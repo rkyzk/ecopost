@@ -4,5 +4,5 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-        path('', views.Home.as_view(), name='home'),
+        path('', views.PostList.as_view(), name='home'),
 ]

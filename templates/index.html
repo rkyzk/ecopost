@@ -1,12 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecopost</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<!-- intro -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 offset-3 mt-5">
+      <p>Depressed about climate change?</p>
+      <p>This website is for anyone who wants to find out what some local communities
+         and individuals all over the world are doing to tackle the issue and/or 
+         more generally to save the environment.  Read their stories,
+         get inspired, send comments to them, join them if you can, or start up your own
+         activities and share your stories.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container mt-5 left">
+  <h2>Featured Stories</h2>
+  <div class="row mt-5">
+    {% for post in post_list %}
+      <div class="col-md-4 card p-2">
+        <!-- <div>
+          <div>
+          {% if "placeholder" in post.featured_image.url %}
+            <img class="card-img-top" src="media/default.jpg" alt="woods">
+          {% else %}
+            <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+           {% endif %}
+          </div>
+        </div> -->
+        <div class="mx-2">
+          <p class="mt-1"><strong>{{ post.title }}</strong><br>
+            Written by {{ post.author }}<br>    <!-- want to put this on right  -->     
+            </p>
+          <a href="#">Read the full story</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>No posts</p>
+    {% endfor %}
+  </div>
+  <hr/>
+</div>
+{% endblock %}
