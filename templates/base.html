@@ -29,7 +29,7 @@
             <a class="nav-link" href="">About</a>
             <a class="nav-link" href="">Search Stories</a>
             {% if user.is_authenticated %}
-              <a class="nav-link" href="#">Write a story</a>
+              <a class="nav-link" href="{% url 'add_story' %}">Write stories</a>
               <a class="nav-link" href="#">My Page</a>
               <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
             {% else %}
@@ -40,8 +40,19 @@
         </div>
       </div>
     </nav>
-
-    
+    <!-- Message -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset_md_2">
+          {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+              {{ message | safe }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>  
+      </div>
+    </div> 
     <div class="container">
       {% block content %}
 
@@ -50,4 +61,13 @@
   </body>
   <footer>
   </footer>
+  <script>
+    setTimeout(function() {
+        let messages =document.getElementById("msg");
+        let alert = new bootstrap.Alert(messages);
+        alert.close();
+    }, 3000);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  <script src="https://kit.fontawesome.com/b78a20097c.js" crossorigin="anonymous"></script>
 </html>

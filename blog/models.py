@@ -69,3 +69,7 @@ class Post(models.Model):
 
     def pub_date(self):
         return self.published_on.strftime("%m/%d/%Y")
+
+
+class Photo(models.Model):
+    image = CloudinaryField('image', blank=True)
