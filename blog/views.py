@@ -57,8 +57,10 @@ class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
-        comments = post.comments.objects.all.order_by('created_on')
+        comments = []
         liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
 
         return render(
             request,

@@ -24,12 +24,12 @@
       </p>
     </div>
   </div>
-  <!-- likes and bookmark -->
+  <!-- likes -->
   <div class="row">
     <div class="col-lg-4">
       <strong>
       {% if user.is_authenticated %}
-        <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+        <form class="d-inline" action="#" method="POST">
           {% csrf_token %}
           {% if liked %}
             <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
@@ -46,7 +46,47 @@
       {% endif %}
         <span class="text-secondary">{{ post.number_of_likes }}</span>
       </strong>
+    </div>
 
+
+
+      <!-- Comments section if the post has been published --> 
+     
+      {% if post.status == 2 %}  
+      <div class="row">
+        <div class="col-md-7">
+          <h3 class="my-5">Comments</h3>
+          <div class="col-10 position-relative">
+            {% for comment in comments %} 
+              {{ comment.name }}
+              <span class="position-absolute end-0">{{ comment.created_on|date:'M d, Y' }}</span>
+              {{ comment.body | linebreaks }}  
+            <hr/>  
+            {% empty %}
+              <p>No comments.</p>        
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-5">
+          {% if user.is_authenticated %}
+            <h3>Leave a comment:</h3>
+            <p>Posting as: {{ user.username }}</p>
+            <form method="post" style="margin-top: 1.3em;">
+              {{ comment_form | crispy }}
+              {% csrf_token %}
+              <button type="submit" class="btn-submit btn-lg mt-3">Submit</button>
+            </form>
+          {% else %}
+            <p>To leave comments,
+              <a href="{% url 'account_login' %}">Log In</a>
+              or
+              <a href="{% url 'account_signup' %}">Become a member</a>
+            </p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      </div>
     </div>
   </div>
 </div>
