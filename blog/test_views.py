@@ -23,7 +23,7 @@ class TestViews(TestCase):
 
     # def test_can_get_add_story_after_login(self):
 
-    #     # login 
+    #     # login
     #     response = self.client.get('/add_story')
     #     self.assertEqual(response.status_code, 200)
     #     self.assertTemplateUsed(response, 'add_story.html')

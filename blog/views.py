@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import PostForm, PhotoForm
-from .models import Post
+from .forms import PostForm, PhotoForm, CommentForm
+from .models import Post, Comment
 
 
 class PostList(generic.ListView):
@@ -55,5 +55,18 @@ class AddStory(LoginRequiredMixin, View):
 
 class PostDetail(View):
 
-    def get():
-        pass
+    def get(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        comments = post.comments.objects.all.order_by('created_on')
+        liked = False
+
+        return render(
+            request,
+            "post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "liked": liked,
+                "comment_form": CommentForm(),
+            },
+        )

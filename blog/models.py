@@ -6,6 +6,8 @@ from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Submitted"), (2, "Published"), (3, "Declined"))
 
+COMMENT_STATUS = ((0, "original"), (1, "edited"), (2, "deleted"))
+
 REGION = (('N/A', 'N/A'),
           ('NAM', 'North America'),
           ('CAM', 'Central America'),
@@ -76,6 +78,22 @@ class Post(models.Model):
 
     def pub_date(self):
         return self.published_on.strftime("%m/%d/%Y")
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             related_name='comments')
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE,
+                                  related_name='commenter')
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    comment_status = models.IntegerField(choices=COMMENT_STATUS, default=0)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return f"Comment: {self.body} by {self.name.username}"
 
 
 class Photo(models.Model):
