@@ -54,7 +54,6 @@ class AddStory(LoginRequiredMixin, View):
 
 
 class PostDetail(View):
-
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         comments = []
@@ -68,6 +67,7 @@ class PostDetail(View):
             {
                 "post": post,
                 "comments": comments,
+                "commented": False,
                 "liked": liked,
                 "comment_form": CommentForm(),
             },

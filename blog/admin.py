@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from .models import Post
+from .models import Post, Comment
 from django_summernote.admin import SummernoteModelAdmin
 from datetime import datetime
 
@@ -19,3 +19,11 @@ class PostAdmin(SummernoteModelAdmin):
     def publish_posts(self, request, queryset):
         queryset.update(status=2)
         queryset.update(published_on=datetime.utcnow())
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+
+    list_display = ('commenter', 'body', 'post', 'created_on', 'comment_status')
+    list_filter = ('created_on', 'comment_status')
+    search_fields = ('commenter', 'body')
