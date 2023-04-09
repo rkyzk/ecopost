@@ -56,7 +56,7 @@ class AddStory(LoginRequiredMixin, View):
 class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
-        comments = []
+        comments = post.comments.order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -67,8 +67,36 @@ class PostDetail(View):
             {
                 "post": post,
                 "comments": comments,
-                "commented": False,
                 "liked": liked,
                 "comment_form": CommentForm(),
+            },
+        )
+
+
+    def post(self, request, slug, *args, **kwargs):
+        post = Post.objects.filter(slug=slug)[0]
+        comments = post.comments.order_by('created_on')
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        comment_form = CommentForm(data=request.POST)
+
+        if comment_form.is_valid():
+            comment_form.instance.email = request.user.email
+            comment_form.instance.commenter = request.user
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+        else:
+            comment_form = CommentForm()
+        return render(
+            request,
+            "post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "liked": liked,
+                "comment_form": CommentForm()
             },
         )
