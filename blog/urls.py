@@ -10,4 +10,6 @@ urlpatterns = [
         path('<slug:slug>/update/', views.UpdatePost.as_view(), name='update_post'),
         path('<slug:slug>/delete/', views.DeletePost.as_view(), name='delete_post'),
         path('mypage/<int:id>/', views.MyPage.as_view(), name='my_page'),
+        path('update_comment/', views.UpdateComment.as_view(), name='update_comment'),
+        path('delete_comment/', views.DeleteComment.as_view(), name='delete_comment'),
 ]

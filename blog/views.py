@@ -96,10 +96,10 @@ class PostDetail(View):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
-            messages.add_message(request, message.SUCCESS, 'Your comment has been submitted.')
+            messages.add_message(request, messages.SUCCESS, 'Your comment has been submitted.')
         else:
             comment_form = CommentForm()
-            messages.add_message(request, message.SUCCESS, "Error occuered.  Your comment was not saved.")
+            messages.add_message(request, messages.SUCCESS, "Error occuered.  Your comment was not saved.")
         return render(
             request,
             "post_detail.html",
@@ -162,10 +162,6 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
         )
 
 
-    def test_func(self):
-        print(dir(self.request.GET.values))
-        return True
-
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         post_form = PostForm(self.request.POST, instance=post)
@@ -196,6 +192,15 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+    def test_func(self):
+        post_author = self.request.GET.get('update_post')
+        if post_author == self.request.user:
+            return True
+        else:
+            return False
+            
+
+
 class DeletePost(LoginRequiredMixin, View):  # UserPassesTestMixin,
 
     def get(self, request, slug, *args, **kwargs):
@@ -203,6 +208,47 @@ class DeletePost(LoginRequiredMixin, View):  # UserPassesTestMixin,
         post.delete()
         messages.add_message(self.request, messages.SUCCESS, 'Your draft has been deleted.')
         return HttpResponseRedirect(reverse('home'))
+
+
+class UpdateComment(View):
+
+    def get(self, request, id, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=id)
+        update_form = CommentForm(instance=comment)
+        comment_form = CommentForm()
+        slug = comment.post.slug
+
+        return render(
+            request,
+            "post_detail.html",
+            {
+                "comment_form": comment_form,
+                "update_form": update_form
+            }
+        )
+
+
+    def post(self, request, id, *args, **kwargs):
+
+        comment = get_object_or_404(Comment, id=id)
+        comment_form = CommentForm(self.request.POST, instance=comment)
+        updated = comment_form.save(commit=False)
+        updated.name = request.user
+        updated.comment_status = 1
+        slug = comment.post.slug
+        if comment_form.is_valid():
+            updated.save()
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class DeleteComment(View):
+
+    def post(self, request, id, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=id)
+        comment.comment_status = 2
+        slug = comment.post.slug
+        comment.save()
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class MyPage(LoginRequiredMixin, View): #UserTestPassesMixin

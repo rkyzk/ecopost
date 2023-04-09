@@ -71,12 +71,12 @@
       <div class="btn">
         <form method="GET" action="{% url 'update_post' post.slug %}">
           {% csrf_token %}
-            <button class="btn btn-submit" type="submit" name="update" value="{{post.slug}}">Update</button>
+            <button class="btn btn-submit" type="submit" name="update_post" value="{{post.slug}}">Update</button>
         </form>
       </div>
       <div class="btn">
         <form method="GET" action="#">
-          <button type="submit" class="btn btn-submit delete_post">Delete</button>
+          <button type="submit" class="btn btn-submit delete_post" name="delete_post" value="{{post.slug}}">Delete</button>
         </form>
       </div>  
     </div> 
@@ -88,13 +88,44 @@
           <h3 class="my-5">Comments</h3>
           <div class="col-10 position-relative">
             {% for comment in comments %} 
-              {{ comment.name }}
+            <!-- if the comment has been edited, say 'edited.' -->
+            {% if comment.comment_status == 1 %}
+              <span class="text-muted">edited</span>
+            {% endif %}
+            {% if comment.comment_status != 2 %}  
+              {{ comment.commenter }}
               <span class="position-absolute end-0">{{ comment.created_on|date:'M d, Y' }}</span>
-              {{ comment.body | linebreaks }}  
-            <hr/>  
+              {{ comment.body | linebreaks }}
+              <!-- if the comment has been written by the user, show update and delete buttons -->
+              {% if comment.commenter == user %}
+              <div class="row">
+                <div class="col-1">
+                  <form method="GET" action="{% url 'update_comment' %}">
+                    <button type="submit" class="btn btn-sm mt-1">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"/>
+                  </form>
+                </div>
+                <div class="col-1">
+                  <form method="POST" action="{% url 'delete_comment' %}" class="mt-3 delete_comment">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                    <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"/>
+                  </form>
+                </div>
+              </div>
+              {% endif %}
+            {% else %}
+            <p class="text-muted mb-5">Comment deleted</p>
+            <hr/>
+            {% endif %}
             {% empty %}
-              <p>No comments</p>        
-            {% endfor %}
+              <p>No comments</p>
+              <hr/>
+            {% endfor %}     
           </div>
         </div>
         <div class="col-md-5">
@@ -121,3 +152,12 @@
   </div>
 </div>
 {% endblock content %}
+<!-- 
+{% if upate_form %}
+<form method="post" style="margin-top: 1.3em;">
+  {{ update_form | crispy }}
+  {% csrf_token %}
+  <button type="submit" name="submit" value="update" class="btn-submitbtn-lg mt-3">Save changes</button>
+  <button type="submit" name="submit" value="cancel" class="btn-submit btn-lg mt-3">Cancel</button>
+</form>
+{% endif %} -->
