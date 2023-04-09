@@ -132,3 +132,31 @@ class Bookmark(View):
         else:
             post.bookmark.add(request.user)
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class UpdatePost(LoginRequiredMixin, View): # UserPassesTestMixin
+
+    def get(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        # Not Working at all
+        # if post.status == 2:
+        #     messages.add_message(self.request, messages.INFO, "You can't update a post that's been published.")
+        #     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        original_data = {
+                            "title": post.title,
+                            "content": post.content,
+                            "region": post.region,
+                            "category": post.category,
+                        }
+
+        image = post.featured_image.image
+
+        return render(
+            request,
+            "update_post.html",
+            {
+                "post_form": PostForm(initial=original_data),
+                "photo_form": PhotoForm(image),
+                "post": post
+            }
+        )

@@ -65,6 +65,22 @@
       {% endif %}
       </div>
     </div> <!--end of bookmark -->
+    <!-- Update and Delete buttons, if the user is the author -->
+    {% if post.author == user %}
+    <div class="btn-container mt-3">    
+      <div class="btn">
+        <form method="GET" action="{% url 'update_post' post.slug %}">
+          {% csrf_token %}
+            <input class="btn btn-submit"type="submit" value="Update">
+        </form>
+      </div>
+      <div class="btn">
+        <form method="GET" action="#">
+          <button type="submit" class="btn btn-submit delete_post">Delete</button>
+        </form>
+      </div>  
+    </div> 
+   {% endif %}
     <!-- Comments section if the post has been published -->     
       {% if post.status == 2 %}  
       <div class="row">
