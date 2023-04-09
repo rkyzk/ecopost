@@ -71,7 +71,7 @@
       <div class="btn">
         <form method="GET" action="{% url 'update_post' post.slug %}">
           {% csrf_token %}
-            <input class="btn btn-submit"type="submit" value="Update">
+            <button class="btn btn-submit" type="submit" name="update" value="{{post.slug}}">Update</button>
         </form>
       </div>
       <div class="btn">

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from .forms import PostForm, PhotoForm, CommentForm
 from .models import Post, Comment
@@ -134,7 +134,7 @@ class Bookmark(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class UpdatePost(LoginRequiredMixin, View): # UserPassesTestMixin
+class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -160,3 +160,37 @@ class UpdatePost(LoginRequiredMixin, View): # UserPassesTestMixin
                 "post": post
             }
         )
+
+
+    def test_func(self):
+        print(dir(self.request.GET.values))
+        return True
+
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        post_form = PostForm(self.request.POST, instance=post)
+        photo_form = PhotoForm(self.request.POST, self.request.FILES)
+        
+        if post_form.is_valid() and photo_form.is_valid:
+            post_form.instance.author = self.request.user
+            photo = photo_form.save(commit=False)
+            # if photo.image is None:
+            #     post_form.instance.featured_image = post.featured_image
+            # else:
+            post_form.instance.featured_image = photo.image
+
+            if 'submit' in self.request.POST.keys():
+                post_form.instance.status = 1
+                post_form.save()
+                messages.add_message(self.request, messages.SUCCESS, 'Your draft has been submitted.')
+            else:
+                post_form.save()
+                messages.add_message(self.request, messages.SUCCESS, 'Your draft has been saved.')
+
+        else:
+            messages.add_message(self.request, messages.INFO, "Error occured.  The change hasn't been saved.")
+            print ("non", post_form.non_field_errors())   
+            field_errors = [(field.label, field.errors) for field in post_form]
+            print ("field", field_errors)
+            print (post_form.errors)
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
