@@ -200,7 +200,6 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
             return False
             
 
-
 class DeletePost(LoginRequiredMixin, View):  # UserPassesTestMixin,
 
     def get(self, request, slug, *args, **kwargs):
@@ -251,7 +250,7 @@ class DeleteComment(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class MyPage(LoginRequiredMixin, View): #UserTestPassesMixin
+class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
 
     def get(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(author=id)  
@@ -275,3 +274,22 @@ class MyPage(LoginRequiredMixin, View): #UserTestPassesMixin
                 "bookmarked_posts": bookmarked_posts
             },
         )
+
+    
+    # def test_func(self):
+
+
+class Search(View):
+    def get(self, request, *args, **kwargs):
+        qs = []
+        posts = Post.objects.filter(status=2)
+        print("published date")
+        print(posts[0].published_on)
+        print(type(posts[0].published_on))
+        title_query = request.GET.get('title_input')
+        title_filter_type = request.GET.get('title_option')
+ 
+
+        query_lists = []
+ 
+        return render(request, "search.html")
