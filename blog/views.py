@@ -194,3 +194,30 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
             print ("field", field_errors)
             print (post_form.errors)
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+
+class MyPage(LoginRequiredMixin, View): #UserTestPassesMixin
+
+    def get(self, request, id, *args, **kwargs):
+        queryset = Post.objects.filter(author=id)  
+        comments = Comment.objects.filter(commenter__id=id)
+        commented_posts = [comment.post for comment in comments]
+        # remove duplicates
+        commented_posts = list(dict.fromkeys(commented_posts))
+        # this can be made more concise
+        all_posts = Post.objects.all()
+        bookmarked_posts = []
+        for post in all_posts:
+            if post.bookmark.filter(id=request.user.id).exists():
+                bookmarked_posts.append(post)
+
+        return render(
+            request,
+            "my_page.html",
+            {
+                "queryset": queryset,
+                "commented_posts": commented_posts,
+                "bookmarked_posts": bookmarked_posts
+            },
+        )
