@@ -196,6 +196,14 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+class DeletePost(LoginRequiredMixin, View):  # UserPassesTestMixin,
+
+    def get(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        post.delete()
+        messages.add_message(self.request, messages.SUCCESS, 'Your draft has been deleted.')
+        return HttpResponseRedirect(reverse('home'))
+
 
 class MyPage(LoginRequiredMixin, View): #UserTestPassesMixin
 

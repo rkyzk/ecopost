@@ -7,5 +7,7 @@ urlpatterns = [
         path('', views.PostList.as_view(), name='home'),
         path('add_story/', views.AddStory.as_view(), name='add_story'),
         path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+        path('<slug:slug>/update/', views.UpdatePost.as_view(), name='update_post'),
+        path('<slug:slug>/delete/', views.DeletePost.as_view(), name='delete_post'),
         path('mypage/<int:id>/', views.MyPage.as_view(), name='my_page'),
 ]
