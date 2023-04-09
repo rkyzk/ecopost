@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('blog.urls'), name='blog_urls'),
     path("accounts/", include("allauth.urls")),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    path('<slug:slug>/like/', views.PostLike.as_view(), name='post_like'),
 ]
