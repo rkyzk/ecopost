@@ -46,9 +46,26 @@
       {% endif %}
         <span class="text-secondary">{{ post.number_of_likes }}</span>
       </strong>
-    </div>
-      <!-- Comments section if the post has been published --> 
-     
+      <!-- bookmark -->
+      {% if user.is_authenticated %}
+        <form class="d-inline" action="{% url 'bookmark' post.slug %}" method="POST">
+          {% csrf_token %}
+          {% if bookmarked %}
+            <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
+              <i class="fa fa-bookmark" aria-hidden="true"></i>
+            </button>
+            <span class="text-muted">You've bookmarked this post</p>
+          {% else %}
+            <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
+              <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+            </button>
+            <span class="text-muted">Click to bookmark</span>
+          {% endif %}           
+        </form>
+      {% endif %}
+      </div>
+    </div> <!--end of bookmark -->
+    <!-- Comments section if the post has been published -->     
       {% if post.status == 2 %}  
       <div class="row">
         <div class="col-md-7">

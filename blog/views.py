@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -61,6 +61,9 @@ class PostDetail(View):
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
+        bookmarked = False
+        if post.bookmark.filter(id=self.request.user.id).exists():
+            bookmarked = True
 
         return render(
             request,
@@ -69,6 +72,7 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "liked": liked,
+                "bookmarked": bookmarked,
                 "comment_form": CommentForm(),
             },
         )
@@ -80,6 +84,9 @@ class PostDetail(View):
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
+        bookmarked = False
+        if post.bookmark.filter(id=self.request.user.id).exists():
+            bookmarked = True
 
         comment_form = CommentForm(data=request.POST)
 
@@ -89,8 +96,10 @@ class PostDetail(View):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
+            messages.add_message(request, message.SUCCESS, 'Your comment has been submitted.')
         else:
             comment_form = CommentForm()
+            messages.add_message(request, message.SUCCESS, "Error occuered.  Your comment was not saved.")
         return render(
             request,
             "post_detail.html",
@@ -98,6 +107,7 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "liked": liked,
+                "bookmarked": bookmarked,
                 "comment_form": CommentForm()
             },
         )
@@ -111,4 +121,14 @@ class PostLike(View):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class Bookmark(View):
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.bookmark.filter(id=request.user.id).exists():
+            post.bookmark.remove(request.user)
+        else:
+            post.bookmark.add(request.user)
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
