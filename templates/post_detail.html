@@ -75,8 +75,9 @@
         </form>
       </div>
       <div class="btn">
-        <form method="GET" action="#">
-          <button type="submit" class="btn btn-submit delete_post" name="delete_post" value="{{post.slug}}">Delete</button>
+        <form method="POST" action="{% url 'delete_post' post.slug %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-submit delete_post">Delete</button>
         </form>
       </div>  
     </div> 
@@ -149,13 +150,11 @@
     </div>
   </div>
 </div>
+<script>
+  // Confirm before deleting the post
+  const DELETE_POST ="Are you sure you want to delete your post?"
+  $('.delete_post').click(function() {
+    return confirm(DELETE_POST);
+  });
+  </script>
 {% endblock content %}
-<!-- 
-{% if upate_form %}
-<form method="post" style="margin-top: 1.3em;">
-  {{ update_form | crispy }}
-  {% csrf_token %}
-  <button type="submit" name="submit" value="update" class="btn-submitbtn-lg mt-3">Save changes</button>
-  <button type="submit" name="submit" value="cancel" class="btn-submit btn-lg mt-3">Cancel</button>
-</form>
-{% endif %} -->
