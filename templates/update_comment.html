@@ -6,10 +6,10 @@
   <div>
     <form method="POST" class="form">
       {% csrf_token %}
-        <h4>Update Post</h4>
+        <h4>Update Comment</h4>
           {{ comment_form | crispy}}
             <div class="mt-3">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-secondary">Cancel</button>
               <input type="submit" class="btn" value="Save changes" />
             </div>
     </form>

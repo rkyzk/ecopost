@@ -100,20 +100,18 @@
               {% if comment.commenter == user %}
               <div class="row">
                 <div class="col-1">
-                  <form method="GET" action="{% url 'update_comment' %}">
+                  <form method="GET" action="{% url 'update_comment' comment.id %}">
                     <button type="submit" class="btn btn-sm mt-1">
                       <i class="fa-regular fa-pen-to-square"></i>
                     </button>
-                    <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"/>
                   </form>
                 </div>
                 <div class="col-1">
-                  <form method="POST" action="{% url 'delete_comment' %}" class="mt-3 delete_comment">
+                  <form method="POST" action="#" class="mt-3 delete_comment">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm">
                       <i class="fa-regular fa-trash-can"></i>
                     </button>
-                    <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"/>
                   </form>
                 </div>
               </div>

@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from .forms import PostForm, PhotoForm, CommentForm
+from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
 
@@ -13,45 +13,62 @@ class PostList(generic.ListView):
     template_name = "index.html"
 
 
-class AddStory(LoginRequiredMixin, View):
+class AddStory(LoginRequiredMixin, generic.CreateView):
+    model = Post
+    template_name = "add_story.html"
+    form_class = PostForm
+    success_url = ('/add_story/')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        message = 'Your story has been saved.'
+        if 'submit' in self.request.POST.keys():
+            form.instance.status = 2
+            message = 'Your story has been submitted.'
+        messages.add_message(self.request, messages.SUCCESS, message)
+        return super(AddStory, self).form_valid(form)
+
+
+
+# class AddStory(LoginRequiredMixin, View):
     
-    def get(self, request, *args, **kwargs):
-        """Post an empty form for writing a new post """
-        return render(
-            request,
-            "add_story.html",
-            {
-                "post_form": PostForm(),
-                "photo_form": PhotoForm()
-            }
-        )
+#     def get(self, request, *args, **kwargs):
+#         """Post an empty form for writing a new post """
+#         return render(
+#             request,
+#             "add_story.html",
+#             {
+#                 "post_form": PostForm(),
+#                 "photo_form": PhotoForm()
+#             }
+#         )
 
     
-    def post(self, request, *args, **kwargs):
-        """Save or submit a new post"""
-        post_form = PostForm(self.request.POST)
-        photo_form = PhotoForm(self.request.POST, self.request.FILES)
-        if post_form.is_valid() and photo_form.is_valid():
-            post_form.instance.author = self.request.user
-            photo = photo_form.save(commit=False)
-            post_form.instance.featured_image = photo.image
-            if 'submit' in self.request.POST.keys():
-                post_form.instance.status = 1
-                post_form.save()
-                messages.add_message(self.request, messages.SUCCESS, 'Your draft has been submitted.')
-            else:
-                post_form.save()
-                messages.add_message(self.request, messages.SUCCESS, 'Your draft has been saved.')    
-        else:
-            print("error occured")
-        return render(
-            request,
-            "add_story.html",
-            {
-                "post_form": PostForm(),
-                "photo_form": PhotoForm()
-            }
-        )
+#     def post(self, request, *args, **kwargs):
+#         """Save or submit a new post"""
+#         post_form = PostForm(self.request.POST)
+#         photo_form = PhotoForm(self.request.POST, self.request.FILES)
+#         if post_form.is_valid() and photo_form.is_valid():
+#             post_form.instance.author = self.request.user
+#             photo = photo_form.save(commit=False)
+#             post_form.instance.featured_image = photo.image
+#             if 'submit' in self.request.POST.keys():
+#                 post_form.instance.status = 1
+#                 post_form.save()
+#                 messages.add_message(self.request, messages.SUCCESS, 'Your draft has been submitted.')
+#             else:
+#                 post_form.save()
+#                 messages.add_message(self.request, messages.SUCCESS, 'Your draft has been saved.')    
+#         else:
+#             print("error occured")
+#         return render(
+#             request,
+#             "add_story.html",
+#             {
+#                 "post_form": PostForm(),
+#                 "photo_form": PhotoForm()
+#             }
+#         )
 
 
 class PostDetail(View):
@@ -147,16 +164,18 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
                             "content": post.content,
                             "region": post.region,
                             "category": post.category,
-                        }
+        }
 
-        image = post.featured_image.image
+        original_image = {
+                            "image": post.featured_image.image
+        }
 
         return render(
             request,
             "update_post.html",
             {
                 "post_form": PostForm(initial=original_data),
-                "photo_form": PhotoForm(image),
+                "photo_form": PhotoForm(initial=original_image),
                 "post": post
             }
         )
@@ -167,6 +186,9 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
         post_form = PostForm(self.request.POST, instance=post)
         photo_form = PhotoForm(self.request.POST, self.request.FILES)
         
+        print(photo_form)
+        print(dir(photo_form.fields.values))
+
         if post_form.is_valid() and photo_form.is_valid:
             post_form.instance.author = self.request.user
             photo = photo_form.save(commit=False)
@@ -193,8 +215,9 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
 
 
     def test_func(self):
-        post_author = self.request.GET.get('update_post')
-        if post_author == self.request.user:
+        slug = self.request.GET.get('update_post')
+        post = get_object_or_404(Post, slug=slug)
+        if post.author == self.request.user:
             return True
         else:
             return False
@@ -213,16 +236,14 @@ class UpdateComment(View):
 
     def get(self, request, id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=id)
-        update_form = CommentForm(instance=comment)
-        comment_form = CommentForm()
+        comment_form = CommentForm(instance=comment)
         slug = comment.post.slug
 
         return render(
             request,
-            "post_detail.html",
+            "update_comment.html",
             {
-                "comment_form": comment_form,
-                "update_form": update_form
+                "comment_form": comment_form
             }
         )
 
@@ -240,14 +261,14 @@ class UpdateComment(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class DeleteComment(View):
+# class DeleteComment(View):
 
-    def post(self, request, id, *args, **kwargs):
-        comment = get_object_or_404(Comment, id=id)
-        comment.comment_status = 2
-        slug = comment.post.slug
-        comment.save()
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+#     def post(self, request, id, *args, **kwargs):
+#         comment = get_object_or_404(Comment, id=id)
+#         comment.comment_status = 2
+#         slug = comment.post.slug
+#         comment.save()
+#         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
@@ -275,21 +296,12 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
             },
         )
 
-    
-    # def test_func(self):
-
 
 class Search(View):
-    def get(self, request, *args, **kwargs):
-        qs = []
-        posts = Post.objects.filter(status=2)
-        print("published date")
-        print(posts[0].published_on)
-        print(type(posts[0].published_on))
-        title_query = request.GET.get('title_input')
-        title_filter_type = request.GET.get('title_option')
- 
 
-        query_lists = []
- 
-        return render(request, "search.html")
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            "search.html",
+            {}
+            )
