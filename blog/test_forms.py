@@ -18,3 +18,6 @@ from .forms import PostForm
     #     self.assertFalse(form.is_valid())
     #     self.assertIn('title', form.error.keys())
     #     self.assertEqual(form.errors['title'][0], 'This field is required.')
+
+if __name__ == "__main__":
+    main()
