@@ -3,6 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
+from django.urls import reverse_lazy
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
@@ -218,14 +219,14 @@ class UpdateComment(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-# class DeleteComment(View):
+class DeleteComment(View):
 
-#     def post(self, request, id, *args, **kwargs):
-#         comment = get_object_or_404(Comment, id=id)
-#         comment.comment_status = 2
-#         slug = comment.post.slug
-#         comment.save()
-#         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    def post(self, request, id, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=id)
+        comment.comment_status = 2
+        comment.save()
+        slug = comment.post.slug
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
@@ -252,12 +253,6 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
                 "bookmarked_posts": bookmarked_posts
             },
         )
-
-    #     def get_context_data(self, *args, **kwargs):
-    # context = super(IndexView, self).get_context_data(*args, **kwargs)
-    # context['alphabetical_poll_list'] = Poll.objects.order_by('name')[:5]
-    # return context 
-
 
 
 class Search(View):

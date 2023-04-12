@@ -101,16 +101,16 @@
               {% if comment.commenter == user %}
               <div class="row">
                 <div class="col-1">
-                  <form method="GET" action="{% url 'update_comment' comment.id %}">
-                    <button type="submit" class="btn btn-sm mt-1">
+                  <!-- <form method="GET" action="{% url 'update_comment' comment.id %}"> -->
+                    <button type="submit" class="btn btn-sm mt-1 update_comment">
                       <i class="fa-regular fa-pen-to-square"></i>
                     </button>
-                  </form>
+                  <!-- </form> -->
                 </div>
                 <div class="col-1">
-                  <form method="POST" action="#" class="mt-3 delete_comment">
+                  <form method="POST" action="{% url 'delete_comment' comment.id %}" class="mt-3 delete_comment">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-sm">
+                    <button type="submit" class="btn btn-sm delete_comment">
                       <i class="fa-regular fa-trash-can"></i>
                     </button>
                   </form>
@@ -152,9 +152,17 @@
 </div>
 <script>
   // Confirm before deleting the post
-  const DELETE_POST ="Are you sure you want to delete your post?  You won't be able to retrieve the draft."
+  const DELETE_POST = "Are you sure you want to delete your post?  You won't be able to retrieve the draft."
   $('.delete_post').click(function() {
     return confirm(DELETE_POST);
   });
+
+  // delete comment
+  const DELETE_COMMENT = "Are you sure you want to delete your comment?"
+  $('.delete_comment').click(function() {
+    return confirm(DELETE_COMMENT);
+  })
+
+
   </script>
 {% endblock content %}
