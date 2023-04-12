@@ -152,65 +152,18 @@ class Bookmark(View):
 
 class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
-    def get(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
-        # Not Working at all
-        # if post.status == 2:
-        #     messages.add_message(self.request, messages.INFO, "You can't update a post that's been published.")
-        #     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-        original_data = {
-                            "title": post.title,
-                            "content": post.content,
-                            "region": post.region,
-                            "category": post.category,
-        }
+    model = Post
+    template_name = "update_post.html"
+    form_class = PostForm
 
-        original_image = {
-                            "image": post.featured_image.image
-        }
-
-        return render(
-            request,
-            "update_post.html",
-            {
-                "post_form": PostForm(initial=original_data),
-                "photo_form": PhotoForm(initial=original_image),
-                "post": post
-            }
-        )
-
-
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
-        post_form = PostForm(self.request.POST, instance=post)
-        photo_form = PhotoForm(self.request.POST, self.request.FILES)
-        
-        print(photo_form)
-        print(dir(photo_form.fields.values))
-
-        if post_form.is_valid() and photo_form.is_valid:
-            post_form.instance.author = self.request.user
-            photo = photo_form.save(commit=False)
-            # if photo.image is None:
-            #     post_form.instance.featured_image = post.featured_image
-            # else:
-            post_form.instance.featured_image = photo.image
-
-            if 'submit' in self.request.POST.keys():
-                post_form.instance.status = 1
-                post_form.save()
-                messages.add_message(self.request, messages.SUCCESS, 'Your draft has been submitted.')
-            else:
-                post_form.save()
-                messages.add_message(self.request, messages.SUCCESS, 'Your draft has been saved.')
-
-        else:
-            messages.add_message(self.request, messages.INFO, "Error occured.  The change hasn't been saved.")
-            print ("non", post_form.non_field_errors())   
-            field_errors = [(field.label, field.errors) for field in post_form]
-            print ("field", field_errors)
-            print (post_form.errors)
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        message = 'The change has been saved.'
+        if 'submit' in self.request.POST.keys():
+            form.instance.status = 1
+            message = 'Your story has been submitted for evaluation.'
+        messages.add_message(self.request, messages.SUCCESS, message)
+        return super(UpdatePost, self).form_valid(form)
 
 
     def test_func(self):

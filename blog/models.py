@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.shortcuts import reverse
 from cloudinary.models import CloudinaryField
 
 
@@ -85,6 +86,9 @@ class Post(models.Model):
 
     def pub_date(self):
         return self.published_on.strftime("%m/%d/%Y")
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'slug': self.slug})
 
 
 class Comment(models.Model):
