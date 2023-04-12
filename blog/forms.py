@@ -1,5 +1,5 @@
-from .models import Post, Photo, Comment
-from cloudinary.forms import CloudinaryFileField
+from .models import Post, Comment
+# from cloudinary.forms import CloudinaryFileField
 from django import forms
 
 
@@ -7,14 +7,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'content', 'featured_image', 'region', 'category')
-        featured_image = CloudinaryFileField(
-            options = {
-                'tags': "directly_uploaded",
-                'crop': 'fill_pad', 'width': 510, 'height': 340,
-                'gravity': 'auto',
-                'q_auto': 'good'
-            })
+        fields = ['title', 'content', 'featured_image', 'region', 'category']
 
 
         def __init__(self, *args, **kwargs):

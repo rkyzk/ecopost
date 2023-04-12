@@ -35,15 +35,21 @@ class TestModels(TestCase):
 
     def test_featured_flag_default_to_False(self):
         self.assertEqual(self.post1.featured_flag, False)    
-        
-    
-    # def test_featured_flag_default_to_False(self):
-    #     assertEqual(self.post1.featured_flag, False)
 
-    # def test_posts_ordered_from_newest_to_oldest(self):
+
+    def test_str_method_will_return_title(self):
+        self.assertEqual(str(self.post1), 'title_1')
+
+    
+    # why fail?
+    # def test_num_of_likes_count_num_of_likes(self):
+    #     self.assertEqual(self.post1.number_of_likes, self.post1.likes.count())
+
+# def test_posts_ordered_from_newest_to_oldest(self):
     #     i = 1
     #     for post in range(len(queryset) - 1):
     #         post.published_on > queryset[1].publisehd_on
+
 
     # def test_save_method_will_slugify_post_if_not(self):
     #     """test the newly made post6 will have slug value of none
@@ -53,14 +59,6 @@ class TestModels(TestCase):
     #                                      content="test sentences")
     #     assertEqual(self.post6.slug, None)
     #     assertEqual(self.post1.slug, 'title_1')
-
-    def test_str_method_will_return_title(self):
-        self.assertEqual(str(self.post1), 'title_1')
-
-    
-    # why fail?
-    # def test_num_of_likes_count_num_of_likes(self):
-    #     self.assertEqual(self.post1.number_of_likes, self.post1.likes.count())
         
 
 if __name__ == "__main__":

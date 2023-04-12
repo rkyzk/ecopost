@@ -23,11 +23,10 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         form.instance.author = self.request.user
         message = 'Your story has been saved.'
         if 'submit' in self.request.POST.keys():
-            form.instance.status = 2
-            message = 'Your story has been submitted.'
+            form.instance.status = 1
+            message = 'Your story has been submitted for evaluation.'
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
-
 
 
 # class AddStory(LoginRequiredMixin, View):
@@ -151,7 +150,7 @@ class Bookmark(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, View):
+class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -295,6 +294,12 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
                 "bookmarked_posts": bookmarked_posts
             },
         )
+
+    #     def get_context_data(self, *args, **kwargs):
+    # context = super(IndexView, self).get_context_data(*args, **kwargs)
+    # context['alphabetical_poll_list'] = Poll.objects.order_by('name')[:5]
+    # return context 
+
 
 
 class Search(View):
