@@ -8,20 +8,7 @@
     <legend>Update your story</legend>
     <form method="POST" class="mt-3" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ post_form | crispy }}
-      <div id="div_id_featured_image" class="form-group">
-        <label for="id_featured_image"></label>
-        <div class="row">
-          <div class="col-md-3">
-            Current image: <img src="{{ post.featured_image.url }}" width="150px" height="auto">
-          </div>
-        </div>
-        <div class="row mt-3">
-          Replace:
-          <input type="file" value="{{ post.featured_image }}" name="image" class="clearablefileinput form-control-file" id="id_image">
-          <!-- <button class="btn-lg" onclick="form_reset();">Reset</button> -->
-        </div>
-      </div>
+      {{ form | crispy }}
       <div class="mt-3">
         <button type="submit" class="btn-submit btn-lg mt-3" name="save" value="draft">Save</button>
         <button type="submit" class="btn-submit btn-lg mt-3 ml-5" name="submit" value="complete">Submit for approval</button> 
@@ -29,12 +16,4 @@
     </form>
   </div>
 </div>
-<script>
-//   function form_reset() {
-//     var photoForm = document.getElementById("id_image");
-//     alert("resetting"); 
-//     photoForm.value = "";
-
-//   }
-</script>
 {% endblock content %}

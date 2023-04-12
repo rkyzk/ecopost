@@ -175,13 +175,18 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
             return False
             
 
-class DeletePost(LoginRequiredMixin, View):  # UserPassesTestMixin,
+class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Post
+    success_url = ('/home/')
 
-    def post(self, request, slug, *args, **kwargs):
+
+    def test_func(self):
+        slug = self.request.GET.get('delete_post')
         post = get_object_or_404(Post, slug=slug)
-        post.delete()
-        messages.add_message(self.request, messages.SUCCESS, 'Your draft has been deleted.')
-        return HttpResponseRedirect(reverse('home'))
+        if post.author == self.request.user:
+            return True
+        else:
+            return False
 
 
 class UpdateComment(View):
