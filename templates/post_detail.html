@@ -90,37 +90,39 @@
           <div class="col-10 position-relative">
             {% for comment in comments %} 
             <!-- if the comment has been edited, say 'edited.' -->
-            {% if comment.comment_status == 1 %}
-              <span class="text-muted">edited</span>
-            {% endif %}
-            {% if comment.comment_status != 2 %}  
-              {{ comment.commenter }}
-              <span class="position-absolute end-0">{{ comment.created_on|date:'M d, Y' }}</span>
-              {{ comment.body | linebreaks }}
-              <!-- if the comment has been written by the user, show update and delete buttons -->
-              {% if comment.commenter == user %}
-              <div class="row">
-                <div class="col-1">
-                  <!-- <form method="GET" action="{% url 'update_comment' comment.id %}"> -->
-                    <button type="submit" class="btn btn-sm mt-1 update_comment">
-                      <i class="fa-regular fa-pen-to-square"></i>
-                    </button>
-                  <!-- </form> -->
-                </div>
-                <div class="col-1">
-                  <form method="POST" action="{% url 'delete_comment' comment.id %}" class="mt-3 delete_comment">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm delete_comment">
-                      <i class="fa-regular fa-trash-can"></i>
-                    </button>
-                  </form>
-                </div>
-              </div>
+              <div id="comment-box">
+              {% if comment.comment_status == 1 %}
+                <span class="text-muted">edited</span>
               {% endif %}
-            {% else %}
-            <p class="text-muted mb-5">Comment deleted</p>
-            <hr/>
-            {% endif %}
+              {% if comment.comment_status != 2 %}  
+                {{ comment.commenter }}
+                <span class="position-absolute end-0">{{ comment.created_on|date:'M d, Y' }}</span>
+                <p class="comment-body">{{ comment.body | linebreaks }}</p>
+                <!-- if the comment has been written by the user, show update and delete buttons -->
+                {% if comment.commenter == user %}
+                <div class="row">
+                  <div class="col-1">
+                    <!-- <form method="GET" action="{% url 'update_comment' comment.id %}"> -->
+                      <button type="submit" class="btn btn-sm mt-1 update_comment">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                      </button>
+                    <!-- </form> -->
+                  </div>
+                  <div class="col-1">
+                    <form method="POST" action="{% url 'delete_comment' comment.id %}" class="mt-3">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm delete_comment">
+                        <i class="fa-regular fa-trash-can"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                {% endif %}
+              {% else %}
+                <p class="text-muted mb-5">Comment deleted</p>
+                <hr/>
+              {% endif %}
+              </div>
             {% empty %}
               <p>No comments</p>
               <hr/>
@@ -163,6 +165,25 @@
     return confirm(DELETE_COMMENT);
   })
 
+  // 
+  let updateComment = document.querySelector('.update_comment');
+  updateComment.addEventListener('click', (e)=>{ 
+    let commentBox = document.getElementById("comment-box");
+    let comment = commentBox.childNodes[3].innerText;
+    console.log(comment);
+    console.log('Button clicked');
+    let updateCommentBox = document.createElement("form");
+    updateCommentBox.setAttribute("method", "Post");
+    updateCommentBox.setAttribute("action", "#");
+    let inputBox = document.createElement("input");
+    inputBox.setAttribute("type", "text");
+    inputBox.setAttribute("id", "update_comment");
+    
+    console.log(comment)
+    inputBox.setAttribute("value", "{{ comment.body }}");
+    updateCommentBox.appendChild(inputBox)
+    commentBox.parentNode.replaceChild(updateCommentBox, commentBox);
+})
 
   </script>
 {% endblock content %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -256,8 +256,10 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
 
 
 class Search(View):
+    
     def get(self, request, *args, **kwargs):
         return render(
             request,
-            "search.html"
+            "search.html",
+            {}
         )

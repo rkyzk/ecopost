@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hello World!</h1>
 
-{% endblock content %}
+<div class="container my-3">
+  <h2>Search</h2>
+  {% for post in object.list %}
+  {{post.title }}
+  {% endfor %}
+</div>
+{% endblock %}
