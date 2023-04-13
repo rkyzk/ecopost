@@ -5,9 +5,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
         path('', views.PostList.as_view(), name='home'),
-        path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+        path('detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+        path('search_story/', views.Search.as_view(), name='search'),
         path('add_story/', views.AddStory.as_view(), name='add_story'),
-        path('search/', views.Search.as_view(), name='search_stories'),
         path('<slug:slug>/update/', views.UpdatePost.as_view(), name='update_post'),
         path('<slug:slug>/delete/', views.DeletePost.as_view(), name='delete_post'), 
         path('<slug:slug>/like/', views.PostLike.as_view(), name='post_like'),

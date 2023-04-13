@@ -256,10 +256,42 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
 
 
 class Search(View):
-    
     def get(self, request, *args, **kwargs):
-        return render(
-            request,
-            "search.html",
-            {}
-        )
+        qs = []
+        posts = Post.objects.filter(status=2)
+
+        title_query = request.GET.get('title_input')
+        title_filter_type = request.GET.get('title_option')
+
+        query_lists = []
+
+        if title_query != '' and title_query is not None:  
+            if title_filter_type == "contains":
+                qs_title = posts.filter(title__icontains=title_query)
+            else:
+                qs_title = posts.filter(title__exact=title_query)
+            if qs_title != []:
+                query_lists.append(qs_title)
+
+        if query_lists != []:
+            qs = query_lists[0]
+
+        if len(query_lists) > 1:
+            print("hello")
+            i = 0
+            for i in range(len(query_lists) - 1):
+                print("hi")
+                qs = [post for post in query_lists[i] if post in query_lists[i+1]]
+                i += 1
+            
+        no_results = False
+        if 'submit' in self.request.GET.keys():
+            print('hello')
+            if qs == []:
+                no_results = True
+        print(qs)
+        context = {
+            'queryset': qs,
+            'no_results': no_results
+        }
+        return render(request, "search.html", context)
