@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.db.models import Q
+from datetime import datetime
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
@@ -267,7 +268,9 @@ class Search(View):
         kw_query_list = [request.GET.get('keyword_1'),
                          request.GET.get('keyword_2'),
                          request.GET.get('keyword_3')
-                    ] 
+                    ]
+        pub_date_min_query = request.GET.get('date_min')
+        pub_date_max_query = request.GET.get('date_max')
 
         query_lists = []
 
@@ -291,6 +294,17 @@ class Search(View):
             if kw != '' and kw is not None:
                 qs = posts.filter(Q(title__icontains=kw) | Q(content__icontains=kw))
                 query_lists.append(qs)
+
+        if pub_date_min_query != '' and pub_date_min_query is not None:
+            min_date_str = pub_date_min_query
+            min_date = datetime.strptime(min_date_str, '%Y-%m-%d')
+            qs_min_pub_date = posts.filter(published_on__date__gte=min_date)
+            query_lists.append(qs_min_pub_date)
+        if pub_date_max_query != '' and pub_date_max_query is not None:
+            max_date_str = pub_date_max_query
+            max_date = datetime.strptime(max_date_str, '%Y-%m-%d')
+            qs_max_pub_date = posts.filter(published_on__date__lte=max_date)
+            query_lists.append(qs_max_pub_date)
 
         if query_lists != []:
             qs = query_lists[0]
