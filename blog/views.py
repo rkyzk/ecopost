@@ -269,6 +269,7 @@ class Search(View):
                          request.GET.get('keyword_2'),
                          request.GET.get('keyword_3')
                     ]
+        min_liked_query = request.GET.get('liked_count_min')
         pub_date_min_query = request.GET.get('date_min')
         pub_date_max_query = request.GET.get('date_max')
 
@@ -295,11 +296,19 @@ class Search(View):
                 qs = posts.filter(Q(title__icontains=kw) | Q(content__icontains=kw))
                 query_lists.append(qs)
 
+        if min_liked_query != '' and min_liked_query is not None:
+            print('hello liked')
+            qs_liked = [post for post in posts if (post.number_of_likes()>=int(min_liked_query))]
+            print(qs_liked)
+            if qs_liked != []:
+                query_lists.append(qs_liked)
+
         if pub_date_min_query != '' and pub_date_min_query is not None:
             min_date_str = pub_date_min_query
             min_date = datetime.strptime(min_date_str, '%Y-%m-%d')
             qs_min_pub_date = posts.filter(published_on__date__gte=min_date)
             query_lists.append(qs_min_pub_date)
+
         if pub_date_max_query != '' and pub_date_max_query is not None:
             max_date_str = pub_date_max_query
             max_date = datetime.strptime(max_date_str, '%Y-%m-%d')
@@ -316,6 +325,7 @@ class Search(View):
                 print("hi")
                 qs = [post for post in query_lists[i] if post in query_lists[i+1]]
                 i += 1
+        
             
         no_results = False
         print("search button clicked?")
