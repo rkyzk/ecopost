@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.db.models import Q
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
@@ -261,7 +261,13 @@ class Search(View):
         posts = Post.objects.filter(status=2)
 
         title_query = request.GET.get('title_input')
-        title_filter_type = request.GET.get('title_option')
+        title_filter_type = request.GET.get('title_filter')
+        author_query = request.GET.get('author_input')
+        author_filter_type = request.GET.get('author_filter')
+        kw_query_list = [request.GET.get('keyword_1'),
+                         request.GET.get('keyword_2'),
+                         request.GET.get('keyword_3')
+                    ] 
 
         query_lists = []
 
@@ -272,6 +278,19 @@ class Search(View):
                 qs_title = posts.filter(title__exact=title_query)
             if qs_title != []:
                 query_lists.append(qs_title)
+
+        if author_query != '' and author_query is not None:
+            if author_filter_type == "contains":
+                qs_author = posts.filter(author__username__icontains=author_query)
+            else:
+                qs_author = posts.filter(author__username__exact=author_query)
+            if qs_author != []:
+                query_lists.append(qs_author)
+
+        for kw in kw_query_list:
+            if kw != '' and kw is not None:
+                qs = posts.filter(Q(title__icontains=kw) | Q(content__icontains=kw))
+                query_lists.append(qs)
 
         if query_lists != []:
             qs = query_lists[0]
@@ -285,11 +304,11 @@ class Search(View):
                 i += 1
             
         no_results = False
-        if 'submit' in self.request.GET.keys():
-            print('hello')
+        print("search button clicked?")
+        print('search' in self.request.GET)
+        if 'search' in self.request.GET:
             if qs == []:
                 no_results = True
-        print(qs)
         context = {
             'queryset': qs,
             'no_results': no_results
