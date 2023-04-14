@@ -258,7 +258,11 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
 
 class Search(View):
     def get(self, request, *args, **kwargs):
-        qs = []
+        category_choices = Post._meta.get_field('category').choices
+        categories = [cat[1] for cat in category_choices]
+        region_choices = Post._meta.get_field('region').choices
+        regions = [region[1] for region in region_choices]
+
         posts = Post.objects.filter(status=2)
 
         title_query = request.GET.get('title_input')
@@ -272,7 +276,9 @@ class Search(View):
         min_liked_query = request.GET.get('liked_count_min')
         pub_date_min_query = request.GET.get('date_min')
         pub_date_max_query = request.GET.get('date_max')
-
+        category = request.GET.get('category')
+        region = request.GET.get('region')
+        qs = []
         query_lists = []
 
         if title_query != '' and title_query is not None:  
@@ -315,17 +321,21 @@ class Search(View):
             qs_max_pub_date = posts.filter(published_on__date__lte=max_date)
             query_lists.append(qs_max_pub_date)
 
+        if region != 'Choose...':
+            qs_region = [post for post in posts if post.get_region_display() == region]
+            query_lists.append(qs_region)
+        if category != 'Choose...':
+            qs_category = [post for post in posts if post.get_category_display() == category]
+            query_lists.append(qs_category)
+
         if query_lists != []:
             qs = query_lists[0]
 
         if len(query_lists) > 1:
-            print("hello")
             i = 0
             for i in range(len(query_lists) - 1):
-                print("hi")
                 qs = [post for post in query_lists[i] if post in query_lists[i+1]]
-                i += 1
-        
+                i += 1 
             
         no_results = False
         print("search button clicked?")
@@ -334,6 +344,8 @@ class Search(View):
             if qs == []:
                 no_results = True
         context = {
+            'categories': categories,
+            'regions': regions,
             'queryset': qs,
             'no_results': no_results
         }

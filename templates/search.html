@@ -98,6 +98,28 @@
       <input type="date" class="form-control mt-2" id="publishDateMax" name="date_max">
       </div>
     </div>
+    <div class="row mt-4">
+      <!-- Search by category -->
+      <div class="form-group col-md-4">
+        <label for="category">Category</label>
+        <select id="category" class="form-control mt-2" name="category">
+          <option selected>Choose...</option>
+            {% for category in categories %}
+          <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+      </div>
+      <!-- Search by region -->
+      <div class="form-group col-md-4">
+        <label for="region">Region</label>
+        <select id="region" class="form-control mt-2" name="region">
+          <option selected>Choose...</option>
+            {% for region in regions %}
+          <option value="{{ region }}">{{ region }}</option>
+            {% endfor %}
+        </select>
+      </div>
+    </div>
     <button type="submit" class="btn btn-primary mt-3" name="search" value="search">Search</button>
   </form>
   <hr/>
