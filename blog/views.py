@@ -144,33 +144,45 @@ class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
         return post.author == self.request.user
 
 
-class UpdateComment(View):
-
-    def get(self, request, id, *args, **kwargs):
+def update_comment(request):
+    # if request is json
+    if request.method == "GET":
+        id = request.GET['id']
         comment = get_object_or_404(Comment, id=id)
-        comment_form = CommentForm(instance=comment)
-        slug = comment.post.slug
-
-        return render(
-            request,
-            "update_comment.html",
-            {
-                "comment_form": comment_form
-            }
-        )
+        response = {
+            'comment' : comment.body,
+        }
+        return JsonResponse(response)
 
 
-    def post(self, request, id, *args, **kwargs):
 
-        comment = get_object_or_404(Comment, id=id)
-        comment_form = CommentForm(self.request.POST, instance=comment)
-        updated = comment_form.save(commit=False)
-        updated.name = request.user
-        updated.comment_status = 1
-        slug = comment.post.slug
-        if comment_form.is_valid():
-            updated.save()
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+# class UpdateComment(View):
+
+#     def get(self, request, id, *args, **kwargs):
+#         comment = get_object_or_404(Comment, id=id)
+#         comment_form = CommentForm(instance=comment)
+#         slug = comment.post.slug
+
+#         return render(
+#             request,
+#             "update_comment.html",
+#             {
+#                 "comment_form": comment_form
+#             }
+#         )
+
+
+#     def post(self, request, id, *args, **kwargs):
+
+#         comment = get_object_or_404(Comment, id=id)
+#         comment_form = CommentForm(self.request.POST, instance=comment)
+#         updated = comment_form.save(commit=False)
+#         updated.name = request.user
+#         updated.comment_status = 1
+#         slug = comment.post.slug
+#         if comment_form.is_valid():
+#             updated.save()
+#         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class DeleteComment(View):

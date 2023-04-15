@@ -72,7 +72,8 @@ class TestPostModels(TestCase):
 
     def test_num_of_likes_count_num_of_likes(self):
         self.post1.likes.add(self.user_2)
-        self.assertEqual(self.post1.number_of_likes(), self.post1.likes.count())
+        self.assertEqual(self.post1.number_of_likes(),
+                         self.post1.likes.count())
 
 
     def test_pub_date_returns_specified_format(self):
@@ -89,9 +90,9 @@ class TestPostModels(TestCase):
             "if the excerpt method returns the first 99 characters and " + \
             "... are returned"
         )
-        self.assertEqual(post3.excerpt(), "I'm writing a long content to test " + \
-            "if the excerpt method returns the first 99 characters and " + \
-            "... ar...")
+        self.assertEqual(post3.excerpt(), "I'm writing a long content to " + \
+            "test if the excerpt method returns the first 99 characters " + \
+            "and ... ar...")
 
 
     # def test_get_absolute_url(self):

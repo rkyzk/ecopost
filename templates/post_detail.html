@@ -102,11 +102,9 @@
                 {% if comment.commenter == user %}
                 <div class="row">
                   <div class="col-1">
-                    <!-- <form method="GET" action="{% url 'update_comment' comment.id %}"> -->
-                      <button type="submit" class="btn btn-sm mt-1 update_comment">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                      </button>
-                    <!-- </form> -->
+                    <button type="submit" class="btn btn-sm mt-1" id="update_comment">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
                   </div>
                   <div class="col-1">
                     <form method="POST" action="{% url 'delete_comment' comment.id %}" class="mt-3">
@@ -166,24 +164,34 @@
   })
 
   // 
-  let updateComment = document.querySelector('.update_comment');
+  function send_data() {
+  
+  $.ajax({
+    url : 'update_comment/',
+    data : {
+      'id' : 1,     
+    },
+    method : 'GET',
+    success : success_function // reference to below
+  });
+
+}
+
+  let updateComment = document.querySelector('#update_comment');
   updateComment.addEventListener('click', (e)=>{ 
+    send_data();
+  })
+
+  function success_function(response) {
+    comment = response.comment;
     let commentBox = document.getElementById("comment-box");
-    let comment = commentBox.childNodes[3].innerText;
-    console.log(comment);
-    console.log('Button clicked');
-    let updateCommentBox = document.createElement("form");
-    updateCommentBox.setAttribute("method", "Post");
-    updateCommentBox.setAttribute("action", "#");
     let inputBox = document.createElement("input");
     inputBox.setAttribute("type", "text");
     inputBox.setAttribute("id", "update_comment");
+    inputBox.setAttribute("value", comment);
     
-    console.log(comment)
-    inputBox.setAttribute("value", "{{ comment.body }}");
-    updateCommentBox.appendChild(inputBox)
     commentBox.parentNode.replaceChild(updateCommentBox, commentBox);
-})
+  }
 
   </script>
 {% endblock content %}
