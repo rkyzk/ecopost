@@ -6,4 +6,9 @@ that appears on the page.  --> still need to fix.
 
 
 log in user id =2, click on my page and got
-Reverse for 'post_detail' with arguments '('',)' not found. 
+Reverse for 'post_detail' with arguments '('',)' not found.
+
+search.html
+Reverse for 'post_detail' with arguments '('',)' not found.
+The word 'search' was recognized as slug.  changed the url from '<slug:slug>/post_detail' to 'detail/<slug:slug>'
+and search.html was rendered.

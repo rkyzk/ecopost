@@ -14,5 +14,5 @@ urlpatterns = [
         path('bookmark/<slug:slug>', views.Bookmark.as_view(), name='bookmark'),        
         path('update_comment/<int:id>', views.UpdateComment.as_view(), name='update_comment'),
         path('delete_comment/<int:id>', views.DeleteComment.as_view(), name='delete_comment'),
-        path('detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+        path('detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail')
 ]
