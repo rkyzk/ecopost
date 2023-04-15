@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+from datetime import datetime
 from .models import Post, Comment
+
 
 class TestModels(TestCase):
 
@@ -55,10 +57,6 @@ class TestModels(TestCase):
         self.assertEqual(self.post1.category, 'Others')
 
 
-    def test_str_method_will_return_title(self):
-        self.assertEqual(str(self.post1), 'title_1')
-
-
     def test_posts_ordered_by_created_on_newest_to_oldest(self):
         posts = Post.objects.all()
         i = 0
@@ -66,25 +64,29 @@ class TestModels(TestCase):
             self.assertGreater(posts[i].created_on, posts[i+1].created_on)
             i += 1
       
+    # how to test save method specifically? Can I prevent save method and see if it doesn't slugify?
+    def test_save_method_will_slugify_post(self):
+        self.assertEqual(self.post1.slug, 'title_1')
+
     
-    # def test_save_method_will_slugify_post_if_not(self):
-    #     """test the newly made post6 will have slug value of none
-    #        while already saved title_1 will have slug 'title_1'"""
-    #     self.post6 = Post.objects.create(title="test_title_6",
-    #                                      author="user_1",
-    #                                      content="test sentences")
-    #     assertEqual(self.post6.slug, None)
-    #     assertEqual(self.post1.slug, 'title_1')
 
-    # why fail?
-    # def test_num_of_likes_count_num_of_likes(self):
-    #     self.assertEqual(self.post1.number_of_likes, self.post1.likes.count())
-
-                                    # content="test sentences")    
+    def test_str_method_will_return_title(self):
+        self.assertEqual(str(self.post1), 'title_1')
 
 
+    def test_num_of_likes_count_num_of_likes(self):
+        self.post1.likes.add(self.user_2)
+        self.assertEqual(self.post1.number_of_likes(), self.post1.likes.count())
 
-        
+
+    def test_pub_date_returns_specified_format(self):
+        date = datetime.utcnow()
+        self.post1.published_on = date
+        self.assertEqual(self.post1.pub_date(), date.strftime("%B %d, %Y"))
+
+
+    # def test_get_absolute_url(self):
+
 
 if __name__ == "__main__":
     main()

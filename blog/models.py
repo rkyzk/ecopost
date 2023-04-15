@@ -85,7 +85,8 @@ class Post(models.Model):
 
 
     def pub_date(self):
-        return self.published_on.strftime("%m/%d/%Y")
+        return self.published_on.strftime("%B %d, %Y")
+
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.slug})
