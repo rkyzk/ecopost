@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.db.models import Q
-from datetime import datetime
+from datetime import datetime, timedelta
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
@@ -130,10 +130,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     def test_func(self):
         slug = self.request.GET.get('update_post')
         post = get_object_or_404(Post, slug=slug)
-        if post.author == self.request.user:
-            return True
-        else:
-            return False
+        return post.author == self.request.user
             
 
 class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -144,10 +141,7 @@ class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     def test_func(self):
         slug = self.request.GET.get('delete_post')
         post = get_object_or_404(Post, slug=slug)
-        if post.author == self.request.user:
-            return True
-        else:
-            return False
+        return post.author == self.request.user
 
 
 class UpdateComment(View):
@@ -189,7 +183,7 @@ class DeleteComment(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
+class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(author=id)  
@@ -213,6 +207,12 @@ class MyPage(LoginRequiredMixin, View): # UserPassesTestMixin,
                 "bookmarked_posts": bookmarked_posts
             },
         )
+
+
+    def test_func(self):
+        return True
+    #     id = self.request.GET.get('id')
+    #     return id == self.request.user.id
 
 
 class Search(View):
@@ -309,3 +309,11 @@ class Search(View):
             'no_results': no_results
         }
         return render(request, "search.html", context)
+
+
+class MoreStories(generic.ListView):
+    model = Post
+    queryset = Post.objects.filter(Q(status=2) | Q(published_on__date__gte=datetime.utcnow() - timedelta(days=7))).order_by("-created_on")
+    template_name = "more_stories.html"
+    paginate_by = 6
+    print(queryset)

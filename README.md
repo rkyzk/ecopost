@@ -12,3 +12,6 @@ search.html
 Reverse for 'post_detail' with arguments '('',)' not found.
 The word 'search' was recognized as slug.  changed the url from '<slug:slug>/post_detail' to 'detail/<slug:slug>'
 and search.html was rendered.
+
+
+my page how to get parameter id to test user == id

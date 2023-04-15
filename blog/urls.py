@@ -8,6 +8,7 @@ urlpatterns = [
         path('my_page/<int:id>/', views.MyPage.as_view(), name='my_page'),
         path('search_story/', views.Search.as_view(), name='search'),
         path('add_story/', views.AddStory.as_view(), name='add_story'),
+        path('more_stories', views.MoreStories.as_view(), name='more_stories'),
         path('update/<slug:slug>/', views.UpdatePost.as_view(), name='update_post'),
         path('delete/<slug:slug>/', views.DeletePost.as_view(), name='delete_post'), 
         path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),

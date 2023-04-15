@@ -9,8 +9,7 @@ class TestViews(TestCase):
     c = Client()
 
     def setUp(self):
-        """create test users and posts"""
-
+        """create test user and post"""
         self.user_1 = User.objects.create(username="user_1",
                                           password="password")
         logged_in = self.c.login(username='user_1', password='password')
@@ -21,24 +20,6 @@ class TestViews(TestCase):
                                           region='N/A',
                                           category='others')
 
-    #     self.post1 = Post.objects.create(title="title_1",
-    #                         author=self.user_1,
-    #                         content="test sentences")
-    #     self.post2 = Post.objects.create(title="title_2",
-    #                         author=self.user_2,
-    #                         content="test 2 sentences")
-    #     self.post3 = Post.objects.create(title="title_3",
-    #                         author=self.user_1,
-    #                         content="test 3 sentences")
-    #     self.post4 = Post.objects.create(title="title_4",
-    #                         author=self.user_2,
-    #                         content="test 4 sentences")
-       
-
-        # # confirm user is logged in
-        # self.assertTrue(log_in)
-        # self.assertTrue(self.user.is_staff)
-
 
     def test_get_postlist(self):
         response = self.client.get('/')
@@ -47,9 +28,9 @@ class TestViews(TestCase):
 
 
     # It's testing login mixin, not View. ok in this file?
-    def test_cannot_get_add_story_without_login(self):
+    def test_redirected_to_login_if_add_story_called_without_login(self):
         response = self.client.get('/add_story')
-        # response.status.code 301
+        # self.assertEqual(response.status_code, 301) 
    
 
     def test_can_get_add_story_after_login(self):

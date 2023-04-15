@@ -23,7 +23,7 @@
         <div>
           <div>
           {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top" src="media/default.jpg" alt="">
+            <img class="card-img-top" src="media/default.jpg" alt="graphics of forest">
           {% else %}
             <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
            {% endif %}
@@ -31,14 +31,21 @@
         </div>
         <div class="mx-2">
           <p class="mt-1"><strong>{{ post.title }}</strong><br>
-            Written by {{ post.author }}<br>    <!-- want to put this on right  -->     
-            </p>
+            Written by {{ post.author }}<br>   
+          </p>
+          <p>{{ post.excerpt }}</p>
           <a href="{% url 'post_detail' post.slug %}">Read the full story</a>
         </div>
       </div>
     {% empty %}
       <p>No posts</p>
     {% endfor %}
+    <div class="mt-5">
+      <a href="{% url 'more_stories' %}"><p class="links">Read more stories from this week &raquo;</p></a>
+    </div>
+    <div class="mt-3">
+      <a href="#"><p class="links">Read the most 'liked' stories of all time &raquo;</p></a>
+    </div>
   </div>
   <hr/>
 </div>
