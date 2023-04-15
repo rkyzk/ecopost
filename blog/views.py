@@ -23,53 +23,12 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        message = 'Your story has been saved.'
+        message = 'Your draft has been saved.'
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
             message = 'Your story has been submitted for evaluation.'
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
-
-
-# class AddStory(LoginRequiredMixin, View):
-    
-#     def get(self, request, *args, **kwargs):
-#         """Post an empty form for writing a new post """
-#         return render(
-#             request,
-#             "add_story.html",
-#             {
-#                 "post_form": PostForm(),
-#                 "photo_form": PhotoForm()
-#             }
-#         )
-
-    
-#     def post(self, request, *args, **kwargs):
-#         """Save or submit a new post"""
-#         post_form = PostForm(self.request.POST)
-#         photo_form = PhotoForm(self.request.POST, self.request.FILES)
-#         if post_form.is_valid() and photo_form.is_valid():
-#             post_form.instance.author = self.request.user
-#             photo = photo_form.save(commit=False)
-#             post_form.instance.featured_image = photo.image
-#             if 'submit' in self.request.POST.keys():
-#                 post_form.instance.status = 1
-#                 post_form.save()
-#                 messages.add_message(self.request, messages.SUCCESS, 'Your draft has been submitted.')
-#             else:
-#                 post_form.save()
-#                 messages.add_message(self.request, messages.SUCCESS, 'Your draft has been saved.')    
-#         else:
-#             print("error occured")
-#         return render(
-#             request,
-#             "add_story.html",
-#             {
-#                 "post_form": PostForm(),
-#                 "photo_form": PhotoForm()
-#             }
-#         )
 
 
 class PostDetail(View):
