@@ -30,27 +30,43 @@ class TestModels(TestCase):
     #                                      author=self.user_2,
     #                                      content="test sentences")
     #     self.assertRaises(IntegrityError, 'UNIQUE constraint failed')
-        # sqlite3.IntegrityError: UNIQUE constraint failed: blog_post.slug
-
+        
 
     def test_featured_flag_default_to_False(self):
         self.assertEqual(self.post1.featured_flag, False)    
 
 
+    def test_published_on_can_be_blank(self): # necessary, and right?
+        self.assertEqual(self.post1.published_on, None)
+
+
+    def test_featured_image_default_to_placeholder(self):
+        self.assertEqual(self.post1.featured_image, 'placeholder')
+
+
+    # test_the_image_is_transformed
+
+
+    def test_region_default_to_NA(self):
+        self.assertEqual(self.post1.region, 'N/A')
+
+
+    def test_category_default_to_Others(self):
+        self.assertEqual(self.post1.category, 'Others')
+
+
     def test_str_method_will_return_title(self):
         self.assertEqual(str(self.post1), 'title_1')
 
+
+    def test_posts_ordered_by_created_on_newest_to_oldest(self):
+        posts = Post.objects.all()
+        i = 0
+        for i in range(len(posts) - 2):
+            self.assertGreater(posts[i].created_on, posts[i+1].created_on)
+            i += 1
+      
     
-    # why fail?
-    # def test_num_of_likes_count_num_of_likes(self):
-    #     self.assertEqual(self.post1.number_of_likes, self.post1.likes.count())
-
-# def test_posts_ordered_from_newest_to_oldest(self):
-    #     i = 1
-    #     for post in range(len(queryset) - 1):
-    #         post.published_on > queryset[1].publisehd_on
-
-
     # def test_save_method_will_slugify_post_if_not(self):
     #     """test the newly made post6 will have slug value of none
     #        while already saved title_1 will have slug 'title_1'"""
@@ -59,6 +75,15 @@ class TestModels(TestCase):
     #                                      content="test sentences")
     #     assertEqual(self.post6.slug, None)
     #     assertEqual(self.post1.slug, 'title_1')
+
+    # why fail?
+    # def test_num_of_likes_count_num_of_likes(self):
+    #     self.assertEqual(self.post1.number_of_likes, self.post1.likes.count())
+
+                                    # content="test sentences")    
+
+
+
         
 
 if __name__ == "__main__":
