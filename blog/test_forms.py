@@ -94,5 +94,38 @@ class TestPostForm(TestCase):
         )
 
 
+class TestCommentForm(TestCase):
+
+    def setUp(self):  # done before each test is done
+        """create test users and posts"""
+        self.user_1 = User.objects.create(username="test1",
+                                          password="password")
+        self.user_2 = User.objects.create(username="test2",
+                                          password="password")
+        self.post1 = Post.objects.create(title="title_1",
+                                         author=self.user_1,
+                                         content="test sentences")
+        self.post2 = Post.objects.create(title="title_2",
+                                         author=self.user_2,
+                                         content="test 2 sentences")
+
+
+    def test_comment_body_is_required(self):
+        form = CommentForm({
+            'body': '',
+            'author': self.user_1,
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn('body', form.errors.keys())
+        self.assertEqual(form.errors['body'][0], 'This field is required.')
+
+
+    def test_fields_are_explicit_in_form_metaclass(self):
+        form = CommentForm()
+        self.assertEqual(
+            form.Meta.fields,
+            ('body',)
+        )
+
 if __name__ == "__main__":
     main()
