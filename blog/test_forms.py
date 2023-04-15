@@ -6,18 +6,10 @@ from .models import Post, Comment
 
 class TestPostForm(TestCase):
 
-    def setUp(self):  # done before each test is done
-        """create test users and posts"""
+    def setUp(self):
+        """create test user"""
         self.user_1 = User.objects.create(username="test1",
                                           password="password")
-        self.user_2 = User.objects.create(username="test2",
-                                          password="password")
-        self.post1 = Post.objects.create(title="title_1",
-                                         author=self.user_1,
-                                         content="test sentences")
-        self.post2 = Post.objects.create(title="title_2",
-                                         author=self.user_2,
-                                         content="test 2 sentences")
 
 
     def test_post_title_is_required(self):
@@ -50,7 +42,7 @@ class TestPostForm(TestCase):
     def test_post_featured_image_is_not_required(self):
         form = PostForm({
             'title': 'title_3',
-            'author': self.user_2,
+            'author': self.user_1,
             'content': 'content',
             'region': 'N/A',
             'category': 'others'
@@ -61,7 +53,7 @@ class TestPostForm(TestCase):
     def test_post_region_is_required(self):
         form = PostForm({
             'title': 'title_3',
-            'author': self.user_2,
+            'author': self.user_1,
             'content': 'content',
             'region': '',
             'category': 'others'
@@ -75,7 +67,7 @@ class TestPostForm(TestCase):
     def test_post_category_is_required(self):
         form = PostForm({
             'title': 'title_3',
-            'author': self.user_2,
+            'author': self.user_1,
             'content': 'content',
             'region': 'N/A',
             'category': ''
@@ -96,18 +88,10 @@ class TestPostForm(TestCase):
 
 class TestCommentForm(TestCase):
 
-    def setUp(self):  # done before each test is done
-        """create test users and posts"""
+    def setUp(self):
+        """create test user"""
         self.user_1 = User.objects.create(username="test1",
                                           password="password")
-        self.user_2 = User.objects.create(username="test2",
-                                          password="password")
-        self.post1 = Post.objects.create(title="title_1",
-                                         author=self.user_1,
-                                         content="test sentences")
-        self.post2 = Post.objects.create(title="title_2",
-                                         author=self.user_2,
-                                         content="test 2 sentences")
 
 
     def test_comment_body_is_required(self):
