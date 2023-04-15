@@ -296,17 +296,15 @@ class Search(View):
                 qs = [post for post in query_lists[i] if post in query_lists[i+1]]
                 i += 1 
             
-        no_results = False
-        print("search button clicked?")
-        print('search' in self.request.GET)
+        search_clicked = False
         if 'search' in self.request.GET:
-            if qs == []:
-                no_results = True
+            search_clicked = True
+        print(qs)    
         context = {
             'categories': categories,
             'regions': regions,
             'queryset': qs,
-            'no_results': no_results
+            'search_clicked': search_clicked
         }
         return render(request, "search.html", context)
 
@@ -316,4 +314,3 @@ class MoreStories(generic.ListView):
     queryset = Post.objects.filter(Q(status=2) | Q(published_on__date__gte=datetime.utcnow() - timedelta(days=7))).order_by("-created_on")
     template_name = "more_stories.html"
     paginate_by = 6
-    print(queryset)

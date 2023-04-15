@@ -81,6 +81,19 @@ class TestPostModels(TestCase):
         self.assertEqual(self.post1.pub_date(), date.strftime("%B %d, %Y"))
 
 
+    def test_excerpt_returns_specified_str(self):
+        post3 = Post.objects.create(
+            title="title_3",
+            author=self.user_1,
+            content="I'm writing a long content to test " + \
+            "if the excerpt method returns the first 99 characters and " + \
+            "... are returned"
+        )
+        self.assertEqual(post3.excerpt(), "I'm writing a long content to test " + \
+            "if the excerpt method returns the first 99 characters and " + \
+            "... ar...")
+
+
     # def test_get_absolute_url(self):
 
 
