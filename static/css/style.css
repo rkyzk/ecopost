@@ -1,6 +1,12 @@
 .btn-submit {
-  background-color: rgb(255, 165, 0);
+  background-color: rgb(149, 120, 67);
 }
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+}
+
 
 .navbar-bg {
   background-color: rgb(51, 52, 55);

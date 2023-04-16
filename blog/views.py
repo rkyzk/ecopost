@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime, timedelta
+from django.core.exceptions import PermissionDenied
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
@@ -132,15 +133,17 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         return post.author == self.request.user
             
 
-class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
-    model = Post
-    success_url = ('/home/')
+class DeletePost(LoginRequiredMixin, View):
 
-
-    def test_func(self):
-        slug = self.request.GET.get('delete_post')
+    def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
-        return post.author == self.request.user
+        if post.author == self.request.user:
+            post.delete()
+            message = 'Your draft has been deleted.'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('home'))
+        else:     
+            raise PermissionDenied()   
 
 
 # def update_comment(request):
@@ -212,7 +215,7 @@ class DeleteComment(View):
 class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, id, *args, **kwargs):
-        queryset = Post.objects.filter(author=id)  
+        my_posts = Post.objects.filter(author=id)  
         comments = Comment.objects.filter(commenter__id=id)
         commented_posts = [comment.post for comment in comments]
         # remove duplicates
@@ -228,7 +231,7 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
             request,
             "my_page.html",
             {
-                "queryset": queryset,
+                "my_posts": my_posts,
                 "commented_posts": commented_posts,
                 "bookmarked_posts": bookmarked_posts
             },
@@ -236,9 +239,7 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
 
     def test_func(self):
-        return True
-    #     id = self.request.GET.get('id')
-    #     return id == self.request.user.id
+        return self.kwargs.get('id') == self.request.user.id
 
 
 class Search(View):
@@ -347,5 +348,7 @@ class MoreStories(generic.ListView):
             'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
             'featured_flag': False
             }
+        posts = Post.objects.filter(**filterargs).order_by("-published_on")
+        print(posts)
         context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
         return context

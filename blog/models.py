@@ -96,7 +96,7 @@ class Post(models.Model):
 
 
     def excerpt(self):
-        excerpt = str(self.content)[0:99] + "..."
+        excerpt = str(self.content)[0:199] + "..."
         return excerpt
 
 

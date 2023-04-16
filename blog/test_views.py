@@ -28,15 +28,15 @@ class TestViews(TestCase):
 
 
     def test_redirected_to_login_if_add_story_called_without_login(self):
-        response = self.client.get('/add_story', follow=True)
+        response = self.client.get(reverse('add_story'), follow=True)
         print(response.redirect_chain)
         # self.assertEqual(response.status_code, 302)
-        # response = self.client.get(reverse('add_story'))
-        # self.assertTrue(response.redirect_chain. )
+        # self.assertRedirects(response)
+        # self.assertTrue()
   
 
     def test_can_get_add_story_after_login(self):
-        response = self.c.get("/add_story", follow=True, secure=True)
+        response = self.c.get("/add_story")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html', 'add_story.html')
 

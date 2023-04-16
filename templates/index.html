@@ -4,7 +4,7 @@
 <!-- intro -->
 <div class="intro">
   <div class="row">
-    <div class="intro-box col-md-6 offset-3 mt-5">
+    <div class="intro-box col-md-6 offset-md-3 mt-5">
       <p>Depressed about climate change?</p>
       <p>Feel like individuals can't do much?  Don't give up.  This website is
          for anyone who wants to find out what some local communities
@@ -22,7 +22,7 @@
   <div class="row mt-5">
     {% for post in post_list %}
       <div class="col-md-4 p-2">
-        <div>
+        <div class="image-wrapper">
           {% if "placeholder" in post.featured_image.url %}
             <img class="card-img-top" src="/media/default.jpg" alt="forest graphics">
           {% else %}
