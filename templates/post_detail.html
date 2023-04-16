@@ -8,13 +8,8 @@
   <div class="row">
     <div class="col-lg-5 mt-3">
       <div class="d-flex justify-content-between mb-2">
-        {% if post.pub_date %}
         <span>Author: {{ post.author }}</span>
-        <span>published on {{ post.pub_date }}</span>
-        {% else %}
-        <span>Author: {{ post.author }}</span>
-        <span>{{ created_on|date:'M d, Y' }}</span>
-        {% endif %}  
+        <span>{{ post.pub_date }}</span>
       </div>
     </div>
   </div>

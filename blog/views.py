@@ -11,7 +11,7 @@ from .models import Post, Comment
 
 class PostList(generic.ListView):
     model = Post
-    queryset = Post.objects.filter(featured_flag=True).order_by("-created_on")
+    queryset = Post.objects.filter(featured_flag=True).order_by("-created_on")[:3]
     template_name = "index.html"
 
 
@@ -42,7 +42,7 @@ class PostDetail(View):
         bookmarked = False
         if post.bookmark.filter(id=self.request.user.id).exists():
             bookmarked = True
-
+        print(post.pub_date())
         return render(
             request,
             "post_detail.html",

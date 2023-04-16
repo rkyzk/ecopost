@@ -85,7 +85,10 @@ class Post(models.Model):
 
 
     def pub_date(self):
-        return self.published_on.strftime("%B %d, %Y")
+        if self.status == 2:
+            return self.published_on.strftime("%B %d, %Y")
+        else:
+            return 'Not published'
 
 
     def excerpt(self):
