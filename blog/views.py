@@ -340,6 +340,12 @@ class MoreStories(generic.ListView):
     template_name = "more_stories.html"
     paginate_by = 6
 
-    def get_queryset(self):
-        return Post.objects.filter(Q(status=2) | Q(published_on__date__gte=datetime.utcnow() - timedelta(days=7))).order_by("-created_on")
-  
+    def get_context_data(self, **kwargs):
+        context = super(MoreStories, self).get_context_data(**kwargs)
+        filterargs = {
+            'status': 2,
+            'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
+            'featured_flag': False
+            }
+        context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
+        return context
