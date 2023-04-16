@@ -1,3 +1,5 @@
+\
+
 bugs
 
 * Post couldn't be created through add_story.html.  Integrity error.  Set slugify and worked.

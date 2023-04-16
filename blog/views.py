@@ -337,6 +337,8 @@ class Search(View):
 
 class MoreStories(generic.ListView):
     model = Post
-    queryset = Post.objects.filter(Q(status=2) | Q(published_on__date__gte=datetime.utcnow() - timedelta(days=7))).order_by("-created_on")
+    queryset = Post.objects.filter(
+        Q(status=2) | Q(published_on__date__gte=datetime.utcnow() - timedelta(days=7))
+        ).order_by("-created_on")
     template_name = "more_stories.html"
     paginate_by = 6

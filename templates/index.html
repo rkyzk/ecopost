@@ -23,20 +23,16 @@
     {% for post in post_list %}
       <div class="col-md-4 p-2">
         <div>
-          <div>
           {% if "placeholder" in post.featured_image.url %}
             <img class="card-img-top" src="/media/default.jpg" alt="graphics of forest">
           {% else %}
             <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
            {% endif %}
-          </div>
         </div>
         <div class="mx-2 mt-2">
           <div class="d-flex justify-content-between">
             <span><strong>{{ post.title }}</strong></span>
-            {% if post.pub_date %}
             <span>{{ post.pub_date }}</span>
-            {% endif %}
           </div>
           <p>Author: {{ post.author }}</p>
           <p>{{ post.excerpt }}</p>
