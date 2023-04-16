@@ -76,8 +76,13 @@ class TestPostModels(TestCase):
                          self.post1.likes.count())
 
 
-    def test_pub_date_returns_specified_format(self):
+    def test_pub_date_returns_string_message_if_not_published(self):
+        self.assertEqual(self.post2.pub_date(), 'Not published')
+
+
+    def test_pub_date_returns_specified_format_if_published(self):
         date = datetime.utcnow()
+        self.post1.status = 2
         self.post1.published_on = date
         self.assertEqual(self.post1.pub_date(), date.strftime("%B %d, %Y"))
 

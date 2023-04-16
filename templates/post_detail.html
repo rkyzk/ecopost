@@ -108,9 +108,12 @@
             {% if comment.commenter == user %}
             <div class="d-flex justify-content-end">
               <div class="col-1">
-                <button type="submit" class="btn btn-sm" id="update_comment">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                </button>
+                <form method="GET" action="{% url 'update_comment' comment.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-sm" name="update_comment" value="{{comment.id}}">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                  </button>
+                </form>
               </div>
               <div class="col-1">
                 <form method="POST" action="{% url 'delete_comment' comment.id %}">
@@ -143,11 +146,12 @@
             <button type="submit" class="btn-submit btn-lg mt-3">Submit</button>
           </form>
         {% else %}
-          <p>To leave comments,
-            <a href="{% url 'account_login' %}">Log In</a>
+          <h3>Want to leave comments?</h3>
+            <p>
+              <a href="{% url 'account_signup' %}">Become a member</a>
               or
-            <a href="{% url 'account_signup' %}">Become a member</a>
-          </p>
+              <a href="{% url 'account_login' %}">Log in</a>
+            </p>
         {% endif %}
       </div>
     </div>
@@ -169,35 +173,35 @@
     return confirm(DELETE_COMMENT);
   })
 
-  // 
-  function send_data() {
+//   // 
+//   function send_data() {
   
-  $.ajax({
-    url : 'update_comment/',
-    data : {
-      'id' : 1,     
-    },
-    method : 'GET',
-    success : success_function // reference to below
-  });
+//   $.ajax({
+//     url : 'update_comment/',
+//     data : {
+//       'id' : 1,     
+//     },
+//     method : 'GET',
+//     success : success_function // reference to below
+//   });
 
-}
+// }
 
-  let updateComment = document.querySelector('#update_comment');
-  updateComment.addEventListener('click', (e)=>{ 
-    send_data();
-  })
+//   let updateComment = document.querySelector('#update_comment');
+//   updateComment.addEventListener('click', (e)=>{ 
+//     send_data();
+//   })
 
-  function success_function(response) {
-    comment = response.comment;
-    let commentBox = document.getElementById("comment-box");
-    let inputBox = document.createElement("input");
-    inputBox.setAttribute("type", "text");
-    inputBox.setAttribute("id", "update_comment");
-    inputBox.setAttribute("value", comment);
+//   function success_function(response) {
+//     comment = response.comment;
+//     let commentBox = document.getElementById("comment-box");
+//     let inputBox = document.createElement("input");
+//     inputBox.setAttribute("type", "text");
+//     inputBox.setAttribute("id", "update_comment");
+//     inputBox.setAttribute("value", comment);
     
-    commentBox.parentNode.replaceChild(updateCommentBox, commentBox);
-  }
+//     commentBox.parentNode.replaceChild(updateCommentBox, commentBox);
+//   }
 
   </script>
 {% endblock content %}

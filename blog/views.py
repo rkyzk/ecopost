@@ -42,7 +42,6 @@ class PostDetail(View):
         bookmarked = False
         if post.bookmark.filter(id=self.request.user.id).exists():
             bookmarked = True
-        print(post.pub_date())
         return render(
             request,
             "post_detail.html",
@@ -156,33 +155,48 @@ class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
 
 
 
-class UpdateComment(View):
-
-    def get(self, request, id, *args, **kwargs):
-        comment = get_object_or_404(Comment, id=id)
-        comment_form = CommentForm(instance=comment)
-        slug = comment.post.slug
-
-        return render(
-            request,
-            "update_comment.html",
-            {
-                "comment_form": comment_form
-            }
-        )
+class UpdateComment(LoginRequiredMixin, generic.UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = "update_comment.html"
+    
+    # def form_valid(self, form):
+    #     form.instance.commenter = self.request.user
+    #     message = 'Your comment has been updated.'
+    #     messages.add_message(self.request, messages.SUCCESS, message)
+    #     return super(UpdateComment, self).form_valid(form)
 
 
-    def post(self, request, id, *args, **kwargs):
+    # def test_func(self):
+    #     id = self.request.GET.get('submit')
+    #     comment = get_object_or_404(Comment, id)
+    #     return comment.commenter == self.request.user
 
-        comment = get_object_or_404(Comment, id=id)
-        comment_form = CommentForm(self.request.POST, instance=comment)
-        updated = comment_form.save(commit=False)
-        updated.name = request.user
-        updated.comment_status = 1
-        slug = comment.post.slug
-        if comment_form.is_valid():
-            updated.save()
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    # def get(self, request, id, *args, **kwargs):
+    #     comment = get_object_or_404(Comment, id=id)
+    #     comment_form = CommentForm(instance=comment)
+    #     slug = comment.post.slug
+
+    #     return render(
+    #         request,
+    #         "update_comment.html",
+    #         {
+    #             "comment_form": comment_form
+    #         }
+    #     )
+
+
+    # def post(self, request, id, *args, **kwargs):
+
+    #     comment = get_object_or_404(Comment, id=id)
+    #     comment_form = CommentForm(self.request.POST, instance=comment)
+    #     updated = comment_form.save(commit=False)
+    #     updated.name = request.user
+    #     updated.comment_status = 1
+    #     slug = comment.post.slug
+    #     if comment_form.is_valid():
+    #         updated.save()
+    #     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class DeleteComment(View):
