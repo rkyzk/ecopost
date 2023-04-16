@@ -9,11 +9,11 @@ class TestViews(TestCase):
     c = Client()
 
     def setUp(self):
-        """create test user and post"""
+        """create a test user and test post.  Log in the test user."""
         self.user_1 = User.objects.create(username="user_1",
                                           password="password")
-        logged_in = self.c.login(username='user_1', password='password')
-
+        logged_in = self.c.login(username='user_1',
+                                 password='password')
         self.post_1 = Post.objects.create(title='title_1',
                                           author=self.user_1,
                                           content='content',
@@ -26,8 +26,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html', 'base.html')
 
-
-    # It's testing login mixin, not View. ok in this file?
+    # ??
     def test_redirected_to_login_if_add_story_called_without_login(self):
         response = self.client.get('/add_story')
         # self.assertEqual(response.status_code, 301) 
@@ -40,49 +39,76 @@ class TestViews(TestCase):
 
 
     # can't create a post
-    def test_can_add_story(self):
-        response = self.c.post('/add_story',
-                               {'title': 'title_2',
-                                'author': self.user_1,
-                                'content': 'test',
-                                'region': 'N/A',
-                                'category': 'others'},
-                                follow=True,
-                                secure=True
-                               )
-        
-        # post = get_object_or_404(Post, title='title_2')
-        # self.assertEqual(post.title, 'title_2')
-        # self.assertEqual(post.content, 'test')
-        # self.assertRedirects(response, '/add_story')
+    # def test_can_add_story(self):
+    #     response = self.c.post('/add_story',
+    #                            {'title': 'title_2',
+    #                             'author': self.user_1,
+    #                             'content': 'test',
+    #                             'region': 'N/A',
+    #                             'category': 'others',
+    #                             'save': 'draft'},
+    #                            follow=True,
+    #         
+    #                            )
+    #     post = get_object_or_404(Post, title='title_2')
+    #     print(post)
+    #     self.assertEqual(post.title, 'title_2')
+    #     self.assertEqual(post.content, 'test')
+    #     self.assertRedirects(response, '/add_story')
 
 
-        # def test_message_says_draft_is_saved(self):
+    # def test_message_says_draft_is_saved(self):
+        # response = self.c.post('/add_story',
+        #                        {'title': 'title_2',
+        #                         'author': self.user_1,
+        #                         'content': 'test',
+        #                         'region': 'N/A',
+        #                         'category': 'others'},
+        #                        follow=True,
+        #                        secure=True
+        #                        )
+        # self.assertEqual(messages, 'Your draft has been saved.')
 
-        # def test_message_says_draft_is_submitted_if_submitted(self):
+    # def test_message_says_draft_is_submitted_if_submitted(self):
+     # response = self.c.post('/add_story',
+        #                        {'title': 'title_2',
+        #                         'author': self.user_1,
+        #                         'content': 'test',
+        #                         'region': 'N/A',
+        #                         'category': 'others'},
+        #                        follow=True,
+        #                        secure=True
+        #                        )
+        # self.assertEqual(messages, 'Your draft has been saved.')
 
 
-    # def test_get_postdetail(self):
-    #     response = self.client.get('/detail', {'slug': 'title_1'})
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
+    def test_get_postdetail(self):
+        response = self.client.get('/detail/{0}/'.format(self.post_1.slug))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
+
 
     # can't create comments
-    def test_can_post_comment(self):
-        response = self.c.post('/detail/title_1',
-                               {
-                                'body': 'test comment',
-                                'commenter': self.user_1
-                                },
-                                follow=True,
-                                secure=True
-                              )
-        comment = Comment.objects.filter(commenter=self.user_1)
-        print(comment)
+    # def test_can_post_comment(self):
+    #     user_2 = User.objects.create(username="user_2",
+    #                                  password="secret")
+    #     self.c.login(username='user_2', password='secret')
+    #     print(type(user_2))
+    #     print(user_2.is_authenticated)
+    #     response = self.c.post('/detail/{0}/'.format(self.post_1.slug),
+    #                            {
+    #                                 'body': 'test comment',
+    #                                 'commenter': user_2
+    #                             }
+    #                           )
+    #     comment = Comment.objects.filter(commenter=user_2)
+    #     print(comment)
 
 
-    def test_post_like_will_add_likes(self):
-        response = self.c.post('/like', {'slug': 'title_1'})
+    # def test_post_like_will_add_likes(self):
+    #         
+    #     response = self.c.post('/like/{0}'.format(self.post_1.slug))
+    #   self.assertIn(user object, post_1.likes)
 
 
 

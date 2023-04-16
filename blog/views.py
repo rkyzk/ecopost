@@ -24,6 +24,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         message = 'Your draft has been saved.'
+        print(self.request.POST.keys())
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
             message = 'Your story has been submitted for evaluation.'
@@ -68,7 +69,6 @@ class PostDetail(View):
         comment_form = CommentForm(data=request.POST)
 
         if comment_form.is_valid():
-            comment_form.instance.email = request.user.email
             comment_form.instance.commenter = request.user
             comment = comment_form.save(commit=False)
             comment.post = post
@@ -144,45 +144,45 @@ class DeletePost(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
         return post.author == self.request.user
 
 
-def update_comment(request):
-    # if request is json
-    if request.method == "GET":
-        id = request.GET['id']
+# def update_comment(request):
+#     # if request is json
+#     if request.method == "GET":
+#         id = request.GET['id']
+#         comment = get_object_or_404(Comment, id=id)
+#         response = {
+#             'comment' : comment.body,
+#         }
+#         return JsonResponse(response)
+
+
+
+class UpdateComment(View):
+
+    def get(self, request, id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=id)
-        response = {
-            'comment' : comment.body,
-        }
-        return JsonResponse(response)
+        comment_form = CommentForm(instance=comment)
+        slug = comment.post.slug
+
+        return render(
+            request,
+            "update_comment.html",
+            {
+                "comment_form": comment_form
+            }
+        )
 
 
+    def post(self, request, id, *args, **kwargs):
 
-# class UpdateComment(View):
-
-#     def get(self, request, id, *args, **kwargs):
-#         comment = get_object_or_404(Comment, id=id)
-#         comment_form = CommentForm(instance=comment)
-#         slug = comment.post.slug
-
-#         return render(
-#             request,
-#             "update_comment.html",
-#             {
-#                 "comment_form": comment_form
-#             }
-#         )
-
-
-#     def post(self, request, id, *args, **kwargs):
-
-#         comment = get_object_or_404(Comment, id=id)
-#         comment_form = CommentForm(self.request.POST, instance=comment)
-#         updated = comment_form.save(commit=False)
-#         updated.name = request.user
-#         updated.comment_status = 1
-#         slug = comment.post.slug
-#         if comment_form.is_valid():
-#             updated.save()
-#         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        comment = get_object_or_404(Comment, id=id)
+        comment_form = CommentForm(self.request.POST, instance=comment)
+        updated = comment_form.save(commit=False)
+        updated.name = request.user
+        updated.comment_status = 1
+        slug = comment.post.slug
+        if comment_form.is_valid():
+            updated.save()
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class DeleteComment(View):
