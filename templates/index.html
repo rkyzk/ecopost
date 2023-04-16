@@ -24,7 +24,7 @@
       <div class="col-md-4 p-2">
         <div>
           {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top" src="/media/default.jpg" alt="graphics of forest">
+            <img class="card-img-top" src="/media/default.jpg" alt="forest graphics">
           {% else %}
             <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
            {% endif %}

@@ -26,16 +26,19 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html', 'base.html')
 
-    # ??
+
     def test_redirected_to_login_if_add_story_called_without_login(self):
-        response = self.client.get('/add_story')
-        # self.assertEqual(response.status_code, 301) 
-   
+        response = self.client.get('/add_story', follow=True)
+        print(response.redirect_chain)
+        # self.assertEqual(response.status_code, 302)
+        # response = self.client.get(reverse('add_story'))
+        # self.assertTrue(response.redirect_chain. )
+  
 
     def test_can_get_add_story_after_login(self):
-        page = self.c.get("/add_story", follow=True, secure=True)
-        self.assertEqual(page.status_code, 200)
-        self.assertTemplateUsed(page, 'base.html', 'add_story.html')
+        response = self.c.get("/add_story", follow=True, secure=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base.html', 'add_story.html')
 
 
     # can't create a post
@@ -47,8 +50,6 @@ class TestViews(TestCase):
     #                             'region': 'N/A',
     #                             'category': 'others',
     #                             'save': 'draft'},
-    #                            follow=True,
-    #         
     #                            )
     #     post = get_object_or_404(Post, title='title_2')
     #     print(post)
@@ -67,7 +68,8 @@ class TestViews(TestCase):
         #                        follow=True,
         #                        secure=True
         #                        )
-        # self.assertEqual(messages, 'Your draft has been saved.')
+        # 
+        # self.assertEqual(response.messages, 'Your draft has been saved.')
 
     # def test_message_says_draft_is_submitted_if_submitted(self):
      # response = self.c.post('/add_story',

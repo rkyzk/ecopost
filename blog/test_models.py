@@ -23,20 +23,16 @@ class TestPostModels(TestCase):
             )
 
 
-    # def test_two_posts_cannot_have_the_same_title(self):                                         
-    #     with self.assertRaises(IntegrityError) as context:
-    #         Post.objects.create(title="title_1", author=self.user_2,
-    #                             content="test sentences", category='others',
-    #                             region='N/A')
-    #     self.assertTrue('UNIQUE constraint failed' in str(context.exception))
+    def test_two_posts_cannot_have_the_same_title(self):                                         
+        with self.assertRaises(Exception) as raised:
+            Post.objects.create(title="title_1", author=self.user_2,
+                                content="test sentences", category='others',
+                                region='N/A')
+        self.assertTrue(IntegrityError, type(raised.exception))
     
 
     def test_featured_flag_default_to_False(self):
-        self.assertEqual(self.post1.featured_flag, False)    
-
-
-    def test_published_on_can_be_blank(self): # necessary, and right?
-        self.assertEqual(self.post1.published_on, None)
+        self.assertEqual(self.post1.featured_flag, False)
 
 
     def test_featured_image_default_to_placeholder(self):

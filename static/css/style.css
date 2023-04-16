@@ -2,6 +2,11 @@
   background-color: rgb(255, 165, 0);
 }
 
+.navbar-bg {
+  background-color: rgb(51, 52, 55);
+  color: #fff;
+}
+
 .intro {
   background-image: url(/media/ecopost-bg.jpg);
 }
@@ -15,6 +20,15 @@ footer {
   width: 100%;
   height: 40px;
   background-color:rgb(6, 67, 45)
+}
+
+
+.hide-posts {
+  display: none;
+}
+
+.show-posts {
+  display: block;
 }
 
 /* .bm-text {

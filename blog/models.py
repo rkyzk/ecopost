@@ -49,16 +49,20 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     published_on = models.DateTimeField(null=True, blank=True)
     content = models.TextField()
-    featured_image = CloudinaryField('image', default='placeholder', blank=True,
+    featured_image = CloudinaryField('image',
+                                     default='placeholder',
+                                     blank=True,
                                      transformation={
                                         'crop': 'fill_pad',
                                         'width': 510,
                                         'height': 340,
                                         'gravity': 'auto',
                                         'q_auto': 'good'
-                                    })
+                                     })
     status = models.IntegerField(choices=STATUS, default=0)
-    likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
+    likes = models.ManyToManyField(User,
+                                   related_name='post_likes',
+                                   blank=True)
     region = models.CharField(max_length=30, choices=REGION, default='N/A')
     category = models.CharField(max_length=30, choices=CATEGORY,
                                 default='Others')
