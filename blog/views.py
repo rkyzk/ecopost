@@ -162,6 +162,7 @@ class UpdateComment(LoginRequiredMixin, generic.UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = "update_comment.html"
+
     
     # def form_valid(self, form):
     #     form.instance.commenter = self.request.user

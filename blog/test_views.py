@@ -28,15 +28,13 @@ class TestViews(TestCase):
 
 
     def test_redirected_to_login_if_add_story_called_without_login(self):
-        response = self.client.get(reverse('add_story'), follow=True)
-        print(response.redirect_chain)
-        # self.assertEqual(response.status_code, 302)
-        # self.assertRedirects(response)
-        # self.assertTrue()
+        response = self.client.get(reverse('add_story'))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login/'))
   
 
     def test_can_get_add_story_after_login(self):
-        response = self.c.get("/add_story")
+        response = self.c.get("/add_story", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html', 'add_story.html')
 
@@ -110,8 +108,7 @@ class TestViews(TestCase):
     # def test_post_like_will_add_likes(self):
     #         
     #     response = self.c.post('/like/{0}'.format(self.post_1.slug))
-    #   self.assertIn(user object, post_1.likes)
-
+    #     self.assertIn(user object, post_1.likes)
 
 
 if __name__ == '__main__':
