@@ -10,9 +10,9 @@
       <div class="col-md-4">
         <div class="image-container">
           {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top" src="/media/default.jpg">
+            <img class="card-img-top" src="/media/default.jpg" alt="graphic of forest">
           {% else %}
-            <img class="card-img-top" src=" {{ post.featured_image.url }}">
+            <img class="card-img-top" src=" {{ post.featured_image.url }}" alt="{{ post.title }}">
           {% endif %}
           <div>
             <p class="author">Author: {{ post.author }}</p>
@@ -91,7 +91,7 @@
         <div class="image-flash">
           <p class="author">Author: {{ post.author }}</p>
           <strong><p>{{ post.title }}</p></strong>
-          <p>{{ post.content }}</p>
+          <p>{{ post.excerpt }}</p>
           <a href="{% url 'post_detail' post.slug  %}">Read the full story</a>
         </div>
       </div>
