@@ -110,7 +110,7 @@
               <div class="col-1">
                 <form method="GET" action="{% url 'update_comment' comment.id %}">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-sm" name="update_comment" value="{{comment.id}}">
+                  <button type="submit" class="btn btn-sm">
                     <i class="fa-regular fa-pen-to-square"></i>
                   </button>
                 </form>

@@ -158,52 +158,45 @@ class DeletePost(LoginRequiredMixin, View):
 
 
 
-class UpdateComment(LoginRequiredMixin, generic.UpdateView):
-    model = Comment
-    form_class = CommentForm
-    template_name = "update_comment.html"
-
-    
-    # def form_valid(self, form):
-    #     form.instance.commenter = self.request.user
-    #     message = 'Your comment has been updated.'
-    #     messages.add_message(self.request, messages.SUCCESS, message)
-    #     return super(UpdateComment, self).form_valid(form)
+class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
 
-    # def test_func(self):
-    #     id = self.request.GET.get('submit')
-    #     comment = get_object_or_404(Comment, id)
-    #     return comment.commenter == self.request.user
+    def get(self, request, id, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=id)
+        comment_form = CommentForm(instance=comment)
+        slug = comment.post.slug
 
-    # def get(self, request, id, *args, **kwargs):
-    #     comment = get_object_or_404(Comment, id=id)
-    #     comment_form = CommentForm(instance=comment)
-    #     slug = comment.post.slug
-
-    #     return render(
-    #         request,
-    #         "update_comment.html",
-    #         {
-    #             "comment_form": comment_form
-    #         }
-    #     )
+        return render(
+            request,
+            "update_comment.html",
+            {
+                "comment_form": comment_form
+            }
+        )
 
 
-    # def post(self, request, id, *args, **kwargs):
+    def post(self, request, id, *args, **kwargs):
 
-    #     comment = get_object_or_404(Comment, id=id)
-    #     comment_form = CommentForm(self.request.POST, instance=comment)
-    #     updated = comment_form.save(commit=False)
-    #     updated.name = request.user
-    #     updated.comment_status = 1
-    #     slug = comment.post.slug
-    #     if comment_form.is_valid():
-    #         updated.save()
-    #     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        comment = get_object_or_404(Comment, id=id)
+        comment_form = CommentForm(self.request.POST, instance=comment)
+        updated = comment_form.save(commit=False)
+        updated.commneter = request.user
+        updated.comment_status = 1
+        slug = comment.post.slug
+        if comment_form.is_valid():
+            updated.save()
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class DeleteComment(View):
+    def test_func(self):
+        if self.request == 'GET':
+            id = self.kwargs.get('id')
+            comment = get_object_or_404(Comment, id)
+            return comment.commenter == self.request.user
+        return True
+
+
+class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def post(self, request, id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=id)
@@ -211,6 +204,13 @@ class DeleteComment(View):
         comment.save()
         slug = comment.post.slug
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+    
+    def test_func(self):
+        id = self.kwargs.get('id')
+        comment = get_object_or_404(Comment, id=id)
+        return comment.commenter == self.request.user
+       
 
 
 class MyPage(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
@@ -381,8 +381,7 @@ class Search(View):
             
         search_clicked = False
         if 'search' in self.request.GET:
-            search_clicked = True
-        print(qs)    
+            search_clicked = True  
         context = {
             'categories': categories,
             'regions': regions,
@@ -405,6 +404,5 @@ class MoreStories(generic.ListView):
             'featured_flag': False
             }
         posts = Post.objects.filter(**filterargs).order_by("-published_on")
-        print(posts)
         context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
         return context
