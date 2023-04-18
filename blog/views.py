@@ -20,15 +20,15 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
     model = Post
     template_name = "add_story.html"
     form_class = PostForm
-    success_url = ('/add_story/')
+
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         message = 'Your draft has been saved.'
-        print(self.request.POST.keys())
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
             message = 'Your story has been submitted for evaluation.'
+        form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
 
@@ -213,38 +213,40 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
        
 
 
-class MyPage(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
+# class MyPage(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
 
-    model = Post
-    template_name = "my_page.html"
+#     model = Post
+#     template_name = "my_page.html"
 
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(IndexView, self).get_context_data(*args, **kwargs)
-        id = self.kwargs.get('id')
-        my_posts = [Post.objects.filter(author=id)]
-        if len(my_posts) > 3:
-            my_posts, my_posts_hidden = [my_posts[:3], my_posts[3:]]
-        comments = Comment.objects.filter(commenter__id=id)
-        commented_posts = [comment.post for comment in comments]
-        # remove duplicates
-        commented_posts = list(dict.fromkeys(commented_posts))
-        if len(commented_posts) > 3:
-            commented_posts, commented_posts_hidden = [commented_posts[:3],
-                                                       commented_posts[3:]]
-        bookmarked_posts = Post.objects.filter(
-                bookmark.filter(id=id).exists()
-            )
-        if len(bookmarked_posts) > 3:
-            bookmarked_posts, bookmarked_posts_hidden = [
-                bookmarked_posts[:3], bookmarked_posts[3:] 
-            ]
-        context = {
-            'my_posts': my_posts,
-            'commented_posts': commented_posts,
-            'bookmarked_posts': bookmarked_posts 
-        }
-        return context
+#     def get_context_data(self, *args, **kwargs):
+#         context = super(MyPage, self).get_context_data(*args, **kwargs)
+#         id = self.kwargs.get('pk')
+#         my_posts = [Post.objects.filter(author=id)]
+#         if len(my_posts) > 3:
+#             my_posts, my_posts_hidden = [my_posts[:3], my_posts[3:]]
+#         comments = Comment.objects.filter(commenter__id=id)
+#         commented_posts = [comment.post for comment in comments]
+#         # remove duplicates
+#         commented_posts = list(dict.fromkeys(commented_posts))
+#         if len(commented_posts) > 3:
+#             commented_posts, commented_posts_hidden = [commented_posts[:3],
+#                                                        commented_posts[3:]]
+#         all_posts = Post.objects.all()
+#         bookmarked_posts = []
+#         for post in all_posts:
+#             if post.bookmark.filter(id=id).exists():
+#                 bookmarked_posts.append(post)
+#         if len(bookmarked_posts) > 3:
+#             bookmarked_posts, bookmarked_posts_hidden = [
+#                 bookmarked_posts[:3], bookmarked_posts[3:] 
+#             ]
+#         context = {
+#             'my_posts': my_posts,
+#             'commented_posts': commented_posts,
+#             'bookmarked_posts': bookmarked_posts 
+#         }
+#         return context
 
     # def get(self, request, id, *args, **kwargs):
     #     my_posts = Post.objects.filter(author=id)  
@@ -264,15 +266,15 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
         # )
 
 
-    def test_func(self):
-        return self.kwargs.get('id') == self.request.user.id
+    # def test_func(self):
+    #     return self.kwargs.get('pk') == self.request.user.id
 
 
 class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
-    def get(self, request, id, *args, **kwargs):
-        my_posts = Post.objects.filter(author=id)  
-        comments = Comment.objects.filter(commenter__id=id)
+    def get(self, request, pk, *args, **kwargs):     
+        my_posts = Post.objects.filter(author=pk)  
+        comments = Comment.objects.filter(commenter__id=pk)
         commented_posts = [comment.post for comment in comments]
         # remove duplicates
         commented_posts = list(dict.fromkeys(commented_posts))
@@ -295,7 +297,7 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
 
     def test_func(self):
-        return self.kwargs.get('id') == self.request.user.id
+        return self.kwargs.get('pk') == self.request.user.id
 
 
 class Search(View):

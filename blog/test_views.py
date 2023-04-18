@@ -57,17 +57,17 @@ class TestViews(TestCase):
 
 
     # def test_message_says_draft_is_saved(self):
-        # response = self.c.post('/add_story',
-        #                        {'title': 'title_2',
-        #                         'author': self.user_1,
-        #                         'content': 'test',
-        #                         'region': 'N/A',
-        #                         'category': 'others'},
-        #                        follow=True,
-        #                        secure=True
-        #                        )
-        # 
-        # self.assertEqual(response.messages, 'Your draft has been saved.')
+    #     response = self.c.post('/add_story',
+    #                            {'title': 'title_2',
+    #                             'author': self.user_1,
+    #                             'content': 'test',
+    #                             'region': 'N/A',
+    #                             'category': 'others'},
+    #                            follow=True,
+    #                            secure=True
+    #                            )
+        
+    #     self.assertEqual(response.messages, 'Your draft has been saved.')
 
     # def test_message_says_draft_is_submitted_if_submitted(self):
      # response = self.c.post('/add_story',
@@ -109,6 +109,13 @@ class TestViews(TestCase):
     #         
     #     response = self.c.post('/like/{0}'.format(self.post_1.slug))
     #     self.assertIn(user object, post_1.likes)
+
+
+    # should get 403
+    def test_update_post(self):
+        response = self.client.get('update/{0}/'.format(self.post_1.slug))
+        # self.assertEqual(response.status_code, 302)
+        # self.assertTrue(response.url.startswith('/accounts/login/'))
 
 
 if __name__ == '__main__':
