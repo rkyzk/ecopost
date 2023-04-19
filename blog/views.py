@@ -93,7 +93,7 @@ class PostDetail(View):
 class PostLike(View):
 
     def post(self, request, pk, *args, **kwargs):
-        post = get_object_or_404(Post, int=pk)
+        post = get_object_or_404(Post, id=pk)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
@@ -128,7 +128,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
 
     def test_func(self):
-        pk = self.request.kwargs('pk')
+        pk = self.kwargs.get('pk')
         post = get_object_or_404(Post, id=pk)
         return post.author == self.request.user
             
@@ -275,7 +275,8 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, pk, *args, **kwargs):     
         my_posts = Post.objects.filter(author=pk)  
-        comments = Comment.objects.filter(commenter__id=pk)
+        comments = Comment.objects.filter(commenter__id=pk,
+                                          comment_status__in=[0, 1])
         commented_posts = [comment.post for comment in comments]
         # remove duplicates
         commented_posts = list(dict.fromkeys(commented_posts))
@@ -298,7 +299,7 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
 
     def test_func(self):
-        return self.kwargs.get('pk') == self.request.user.id
+        return self.kwargs.get('pk') == self.request.user.pk
 
 
 class Search(View):

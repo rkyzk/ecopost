@@ -73,7 +73,7 @@
     <div class="btn">
       <form method="GET" action="{% url 'update_post' post.pk %}">
         {% csrf_token %}
-          <button class="btn btn-submit" type="submit" name="update_post" value="{{post.pk}}">Update</button>
+          <button class="btn btn-submit" type="submit">Update</button>
       </form>
     </div>
     <div class="btn">

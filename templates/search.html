@@ -113,9 +113,9 @@
   {% if search_clicked %}
   <hr/>
   <h3 mt-3>Search Results</h3>
-  <!-- if queryset is empty -->
+  {% if not queryset %}
     <p>No results found</p>
-
+  {% endif %}
     <div class="row">
         {% for post in queryset %}
         <div class="col-md-4">
