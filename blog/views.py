@@ -34,8 +34,8 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
 
 
 class PostDetail(View):
-    def get(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
+    def get(self, request, pk, *args, **kwargs):
+        post = get_object_or_404(Post, id=pk)
         comments = post.comments.order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -56,8 +56,8 @@ class PostDetail(View):
         )
 
 
-    def post(self, request, slug, *args, **kwargs):
-        post = Post.objects.filter(slug=slug)[0]
+    def post(self, request, pk, *args, **kwargs):
+        post = Post.objects.filter(id=pk)[0]
         comments = post.comments.order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -92,23 +92,23 @@ class PostDetail(View):
 
 class PostLike(View):
 
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
+    def post(self, request, pk, *args, **kwargs):
+        post = get_object_or_404(Post, int=pk)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('detail_page', args=[pk]))
 
 
 class Bookmark(View):
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
+    def post(self, request, pk, *args, **kwargs):
+        post = get_object_or_404(Post, id=pk)
         if post.bookmark.filter(id=request.user.id).exists():
             post.bookmark.remove(request.user)
         else:
             post.bookmark.add(request.user)
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('detail_page', args=[pk]))
 
 
 class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
@@ -128,15 +128,15 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
 
     def test_func(self):
-        slug = self.request.GET.get('update_post')
-        post = get_object_or_404(Post, slug=slug)
+        pk = self.request.kwargs('pk')
+        post = get_object_or_404(Post, id=pk)
         return post.author == self.request.user
             
 
 class DeletePost(LoginRequiredMixin, View):
 
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
+    def post(self, request, pk, *args, **kwargs):
+        post = get_object_or_404(Post, id=pk)
         if post.author == self.request.user:
             post.delete()
             message = 'Your draft has been deleted.'
@@ -164,7 +164,6 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=id)
         comment_form = CommentForm(instance=comment)
-        slug = comment.post.slug
 
         return render(
             request,
@@ -182,10 +181,10 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
         updated = comment_form.save(commit=False)
         updated.commneter = request.user
         updated.comment_status = 1
-        slug = comment.post.slug
+        post_id = comment.post.id
         if comment_form.is_valid():
             updated.save()
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('detail_page', args=[post_id]))
 
 
     def test_func(self):
@@ -202,8 +201,10 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
         comment = get_object_or_404(Comment, id=id)
         comment.comment_status = 2
         comment.save()
-        slug = comment.post.slug
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        post_id = comment.post.id
+        message = 'Your comment has been deleted.'
+        messages.add_message(request, messages.SUCCESS, message)
+        return HttpResponseRedirect(reverse('detail_page', args=[post_id]))
 
     
     def test_func(self):

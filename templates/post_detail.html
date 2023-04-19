@@ -23,14 +23,14 @@
         <div class="d-flex justify-content-start">
           <strong>
             {% if user.is_authenticated %}
-            <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+            <form class="d-inline" action="{% url 'post_like' post.pk %}" method="POST">
             {% csrf_token %}
               {% if liked %}
-              <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
+              <button type="submit" name="'blogpost_id" value="{{post.pk}}" class="btn">
                 <i class="fa-solid fa-heart"></i>
               </button>
               {% else %}
-              <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
+              <button type="submit" name="'blogpost_id" value="{{post.pk}}" class="btn">
                 <i class="fa-regular fa-heart"></i>
               </button>
               {% endif %}
@@ -42,15 +42,15 @@
           </strong>
           <!-- bookmark -->
           {% if user.is_authenticated %}
-          <form class="d-inline" action="{% url 'bookmark' post.slug %}" method="POST">
+          <form class="d-inline" action="{% url 'bookmark' post.pk %}" method="POST">
             {% csrf_token %}
             {% if bookmarked %}
-            <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
+            <button type="submit" name="'blogpost_id" value="{{post.pk}}" class="btn">
               <i class="fa fa-bookmark" aria-hidden="true"></i>
             </button>
             <span class="bm-text text-muted">You've bookmarked this post</span>
             {% else %}
-            <button type="submit" name="'blogpost_id" value="{{post.slug}}" class="btn">
+            <button type="submit" name="'blogpost_id" value="{{post.pk}}" class="btn">
               <i class="fa fa-bookmark-o" aria-hidden="true"></i>
             </button>
             <span class="bm-text text-muted">Click to bookmark</span>
@@ -71,15 +71,15 @@
   {% if post.author == user %}
   <div class="btn-container mt-3">    
     <div class="btn">
-      <form method="GET" action="{% url 'update_post' post.slug %}">
+      <form method="GET" action="{% url 'update_post' post.pk %}">
         {% csrf_token %}
-          <button class="btn btn-submit" type="submit" name="update_post" value="{{post.slug}}">Update</button>
+          <button class="btn btn-submit" type="submit" name="update_post" value="{{post.pk}}">Update</button>
       </form>
     </div>
     <div class="btn">
-      <form method="POST" action="{% url 'delete_post' post.slug %}">
+      <form method="POST" action="{% url 'delete_post' post.pk %}">
         {% csrf_token %}
-        <button type="submit" class="btn btn-submit delete_post" name="delete_post" value="{{post.slug}}">Delete</button>
+        <button type="submit" class="btn btn-submit delete_post" name="delete_post" value="{{post.pk}}">Delete</button>
       </form>
     </div>  
   </div> 
