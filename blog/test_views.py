@@ -41,19 +41,18 @@ class TestViews(TestCase):
 
     # can't create a post
     # def test_can_add_story(self):
+    #     print(type(self.c))
     #     response = self.c.post('/add_story',
     #                            {'title': 'title_2',
-    #                             'author': self.user_1,
     #                             'content': 'test',
     #                             'region': 'N/A',
     #                             'category': 'others',
     #                             'save': 'draft'},
     #                            )
-    #     post = get_object_or_404(Post, title='title_2')
-    #     print(post)
+    #     post = Post.objects(slug='title_2') 
     #     self.assertEqual(post.title, 'title_2')
     #     self.assertEqual(post.content, 'test')
-    #     self.assertRedirects(response, '/add_story')
+    #     self.assertRedirects(response, '/detail/post{0}'.format(post.pk))
 
 
     # def test_message_says_draft_is_saved(self):
@@ -82,40 +81,54 @@ class TestViews(TestCase):
         # self.assertEqual(messages, 'Your draft has been saved.')
 
 
-    def test_get_postdetail(self):
-        response = self.client.get('/detail/{0}/'.format(self.post_1.slug))
+    def test_get_detail_page(self):
+        response = self.client.get('/detail/post{0}/'.format(self.post_1.pk))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
 
     # can't create comments
     # def test_can_post_comment(self):
-    #     user_2 = User.objects.create(username="user_2",
-    #                                  password="secret")
-    #     self.c.login(username='user_2', password='secret')
-    #     print(type(user_2))
-    #     print(user_2.is_authenticated)
-    #     response = self.c.post('/detail/{0}/'.format(self.post_1.slug),
+    #     self.c.login(username='user_2', password='pw2')
+    #     response = self.c.post('/detail/post{0}/'.format(self.post_1.pk),
     #                            {
-    #                                 'body': 'test comment',
-    #                                 'commenter': user_2
+    #                                 'body': 'test comment'
     #                             }
     #                           )
-    #     comment = Comment.objects.filter(commenter=user_2)
-    #     print(comment)
+        
+        # comment = Comment.objects.filter(commenter=user_2)
 
 
     # def test_post_like_will_add_likes(self):
-    #         
-    #     response = self.c.post('/like/{0}'.format(self.post_1.slug))
-    #     self.assertIn(user object, post_1.likes)
+    #     response = self.c.post('/like/post{0}'.format(self.post_1.pk))
+    #     self.assertIn(self.c, post_1.likes)
 
 
     # should get 403
-    def test_update_post(self):
-        response = self.client.get('update/{0}/'.format(self.post_1.slug))
+    # def test_get_update_post(self):
+    #     response = self.client.get('/update/post{0}'.format(self.post_1.pk), follow=True)
+    #     print(response.status_code)
+    #     print(response.redirect_chain)
         # self.assertEqual(response.status_code, 302)
         # self.assertTrue(response.url.startswith('/accounts/login/'))
+
+
+    # def test_can_get_my_page_if_user(self):
+    #     response = self.c.get('/mypage/user{0}'.format(self.user_1.id))
+    #     # self.assertEqual(response.status_code, 200)
+    #     print(self.user_1.is_authenticated)
+    #     print(response.url)
+        # self.assertTemplateUsed(response, 'my_page.html', 'base.html')
+        
+
+    # should get 403
+    # def test_cannot_get_my_page_if_not_the_user(self):
+    #     user_2 = User.objects.create(username="user_2",
+    #                                  password="pw2")
+    #     self.c.login(username='user_2', password='pw2')
+    #     print(user_2.is_authenticated)
+    #     response = self.client.get('/mypage/user{0}'.format(self.user_1.id))
+    #     print(response.status_code)
 
 
 if __name__ == '__main__':
