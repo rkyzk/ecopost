@@ -28,7 +28,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
             message = 'Your story has been submitted for evaluation.'
-        form.save()    
+        form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
 

@@ -15,5 +15,12 @@ Reverse for 'post_detail' with arguments '('',)' not found.
 The word 'search' was recognized as slug.  changed the url from '<slug:slug>/post_detail' to 'detail/<slug:slug>'
 and search.html was rendered.
 
+urls.py
+'/detail/' added slash at the end and the issue was resolved.
+
+test_views 
+can_add_post didn't created a post.  logged in the user and was able to create a post.
+
+https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests
 
 my page how to get parameter id to test user == id

@@ -9,9 +9,9 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content', 'featured_image', 'region', 'category']
 
 
-        # def __init__(self, *args, **kwargs):
-        #     super(PostForm, self).__init__(*args, **kwargs)
-        #     self.fields['featured_image'].required = False
+        def __init__(self, *args, **kwargs):
+            super(PostForm, self).__init__(*args, **kwargs)
+            self.fields['featured_image'].required = False
 
 
 class CommentForm(forms.ModelForm):

@@ -6,19 +6,20 @@ from django.shortcuts import reverse, get_object_or_404
 
 class TestViews(TestCase):
 
-    c = Client()
 
     def setUp(self):
         """create a test user and test post.  Log in the test user."""
-        self.user_1 = User.objects.create(username="user_1",
-                                          password="password")
-        logged_in = self.c.login(username='user_1',
-                                 password='password')
-        self.post_1 = Post.objects.create(title='title_1',
-                                          author=self.user_1,
-                                          content='content',
-                                          region='N/A',
-                                          category='others')
+        self.user1 = User.objects.create_user(username="user1")
+        self.user1.set_password('password')
+        self.user1.save()
+        self.c = Client()
+        logged_in = self.c.login(username='user1', password='password')
+        self.post1 = Post.objects.create(title='title1',
+                                         author=self.user1,
+                                         content='content',
+                                         region='N/A',
+                                         category='others'
+                                        )
 
 
     def test_get_postlist(self):
@@ -34,25 +35,25 @@ class TestViews(TestCase):
   
 
     def test_can_get_add_story_after_login(self):
-        response = self.c.get("/add_story", follow=True)
+        response = self.c.get("/add_story/")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html', 'add_story.html')
 
 
-    # can't create a post
-    # def test_can_add_story(self):
-    #     print(type(self.c))
-    #     response = self.c.post('/add_story',
-    #                            {'title': 'title_2',
-    #                             'content': 'test',
-    #                             'region': 'N/A',
-    #                             'category': 'others',
-    #                             'save': 'draft'},
-    #                            )
-    #     post = Post.objects(slug='title_2') 
-    #     self.assertEqual(post.title, 'title_2')
-    #     self.assertEqual(post.content, 'test')
-    #     self.assertRedirects(response, '/detail/post{0}'.format(post.pk))
+    def test_can_add_story(self):
+        response = self.c.post('/add_story/',
+                                {
+                                    'title': 'title2',
+                                    'content': 'test',
+                                    'region': 'N/A',
+                                    'category': 'others',
+                                    'save': 'draft'
+                                },
+                              )
+        post = Post.objects.filter(slug='title2').first()
+        self.assertEqual(post.title, 'title2')
+        self.assertEqual(post.content, 'test')
+        self.assertRedirects(response, '/detail/post{0}/'.format(post.pk))
 
 
     # def test_message_says_draft_is_saved(self):
@@ -82,26 +83,35 @@ class TestViews(TestCase):
 
 
     def test_get_detail_page(self):
-        response = self.client.get('/detail/post{0}/'.format(self.post_1.pk))
+        response = self.client.get('/detail/post1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
 
-    # can't create comments
-    # def test_can_post_comment(self):
-    #     self.c.login(username='user_2', password='pw2')
-    #     response = self.c.post('/detail/post{0}/'.format(self.post_1.pk),
-    #                            {
-    #                                 'body': 'test comment'
-    #                             }
-    #                           )
-        
-        # comment = Comment.objects.filter(commenter=user_2)
+    def test_post_detail_POST_can_post_comment(self):
+        response = self.c.post('/detail/post1/',
+                               {
+                                    'body': 'test comment'
+                                }
+                               )
+        comment = Comment.objects.filter(commenter=self.user1).first()
+        self.assertEqual(comment.body, 'test comment')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
 
-    # def test_post_like_will_add_likes(self):
-    #     response = self.c.post('/like/post{0}'.format(self.post_1.pk))
-    #     self.assertIn(self.c, post_1.likes)
+
+    def test_post_like_will_add_likes(self):
+        user2 = User.objects.create_user(username="user2")
+        user2.set_password('password2')
+        user2.save()
+        c = Client()
+        logged_in = c.login(username='user2', password='password2')
+        response = self.c.post(reverse('post_like', args=[1]))
+        self.post1.save()
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/detail/post1/')
+        # self.assertTrue(self.post1.likes.filter(id=user2.id).exists())
 
 
     # should get 403
@@ -109,8 +119,8 @@ class TestViews(TestCase):
     #     response = self.client.get('/update/post{0}'.format(self.post_1.pk), follow=True)
     #     print(response.status_code)
     #     print(response.redirect_chain)
-        # self.assertEqual(response.status_code, 302)
-        # self.assertTrue(response.url.startswith('/accounts/login/'))
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertTrue(response.url.startswith('/accounts/login/'))
 
 
     # def test_can_get_my_page_if_user(self):
