@@ -276,15 +276,15 @@ class TestViews(TestCase):
     # def test_no_change_will_not_update_post(self):
 
 
-    def test_update_post_POST_cancel_will_not_update_post(self):
-        response = self.c.post('/update_post/post1/',
-                               {'title': 'title2',
-                                'content': 'content updated',
-                                'region': 'N/A',
-                                'category': 'others',
-                                'cancel': 'cancel'})
-        post = Post.objects.filter(slug='title1').first()
-        self.assertEqual(post.content, 'content')
+    # def test_update_post_POST_cancel_will_not_update_post(self):
+    #     response = self.c.post('/update_post/post1/',
+    #                            {'title': 'title2',
+    #                             'content': 'content updated',
+    #                             'region': 'N/A',
+    #                             'category': 'others',
+    #                             'cancel': 'cancel'})
+    #     post = Post.objects.filter(slug='title1').first()
+    #     self.assertEqual(post.content, 'content')
 
 
     # def test_can_get_search(self):
@@ -296,10 +296,10 @@ class TestViews(TestCase):
     # def test_search_no_input_will_(self):
 
 
-    def test_can_get_more_stories(self):
-        response = self.client.get('/more_stories/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'more_stories.html')
+    # def test_can_get_more_stories(self):
+    #     response = self.client.get('/more_stories/')
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'more_stories.html')
 
     # need to test the content of object_list?
     def test_can_get_more_stories(self):

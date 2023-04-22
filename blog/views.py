@@ -415,3 +415,15 @@ class MoreStories(generic.ListView):
         posts = Post.objects.filter(**filterargs).order_by("-published_on")
         context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
         return context
+
+
+class PopularStories(generic.ListView):
+    model = Post
+    template_name = "popular_stories.html"
+    paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        context = super(PopularStories, self).get_context_data(**kwargs)
+        posts = Post.objects.filter(status=2, featured_flag=False).order_by("-published_on")
+        context['popular_posts'] = [post for post in posts if post.number_of_likes() > 1]
+        return context
