@@ -42,10 +42,27 @@
   background-color: #fff;
 }
 
-
 h2 {
   font-family: 'Lato', sans-serif;
   color:rgb(78, 75, 70);
+}
+
+h4 {
+  font-family: 'Lato', sans-serif;
+}
+
+a {
+  color:rgb(46, 122, 145);
+}
+
+a:hover {
+  color:rgb(13, 48, 59);
+  text-decoration: underline;
+}
+
+
+.post-text > p {
+  line-height: 20px;
 }
 
 /*   -- index.html --  */

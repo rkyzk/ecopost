@@ -32,13 +32,13 @@
             <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
            {% endif %}
         </div>
-        <div class="mx-2 mt-2">
-          <span><strong>{{ post.title }}</strong></span>
-          <p>By {{ post.author }}<p>
+        <div class="mx-2 mt-2 post-text">
+          <span><strong>{{ post.title }}</strong></span><br>
+          <span>By {{ post.author }}</span>
           <div class="d-flex justify-content-end">
-            <p>city, country {{ post.pub_date }}</p>
+            <span>city, country {{ post.pub_date }}</span>
           </div>
-          <p>{{ post.excerpt }}</p>
+          <p class="mt-1">{{ post.excerpt }}</p>
           <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
         </div>
       </div>

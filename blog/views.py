@@ -118,6 +118,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     form_class = PostForm
 
     def form_valid(self, form):
+        print(self.request.POST)
         if 'cancel' in self.request.POST.keys():
             slug = self.kwargs.get('slug')
             message = "Your story wasn;t updated."
