@@ -15,39 +15,35 @@
   </head>
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-bg">
-      <div class="container d-flex justify-content-between">
-        <div>
-          <a class="navbar-brand" href="{% url 'home' %}">Eco Post</a>
-        </div>
-        <div>
-          <div class="navbar-nav">
-            <a class="nav-link active" href="{% url 'home' %}">Home<span class="sr-only"></span></a>
-            <a class="nav-link" href="{% url 'search' %}">Search Stories</a>
-            {% if user.is_authenticated %}
-              <a class="nav-link" href="{% url 'add_story' %}">Write stories</a>
-              <a class="nav-link" href="{% url 'mypage' user.pk %}">My Page</a>
-              <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
-            {% else %}
-              <a class="nav-link" href="{% url 'account_signup' %}">Become a Member</a>
-              <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
-            {% endif %}
-          </div>
-        </div>
+    <header class="header">
+      <div class="mobileHeader">
+        <a href="{% url 'home' %}">
+          <img src="/media/ecopost_logo.jpg" alt="logo (a green clover)" id="logo">
+        </a>
+        <button class="hamburger" onclick="{openMenu()}">|||</button>
       </div>
-    </nav>
+      <nav class="nav-menu">     
+        <ul class="nav-list">
+          <li><a class="active" href="{% url 'home' %}">Home</a></li>
+          <li><a class="list-item" href="{% url 'search' %}">Search Stories</a></li>
+          {% if user.is_authenticated %}
+          <li><a class="list-item" href="{% url 'add_story' %}">Write stories</a></li>
+          <li><a class="list-item" href="{% url 'mypage' user.pk %}">My Page</a></li>
+          <li><a class="list-item" href="{% url 'account_logout' %}">Log Out</a></li>
+          {% else %}
+          <li><a class="list-item" href="{% url 'account_signup' %}">Become a Member</a></li>
+          <li><a class="list-item" href="{% url 'account_login' %}">Log in</a></li>
+          {% endif %}
+        </ul>    
+      </nav>
+    </header> 
     <!-- Message -->
     <div class="container">
-      <div class="row">
-        <div class="col-md-8 offset_md_2">
           {% for message in messages %}
             <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-              {{ message | safe }}
-             
+              {{ message | safe }}         
             </div>
           {% endfor %}
-        </div>  
-      </div>
     </div> 
     <div class="container">
       {% block content %}
@@ -83,6 +79,18 @@
         let alert = new bootstrap.Alert(messages);
         alert.close();
     }, 3000);
+
+    const menu = document.querySelector(".nav-menu");
+    let open;
+    function openMenu() {
+      if (open) {
+        menu.style.display = "none";
+        open = false;
+      } else if (!open) {
+        menu.style.display = "block";
+        open = true;
+      }
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <script src="https://kit.fontawesome.com/b78a20097c.js" crossorigin="anonymous"></script>

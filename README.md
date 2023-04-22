@@ -24,3 +24,8 @@ can_add_post didn't created a post.  logged in the user and was able to create a
 https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests
 
 my page how to get parameter id to test user == id
+
+
+
+turn navbar to hamburger menu
+https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design
