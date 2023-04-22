@@ -118,6 +118,11 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     form_class = PostForm
 
     def form_valid(self, form):
+        if 'cancel' in self.request.POST.keys():
+            slug = self.kwargs.get('slug')
+            message = "Your story wasn;t updated."
+            messages.add_message(self.request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('detail_page', args=[slug]))
         form.instance.author = self.request.user
         message = 'The change has been saved.'
         if 'submit' in self.request.POST.keys():

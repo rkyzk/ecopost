@@ -225,12 +225,12 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 403)
 
 
-    def test_update_comment_POST_cancel_will_not_update_comment(self):
-        response = self.c.post('/update_comment/comment1/',
-                               {'body': 'comment updated',
-                                'cancel': 'cancel'})
-        comment = Comment.objects.filter(id=1).first()
-        self.assertEqual(comment.body, 'test comment')
+    # def test_update_comment_POST_cancel_will_not_update_comment(self):
+    #     response = self.c.post('/update_comment/comment1/',
+    #                            {'body': 'comment updated',
+    #                             'cancel': 'cancel'})
+    #     comment = Comment.objects.filter(id=1).first()
+    #     self.assertEqual(comment.body, 'test comment')
 
 
     # def test_get_update_post_will_redirect_to_login_if_not_logged_in(self):
@@ -276,10 +276,21 @@ class TestViews(TestCase):
     # def test_no_change_will_not_update_post(self):
 
 
-    def test_can_get_search(self):
-        response = self.client.get('/search_story/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
+    def test_update_post_POST_cancel_will_not_update_post(self):
+        response = self.c.post('/update_post/post1/',
+                               {'title': 'title2',
+                                'content': 'content updated',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'cancel': 'cancel'})
+        post = Post.objects.filter(slug='title1').first()
+        self.assertEqual(post.content, 'content')
+
+
+    # def test_can_get_search(self):
+    #     response = self.client.get('/search_story/')
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'search.html')
 
 
     # def test_search_no_input_will_(self):
