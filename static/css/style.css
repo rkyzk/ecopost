@@ -17,7 +17,6 @@
   list-style-type: none;
   column-gap: 20px;
   padding: 0;
-  color:rgb(105, 81, 37);
 }
 
 .list-item {
@@ -26,7 +25,7 @@
 }
 
 .nav-list a {
-  color:rgb(105, 81, 37);
+  color:rgb(141, 111, 56);
 }
 
 .nav-list a:hover {
@@ -60,16 +59,19 @@ a:hover {
   text-decoration: underline;
 }
 
-
 .post-text > p {
   line-height: 20px;
+}
+
+.line {
+  display: none;
 }
 
 /*   -- index.html --  */
 h1 {
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 3rem;
-  color: rgb(79, 73, 73);
+  color:rgb(141, 111, 56);
 }
 
 .earth {
@@ -87,6 +89,21 @@ h1 {
   padding: 0 15px;
 }
 
+.posts {
+  margin-top: 40px;
+}
+
+.more-posts {
+  margin-top: 50px;
+ }
+
+.more-posts p {
+  font-size: 1.4rem;
+}
+
+.link-to-favorites {
+  margin-top: 20px;
+}
 
 .btn-submit {
   background-color: rgb(149, 120, 67);
@@ -97,15 +114,6 @@ h1 {
   aspect-ratio: 3 / 2;
 }
 
-
-.navbar-bg {
-  background-color: rgb(51, 52, 55);
-  color: #fff;
-}
-
-
-
-
 footer {
   width: 100%;
   height: 60px;
@@ -115,7 +123,6 @@ footer {
 .social-networks {
   list-style: none;
 }
-
 
 .hide-posts {
   display: none;
@@ -131,6 +138,31 @@ footer {
 
 a {
   text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+  .intro-box, .content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 767px) {
+  .line {
+    display: block;
+    margin-bottom: 40px;
+  }
+
+  .more-posts {
+    margin-top: 0;
+   }
+
+  .more-posts p {
+    font-size: 1.1rem;
+  }
+
+  .posts {
+    margin-top: 20px;
+  }
 }
 
 @media screen and (max-width: 620px) {
@@ -165,5 +197,27 @@ a {
 @media screen and (min-width: 621px) {
   .nav-menu {
     display: block !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .earth {
+    width: 30%;
+    height: auto;
+    padding-left: 15px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .intro-box, .content {
+    width: 100%;
+  }
+
+  .link-to-favorites {
+    margin-top: 10px;
   }
 }
