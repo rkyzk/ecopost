@@ -207,12 +207,30 @@ class TestViews(TestCase):
     #     self.assertRedirects(response, '/detail/title1/')
 
 
-    # def test_post_delete_comment_will_set_comment_status_to_2(self):
+    # def test_delete_comment_POST_will_set_comment_status_to_2(self):
     #     response = self.c.post('/delete_comment/comment1/')
     #     comment = Comment.objects.filter(commenter=self.user1).first()
     #     self.assertEqual(comment.comment_status, 2)
     #     self.assertEqual(response.status_code, 302)
     #     self.assertRedirects(response, '/detail/title1/')
+
+
+    def test_update_comment_POST_will_403_if_wrong_user(self):
+        user2 = User.objects.create_user(username="user2")
+        user2.set_password('password2')
+        user2.save()
+        c2 = Client()
+        logged_in = c2.login(username='user2', password='password2')
+        response = c2.get(reverse('update_comment', args=[1]))
+        self.assertEqual(response.status_code, 403)
+
+
+    def test_update_comment_POST_cancel_will_not_update_comment(self):
+        response = self.c.post('/update_comment/comment1/',
+                               {'body': 'comment updated',
+                                'cancel': 'cancel'})
+        comment = Comment.objects.filter(id=1).first()
+        self.assertEqual(comment.body, 'test comment')
 
 
     # def test_get_update_post_will_redirect_to_login_if_not_logged_in(self):
