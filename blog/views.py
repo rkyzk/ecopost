@@ -176,24 +176,23 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
 
     def post(self, request, id, *args, **kwargs):
-
         comment = get_object_or_404(Comment, id=id)
+        slug = comment.post.slug
+        if 'cancel' in request.POST.keys():
+            return HttpResponseRedirect(reverse('detail_page', args=[slug]))
         comment_form = CommentForm(self.request.POST, instance=comment)
         updated = comment_form.save(commit=False)
         updated.commneter = request.user
         updated.comment_status = 1
-        slug = comment.post.slug
         if comment_form.is_valid():
             updated.save()
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
 
 
     def test_func(self):
-        if self.request == 'GET':
-            id = self.kwargs.get('id')
-            comment = get_object_or_404(Comment, id)
-            return comment.commenter == self.request.user
-        return True
+        id = self.kwargs.get('id')
+        comment = get_object_or_404(Comment, id=id)
+        return comment.commenter == self.request.user
 
 
 class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
