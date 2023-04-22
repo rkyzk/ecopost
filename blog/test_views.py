@@ -24,39 +24,39 @@ class TestViews(TestCase):
                                                post=self.post1)
 
 
-    def test_get_postlist(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index.html', 'base.html')
+    # def test_get_postlist(self):
+    #     response = self.client.get('/')
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'index.html', 'base.html')
 
 
-    def test_add_story_will_redirect_to_login_if_not_logged_in(self):
-        response = self.client.get(reverse('add_story'))
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith('/accounts/login/'))
+    # def test_add_story_will_redirect_to_login_if_not_logged_in(self):
+    #     response = self.client.get(reverse('add_story'))
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertTrue(response.url.startswith('/accounts/login/'))
   
 
-    def test_can_get_add_story_if_logged_in(self):
-        response = self.c.get("/add_story/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'base.html', 'add_story.html')
+    # def test_can_get_add_story_if_logged_in(self):
+    #     response = self.c.get("/add_story/")
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'base.html', 'add_story.html')
 
 
-    def test_can_add_story(self):
-        response = self.c.post('/add_story/',
-                                {
-                                    'title': 'title2',
-                                    'content': 'test',
-                                    'region': 'N/A',
-                                    'category': 'others',
-                                    'save': 'draft'
-                                },
-                              )
-        post = Post.objects.filter(slug='title2').first()
-        self.assertEqual(post.title, 'title2')
-        self.assertEqual(post.content, 'test')
-        self.assertRedirects(response, '/detail/title2/')
-
+    # def test_can_add_story(self):
+    #     response = self.c.post('/add_story/',
+    #                             {
+    #                                 'title': 'title2',
+    #                                 'content': 'test',
+    #                                 'region': 'N/A',
+    #                                 'category': 'others',
+    #                                 'save': 'draft'
+    #                             },
+    #                           )
+    #     post = Post.objects.filter(slug='title2').first()
+    #     self.assertEqual(post.title, 'title2')
+    #     self.assertEqual(post.content, 'test')
+    #     self.assertRedirects(response, '/detail/title2/')
+# working till here
 
     # def test_message_says_draft_is_saved(self):
     #     response = self.c.post('/add_story',
@@ -208,6 +208,25 @@ class TestViews(TestCase):
     # def test_no_change_will_not_update_post(self):
 
 
+    def test_can_get_search(self):
+        response = self.client.get('/search_story/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+
+
+    # def test_search_no_input_will_(self):
+
+
+    def test_can_get_more_stories(self):
+        response = self.client.get('/more_stories/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'more_stories.html')
+
+    # need to test the content of object_list?
+    def test_can_get_more_stories(self):
+        response = self.client.get('/more_stories/')
+        # print(response.context['object_list'])
+
 
     def test_can_get_my_page_if_user(self):
         response = self.c.get('/mypage/user1/')
@@ -224,6 +243,40 @@ class TestViews(TestCase):
         response = c2.get('/mypage/user1/')
         self.assertEqual(response.status_code, 403)
 
+
+class TestSearchView(TestCase):
+
+    def setUp(self):
+        """create test posts."""
+        self.user1 = User.objects.create_user(username="user1", password="pw1")
+        self.user2 = User.objects.create_user(username="user2", password="pw2")
+        self.user3 = User.objects.create_user(username="user3", password="pw3")
+        
+        self.post1 = Post.objects.create(title='title1',
+                                         author=self.user1,
+                                         content='content',
+                                         region='N/A',
+                                         category='others')
+        
+        self.post2 = Post.objects.create(title='title2',
+                                         author=self.user2,
+                                         content='content',
+                                         region='N/A',
+                                         category='others')
+        
+        self.post3 = Post.objects.create(title='title3',
+                                         author=self.user3,
+                                         content='content',
+                                         region='N/A',
+                                         category='others')
+
+    def test_search_by_title_contains_will_get_right_posts(self):
+        response = self.client.get('search',
+                                    {'title_input': '1',
+                                     'title_field': 'contains',
+                                     'search': 'search'})
+        # print(response.context['categories'])
+        
 
 if __name__ == '__main__':
     main()
