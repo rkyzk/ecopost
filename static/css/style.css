@@ -43,6 +43,34 @@
 }
 
 
+h2 {
+  font-family: 'Lato', sans-serif;
+  color:rgb(78, 75, 70);
+}
+
+/*   -- index.html --  */
+h1 {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 3rem;
+  color: rgb(79, 73, 73);
+}
+
+.earth {
+  width: 150px;
+  height: auto;
+  padding-left: 20px;
+}
+
+.intro-box {
+  color: rgb(79, 73, 73);
+  width: 730px
+}
+
+.intro-box p {
+  padding: 0 15px;
+}
+
+
 .btn-submit {
   background-color: rgb(149, 120, 67);
 }
@@ -58,14 +86,7 @@
   color: #fff;
 }
 
-.intro {
-  background-image: url(/media/ecopost-bg.jpg);
-}
 
-.intro-box {
-  background-color:rgba(59, 48, 48, 0.6);
-  color: #fff;
-}
 
 
 footer {

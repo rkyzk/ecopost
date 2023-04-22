@@ -2,26 +2,29 @@
 
 {% block content %}
 <!-- intro -->
-<div class="intro">
-  <div class="row">
-    <div class="intro-box col-md-6 offset-md-3 mt-2">
-      <p>Depressed about climate change?</p>
-      <p>Feel like individuals can't do much?  Don't give up.  This website is
-         for anyone who wants to find out what some local communities
-         and individuals all over the world are doing to tackle the issue, or more
-         generally, to save the environment.  Read their stories,
-         get inspired, write comments to the posts and share your stories.
-         You can get connected with those who are taking actions, join their activities
-         if you are in the region, or start up your own movements.
-      </p>
-    </div>
+<div class="d-flex justify-content-center">
+  <h1 class="align-self-center">ecopost</h1>
+  <img src="/media/blue-earth.jpeg" alt="blue and green earth" class="earth">
+</div>
+<div class="d-flex justify-content-center">
+  <div class="intro-box mt-2">
+    <hr>
+    <p>Feel like individuals can't do much?  Don't give up.  This website is
+        for anyone who wants to find out what some local communities
+        and individuals all over the world are doing to tackle the issue, or more
+        generally, to save the environment.  Read their stories,
+        get inspired, write comments to the posts and share your stories.
+        You can get connected with those who are taking actions, join their activities
+        if you are in the region, or start up your own movements.
+    </p>
+    <hr>
   </div>
 </div>
 <div class="container mt-5 left">
   <h2>Featured Stories</h2>
   <div class="row mt-5">
     {% for post in post_list %}
-      <div class="col-md-4 p-2">
+      <div class="col-md-4">
         <div class="image-wrapper">
           {% if "placeholder" in post.featured_image.url %}
             <img class="card-img-top" src="/media/default.jpg" alt="forest graphic">
@@ -30,11 +33,11 @@
            {% endif %}
         </div>
         <div class="mx-2 mt-2">
-          <div class="d-flex justify-content-between">
-            <span><strong>{{ post.title }}</strong></span>
-            <span>{{ post.pub_date }}</span>
+          <span><strong>{{ post.title }}</strong></span>
+          <p>By {{ post.author }}<p>
+          <div class="d-flex justify-content-end">
+            <p>city, country {{ post.pub_date }}</p>
           </div>
-          <p>Author: {{ post.author }}</p>
           <p>{{ post.excerpt }}</p>
           <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
         </div>
