@@ -19,7 +19,7 @@
         </div>
         <p>Author: {{ post.author }}</p>
         <p>{{ post.excerpt }}</p>
-        <a href="{% url 'detail_page' post.pk %}">Read the full story</a>
+        <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
       </div>
     </div>
     {% if forloop.counter|divisibleby:3 %}

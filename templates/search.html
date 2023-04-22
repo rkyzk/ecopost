@@ -132,7 +132,7 @@
                 <p class="author">Author: {{ post.author }} | {{ post.published_on }}</p>
                 <strong><p>{{ post.title }}</p></strong>
                 <p>{{ post.excerpt }}</p>
-                <a href="{% url 'detail_page' post.pk %}">Read the full story</a>
+                <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
               </div>
             </div>
         </div>    
