@@ -78,7 +78,6 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         letters = string.ascii_letters
         text = ''.join(random.choice(letters) for i in range(16))
-        print(text)
         if not self.slug:
             self.slug = slugify(self.title) + text
         super().save(*args, **kwargs)

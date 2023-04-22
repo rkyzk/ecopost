@@ -157,23 +157,67 @@ class TestViews(TestCase):
     #     self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
         # how to get error message?
 
-    # NG likes not added
-    def test_post_like_will_add_user(self):
+
+    def test_post_like_POST_will_add_user(self):
         user2 = User.objects.create_user(username="user2")
         user2.set_password('password2')
         user2.save()
         c2 = Client()
         logged_in = c2.login(username='user2', password='password2')
-        response = c2.post(reverse('post_like', kwargs={'slug': self.post1.slug}))
+        response = c2.post(reverse('post_like',
+                                   kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
         self.assertTrue(post.likes.filter(id=user2.id).exists())
 
-    # likes will be removed, if twice hit
+    
+    def test_post_like_POST_for_the_second_time_will_remove_user(self):
+        user2 = User.objects.create_user(username="user2")
+        user2.set_password('password2')
+        user2.save()
+        c2 = Client()
+        logged_in = c2.login(username='user2', password='password2')
+        response = c2.post(reverse('post_like',
+                                   kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertTrue(post.likes.filter(id=user2.id).exists())
+        response = c2.post(reverse('post_like',
+                                   kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertFalse(post.likes.filter(id=user2.id).exists())
 
-    # bookmark will add the user
 
-    # bookmark twice will remove the user
+    def test_bookmark_POST_will_add_user(self):
+        user2 = User.objects.create_user(username="user2")
+        user2.set_password('password2')
+        user2.save()
+        c2 = Client()
+        logged_in = c2.login(username='user2', password='password2')
+        response = c2.post(reverse('bookmark',
+                                   kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertTrue(post.bookmark.filter(id=user2.id).exists())
+
+
+    def test_bookmark_POST_will_remove_user(self):
+        user2 = User.objects.create_user(username="user2")
+        user2.set_password('password2')
+        user2.save()
+        c2 = Client()
+        logged_in = c2.login(username='user2', password='password2')
+        response = c2.post(reverse('bookmark',
+                                   kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertTrue(post.bookmark.filter(id=user2.id).exists())
+        response = c2.post(reverse('bookmark',
+                                   kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertFalse(post.bookmark.filter(id=user2.id).exists())
 
 
     def test_can_get_update_comment_if_right_user(self):
@@ -194,7 +238,7 @@ class TestViews(TestCase):
         user2.save()
         c2 = Client()
         logged_in = c2.login(username='user2', password='password2')
-        response = c2.get(reverse('update_comment', args=[1]))
+        response = c2.get(reverse('update_comment', kwargs={'id': 1}))
         self.assertEqual(response.status_code, 403)
 
 
@@ -246,46 +290,44 @@ class TestViews(TestCase):
         user2.save()
         c2 = Client()
         logged_in = c2.login(username='user2', password='password2')
-        response = c2.get('/update/title1/')
+        response = c2.get(f'/update/{self.post1.slug}/')
         self.assertEqual(response.status_code, 403)
 
 
     def test_can_get_update_post_if_right_user(self):
-        response = self.c.get('/update/title1/')
+        response = self.c.get(f'/update/{self.post1.slug}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'update_post.html', 'base.html')
 
 
-    # can't update post  form.save() in views necessary?
     def test_can_update_post(self):
-        response = self.c.post(reverse('update_post', kwargs={'slug': self.post1.slug}),
-                                {
-                                    'title': 'title11',
-                                    'content': 'content updated',
-                                    'region': 'N/A',
-                                    'category': 'others',
-                                    'save': 'draft'
-                                },
-                              )
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post1.slug}),
+                               {'title': 'title11',
+                                'content': 'content updated',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'save': 'draft'})
         post = Post.objects.filter(title='title11').first()
-        print(post.slug)
         self.assertEqual(post.title, 'title11')
         self.assertEqual(post.content, 'content updated')
         self.assertRedirects(response, f'/detail/{post.slug}/')
 
 
-    # def test_no_change_will_not_update_post(self):
-
-
     def test_update_post_POST_cancel_will_not_update_post(self):
-        response = self.c.post('/update_post/post1/',
+        response = self.c.post(reverse('update_post',
+                                       kwargs={'slug': self.post1.slug}),
                                {'title': 'title2',
                                 'content': 'content updated',
                                 'region': 'N/A',
                                 'category': 'others',
                                 'cancel': 'cancel'})
-        post = Post.objects.filter(slug='title1').first()
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertEqual(post.title, 'title1')
         self.assertEqual(post.content, 'content')
+        self.assertEqual(post.region, 'N/A')
+        self.assertEqual(post.category, 'others')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
 
     def test_can_get_search(self):
