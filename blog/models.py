@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from cloudinary.models import CloudinaryField
-import random, string
 
 
 STATUS = ((0, "Draft"), (1, "Submitted"), (2, "Published"), (3, "Declined"))
@@ -76,13 +75,9 @@ class Post(models.Model):
 
 
     def save(self, *args, **kwargs):
-        letters = string.ascii_letters
-        text = ''.join(random.choice(letters) for i in range(16))
         if not self.slug:
-            self.slug = slugify(self.title) + text
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-
-    # 52 characters
 
         
     def __str__(self):

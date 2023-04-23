@@ -227,6 +227,10 @@ a {
     margin-bottom: 40px;
   }
 
+  .line-for-lg {
+    display: none;
+  }
+
   .more-posts {
     margin-top: 0;
    }

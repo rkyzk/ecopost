@@ -118,17 +118,17 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     form_class = PostForm
 
     def form_valid(self, form):
-        print(self.request.POST)
         if 'cancel' in self.request.POST.keys():
             slug = self.kwargs.get('slug')
-            message = "Your story wasn;t updated."
+            message = "Your story wasn't updated."
             messages.add_message(self.request, messages.INFO, message)
             return HttpResponseRedirect(reverse('detail_page', args=[slug]))
         form.instance.author = self.request.user
         message = 'The change has been saved.'
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
-            message = 'Your story has been submitted for evaluation.'
+            message = "Your story has been submitted for evaluation." + \
+                      "We'll contact you when evaluation is done."
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(UpdatePost, self).form_valid(form)
@@ -137,10 +137,10 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     def test_func(self):
         slug = self.kwargs.get('slug')
         post = get_object_or_404(Post, slug=slug)
-        return post.author == self.request.user
-            
+        return post.status == 0 and post.author == self.request.user
+     
 
-class DeletePost(LoginRequiredMixin, View):
+class DeletePost(LoginRequiredMixin, View):  #login mixin necessary?  post is not possible
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -151,18 +151,6 @@ class DeletePost(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse('home'))
         else:     
             raise PermissionDenied()   
-
-
-# def update_comment(request):
-#     # if request is json
-#     if request.method == "GET":
-#         id = request.GET['id']
-#         comment = get_object_or_404(Comment, id=id)
-#         response = {
-#             'comment' : comment.body,
-#         }
-#         return JsonResponse(response)
-
 
 
 class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -355,9 +343,7 @@ class Search(View):
                 query_lists.append(qs)
 
         if min_liked_query != '' and min_liked_query is not None:
-            print('hello liked')
             qs_liked = [post for post in posts if (post.number_of_likes()>=int(min_liked_query))]
-            print(qs_liked)
             if qs_liked != []:
                 query_lists.append(qs_liked)
 
@@ -405,26 +391,36 @@ class MoreStories(generic.ListView):
     model = Post
     template_name = "more_stories.html"
     paginate_by = 6
-
-    def get_context_data(self, **kwargs):
-        context = super(MoreStories, self).get_context_data(**kwargs)
-        filterargs = {
+    filterargs = {
             'status': 2,
-            'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
+            'published_on__date__gte': datetime.utcnow() - timedelta(days=30),
             'featured_flag': False
             }
-        posts = Post.objects.filter(**filterargs).order_by("-published_on")
-        context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
-        return context
+    posts = Post.objects.filter(**filterargs).order_by("-published_on")
+    queryset = Post.objects.filter(**filterargs).order_by("-published_on")
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(MoreStories, self).get_context_data(**kwargs)
+    #     filterargs = {
+    #         'status': 2,
+    #         'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
+    #         'featured_flag': False
+    #         }
+    #     posts = Post.objects.filter(**filterargs).order_by("-published_on")
+    #     context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
+    #     return context
 
 
 class PopularStories(generic.ListView):
     model = Post
     template_name = "popular_stories.html"
     paginate_by = 6
+    posts = Post.objects.filter(status=2, featured_flag=False).order_by("-published_on")
+    queryset = [post for post in posts if post.number_of_likes() > 0]
 
-    def get_context_data(self, **kwargs):
-        context = super(PopularStories, self).get_context_data(**kwargs)
-        posts = Post.objects.filter(status=2, featured_flag=False).order_by("-published_on")
-        context['popular_posts'] = [post for post in posts if post.number_of_likes() > 1]
-        return context
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(PopularStories, self).get_context_data(**kwargs)
+    #     posts = Post.objects.filter(status=2, featured_flag=False).order_by("-published_on")
+    #     context['popular_posts'] = [post for post in posts if post.number_of_likes() > 1]
+    #     return context
