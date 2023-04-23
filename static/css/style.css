@@ -161,11 +161,11 @@ footer {
   list-style: none;
 }
 
-.hide-posts {
+.hide {
   display: none;
 }
 
-.show-posts {
+.show {
   display: block;
 }
 
