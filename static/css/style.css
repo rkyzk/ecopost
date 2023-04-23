@@ -1,3 +1,7 @@
+body {
+  min-height: 100vh;
+}
+
 #logo {
   width: 35px;
   height: auto;
@@ -109,6 +113,29 @@ h1 {
   margin-top: 20px;
 }
 
+/* post_detail.html */
+.item-left {
+  padding-right: 20px;
+}
+
+.title-box {
+  width: 60%;
+}
+
+.img-box {
+  width: 40%;
+}
+
+.comments-left {
+  width: 50%;
+}
+
+.comments-right {
+  width: 50%;
+  padding: 50px;
+  padding-top: 0;
+}
+
 .btn-submit {
   background-color:rgb(141, 111, 56);
   color: #fff;
@@ -161,6 +188,33 @@ a {
   margin-left: 10px;
 }
 
+@media screen and (max-width: 1150px) {
+  section {
+    width: 85%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 991px) {
+
+  .mt-custom {
+    margin-top: 40px;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  .comments-left {
+    width: 100%;
+  }
+
+  .comments-right {
+    width: 100%;
+    padding: 0;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .intro-box, .content {
     width: 90%;
@@ -187,6 +241,19 @@ a {
 
   .posts-mt {
     margin-top: 10px;
+  }
+
+  /* post_detail.html */
+  .item-left {
+    padding-right: 0;
+  }
+
+  .title-box {
+    width: 100%;
+  }
+  
+  .img-box {
+    width: 100%;
   }
 }
 
@@ -221,6 +288,12 @@ a {
   /* account_base.html */
   .account-forms {
     width: 90%;
+  }
+
+  /* post_detail.html */
+  section {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 
@@ -258,7 +331,7 @@ a {
 }
 
 @media screen and (max-width: 420px) {
-  .intro-box, .content, .search-contnet {
+  .intro-box, .content, .search-contnet, section {
     width: 100%;
   }
 

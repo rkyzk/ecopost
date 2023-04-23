@@ -23,6 +23,9 @@ can_add_post didn't created a post.  logged in the user and was able to create a
 
 add-story bottom confirm submit JS not working 
 
+post-detail footer appears in the middle if content is small
+
+
 
 https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests
 
