@@ -50,7 +50,7 @@ h4 {
   font-family: 'Lato', sans-serif;
 }
 
-a {
+a, .font-blue {
   color:rgb(46, 122, 145);
 }
 
@@ -106,7 +106,13 @@ h1 {
 }
 
 .btn-submit {
-  background-color: rgb(149, 120, 67);
+  background-color:rgb(141, 111, 56);
+  color: #fff;
+  border: none;
+}
+
+.btn-right {
+  margin-left: 10px;
 }
 
 .image-wrapper {
@@ -138,6 +144,11 @@ footer {
 
 a {
   text-decoration: none;
+}
+
+/* account sign in */
+.btn-sign-in {
+  display: block;
 }
 
 @media screen and (max-width: 900px) {
@@ -192,6 +203,11 @@ a {
   .nav-menu {
     display: none;
  }
+
+  /* account_base.html */
+  .account-forms {
+    width: 90%;
+  }
 }
 
 @media screen and (min-width: 621px) {
