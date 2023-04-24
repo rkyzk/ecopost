@@ -302,9 +302,7 @@ class Search(View):
         categories = [cat[1] for cat in category_choices]
         region_choices = Post._meta.get_field('region').choices
         regions = [region[1] for region in region_choices]
-
         posts = Post.objects.filter(status=2)
-
         title_query = request.GET.get('title_input')
         title_filter_type = request.GET.get('title_filter')
         author_query = request.GET.get('author_input')

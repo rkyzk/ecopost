@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from blog.models import Post, Comment
 from django.contrib.auth.models import User
 from django.shortcuts import reverse, get_object_or_404
+from django.contrib.messages import get_messages
 
 
 class TestViews(TestCase):
@@ -13,12 +14,12 @@ class TestViews(TestCase):
         self.user1.set_password('password')
         self.user1.save()
         self.c = Client()
-        logged_in = self.c.login(username='user3', password='pw3')
-        self.user3 = User.objects.create_user(username="user3")
-        self.user3.set_password('pw3')
-        self.user3.save()
-        self.c3 = Client()
-        logged_in = self.c3.login(username='user3', password='pw3')
+        logged_in = self.c.login(username='user2', password='pw2')
+        self.user2 = User.objects.create_user(username="user2")
+        self.user2.set_password('pw2')
+        self.user2.save()
+        self.c2 = Client()
+        logged_in = self.c2.login(username='user2', password='pw2')
         self.post1 = Post.objects.create(title='title1',
                                          author=self.user1,
                                          content='content',
@@ -109,18 +110,18 @@ class TestViews(TestCase):
     #     request = response.wsgi_request
     #     print(request.messages)
 
-    # NG def test_message_says_draft_is_saved(self):
-    #     response = self.c.post('/add_story',
-    #                            {'title': 'title_2',
-    #                             'author': self.user_1,
-    #                             'content': 'test',
-    #                             'region': 'N/A',
-    #                             'category': 'others'},
-    #                            follow=True,
-    #                            secure=True
-    #                            )
-        
-    #     self.assertEqual(response.messages, 'Your draft has been saved.')
+    def test_add_story_POST_save_will_render_msg_draft_saved(self):
+        response = self.c.post('/add_story',
+                               {'title': 'title2',
+                                'author': self.user1,
+                                'content': 'test',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'save': 'draft'},
+                                follow=True)
+        # messages = list(get_messages(response.wsgi_request))
+        # self.assertEqual(len(messages), 1)
+        # self.assertEqual(str(messages[0]), 'Your draft has been saved.')
 
     # NG def test_message_says_draft_is_submitted_if_submitted(self):
      # response = self.c.post('/add_story',
@@ -139,6 +140,35 @@ class TestViews(TestCase):
         response = self.client.get(f'/detail/{self.post1.slug}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
+
+
+    # the following 4 needs self.assertRedirects(response, f'/detail/{post.slug}/')?
+    def test_post_detail_GET_liked_set_False_if_not_liked(self):
+        response = self.c2.get(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['liked'], False)
+
+
+    def test_post_like_GET_will_set_liked_True_if_liked(self):
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        post.likes.add(self.user2)
+        post.save()
+        self.assertTrue(post.likes.filter(id=self.user2.id).exists())
+        response = self.c2.get(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['liked'], True)
+
+
+    def test_post_detail_POST_liked_set_False_if_not_liked(self):
+        response = self.c2.post(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['liked'], False)
+
+
+    def test_post_like_POST_will_set_liked_True_if_liked(self):
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        post.likes.add(self.user2)
+        post.save()
+        self.assertTrue(post.likes.filter(id=self.user2.id).exists())
+        response = self.c2.post(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['liked'], True)
 
 
     def test_post_detail_POST_can_post_comment(self):
@@ -179,10 +209,18 @@ class TestViews(TestCase):
 
                             
     def test_detail_GET_will_not_show_update_btn_if_user_not_author(self):
-        response = self.c3.get(f'/detail/{self.post1.slug}/')
+        response = self.c2.get(f'/detail/{self.post1.slug}/')
         self.assertNotContains(response,
                                '<button class="btn btn-submit" type="submit">Update</button>',
                                status_code=200)
+
+
+    # NG
+    # def test_detail_GET_will_show_delete_btn_if_status_0_and_user_is_author(self):
+    #     response = self.c.get(f'/detail/{self.post1.slug}/')
+    #     self.assertContains(response,
+    #                         '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
+    #                         status_code=200)
 
 
     # def test_post_detail_POST_no_input_for_comment_will_prompt_input(self):
@@ -212,57 +250,29 @@ class TestViews(TestCase):
 
 
     def test_post_like_POST_will_add_user(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.post(reverse('post_like',
+        response = self.c2.post(reverse('post_like',
                                    kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-        self.assertTrue(post.likes.filter(id=user2.id).exists())
+        self.assertTrue(post.likes.filter(id=self.user2.id).exists())
 
     
     def test_post_like_POST_for_the_second_time_will_remove_user(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.post(reverse('post_like',
+        response = self.c2.post(reverse('post_like',
                                    kwargs={'slug': self.post1.slug}))
-        response = c2.post(reverse('post_like',
+        response = self.c2.post(reverse('post_like',
                                    kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-        self.assertFalse(post.likes.filter(id=user2.id).exists())
-
-
-    # how to get like?
-    def test_post_like_POST_will_set_liked_True(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.post(reverse('post_like',
-                                   kwargs={'slug': self.post1.slug}))
-        post = Post.objects.filter(slug=self.post1.slug).first()
-      
+        self.assertFalse(post.likes.filter(id=self.user2.id).exists())
 
 
     def test_bookmark_POST_will_add_user(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.post(reverse('bookmark',
+        response = self.c2.post(reverse('bookmark',
                                    kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-        self.assertTrue(post.bookmark.filter(id=user2.id).exists())
+        self.assertTrue(post.bookmark.filter(id=self.user2.id).exists())
 
 
     def test_bookmark_POST_will_remove_user(self):
@@ -468,15 +478,6 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/')
 
 
-    def test_search_GET_will_get_page(self):
-        response = self.client.get('/search_story/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-
-
-    # def test_search_no_input_will_(self):
-
-
     def test_can_get_more_stories(self):
         response = self.client.get('/more_stories/')
         self.assertEqual(response.status_code, 200)
@@ -505,38 +506,58 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 403)
 
 
-# class TestSearchView(TestCase):
+class TestSearchView(TestCase):
 
-#     def setUp(self):
-#         """create test posts."""
-#         self.user1 = User.objects.create_user(username="user1", password="pw1")
-#         self.user2 = User.objects.create_user(username="user2", password="pw2")
-#         self.user3 = User.objects.create_user(username="user3", password="pw3")
+    def setUp(self):
+        """create test posts."""
+        self.user1 = User.objects.create_user(username="user1", password="pw1")
+        self.user2 = User.objects.create_user(username="user2", password="pw2")
+        self.user3 = User.objects.create_user(username="user3", password="pw3")
         
-#         self.post1 = Post.objects.create(title='title1',
-#                                          author=self.user1,
-#                                          content='content',
-#                                          region='N/A',
-#                                          category='others')
+        self.post1 = Post.objects.create(title='gray cat',
+                                         author=self.user1,
+                                         content='content',
+                                         region='N/A',
+                                         category='others')
         
-#         self.post2 = Post.objects.create(title='title2',
-#                                          author=self.user2,
-#                                          content='content',
-#                                          region='N/A',
-#                                          category='others')
+        self.post2 = Post.objects.create(title='white cat',
+                                         author=self.user2,
+                                         content='content',
+                                         region='N/A',
+                                         category='others')
         
-#         self.post3 = Post.objects.create(title='title3',
-#                                          author=self.user3,
-#                                          content='content',
-#                                          region='N/A',
-#                                          category='others')
+        self.post3 = Post.objects.create(title='brown dog',
+                                         author=self.user3,
+                                         content='content',
+                                         region='N/A',
+                                         category='others')
 
-#     def test_search_by_title_contains_will_get_right_posts(self):
-#         response = self.client.get('search',
-#                                     {'title_input': 'blog',
-#                                      'title_field': 'contains',
-#                                      'search': 'search'})
-        # print(response.context['categories'])
+
+    def test_search_GET_will_get_page(self):
+        response = self.client.get('/search_story/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+
+
+    def test_category_choices_are_right(self):
+        response = self.client.get('/search_story/')
+        category_choices = Post._meta.get_field('category').choices
+        categories = [cat[1] for cat in category_choices]
+        self.assertEqual(response.context['categories'], categories)
+
+
+    def test_search_clicked_set_to_True_if_search_clicked(self):
+        response = self.client.get('search',
+                                   {'search': 'search'})
+        self.assertEqual(response.context['search_clicked'], True)
+
+
+    def test_search_by_title_contains_will_get_right_posts(self):
+        response = self.client.get('search',
+                                    {'title_input': 'cat',
+                                     'title_field': 'contains',
+                                     'search': 'search'})
+        print(response.context['queryset'])
         
 
 if __name__ == '__main__':
