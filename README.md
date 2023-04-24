@@ -60,6 +60,32 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - Montserrat was used for headings because it is stylish and gives a pleasant contrast to the rest when used sparingly.
 - For the content Lato is used since it is readable and familiar to users. 
 
+## Detailed Look at Each Part
+
+## Navigation
+- The logo of the website is located on the left side of the navigation bar.
+- A clover is chosen for the logo because it’s a widely liked symbol and is associated with good luck and hope, giving a friendly and positive impression.   
+- On the right side, links to other pages are provided.
+- Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Log out.’
+- Other users will find links to ‘Home,’ ‘Search,’ ‘Become a Member,’ and ‘Log in.’
+- These terms are self-explanatory, and there should not be any confusion for readers as to what kind of content these other pages will offer.
+
+## Home Page
+
+**Heading**
+- The heading at the center states the title of this website ‘ecopost.’
+- A graphic of earth is placed next to it.
+- This graphic serves as a reminder that we want to protect this beautiful planet.  
+
+**Introduction**
+- Below the heading an introductory paragraph explains what the site is for and how to use it.
+- At the same time the paragraph encourages users to take part in the blog. 
+- The first sentence addresses the problem that many people share – that they feel helpless, thinking individuals cannot do much to save the environment.
+- The first sentence aims to establish immediate connection with the site-visitors.
+- Then the rest of the paragraph offers a possible solution to the users' helpless feeling, inviting them to read the posts and connect with others.    
+- The paragraph aims to capture readers’ interests and motivates them to participate in this app in a friendly and concise manner. 
+
+
 \
 
 bugs
