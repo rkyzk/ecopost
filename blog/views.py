@@ -374,13 +374,22 @@ class Search(View):
                 i += 1 
             
         search_clicked = False
+        no_input = False
         if 'search' in self.request.GET:
-            search_clicked = True  
+            search_clicked = True
+            # If nothing was entered, set no_input to True
+            test_str = title_query + author_query + kw_query_list[0] + \
+                       kw_query_list[1] + kw_query_list[2] + min_liked_query + \
+                       pub_date_min_query + pub_date_max_query
+            test_str = test_str.replace(" ", "")
+            if category == "Choose..." and region == "Choose..." and test_str == '':
+                no_input = True
         context = {
             'categories': categories,
             'regions': regions,
             'queryset': qs,
-            'search_clicked': search_clicked
+            'search_clicked': search_clicked,
+            'no_input': 'no_input'
         }
         return render(request, "search.html", context)
 
