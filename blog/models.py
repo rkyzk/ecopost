@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
+from datetime import datetime
 from cloudinary.models import CloudinaryField
 
 
@@ -77,6 +78,8 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        if self.status == 2 and not self.published_on:
+            self.published_on = datetime.utcnow()
         super().save(*args, **kwargs)
 
         

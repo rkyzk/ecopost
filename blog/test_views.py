@@ -13,7 +13,12 @@ class TestViews(TestCase):
         self.user1.set_password('password')
         self.user1.save()
         self.c = Client()
-        logged_in = self.c.login(username='user1', password='password')
+        logged_in = self.c.login(username='user3', password='pw3')
+        self.user3 = User.objects.create_user(username="user3")
+        self.user3.set_password('pw3')
+        self.user3.save()
+        self.c3 = Client()
+        logged_in = self.c3.login(username='user3', password='pw3')
         self.post1 = Post.objects.create(title='title1',
                                          author=self.user1,
                                          content='content',
@@ -146,6 +151,38 @@ class TestViews(TestCase):
         self.assertEqual(comment.body, 'test comment')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
+
+    
+    def test_detail_GET_will_show_update_btn_if_status_0_and_user_is_author(self):
+        response = self.c.get(f'/detail/{self.post1.slug}/')
+        self.assertContains(response,
+                            '<button class="btn btn-submit" type="submit">Update</button>',
+                            status_code=200)
+
+    
+    def test_detail_GET_will_not_show_update_btn_if_status_1(self):
+        self.post1.status = 1
+        self.post1.save()
+        response = self.c.get(f'/detail/{self.post1.slug}/')
+        self.assertNotContains(response,
+                               '<button class="btn btn-submit" type="submit">Update</button>',
+                               status_code=200)
+
+                    
+    def test_detail_GET_will_not_show_update_btn_if_status_2(self):
+        self.post1.status = 2
+        self.post1.save()
+        response = self.c.get(f'/detail/{self.post1.slug}/')
+        self.assertNotContains(response,
+                               '<button class="btn btn-submit" type="submit">Update</button>',
+                               status_code=200)
+
+                            
+    def test_detail_GET_will_not_show_update_btn_if_user_not_author(self):
+        response = self.c3.get(f'/detail/{self.post1.slug}/')
+        self.assertNotContains(response,
+                               '<button class="btn btn-submit" type="submit">Update</button>',
+                               status_code=200)
 
 
     # def test_post_detail_POST_no_input_for_comment_will_prompt_input(self):
