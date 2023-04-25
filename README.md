@@ -60,30 +60,99 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - Montserrat was used for headings because it is stylish and gives a pleasant contrast to the rest when used sparingly.
 - For the content Lato is used since it is readable and familiar to users. 
 
-## Detailed Look at Each Part
+## Detailed Look at Each Part and Function
 
-## Navigation
+### Navigation (common to all pages)
 - The logo of the website is located on the left side of the navigation bar.
 - A clover is chosen for the logo because it’s a widely liked symbol and is associated with good luck and hope, giving a friendly and positive impression.   
 - On the right side, links to other pages are provided.
 - Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Log out.’
 - Other users will find links to ‘Home,’ ‘Search,’ ‘Become a Member,’ and ‘Log in.’
-- These terms are self-explanatory, and there should not be any confusion for readers as to what kind of content these other pages will offer.
+- These terms clear indicates what these linked pages will present.
+- Only 'My Page' may not be clear for first-time visitors, but if they navigate to the page, they will see lists of posts that are grouped with clearly labeled categories, so there shouldn't be any confusion. 
 
-## Home Page
+### Footer (common to all pages)
+
+### Home Page
 
 **Heading**
 - The heading at the center states the title of this website ‘ecopost.’
-- A graphic of earth is placed next to it.
+- A graphic of earth is placed on the right side.
 - This graphic serves as a reminder that we want to protect this beautiful planet.  
 
 **Introduction**
 - Below the heading an introductory paragraph explains what the site is for and how to use it.
-- At the same time the paragraph encourages users to take part in the blog. 
-- The first sentence addresses the problem that many people share – that they feel helpless, thinking individuals cannot do much to save the environment.
-- The first sentence aims to establish immediate connection with the site-visitors.
+- The paragraph encourages users to take part in the blog. 
+- The first sentence addresses the problem that many people share – that they feel helpless, thinking individuals cannot do much to save the environment, and that is meant to establish immediate connection with the visitors.
 - Then the rest of the paragraph offers a possible solution to the users' helpless feeling, inviting them to read the posts and connect with others.    
-- The paragraph aims to capture readers’ interests and motivates them to participate in this app in a friendly and concise manner. 
+- The paragraph aims to capture readers’ interests and motivates them to participate in this app in a welcoming and concise manner. 
+
+**Featured Stories Section**
+- Among the posts that are submitted in the week, managers of the site will choose three ‘featured stories’ that are most likely to capture readers’ interests and will display in this section.  
+- The featured image, title, author, published date and the excerpt will be shown, so that users can have a general idea of what each post is about.
+- Each excerpt has a link that says ‘Read the full story,’ which will take users to the detail page that shows the full content of the post.
+- Presenting a few featured stories on the home page has advantages: it removes from the visitors the stress of having to choose what to read and also increases the chance of users liking the site and wanting to revisit it.  
+
+**Links to More Post Articles**
+- At the bottom of the page, links to ‘More stories from this week’ and ‘Readers’ favorite stories of all time’ are provided.
+- This invites users to explore more post articles.  
+
+### "More Stories from This Week" and Readers' Favorite Stories of All Time"
+- 'More Stories from This Week' will show a list of post articles published in the previous 7 days except the featured stories.
+- "Readers' Favorite Stories of All Time" shows a list of post articles that are liked more times than others.
+- I made this page 'Readers' Favorite Stories of All Time' since interesting posts are worth reading regardless to how old they are.
+- The managers can set the number of likes above which posts are going to be included on this page.
+- Each page will show 6 posts, and if there are more than 6 posts, the posts will be paginated.
+
+### Detail Page
+- 
+
+
+### Write Stories
+- Here logged-in members can write their own stories they woudl like to share.
+- The fields are: title, content, featured image (optional), cateogry (select box), city, country (select box)
+- if no image is uploaded as featured image, a default graphic image will be applied for the post.
+- Users can click on 'save' to save drafts so they can edit them later, or click 'submit' to submit the articles.
+- In this setting, if the article is submitted, it will be evaluated by the managers of the site  (revise)
+- If submit button is clicked, a confirmation dialog box will tell users that they will not be able to edit or delete the post once submitted.
+
+### Update Post
+- Authors of the posts can update their own drafts before submission.
+- They can update the post by writing over prepopulated fields or uploading a new image.
+- They can 'save' the change , 'submit' the post, or 'cancel' updating.
+
+### Delete Post
+- Authors of the posts can delete their own drafts before submission by clicking the delete button on "Detail page.'
+- A confirmation dialog will ask if users really want to proceed.
+!! - If 'yes' is clicked the post will be deleted from the database, and the users is redirected to the home page.
+
+### Update and Delete Comment
+- The writer of the comment can update or delete their comment by clicking on the edit icon or the trash bin idon right by their comment on 'Detail Page.'
+- If edited, the comment will be labeled with a note 'edited' so as to avoid possible confusion.
+- If deleted, a note will say 'Comment deleted' in place of the comment, again in order to avoid confusion.  
+
+### Search Stories
+- Users can search post articles by title, author, keywords, published dates, number of likes, cities, countries and categories.
+- They can enter one or more fields and click on search.
+- The search result will be displayed below the search form.
+
+
+
+### Control  ----?
+- Some pages of this app are equipped with UserRequiredMixin and UserPassesTestMixin so they are accessible only for certain users and will send 403 errors if others attempt to reach the pages.
+- 'Write Stories' can be accessed only by logged in members.
+- 'Update Post' can be accessed only by the author of the post when he/she is logged in.
+- 'Update Comment' can be accessed only by the writer of the comment when he/she is logged in.
+- 'My Page' is accessible only by the user   ??  when he/she is logged in.
+
+**other forms of control**
+- Besides the two Mixin,   control access by displaying elements of html depending on the conditions.
+- Update and delete buttons are displayed only when the user is the one who wrote the posts or the comments.
+
+
+
+crispy forms are used.
+allauth is used.  Login, Sign out, Sign up pages
 
 
 \
