@@ -73,7 +73,7 @@ class PostDetail(View):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
-            messages.add_message(request, messages.SUCCESS, 'Your comment has been submitted.')
+            messages.add_message(request, messages.SUCCESS, 'You posted a comment.')
         else:
             comment_form = CommentForm()
             messages.add_message(request, messages.SUCCESS, "Error occuered.  Your comment was not saved.")
@@ -140,7 +140,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         return post.status == 0 and post.author == self.request.user
      
 
-class DeletePost(LoginRequiredMixin, View):  #login mixin necessary?  post is not possible
+class DeletePost(LoginRequiredMixin, View):
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)

@@ -4,7 +4,6 @@
 <h2 class="mt-3">Written by Me</h2>
 <div class="row posts-mt">
   {% for post in my_posts %}
-    {% if forloop.counter < 4 %}
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
         {% if "placeholder" in post.featured_image.url %}
@@ -24,12 +23,24 @@
       </div>
       <hr class="line">
     </div>
-    {% endif %}
-{% empty %}
-  <p>No Posts</p>
-{% endfor %}
-</div>
-{% if my_posts|length > 3 %}
+    {% if forloop.counter|divisibleby:3 %}
+  </div>
+    {% endif %} 
+    {% if my_posts|length > 3 %}
+      {% if forloop.counter == 3 %}
+  <button class="btn btn-link" id="show-my-posts">Show more</button>
+  <div id="my-posts" class="hide-posts">
+    <div class="row mt-2">
+        {% endif %}
+        {% if loop.last %}
+        <button class="btn btn-link" id="hide-my-posts">Show less</button>
+      </div>
+        {% endif %}
+      {% endif %}
+  {% empty %}
+    <p>No Posts</p>
+  {% endfor %}
+<!-- {% if my_posts|length > 3 %}
 <button class="btn btn-link" id="show-my-posts">Show more</button>
 <div id="my-posts" class="hide-posts">
   <div class="row mt-2">
@@ -63,7 +74,7 @@
   </div>
   <button class="btn btn-link" id="hide-my-posts">Show less</button>
 </div>
-{% endif %} 
+{% endif %}  -->
   <div class="row">
     <h2 class="mt-3">Commented by Me</h2>
     <div class="row posts-mt">

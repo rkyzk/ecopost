@@ -175,6 +175,18 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
+
+    def test_post_detail_POST_msg_says_comment_posted_if_submitted(self):
+        response = self.c.post(f'/detail/{self.post1.slug}/',
+                               {
+                                    'body': 'test comment'
+                                }
+                               )
+        messages = list(response.context['messages']) 
+        self.assertEqual(str(messages[0]), 'You posted a comment.')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
+
     
     def test_detail_GET_will_show_update_btn_if_status_0_and_user_is_author(self):
         response = self.c.get(f'/detail/{self.post1.slug}/')
@@ -262,7 +274,7 @@ class TestViews(TestCase):
 
     def test_bookmark_POST_will_add_user(self):
         response = self.c2.post(reverse('bookmark',
-                                   kwargs={'slug': self.post1.slug}))
+                                        kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
         self.assertTrue(post.bookmark.filter(id=self.user2.id).exists())
@@ -435,6 +447,33 @@ class TestViews(TestCase):
         self.assertRedirects(response, f'/detail/{post.slug}/')
 
 
+    def test_update_post_POST_msg_will_say_not_updated_if_canceld(self):
+        response = self.c.post(reverse('update_post',
+                                       kwargs={'slug': self.post1.slug}),
+                               {'title': 'title2',
+                                'content': 'content updated',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'cancel': 'cancel'},
+                               follow=True)
+        messages = list(response.context['messages'])
+        self.assertEqual(str(messages[0]), "Your story wasn't updated.")
+
+
+    def test_update_post_POST_msg_says_change_saved_if_saved(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post1.slug}),
+                               {'title': 'title2',
+                                'content': 'content',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'save': 'draft'},
+                               follow=True)
+        messages = list(response.context['messages'])
+        self.assertEqual(str(messages[0]), "The change has been saved.")
+      
+
+
     def test_update_post_POST_submit_will_set_status_to_1(self):
         response = self.c.post(reverse('update_post',
                                        kwargs={'slug': self.post1.slug}),
@@ -454,6 +493,14 @@ class TestViews(TestCase):
         existing_posts = Post.objects.filter(slug=self.post1.slug)
         self.assertEqual(len(existing_posts), 0)
         self.assertRedirects(response, '/')
+
+
+    def test_delete_post_POST_msg_says_deleted(self):
+        response = self.c.post(reverse('delete_post',
+                                       kwargs={'slug': self.post1.slug}),
+                                       follow=True)
+        messages = list(response.context['messages'])
+        self.assertEqual(str(messages[0]), "Your draft has been deleted.")
 
 
     def test_can_get_more_stories(self):
@@ -578,6 +625,43 @@ class TestSearchView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 0)
+
+
+    # def test_search_by_author_contains_will_return_empty_queryset_if_no_match(self):
+    #     response = self.client.get('/search_story/',
+    #                                {'title_input': 'rabbit',
+    #                                 'title_filter': 'contains',
+    #                                 'category': 'Choose...',
+    #                                 'region': 'Choose...',
+    #                                 'search': 'search'})
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'search.html')
+    #     self.assertEqual(len(response.context['queryset']), 0)
+
+
+    # def test_search_by_title_is_exactly_will_return_right_post_for_exact_title(self):
+    #     response = self.client.get('/search_story/',
+    #                                {'title_input': 'gray cat',
+    #                                 'title_filter': 'is_exactly',
+    #                                 'category': 'Choose...',
+    #                                 'region': 'Choose...',
+    #                                 'search': 'search'})
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'search.html')
+    #     self.assertEqual(len(response.context['queryset']), 1)
+    #     self.assertEqual(response.context['queryset'][0], self.post1)
+
+
+    # def test_search_by_title_is_exactly_will_return_empty_queryset_if_no_match(self):
+    #     response = self.client.get('/search_story/',
+    #                                {'title_input': 'green cat',
+    #                                 'title_filter': 'is_exactly',
+    #                                 'category': 'Choose...',
+    #                                 'region': 'Choose...',
+    #                                 'search': 'search'})
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'search.html')
+    #     self.assertEqual(len(response.context['queryset']), 0)
             
 
 if __name__ == '__main__':
