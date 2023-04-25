@@ -72,7 +72,7 @@ class Post(models.Model):
 
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['-created_on', '-published_on']
 
 
     def save(self, *args, **kwargs):

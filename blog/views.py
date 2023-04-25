@@ -26,7 +26,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         form.instance.author = self.request.user
         message = 'Your draft has been saved.'
         if 'submit' in self.request.POST.keys():
-            form.instance.status = 1
+            form.instance.status = 1       
             message = 'Your story has been submitted for evaluation.'
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
@@ -302,7 +302,7 @@ class Search(View):
         categories = [cat[1] for cat in category_choices]
         region_choices = Post._meta.get_field('region').choices
         regions = [region[1] for region in region_choices]
-        posts = Post.objects.filter(status=2)
+        posts = Post.objects.filter(status=2).order_by('-published_on')
         title_query = request.GET.get('title_input')
         title_filter_type = request.GET.get('title_filter')
         author_query = request.GET.get('author_input')
@@ -310,7 +310,7 @@ class Search(View):
         kw_query_list = [request.GET.get('keyword_1'),
                          request.GET.get('keyword_2'),
                          request.GET.get('keyword_3')
-                    ]
+                        ]
         min_liked_query = request.GET.get('liked_count_min')
         pub_date_min_query = request.GET.get('date_min')
         pub_date_max_query = request.GET.get('date_max')
@@ -378,12 +378,20 @@ class Search(View):
         if 'search' in self.request.GET:
             search_clicked = True
             # If nothing was entered, set no_input to True
-            test_str = title_query + author_query + kw_query_list[0] + \
-                       kw_query_list[1] + kw_query_list[2] + min_liked_query + \
-                       pub_date_min_query + pub_date_max_query
-            test_str = test_str.replace(" ", "")
-            if category == "Choose..." and region == "Choose..." and test_str == '':
-                no_input = True
+            # if title_query == '' or title_query is None
+            # author_query == '' or author_query is None
+            # kw_query_list = [request.GET.get('keyword_1'),
+            #                  request.GET.get('keyword_2'),
+            #                  request.GET.get('keyword_3')
+            #                 ]
+            # min_liked_query
+            # pub_date_min_query
+            # pub_date_max_query
+            # category = request.GET.get('category')
+            # region = request.GET.get('region')
+            # test_str = test_str.replace(" ", "")
+            # if category == "Choose..." and region == "Choose..." and test_str == '':
+            #     no_input = True
         context = {
             'categories': categories,
             'regions': regions,

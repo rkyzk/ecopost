@@ -14,7 +14,7 @@ class TestViews(TestCase):
         self.user1.set_password('password')
         self.user1.save()
         self.c = Client()
-        logged_in = self.c.login(username='user2', password='pw2')
+        logged_in = self.c.login(username='user1', password='password')
         self.user2 = User.objects.create_user(username="user2")
         self.user2.set_password('pw2')
         self.user2.save()
@@ -50,14 +50,12 @@ class TestViews(TestCase):
 
     def test_add_story_POST_can_add_story(self):
         response = self.c.post('/add_story/',
-                                {
-                                    'title': 'title2',
-                                    'content': 'test',
-                                    'region': 'N/A',
-                                    'category': 'others',
-                                    'save': 'draft'
-                                },
-                              )
+                               {'title': 'title2',
+                                'content': 'test',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'save': 'draft'})
+    
         post = Post.objects.filter(slug='title2').first()
         self.assertEqual(post.title, 'title2')
         self.assertEqual(post.content, 'test')
@@ -82,14 +80,11 @@ class TestViews(TestCase):
 
     def test_add_story_POST_keeps_status_to_0_if_save_clicked(self):
         response = self.c.post('/add_story/',
-                                {
-                                    'title': 'title2',
-                                    'content': 'test',
-                                    'region': 'N/A',
-                                    'category': 'others',
-                                    'save': 'draft'
-                                },
-                              )
+                               {'title': 'title2',
+                                'content': 'test',
+                                'region': 'N/A',
+                                'category': 'others',
+                                'save': 'draft'})
         post = Post.objects.filter(slug='title2').first()
         self.assertEqual(post.title, 'title2')
         self.assertEqual(post.status, 0)
@@ -110,30 +105,28 @@ class TestViews(TestCase):
     #     request = response.wsgi_request
     #     print(request.messages)
 
-    def test_add_story_POST_save_will_render_msg_draft_saved(self):
-        response = self.c.post('/add_story',
-                               {'title': 'title2',
-                                'author': self.user1,
-                                'content': 'test',
-                                'region': 'N/A',
-                                'category': 'others',
-                                'save': 'draft'},
-                                follow=True)
-        # messages = list(get_messages(response.wsgi_request))
-        # self.assertEqual(len(messages), 1)
-        # self.assertEqual(str(messages[0]), 'Your draft has been saved.')
 
-    # NG def test_message_says_draft_is_submitted_if_submitted(self):
-     # response = self.c.post('/add_story',
-        #                        {'title': 'title_2',
-        #                         'author': self.user_1,
-        #                         'content': 'test',
-        #                         'region': 'N/A',
-        #                         'category': 'others'},
-        #                        follow=True,
-        #                        secure=True
-        #                        )
-        # self.assertEqual(messages, 'Your draft has been saved.')
+    def test_add_story_POST_save_will_render_msg_draft_saved(self):
+        response = self.c.post('/add_story/',
+                                {'title': 'title2',
+                                 'content': 'test',
+                                 'region': 'N/A',
+                                 'category': 'others',
+                                 'save': 'draft'})
+        messages = list(get_messages(response.wsgi_request))       
+        self.assertEqual(str(messages[0]), 'Your draft has been saved.')
+
+    
+    def test_message_says_draft_is_submitted_if_submitted(self):
+        response = self.c.post('/add_story/',
+                                {'title': 'title2',
+                                 'content': 'test',
+                                 'region': 'N/A',
+                                 'category': 'others',
+                                 'submit': 'complete'})
+        messages = list(get_messages(response.wsgi_request))       
+        self.assertEqual(str(messages[0]),
+                         'Your story has been submitted for evaluation.')
 
 
     def test_can_get_detail_page(self):
@@ -251,7 +244,7 @@ class TestViews(TestCase):
 
     def test_post_like_POST_will_add_user(self):
         response = self.c2.post(reverse('post_like',
-                                   kwargs={'slug': self.post1.slug}))
+                                        kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
         self.assertTrue(post.likes.filter(id=self.user2.id).exists())
@@ -276,18 +269,13 @@ class TestViews(TestCase):
 
 
     def test_bookmark_POST_will_remove_user(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.post(reverse('bookmark',
-                                   kwargs={'slug': self.post1.slug}))
-        response = c2.post(reverse('bookmark',
-                                   kwargs={'slug': self.post1.slug}))
+        response = self.c2.post(reverse('bookmark',
+                                        kwargs={'slug': self.post1.slug}))
+        response = self.c2.post(reverse('bookmark',
+                                        kwargs={'slug': self.post1.slug}))
         post = Post.objects.filter(slug=self.post1.slug).first()
         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-        self.assertFalse(post.bookmark.filter(id=user2.id).exists())
+        self.assertFalse(post.bookmark.filter(id=self.user2.id).exists())
 
 
     def test_update_comment_GET_gets_the_page_if_right_user(self):
@@ -303,12 +291,7 @@ class TestViews(TestCase):
 
 
     def test_update_comment_GET_will_403_if_wrong_user(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.get(reverse('update_comment', kwargs={'id': 1}))
+        response = self.c2.get(reverse('update_comment', kwargs={'id': 1}))
         self.assertEqual(response.status_code, 403)
 
 
@@ -354,12 +337,7 @@ class TestViews(TestCase):
 
 
     def test_update_post_GET_will_403_if_wrong_user(self):
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.get(f'/update/{self.post1.slug}/')
+        response = self.c2.get(f'/update/{self.post1.slug}/')
         self.assertEqual(response.status_code, 403)
 
 
@@ -487,7 +465,7 @@ class TestViews(TestCase):
     # need to test the content of object_list?
     def test_can_get_more_stories(self):
         response = self.client.get('/more_stories/')
-        # print(response.context['object_list'])
+        print(response.context['object_list'])
 
 
     def test_my_page_GET_will_get_page_if_user(self):
@@ -496,13 +474,8 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'my_page.html', 'base.html')
 
 
-    def test_my_page_GET_will_403_if_wrong_user(self): 
-        user2 = User.objects.create_user(username="user2")
-        user2.set_password('password2')
-        user2.save()
-        c2 = Client()
-        logged_in = c2.login(username='user2', password='password2')
-        response = c2.get('/mypage/user1/')
+    def test_my_page_GET_will_403_if_wrong_user(self):
+        response = self.c2.get('/mypage/user1/')
         self.assertEqual(response.status_code, 403)
 
 
@@ -518,19 +491,25 @@ class TestSearchView(TestCase):
                                          author=self.user1,
                                          content='content',
                                          region='N/A',
-                                         category='others')
+                                         category='others',
+                                         status=2)
+        self.post1.save()
         
         self.post2 = Post.objects.create(title='white cat',
                                          author=self.user2,
                                          content='content',
                                          region='N/A',
-                                         category='others')
+                                         category='others',
+                                         status=2)
+        self.post2.save()
         
         self.post3 = Post.objects.create(title='brown dog',
                                          author=self.user3,
                                          content='content',
                                          region='N/A',
-                                         category='others')
+                                         category='others',
+                                         status=2)
+        self.post3.save()
 
 
     def test_search_GET_will_get_page(self):
@@ -547,18 +526,59 @@ class TestSearchView(TestCase):
 
 
     def test_search_clicked_set_to_True_if_search_clicked(self):
-        response = self.client.get('search',
+        response = self.client.get('/search_story/',
                                    {'search': 'search'})
         self.assertEqual(response.context['search_clicked'], True)
 
 
     def test_search_by_title_contains_will_get_right_posts(self):
-        response = self.client.get('search',
-                                    {'title_input': 'cat',
-                                     'title_field': 'contains',
-                                     'search': 'search'})
-        print(response.context['queryset'])
-        
+        response = self.client.get('/search_story/',
+                                   {'title_input': 'cat',
+                                    'title_filter': 'contains',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+
+
+    def test_search_by_title_contains_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'title_input': 'rabbit',
+                                    'title_filter': 'contains',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
+
+
+    def test_search_by_title_is_exactly_will_return_right_post_for_exact_title(self):
+        response = self.client.get('/search_story/',
+                                   {'title_input': 'gray cat',
+                                    'title_filter': 'is_exactly',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 1)
+        self.assertEqual(response.context['queryset'][0], self.post1)
+
+
+    def test_search_by_title_is_exactly_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'title_input': 'green cat',
+                                    'title_filter': 'is_exactly',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
+            
 
 if __name__ == '__main__':
     main()
