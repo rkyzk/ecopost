@@ -318,55 +318,75 @@ class Search(View):
         region = request.GET.get('region')
         qs = []
         query_lists = []
+        no_input = True
 
-        if title_query != '' and title_query is not None:  
-            if title_filter_type == "contains":
-                qs_title = posts.filter(title__icontains=title_query)
-            else:
-                qs_title = posts.filter(title__exact=title_query)
-            if qs_title != []:
-                query_lists.append(qs_title)
+        if title_query is not None:
+            if title_query.replace(' ', '') != '':
+                no_input = False
+                print('hello')
+                if title_filter_type == "contains":
+                    qs_title = posts.filter(title__icontains=title_query)
+                else:
+                    qs_title = posts.filter(title__exact=title_query)
+                if qs_title != []:
+                    query_lists.append(qs_title)
 
-        if author_query != '' and author_query is not None:
-            if author_filter_type == "contains":
-                qs_author = posts.filter(author__username__icontains=author_query)
-            else:
-                qs_author = posts.filter(author__username__exact=author_query)
-            if qs_author != []:
-                query_lists.append(qs_author)
+        if author_query is not None:
+            if author_query.replace(' ', '') != '':
+                no_input = False
+                if author_filter_type == "contains":
+                    qs_author = posts.filter(author__username__icontains=author_query)
+                else:
+                    qs_author = posts.filter(author__username__exact=author_query)
+                if qs_author != []:
+                    query_lists.append(qs_author)
 
         for kw in kw_query_list:
-            if kw != '' and kw is not None:
-                qs = posts.filter(Q(title__icontains=kw) | Q(content__icontains=kw))
-                query_lists.append(qs)
+            if kw is not None:
+                if kw.replace(' ', '') != '':
+                    no_input = False
+                    qs_kw = posts.filter(Q(title__icontains=kw) | Q(content__icontains=kw))
+                    if qs_kw != []:
+                        query_lists.append(qs)
 
-        if min_liked_query != '' and min_liked_query is not None:
-            qs_liked = [post for post in posts if (post.number_of_likes()>=int(min_liked_query))]
-            if qs_liked != []:
-                query_lists.append(qs_liked)
+        if min_liked_query is not None:
+            if min_liked_query.replace(' ', '') != '':
+                no_input = False
+                qs_liked = [post for post in posts if (
+                            post.number_of_likes()>=int(min_liked_query))]
+                if qs_liked != []:
+                    query_lists.append(qs_liked)
 
-        if pub_date_min_query != '' and pub_date_min_query is not None:
-            min_date_str = pub_date_min_query
-            min_date = datetime.strptime(min_date_str, '%Y-%m-%d')
-            qs_min_pub_date = posts.filter(published_on__date__gte=min_date)
-            query_lists.append(qs_min_pub_date)
+        if pub_date_min_query is not None:
+            if pub_date_min_query.replace(' ', '') != '':
+                no_input = False
+                min_date_str = pub_date_min_query
+                min_date = datetime.strptime(min_date_str, '%Y-%m-%d')
+                qs_min_pub_date = posts.filter(published_on__date__gte=min_date)
+                query_lists.append(qs_min_pub_date)
 
-        if pub_date_max_query != '' and pub_date_max_query is not None:
-            max_date_str = pub_date_max_query
-            max_date = datetime.strptime(max_date_str, '%Y-%m-%d')
-            qs_max_pub_date = posts.filter(published_on__date__lte=max_date)
-            query_lists.append(qs_max_pub_date)
+        if pub_date_max_query is not None:
+            if pub_date_max_query.replace(' ', '') != '':
+                no_input = False
+                max_date_str = pub_date_max_query
+                max_date = datetime.strptime(max_date_str, '%Y-%m-%d')
+                qs_max_pub_date = posts.filter(published_on__date__lte=max_date)
+                query_lists.append(qs_max_pub_date)
 
         if region != 'Choose...':
+            no_input = False
             qs_region = [post for post in posts if post.get_region_display() == region]
             query_lists.append(qs_region)
         if category != 'Choose...':
+            no_input = False
             qs_category = [post for post in posts if post.get_category_display() == category]
             query_lists.append(qs_category)
 
         if query_lists != []:
             qs = query_lists[0]
 
+        # filter posts that are present in all lists in query lists (which are
+        # the posts that match all criteria)
         if len(query_lists) > 1:
             i = 0
             for i in range(len(query_lists) - 1):
@@ -374,30 +394,15 @@ class Search(View):
                 i += 1 
             
         search_clicked = False
-        no_input = False
         if 'search' in self.request.GET:
             search_clicked = True
-            # If nothing was entered, set no_input to True
-            # if title_query == '' or title_query is None
-            # author_query == '' or author_query is None
-            # kw_query_list = [request.GET.get('keyword_1'),
-            #                  request.GET.get('keyword_2'),
-            #                  request.GET.get('keyword_3')
-            #                 ]
-            # min_liked_query
-            # pub_date_min_query
-            # pub_date_max_query
-            # category = request.GET.get('category')
-            # region = request.GET.get('region')
-            # test_str = test_str.replace(" ", "")
-            # if category == "Choose..." and region == "Choose..." and test_str == '':
-            #     no_input = True
+
         context = {
             'categories': categories,
             'regions': regions,
             'queryset': qs,
             'search_clicked': search_clicked,
-            'no_input': 'no_input'
+            'no_input': no_input
         }
         return render(request, "search.html", context)
 
