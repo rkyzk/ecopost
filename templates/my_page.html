@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- My posts -->
 <h2 class="mt-3">Written by Me</h2>
-<div class="row posts-mt">
+<div class="row">
   {% for post in my_posts %}
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
@@ -23,29 +24,30 @@
       </div>
       <hr class="line">
     </div>
-    {% if forloop.counter|divisibleby:3 %}
-  </div>
-    {% endif %} 
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
-  <button class="btn btn-link" id="show-my-posts">Show more</button>
-  <div id="my-posts" class="hide-posts">
+      </div>
+      <button class="btn btn-link" id="show-my-posts">Show more</button>
+      <div id="my-posts" class="hide">
+        <div class="row mt-2">
+      {% elif forloop.last %}
+     </div>
+     <button class="btn btn-link" id="hide-my-posts">Show less</button>
+      {% elif forloop.counter > 3 %}
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
     <div class="row mt-2">
         {% endif %}
-        {% if loop.last %}
-        <button class="btn btn-link" id="hide-my-posts">Show less</button>
-      </div>
-        {% endif %}
       {% endif %}
+    {% endif %}
   {% empty %}
-    <p>No Posts</p>
+    <p>No posts</p>
   {% endfor %}
-<!-- {% if my_posts|length > 3 %}
-<button class="btn btn-link" id="show-my-posts">Show more</button>
-<div id="my-posts" class="hide-posts">
-  <div class="row mt-2">
-  {% for post in my_posts %}
-    {% if forloop.counter > 3 %}
+</div>
+<!-- Commented Posts -->
+<h2 class="mt-5">Commented by Me</h2>
+<div class="row">
+  {% for post in commented_posts %}
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
         {% if "placeholder" in post.featured_image.url %}
@@ -65,72 +67,70 @@
       </div>
       <hr class="line">
     </div>
-      {% if forloop.counter|divisibleby:3 %}
+    {% if commented_posts|length > 3 %}
+      {% if forloop.counter == 3 %}
+      </div>
+      <button class="btn btn-link" id="show-my-posts">Show more</button>
+      <div id="my-posts" class="hide">
+        <div class="row mt-2">
+      {% elif forloop.last %}
+     </div>
+     <button class="btn btn-link" id="hide-my-posts">Show less</button>
+      {% elif forloop.counter > 3 %}
+        {% if forloop.counter|divisibleby:3 %}
     </div>
     <div class="row mt-2">
+        {% endif %}
       {% endif %}
     {% endif %}
+  {% empty %}
+    <p>No posts</p>
   {% endfor %}
-  </div>
-  <button class="btn btn-link" id="hide-my-posts">Show less</button>
 </div>
-{% endif %}  -->
-  <div class="row">
-    <h2 class="mt-3">Commented by Me</h2>
-    <div class="row posts-mt">
-      {% for post in commented_posts %}
-        <div class="col-md-4">
-          <div class="image-wrapper d-flex justify-content-center">
-            {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
-            {% else %}
-              <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-            {% endif %}
-          </div>
-          <div class="mx-2 mt-2 post-text">
-            <span><strong>{{ post.title }}</strong></span><br>
-            <span>By {{ post.author }}</span>
-            <div class="d-flex justify-content-end">
-              <span>city, country {{ post.pub_date }}</span>
-            </div>
-            <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-            <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-          </div>
-          <hr class="line">
-        </div> 
-    {% empty %}
-      <p>No Posts</p>
-    {% endfor %}
-  </div> 
+<!-- Bookmarked Posts -->
+<h2 class="mt-5">Bookmarked by Me</h2>
+<div class="row">
+  {% for post in bookmarked_posts %}
+    <div class="col-md-4">
+      <div class="image-wrapper d-flex justify-content-center">
+        {% if "placeholder" in post.featured_image.url %}
+          <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
+        {% else %}
+          <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+        {% endif %}
+      </div>
+      <div class="mx-2 mt-2 post-text">
+        <span><strong>{{ post.title }}</strong></span><br>
+        <span>By {{ post.author }}</span>
+        <div class="d-flex justify-content-end">
+          <span>city, country {{ post.pub_date }}</span>
+        </div>
+        <p class="mt-1 excerpt">{{ post.excerpt }}</p>
+        <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
+      </div>
+      <hr class="line">
+    </div>
+    {% if bookmarked_posts|length > 3 %}
+      {% if forloop.counter == 3 %}
+      </div>
+      <button class="btn btn-link" id="show-my-posts">Show more</button>
+      <div id="my-posts" class="hide">
+        <div class="row mt-2">
+      {% elif forloop.last %}
+     </div>
+     <button class="btn btn-link" id="hide-my-posts">Show less</button>
+      {% elif forloop.counter > 3 %}
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row mt-2">
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% empty %}
+    <p>No posts</p>
+  {% endfor %}
+</div>
 
-  <div class="row">
-    <h2 class="mt-3">Bookmarked Posts</h2>
-    <div class="row posts-mt">
-      {% for post in bookmarked_posts %}
-        <div class="col-md-4">
-          <div class="image-wrapper d-flex justify-content-center">
-            {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
-            {% else %}
-              <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-            {% endif %}
-          </div>
-          <div class="mx-2 mt-2 post-text">
-            <span><strong>{{ post.title }}</strong></span><br>
-            <span>By {{ post.author }}</span>
-            <div class="d-flex justify-content-end">
-              <span>city, country {{ post.pub_date }}</span>
-            </div>
-            <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-            <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-          </div>
-          <hr class="line">
-        </div> 
-    {% empty %}
-      <p>No Posts</p>
-    {% endfor %}
-  </div>
-</div>
 <script>
 let showPostsButton = document.getElementById('show-my-posts');
 showPostsButton.addEventListener("click", function(){
@@ -138,7 +138,7 @@ showPostsButton.addEventListener("click", function(){
   myPosts.classList.remove('hide');
   myPosts.classList.add('show');
   let showMoreBtn = document.getElementById('show-my-posts');
-  showMoreBtn.classList.add('hide')
+  showMoreBtn.textContent = 'Show less'
 })
 
 let hideButton = document.getElementById('hide-my-posts');
@@ -147,8 +147,7 @@ hideButton.addEventListener("click", function(){
   myPosts.classList.remove('show');
   myPosts.classList.add('hide');
   let showMoreBtn = document.getElementById('show-my-posts');
-  showMoreBtn.classList.remove('hide')
-  showMoreBtn.classList.add('show')
+  showMoreBtn.textContent = 'Show more'
 })
 
 </script>
