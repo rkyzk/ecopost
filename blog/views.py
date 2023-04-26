@@ -205,64 +205,6 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
         id = self.kwargs.get('id')
         comment = get_object_or_404(Comment, id=id)
         return comment.commenter == self.request.user
-       
-
-
-# class MyPage(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
-
-#     model = Post
-#     template_name = "my_page.html"
-
-
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(MyPage, self).get_context_data(*args, **kwargs)
-#         id = self.kwargs.get('pk')
-#         my_posts = [Post.objects.filter(author=id)]
-#         if len(my_posts) > 3:
-#             my_posts, my_posts_hidden = [my_posts[:3], my_posts[3:]]
-#         comments = Comment.objects.filter(commenter__id=id)
-#         commented_posts = [comment.post for comment in comments]
-#         # remove duplicates
-#         commented_posts = list(dict.fromkeys(commented_posts))
-#         if len(commented_posts) > 3:
-#             commented_posts, commented_posts_hidden = [commented_posts[:3],
-#                                                        commented_posts[3:]]
-#         all_posts = Post.objects.all()
-#         bookmarked_posts = []
-#         for post in all_posts:
-#             if post.bookmark.filter(id=id).exists():
-#                 bookmarked_posts.append(post)
-#         if len(bookmarked_posts) > 3:
-#             bookmarked_posts, bookmarked_posts_hidden = [
-#                 bookmarked_posts[:3], bookmarked_posts[3:] 
-#             ]
-#         context = {
-#             'my_posts': my_posts,
-#             'commented_posts': commented_posts,
-#             'bookmarked_posts': bookmarked_posts 
-#         }
-#         return context
-
-    # def get(self, request, id, *args, **kwargs):
-    #     my_posts = Post.objects.filter(author=id)  
-    #     comments = Comment.objects.filter(commenter__id=id)
-    #     commented_posts = [comment.post for comment in comments]
-        # remove duplicates
-        # commented_posts = list(dict.fromkeys(commented_posts))
-        # this can be made more concise
-        # return render(
-        #     request,
-        #     "my_page.html",
-        #     {
-        #         "my_posts": my_posts,
-        #         "commented_posts": commented_posts,
-        #         "bookmarked_posts": bookmarked_posts
-        #     },
-        # )
-
-
-    # def test_func(self):
-    #     return self.kwargs.get('pk') == self.request.user.id
 
 
 class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -323,7 +265,6 @@ class Search(View):
         if title_query is not None:
             if title_query.replace(' ', '') != '':
                 no_input = False
-                print('hello')
                 if title_filter_type == "contains":
                     qs_title = posts.filter(title__icontains=title_query)
                 else:

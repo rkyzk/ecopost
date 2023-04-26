@@ -532,7 +532,7 @@ class TestSearchView(TestCase):
         """create test posts."""
         self.user1 = User.objects.create_user(username="user1", password="pw1")
         self.user2 = User.objects.create_user(username="user2", password="pw2")
-        self.user3 = User.objects.create_user(username="user3", password="pw3")
+        self.user3 = User.objects.create_user(username="test3", password="pw3")
         
         self.post1 = Post.objects.create(title='gray cat',
                                          author=self.user1,
@@ -576,6 +576,26 @@ class TestSearchView(TestCase):
         response = self.client.get('/search_story/',
                                    {'search': 'search'})
         self.assertEqual(response.context['search_clicked'], True)
+
+
+    def test_search_without_fields_will_keep_no_input_True(self):
+        response = self.client.get('/search_story/',
+                                   {'category': 'Choose...',
+                                   'region': 'Choose...',
+                                   'search': 'search'})
+        print(response.context['no_input'])
+        self.assertTrue(response.context['no_input'])
+
+    # put spaces in all fields
+    def test_search_entering_only_spaces_will_keep_no_input_True(self):
+        response = self.client.get('/search_story/',
+                                   {'title_input': ' ',
+                                    'author_input': ' ',
+                                   'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        print(response.context['no_input'])
+        self.assertTrue(response.context['no_input'])
 
 
     def test_search_by_title_contains_will_get_right_posts(self):
@@ -627,41 +647,54 @@ class TestSearchView(TestCase):
         self.assertEqual(len(response.context['queryset']), 0)
 
 
-    # def test_search_by_author_contains_will_return_empty_queryset_if_no_match(self):
-    #     response = self.client.get('/search_story/',
-    #                                {'title_input': 'rabbit',
-    #                                 'title_filter': 'contains',
-    #                                 'category': 'Choose...',
-    #                                 'region': 'Choose...',
-    #                                 'search': 'search'})
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'search.html')
-    #     self.assertEqual(len(response.context['queryset']), 0)
+    def test_search_by_author_contains_will_return_right_posts(self):
+        response = self.client.get('/search_story/',
+                                   {'author_input': 'user',
+                                    'author_filter': 'contains',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 2)
+        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
 
 
-    # def test_search_by_title_is_exactly_will_return_right_post_for_exact_title(self):
-    #     response = self.client.get('/search_story/',
-    #                                {'title_input': 'gray cat',
-    #                                 'title_filter': 'is_exactly',
-    #                                 'category': 'Choose...',
-    #                                 'region': 'Choose...',
-    #                                 'search': 'search'})
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'search.html')
-    #     self.assertEqual(len(response.context['queryset']), 1)
-    #     self.assertEqual(response.context['queryset'][0], self.post1)
+    def test_search_by_author_contains_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'author_input': 'cat',
+                                    'author_filter': 'contains',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
 
 
-    # def test_search_by_title_is_exactly_will_return_empty_queryset_if_no_match(self):
-    #     response = self.client.get('/search_story/',
-    #                                {'title_input': 'green cat',
-    #                                 'title_filter': 'is_exactly',
-    #                                 'category': 'Choose...',
-    #                                 'region': 'Choose...',
-    #                                 'search': 'search'})
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'search.html')
-    #     self.assertEqual(len(response.context['queryset']), 0)
+    def test_search_by_author_is_exactly_will_return_right_post_for_exact_author(self):
+        response = self.client.get('/search_story/',
+                                   {'author_input': 'user2',
+                                    'author_filter': 'is_exactly',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 1)
+        self.assertEqual(response.context['queryset'][0], self.post2)
+
+
+    def test_search_by_author_is_exactly_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'author_input': 'user',
+                                    'author_filter': 'is_exactly',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
             
 
 if __name__ == '__main__':
