@@ -105,8 +105,22 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - Each page will show 6 posts, and if there are more than 6 posts, the posts will be paginated.
 
 ### Detail Page
-- 
+- The full content of the post is presented.
+- At the top left, the title, author, region and published dates are stated.
+- At the top right the featured image is shown.
+- The full text of the blog is presented below the title and the image.
+- If the post is in ‘draft’ state, and if the user is the author of the post, update and delete buttons are provided below the post content.
+- If the post has been published, comments are displayed on the bottom left.
+- The comments are listed in the order of oldest to newest (?) so that users can follow the conversation.
+- If users are logged in, they will see a comment form on the right side of the comments so they can leave comments.
+- For users who haven’t logged in, a note will say ‘Want to leave comments?  Log in or Become a member,’ which includes links to log-in and sign-up pages.
 
+**Additional Functions on Detail Page**
+- By clicking on the heart below the featured image, users can like the post, or undo that action.
+- Similarly, by clicking on the book sign next to the heart, users can bookmark the post, or undo the action.
+- Bookmarked posts can be found on ‘My Page.’ 
+- The like function is an important element of this app since it offers opportunities for interaction among users--readers can express their appreciation for the articles, and the authors will feel rewarded. 
+- The bookmark function is also a useful function because users can easily find the posts at later times. 
 
 ### Write Stories
 - Here logged-in members can write their own stories they woudl like to share.
@@ -121,21 +135,25 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - They can update the post by writing over prepopulated fields or uploading a new image.
 - They can 'save' the change , 'submit' the post, or 'cancel' updating.
 
-### Delete Post
+### Delete Post Function (no page)
 - Authors of the posts can delete their own drafts before submission by clicking the delete button on "Detail page.'
 - A confirmation dialog will ask if users really want to proceed.
 !! - If 'yes' is clicked the post will be deleted from the database, and the users is redirected to the home page.
 
-### Update and Delete Comment
+### Update and Delete Comment (Delete comment has no page)
 - The writer of the comment can update or delete their comment by clicking on the edit icon or the trash bin idon right by their comment on 'Detail Page.'
 - If edited, the comment will be labeled with a note 'edited' so as to avoid possible confusion.
 - If deleted, a note will say 'Comment deleted' in place of the comment, again in order to avoid confusion.  
 
 ### Search Stories
 - Users can search post articles by title, author, keywords, published dates, number of likes, cities, countries and categories.
-- They can enter one or more fields and click on search.
+- They can enter one or more fields and click on search to get search results.
 - The search result will be displayed below the search form.
+- If no input was made or only spaces are entered, a note will say, 'Please enter at least one field.'
+- If no match was found, a note will say, 'No matching results found'
 
+**Note on other pages**
+“Become a Member” (sign up page), “log in” and “sign out” pages were taken from allauth with a minor modification.  
 
 
 ### Control  ----?
