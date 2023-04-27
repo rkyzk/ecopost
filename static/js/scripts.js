@@ -19,23 +19,30 @@ function openMenu() {
 }
 
 // Clicking 'Show more' button will display more posts.
-let showPostsButton = document.getElementById('show-my-posts');
-showPostsButton.addEventListener("click", function(){
-  let myPosts = document.getElementById('my-posts');
-  myPosts.classList.remove('hide');
-  myPosts.classList.add('show');
-  let showMoreBtn = document.getElementById('show-my-posts');
-  showMoreBtn.textContent = 'Show less'
-})
+let button = document.getElementsByClassName('show-posts');
+console.log(button)
+for (btn in button) {
+  btn.addEventListener("click", function(){
+    let myPosts = this.nextElementSibling;
+    if (showPostsButton.textContent == 'Show more') {
+      myPosts.classList.remove('hide');
+      myPosts.classList.add('show');
+      this.textContent = 'Show less'
+    } else {
+      myPosts.classList.remove('show');
+      myPosts.classList.add('hide');
+      this.textContent = 'Show more'
+    }
+  });
+}
 
 // Clicking 'Show less' button will hide posts.
-let hideButton = document.getElementById('hide-my-posts');
+let hideButton = document.getElementsByClassName('hide-posts');
 hideButton.addEventListener("click", function(){
-  let myPosts = document.getElementById('my-posts');
+  let myPosts = this.parentElement;
   myPosts.classList.remove('show');
   myPosts.classList.add('hide');
-  let showMoreBtn = document.getElementById('show-my-posts');
-  showMoreBtn.textContent = 'Show more'
+  myPosts.previousElementSibling.textContent = 'Show more'
 })
 
-modle.exports = buttonClick;
+module.exports = { openMenu };

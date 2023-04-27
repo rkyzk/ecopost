@@ -27,12 +27,12 @@
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link" id="show-my-posts">Show more</button>
+      <button class="btn btn-link show-posts">Show more</button>
       <div id="my-posts" class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
      </div>
-     <button class="btn btn-link" id="hide-my-posts">Show less</button>
+     <button class="btn btn-link hide-posts">Show less</button>
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>

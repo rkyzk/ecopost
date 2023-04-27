@@ -76,7 +76,7 @@ class PostDetail(View):
             messages.add_message(request, messages.SUCCESS, 'You posted a comment.')
         else:
             comment_form = CommentForm()
-            messages.add_message(request, messages.SUCCESS, "Error occuered.  Your comment was not saved.")
+            messages.add_message(request, messages.INFO, "Error occuered.  Your comment was not saved.")
         return render(
             request,
             "post_detail.html",
@@ -210,7 +210,7 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
 class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, pk, *args, **kwargs):     
-        my_posts = Post.objects.filter(author=pk)  
+        my_posts = Post.objects.filter(author=pk)
         comments = Comment.objects.filter(commenter__id=pk,
                                           comment_status__in=[0, 1])
         commented_posts = [comment.post for comment in comments]
