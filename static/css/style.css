@@ -12,7 +12,7 @@ body {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
+  padding: 20px 60px 0;
 }
 
 .nav-list {
@@ -177,7 +177,7 @@ a {
   text-decoration: none;
 }
 
-/* account sign in */
+/* account login */
 .btn-sign-in {
   display: block;
 }

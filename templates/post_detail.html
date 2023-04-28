@@ -62,7 +62,7 @@
     </div> <!-- img-box -->
   </section> 
   <section class="post-content mt-3">
-    <div class="">
+    <div>
       {{ post.content | safe }}
     </div>
     <!-- Update and Delete buttons, if the user is the author and the post hasn't been submitted -->
@@ -92,7 +92,7 @@
           {% if comment.comment_status != 2 %}
           <div class="d-flex justify-content-between mb-2">
             <span>{{ comment.commenter }}:</span>
-            <span class="text-muted">{{ comment.created_on|date:'M d, Y' }}</span>
+            <span>{{ comment.created_on|date:'M d, Y' }}</span>
           </div>
             {% if comment.comment_status == 1 %}
               <span class="text-muted">edited</span><br>

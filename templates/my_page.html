@@ -2,7 +2,7 @@
 
 {% block content %}
 <!-- My posts -->
-<h2 class="mt-3">Written by Me</h2>
+<h2 class="mt-5 mb-4">Written by Me</h2>
 <div class="row">
   {% for post in my_posts %}
     <div class="col-md-4">
@@ -27,12 +27,12 @@
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link show-posts">Show more</button>
-      <div id="my-posts" class="hide">
+      <button class="btn btn-link show-posts mt-5 mb-4">Show more</button>
+      <div class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
      </div>
-     <button class="btn btn-link hide-posts">Show less</button>
+     <button class="btn btn-link hide-posts mt-5">Show less</button>
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>
@@ -44,8 +44,9 @@
     <p>No posts</p>
   {% endfor %}
 </div>
+<hr/>
 <!-- Commented Posts -->
-<h2 class="mt-5">Commented by Me</h2>
+<h2 class="mt-5 mb-4">Commented by Me</h2>
 <div class="row">
   {% for post in commented_posts %}
     <div class="col-md-4">
@@ -70,12 +71,12 @@
     {% if commented_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link" id="show-my-posts">Show more</button>
-      <div id="my-posts" class="hide">
+      <button class="btn btn-link show-posts mt-5 mb-4">Show more</button>
+      <div class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
      </div>
-     <button class="btn btn-link" id="hide-my-posts">Show less</button>
+     <button class="btn btn-link hide-posts mt-5">Show less</button>
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>
@@ -87,8 +88,9 @@
     <p>No posts</p>
   {% endfor %}
 </div>
+<hr/>
 <!-- Bookmarked Posts -->
-<h2 class="mt-5">Bookmarked by Me</h2>
+<h2 class="mt-5 mb-4">Bookmarked by Me</h2>
 <div class="row">
   {% for post in bookmarked_posts %}
     <div class="col-md-4">
@@ -113,12 +115,12 @@
     {% if bookmarked_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link" id="show-my-posts">Show more</button>
-      <div id="my-posts" class="hide">
+      <button class="btn btn-link show-posts mt-5 mb-4">Show more</button>
+      <div class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
      </div>
-     <button class="btn btn-link" id="hide-my-posts">Show less</button>
+     <button class="btn btn-link hide-posts mt-5">Show less</button>
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>

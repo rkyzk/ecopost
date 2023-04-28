@@ -228,32 +228,6 @@ class TestViews(TestCase):
     #                         status_code=200)
 
 
-    # def test_post_detail_POST_no_input_for_comment_will_prompt_input(self):
-    #     response = self.c.post('/detail/title1/',
-    #                            {
-    #                                 'body': ''
-    #                             }
-    #                            )
-    #     comment = Comment.objects.filter(commenter=self.user1)
-    #     self.assertEqual(len(comment), 1)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
-    #     # validation = 'Please fill in this field'
-
-
-    # def test_post_detail_POST_spaces_for_comment_will_show_error_message(self):
-    #     response = self.c.post('/detail/title1/',
-    #                            {
-    #                                 'body': '  '
-    #                             }
-    #                            )
-    #     comment = Comment.objects.filter(commenter=self.user1)
-    #     self.assertEqual(len(comment), 1)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
-        # how to get error message?
-
-
     def test_post_like_POST_will_add_user(self):
         response = self.c2.post(reverse('post_like',
                                         kwargs={'slug': self.post1.slug}))
@@ -583,7 +557,6 @@ class TestSearchView(TestCase):
                                    {'category': 'Choose...',
                                    'region': 'Choose...',
                                    'search': 'search'})
-        print(response.context['no_input'])
         self.assertTrue(response.context['no_input'])
 
     # put spaces in all fields

@@ -27,7 +27,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         message = 'Your draft has been saved.'
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1       
-            message = 'Your story has been submitted for evaluation.'
+            message = 'Your story has been submitted for evaluation.'            
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
@@ -73,10 +73,12 @@ class PostDetail(View):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
-            messages.add_message(request, messages.SUCCESS, 'You posted a comment.')
+            messages.add_message(request, messages.SUCCESS,
+                                 'You posted a comment.')
         else:
             comment_form = CommentForm()
-            messages.add_message(request, messages.INFO, "Error occuered.  Your comment was not saved.")
+            messages.add_message(request, messages.INFO, "Error occuered. + \
+                                 Your comment was not saved.")
         return render(
             request,
             "post_detail.html",
@@ -180,6 +182,10 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
         updated.comment_status = 1
         if comment_form.is_valid():
             updated.save()
+        else:
+            comment_form = CommentForm()
+            messages.add_message(request, messages.INFO, "Error occuered. + \
+                                 Your comment was not saved.")
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
 
 
@@ -276,9 +282,11 @@ class Search(View):
             if author_query.replace(' ', '') != '':
                 no_input = False
                 if author_filter_type == "contains":
-                    qs_author = posts.filter(author__username__icontains=author_query)
+                    qs_author = posts.filter(
+                        author__username__icontains=author_query)
                 else:
-                    qs_author = posts.filter(author__username__exact=author_query)
+                    qs_author = posts.filter(
+                        author__username__exact=author_query)
                 if qs_author != []:
                     query_lists.append(qs_author)
 
@@ -286,7 +294,8 @@ class Search(View):
             if kw is not None:
                 if kw.replace(' ', '') != '':
                     no_input = False
-                    qs_kw = posts.filter(Q(title__icontains=kw) | Q(content__icontains=kw))
+                    qs_kw = posts.filter(
+                        Q(title__icontains=kw) | Q(content__icontains=kw))
                     if qs_kw != []:
                         query_lists.append(qs)
 
@@ -303,7 +312,8 @@ class Search(View):
                 no_input = False
                 min_date_str = pub_date_min_query
                 min_date = datetime.strptime(min_date_str, '%Y-%m-%d')
-                qs_min_pub_date = posts.filter(published_on__date__gte=min_date)
+                qs_min_pub_date = posts.filter(
+                    published_on__date__gte=min_date)
                 query_lists.append(qs_min_pub_date)
 
         if pub_date_max_query is not None:
@@ -311,7 +321,8 @@ class Search(View):
                 no_input = False
                 max_date_str = pub_date_max_query
                 max_date = datetime.strptime(max_date_str, '%Y-%m-%d')
-                qs_max_pub_date = posts.filter(published_on__date__lte=max_date)
+                qs_max_pub_date = posts.filter(
+                    published_on__date__lte=max_date)
                 query_lists.append(qs_max_pub_date)
 
         if region != 'Choose...':
@@ -360,28 +371,12 @@ class MoreStories(generic.ListView):
     posts = Post.objects.filter(**filterargs).order_by("-published_on")
     queryset = Post.objects.filter(**filterargs).order_by("-published_on")
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(MoreStories, self).get_context_data(**kwargs)
-    #     filterargs = {
-    #         'status': 2,
-    #         'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
-    #         'featured_flag': False
-    #         }
-    #     posts = Post.objects.filter(**filterargs).order_by("-published_on")
-    #     context['object_list'] = Post.objects.filter(**filterargs).order_by("-published_on")
-    #     return context
-
 
 class PopularStories(generic.ListView):
     model = Post
     template_name = "popular_stories.html"
     paginate_by = 6
-    posts = Post.objects.filter(status=2, featured_flag=False).order_by("-published_on")
+    posts = Post.objects.filter(
+        status=2, featured_flag=False).order_by("-published_on")
     queryset = [post for post in posts if post.number_of_likes() > 0]
 
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(PopularStories, self).get_context_data(**kwargs)
-    #     posts = Post.objects.filter(status=2, featured_flag=False).order_by("-published_on")
-    #     context['popular_posts'] = [post for post in posts if post.number_of_likes() > 1]
-    #     return context

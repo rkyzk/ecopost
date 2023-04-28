@@ -20,29 +20,28 @@ function openMenu() {
 
 // Clicking 'Show more' button will display more posts.
 let button = document.getElementsByClassName('show-posts');
-console.log(button)
-for (btn in button) {
+for (btn of button) {
   btn.addEventListener("click", function(){
-    let myPosts = this.nextElementSibling;
-    if (showPostsButton.textContent == 'Show more') {
-      myPosts.classList.remove('hide');
-      myPosts.classList.add('show');
+    let posts = this.nextElementSibling;
+    if (this.textContent == 'Show more') {
       this.textContent = 'Show less'
+      posts.classList.remove('hide');
+      posts.classList.add('show');      
     } else {
-      myPosts.classList.remove('show');
-      myPosts.classList.add('hide');
       this.textContent = 'Show more'
+      posts.classList.remove('show');
+      posts.classList.add('hide');     
     }
   });
 }
 
 // Clicking 'Show less' button will hide posts.
 let hideButton = document.getElementsByClassName('hide-posts');
-hideButton.addEventListener("click", function(){
-  let myPosts = this.parentElement;
-  myPosts.classList.remove('show');
-  myPosts.classList.add('hide');
-  myPosts.previousElementSibling.textContent = 'Show more'
-})
-
-module.exports = { openMenu };
+for (hideBtn of hideButton) {
+  hideBtn.addEventListener("click", function(){
+    let posts = this.parentElement;
+    posts.previousElementSibling.textContent = 'Show more'
+    posts.classList.remove('show');
+    posts.classList.add('hide');
+  });
+}

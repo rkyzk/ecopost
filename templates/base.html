@@ -39,7 +39,14 @@
           {% endif %}
         </ul>    
       </nav>
-    </header> 
+    </header>
+    <div class="container d-flex justify-content-end">
+      {% if user.is_authenticated %}
+      <span>Logged in as {{user.username}}</span>
+      {% else %}
+      <span>You aren't logged in</span>
+      {% endif %}
+    </div>
     <!-- Message -->
     <div class="container">
           {% for message in messages %}
