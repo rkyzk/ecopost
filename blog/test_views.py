@@ -91,21 +91,6 @@ class TestViews(TestCase):
         self.assertRedirects(response, f'/detail/{post.slug}/')
 
 
-    # NG 
-    # def test_post_add_story_empty_input_will_raise_error(self):
-    #     response = self.c.post('/add_story/',
-    #                             {
-    #                                 'title': '',
-    #                                 'content': '',
-    #                                 'region': 'N/A',
-    #                                 'category': 'others',
-    #                                 'save': 'draft'
-    #                             },
-    #                           )
-    #     request = response.wsgi_request
-    #     print(request.messages)
-
-
     def test_add_story_POST_save_will_render_msg_draft_saved(self):
         response = self.c.post('/add_story/',
                                 {'title': 'title2',
@@ -510,7 +495,7 @@ class TestSearchView(TestCase):
         
         self.post1 = Post.objects.create(title='gray cat',
                                          author=self.user1,
-                                         content='content',
+                                         content='abc',
                                          region='N/A',
                                          category='others',
                                          status=2)
@@ -518,7 +503,7 @@ class TestSearchView(TestCase):
         
         self.post2 = Post.objects.create(title='white cat',
                                          author=self.user2,
-                                         content='content',
+                                         content='xyz',
                                          region='N/A',
                                          category='others',
                                          status=2)
@@ -526,7 +511,7 @@ class TestSearchView(TestCase):
         
         self.post3 = Post.objects.create(title='brown dog',
                                          author=self.user3,
-                                         content='content',
+                                         content='def',
                                          region='N/A',
                                          category='others',
                                          status=2)
@@ -559,15 +544,17 @@ class TestSearchView(TestCase):
                                    'search': 'search'})
         self.assertTrue(response.context['no_input'])
 
-    # put spaces in all fields
+
     def test_search_entering_only_spaces_will_keep_no_input_True(self):
         response = self.client.get('/search_story/',
                                    {'title_input': ' ',
                                     'author_input': ' ',
-                                   'category': 'Choose...',
+                                    'keyword_1': ' ',
+                                    'keyword_2': ' ',
+                                    'keyword_3': ' ',
+                                    'category': 'Choose...',
                                     'region': 'Choose...',
                                     'search': 'search'})
-        print(response.context['no_input'])
         self.assertTrue(response.context['no_input'])
 
 
@@ -668,7 +655,73 @@ class TestSearchView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 0)
-            
+
+
+    def test_search_by_keywords_will_return_the_matching_post(self):
+        response = self.client.get('/search_story/',
+                                   {'keyword_1': 'cat',
+                                    'keyword_2': 'xyz',
+                                    'keyword_3': 'white',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 1)
+        self.assertEqual(response.context['queryset'][0], self.post2)
+
+
+    def test_search_by_keywords_will_return_all_matching_posts(self):
+        response = self.client.get('/search_story/',
+                                   {'keyword_1': 'cat',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 2)
+        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+
+
+    def test_search_by_keywords_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'keyword_1': 'cat',
+                                    'keyword_2': 'xyz',
+                                    'keyword_3': 'brown',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
+
+
+    def test_search_by_min_likes_will_return_all_matching_posts(self):
+        self.post1.likes.add(self.user1)
+        self.post1.likes.add(self.user2)
+        self.post2.likes.add(self.user2)
+        self.post2.likes.add(self.user3)
+        response = self.client.get('/search_story/',
+                                   {'liked_count_min': '2',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 2)
+        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+
+
+    def test_search_by_min_likes_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'liked_count_min': '1',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
+
 
 if __name__ == '__main__':
     main()

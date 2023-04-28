@@ -297,10 +297,11 @@ class Search(View):
                     qs_kw = posts.filter(
                         Q(title__icontains=kw) | Q(content__icontains=kw))
                     if qs_kw != []:
-                        query_lists.append(qs)
+                        query_lists.append(qs_kw)
+               
 
-        if min_liked_query is not None:
-            if min_liked_query.replace(' ', '') != '':
+        if min_liked_query is not None and min_liked_query != '':
+            if min_liked_query != 0:
                 no_input = False
                 qs_liked = [post for post in posts if (
                             post.number_of_likes()>=int(min_liked_query))]
@@ -336,15 +337,13 @@ class Search(View):
 
         if query_lists != []:
             qs = query_lists[0]
-
         # filter posts that are present in all lists in query lists (which are
         # the posts that match all criteria)
         if len(query_lists) > 1:
             i = 0
             for i in range(len(query_lists) - 1):
                 qs = [post for post in query_lists[i] if post in query_lists[i+1]]
-                i += 1 
-            
+                i += 1  
         search_clicked = False
         if 'search' in self.request.GET:
             search_clicked = True
