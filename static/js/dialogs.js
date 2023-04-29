@@ -11,8 +11,8 @@ return confirm(DELETE_COMMENT);
 })
 
 // Confirm before submitting posts
-const SUBMIT_POST = "After submiiting your post, you will not be able to update or delete it." + \
-                    "Would you like to proceed?"
+const SUBMIT_POST = "After submiiting your post, you won't be able to" + \
+                    "update or delete it.  Would you like to proceed?"
 $('.submit-post').click(function() {
 return confirm(SUBMIT_POST);
 })

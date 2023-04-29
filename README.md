@@ -4,32 +4,11 @@
 
 This application offers a platform where individuals around the world can share their stories on what they are doing to save the environment.  Many people feel helpless, thinking that individuals cannot do so much.  Here, visitors can read posts written by others, leave comments and write their own stories.  Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope. 
 
+![ecopost in different screen sizes](/assets/images/ecopost.png)
+
 ## User Stories
 
-**As a visitor I can ...**
-- easily understand what the site is meant for and how I can use it.
-
-**As a visitor/member I can ...**
-- take a look at many excerpts and then have access to detailed pages so that I can first have an overview of what kind of stories are posted and read the entire content of the posts that interest me.
-- search posts by title, author, keywords, published dates and popularity (number of likes) so I can easily access the kind of posts I am looking for.
-
-**As a member I can ...**
-- post comments on stories so I can express my thoughts.
-- ‘like’ posts so I can show my appreciation for the post.
-- write my own story so I can share my experience with other users.
-- save drafts so I don't have to finish my drafts at one sitting.
-- edit saved drafts.
-- delete my drafts.
-- edit my comments.
-- delete my comments.
-- have a quick access to posts and drafts I wrote, posts I commented on as well as posts I bookmarked.
-
-**As admin I can ...**
-- evaluate drafts submitted by users so admin can publish only appropriate posts.
-- make it easy for readers to find posts that are interesting for them so that they enjoy their experience at the site.
-- make sure that users can update or delete their posts only before they submit their drafts.
-- make sure that users can’t update or delete posts or comments written by other users.
-- make sure that users can access only to their own ‘My Page,’ but not others’.
+User stories can be found [here](https://github.com/users/rkyzk/projects/5/views/1?layout=board)
 
 ## Features in Nutshell:
 Users can see lists of excerpts from
@@ -181,6 +160,95 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - ‘Update Post,’ ‘Update Comment’ and ‘Delete Comment’ views are controlled by LoginRequiredMixin and UserPassestestMixin, which checks if the user is the writer of the posts or the comments, other users will be sent to a 403 error page.
 - Additionally, since posts should not be updated or deleted once submitted, the program is written to send a 403 page if users try to get to update page of a post that’s been submitted.
 - Delete Posts view function has a program at line 149 in views.py to test if the user is the author of the post and that the post hasn’t been submitted and otherwise sends a 403.  Here Mixins are not used, since the post will be deleted before the test_func is run, which throws an error (explained also in bugs section.)
+
+### How User Stories are reflected in the app
+**User Story: What the site is for and how to use it are clear  #1**
+- As a visitor I can easily understand what the site is meant for and how I can use it so I can immediately start using it.
+
+The introductory paragraph on the home page addresses clearly what the site is meant for and how to use it (that readers can read posts, leave comments and write stories.) 
+
+**User Story: Excerpts of many posts are listed  #2**
+- As a visitor/member I can see a list of excerpts from different posts so that I can have an overview of what kind of stories are available and select the posts to read.
+
+Three featured stories chosen by editors are displayed on the home page for quick access.  
+Also the pages “More Stories from this Week” and “Readers’ Favorite Stories of All Time” provide lists of posts that are likely to interest visitors.
+
+**User Story: Search by title, author and other factors  #3**
+- As a visitor/member I can search posts by title, author, keywords, published dates and popularity so I can easily access the kind of posts I am looking for.
+
+The "Search Stories" page offers a search function by multiple factors.
+
+**USER STORY: Posting comments #4**
+- As a member I can leave comments on posts so I can share my thoughts.
+
+On “Detailed page” logged-in members are able to post comments.
+
+**USER STORY: 'Like' function #5**
+- As a member I can ‘like’ posts so I can show my appreciation for the post.
+
+Logged-in members are able to click on the heart sign to ‘like’ posts.  Clicking the heart again will undo the action.
+
+**USER STORY: Write Posts #6**
+- As a member I can write a new post so I can share my experience with other users.
+
+On "Write Stories" page users can write their own posts and submit them.  The posts will be published if admin of the site approves of them.
+
+**User Story: Saving drafts #7**
+- As a member I can save drafts of posts so I don't have to complete the drafts at one sitting.
+
+By clicking ‘Save’ button on ‘Write stories’ page users can save their drafts for editing later on.
+
+**User Story: Editing drafts #8**
+- As a member I can edit my draft so I can improve it over time.
+
+By clicking ‘Update’ button on “Detail Page,” users can update their drafts.
+
+**User Story: Deleting drafts #9**
+- As a member I can delete my drafts.
+
+By clicking delete button on “Detailed Page,” they can delete their drafts.
+
+**User Story: Editing comments #10**
+- As a member I can edit my comments so I can correct them if I change my mind.
+
+By clicking edit icon, users can update their comments.
+
+**User Story: Deleting comments #11**
+- As a member I can delete my comments so I can take them back if I change my mind.
+
+By clicking trash bin icon, users can delete their comments.
+
+**USER STORY: Quick access to some posts and drafts including one's own #12**
+- As a member I have a quick access to 1. posts and drafts I wrote, 2. posts I commented on and 3. posts I bookmarked.
+
+"My page" presents lists of all three above mentioned groups of posts.
+
+**USER STORY: Selecting posts to be published #13**
+- As admin I can evaluate drafts submitted by users so admin can publish only the posts that are appropriate.
+
+Posts’ status is set to ‘Submitted’ when users submit their drafts, and they will not be displayed in public.  Only when admin changes the status to ‘Published,’ the posts will be publicized.
+
+**USER STORY: Letting users see the most interesting posts #14**
+- As admin I can show posts that seem particularly interesting on the home page so that visitors are likely to read them first and get a good impression of the site.
+
+Three featured stories chosen by admin will be displayed on the home page, where the users will see immediately when they visit the site.
+
+**USER STORY: Allowing users to update or delete posts only before submission # 15**
+- As admin I can make sure that users can update or delete their posts only before they submit their drafts.
+
+Update and Delete buttons for posts appear only if posts are in ‘draft’ status.  In addition, trying to update or delete posts that have been submitted will display a 403 error page.
+
+**USER STORY: Allowing only the author to update or delete the posts and comments #16**
+- As admin I can make sure that users can’t update or delete posts or comments written by other users.
+
+LoginRequiredMixin and UserPassestestMixin allow only the user who is logged in as the author of the posts and comments to update or delete their writings.
+
+**USER STORY: Allowing users to access only their own “My page” #17**
+- As admin I can make sure that users can access only to their own "My Page," but not others'.
+
+LoginRequiredMixin and UserPassestestMixin allow users to access only their own “My Page.”
+
+
 
 
 

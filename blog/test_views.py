@@ -3,6 +3,7 @@ from blog.models import Post, Comment
 from django.contrib.auth.models import User
 from django.shortcuts import reverse, get_object_or_404
 from django.contrib.messages import get_messages
+from django.core.exceptions import PermissionDenied
 
 
 class TestViews(TestCase):
@@ -201,44 +202,48 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
     
-    def test_detail_GET_will_show_update_btn_if_status_0_and_user_is_author(self):
+    def test_detail_GET_will_show_update_and_delete_btn_if_status_0_and_user_is_author(self):
         response = self.c.get(f'/detail/{self.post1.slug}/')
         self.assertContains(response,
                             '<button class="btn btn-submit" type="submit">Update</button>',
                             status_code=200)
+        self.assertContains(response,
+                            '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
+                            status_code=200)
 
     
-    def test_detail_GET_will_not_show_update_btn_if_status_1(self):
+    def test_detail_GET_will_not_show_update_and_delete_btn_if_status_1_and_user_is_author(self):
         self.post1.status = 1
         self.post1.save()
         response = self.c.get(f'/detail/{self.post1.slug}/')
         self.assertNotContains(response,
                                '<button class="btn btn-submit" type="submit">Update</button>',
                                status_code=200)
+        self.assertNotContains(response,
+                               '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
+                               status_code=200)
 
                     
-    def test_detail_GET_will_not_show_update_btn_if_status_2(self):
+    def test_detail_GET_will_not_show_update_and_delete_btn_if_status_2_and_user_is_author(self):
         self.post1.status = 2
         self.post1.save()
         response = self.c.get(f'/detail/{self.post1.slug}/')
         self.assertNotContains(response,
                                '<button class="btn btn-submit" type="submit">Update</button>',
                                status_code=200)
+        self.assertNotContains(response,
+                               '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
+                               status_code=200)
 
                             
-    def test_detail_GET_will_not_show_update_btn_if_user_not_author(self):
+    def test_detail_GET_will_not_show_update_and_delete_btn_if_user_not_author(self):
         response = self.c2.get(f'/detail/{self.post1.slug}/')
         self.assertNotContains(response,
                                '<button class="btn btn-submit" type="submit">Update</button>',
                                status_code=200)
-
-
-    # NG
-    # def test_detail_GET_will_show_delete_btn_if_status_0_and_user_is_author(self):
-    #     response = self.c.get(f'/detail/{self.post1.slug}/')
-    #     self.assertContains(response,
-    #                         '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
-    #                         status_code=200)
+        self.assertNotContains(response,
+                               '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
+                               status_code=200)    
 
 
     def test_post_like_POST_will_add_user(self):
@@ -481,13 +486,20 @@ class TestViews(TestCase):
         self.assertEqual(len(existing_posts), 0)
         self.assertRedirects(response, '/')
 
+    # assertRaises?
+    def test_delete_post_POST_will_throw_permission_denied_if_wrong_user(self):
+        response = self.c2.post(reverse('delete_post',
+                                        kwargs={'slug': self.post1.slug}))
+        # self.assertRaises(PermissionDenied, response)
+        self.assertEqual(response.status_code, 403)
 
-    def test_delete_post_POST_msg_says_deleted(self):
-        response = self.c.post(reverse('delete_post',
-                                       kwargs={'slug': self.post1.slug}),
-                                       follow=True)
-        messages = list(response.context['messages'])
-        self.assertEqual(str(messages[0]), "Your draft has been deleted.")
+    
+    def test_delete_post_POST_will_not_delete_post_if_wrong_user(self):
+        response = self.c2.post(reverse('delete_post',
+                                        kwargs={'slug': self.post1.slug}))
+        existing_posts = Post.objects.filter(slug=self.post1.slug)
+        self.assertEqual(len(existing_posts), 1)
+        self.assertEqual(existing_posts[0].title, 'title1')
 
 
     def test_can_get_more_stories(self):
@@ -749,6 +761,23 @@ class TestSearchView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 0)
+
+
+    # def test_search_by_date_min_will_return_right_post_if_match(self):
+
+    # def test_search_by_date_min_will_return_empty_queryset_if_no_match(self):
+
+    # def test_search_by_date_min_will_return_right_post_if_match(self):
+
+    # def test_search_by_date_min_will_return_empty_queryset_if_no_match(self):
+
+    # def test_search_by_category_will_return_right_post_if_match(self):
+
+    # def test_search_by_category_will_return_empty_queryset_if_no_match(self):
+
+    # def test_search_by_region_will_return_right_post_if_match(self):
+
+    # def test_search_by_region_will_return_empty_queryset_if_no_match(self):
 
 
 if __name__ == '__main__':

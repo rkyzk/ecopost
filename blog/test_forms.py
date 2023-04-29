@@ -50,6 +50,11 @@ class TestPostForm(TestCase):
         self.assertTrue(form.is_valid())
 
 
+    # def test_post_form_init_method_will_set_image_required_to_False(self):
+    #     PostForm.__init__()
+    #     self.asserFalse(PostForm.fields['featured_image'].required)
+
+
     def test_post_region_is_required(self):
         form = PostForm({
             'title': 'title_3',
