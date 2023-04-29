@@ -27,7 +27,7 @@
       </div>
       <nav class="nav-menu">     
         <ul class="nav-list">
-          <li><a class="active" href="{% url 'home' %}">Home</a></li>
+          <li><a class="list_item" href="{% url 'home' %}">Home</a></li>
           <li><a class="list-item" href="{% url 'search' %}">Search Stories</a></li>
           {% if user.is_authenticated %}
           <li><a class="list-item" href="{% url 'add_story' %}">Write stories</a></li>

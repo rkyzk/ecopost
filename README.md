@@ -194,29 +194,44 @@ No. | Goals | How they are achieved |
 
 ### Testing Features
 
-|Test No.|Feature|Preparation Steps if any|Test Steps|Expected results|Actual results|Pass/Fail|Date|Test conducted by|
-||Logo|||||||
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date | Test conducted by |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- | 
+||Logo||||||||
 |1.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|Reiko Yazaki|
 ||**Navigation links**|||||||
-||Test the active page is underlined|||||||
-|2|”Home”|Go to the home page|Check which link is underlined|”Home” is underlined|”Home” is underlined |pass|2023/4/29|Reiko Yazaki|
-|3|”Search Stories”|Go to “Search Stories” page|Check which link is underlined|”Search Stories” is underlined|”Search Stories” is underlined |pass|2023/4/29|Reiko Yazaki|
-|4|”Become A Member”|Go to “Become A Member” page|Check which link is underlined|” Become A Member” is underlined|” Become A Member” is underlined |pass|2023/4/29|Reiko Yazaki|
-|5|”Log in”|Go to “Log in” page|Check which link is underlined|” Log in” is underlined|” Log in” is underlined |pass|2023/4/29|Reiko Yazaki|
-|6|”Write Stories”|Log in and go to “Write Stories” page|Check which link is underlined|” Write Stories” is underlined|”Write Stories” is underlined |pass|2023/4/29|Reiko Yazaki|
-|Notes||Stay logged in for tests no. 7-13||||||
-|7|”Write Stories”|Go to “Write Stories” page|Check which link is underlined|” 
-Write Stories” is underlined|”Write Stories” is underlined |pass|2023/4/29|Reiko Yazaki|
-|8|”My Page”|Go to “My Page”|Check which link is underlined|” My Page” is underlined|” My Page” is underlined |pass|2023/4/29|Reiko Yazaki|
-|9|”Log out”|Go to “My Page”|Check which link is underlined|”Log out” is underlined|”Log out” is underlined |pass|2023/4/29|Reiko Yazaki|
-||Test the link will redirect to the right page |||||||
-|10|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home | Redirected to ”Home”|pass|2023/4/29|Reiko Yazaki|
-|11|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories” | Redirected to ”Search Stories”|pass|2023/4/29|Reiko Yazaki|
-|12|”Write Stories”|Go to “Home”|Click on “Write Stories”|Redirected to ” Write Stories” | Redirected to ” Write Stories”|pass|2023/4/29|Reiko Yazaki|
-|12|”My Page”|Go to “Home”|Click on “My Page”|Redirected to ”My Page” | Redirected to “My Page”|pass|2023/4/29|Reiko Yazaki|
-|13|”Log out”|Go to “Home” |Click on “Log out”|Redirected to ”Log out” | Redirected to “Log out”|pass|2023/4/29|Reiko Yazaki|
-|14|”Become a Member”|Log out and go to “Home”|Click on “Become a Member”|Redirected to ” Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|Reiko Yazaki|
-|15|”Log in”|Go to “Home”|Click on “Log in”|Redirected to ”Log in”| Redirected to “Log in”|pass|2023/4/29|Reiko Yazaki|
+||Test each link will redirect to the right page |||||||
+|2|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home | Redirected to ”Home”|pass|2023/4/29|Reiko Yazaki|
+|3|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories” | Redirected to ”Search Stories”|pass|2023/4/29|Reiko Yazaki|
+|4|”Write Stories”|Go to “Home”|Click on “Write Stories”|Redirected to ” Write Stories” | Redirected to ” Write Stories”|pass|2023/4/29|Reiko Yazaki|
+|5|”My Page”|Go to “Home”|Click on “My Page”|Redirected to ”My Page” | Redirected to “My Page”|pass|2023/4/29|Reiko Yazaki|
+|6|”Log out”|Go to “Home” |Click on “Log out”|Redirected to ”Log out” | Redirected to “Log out”|pass|2023/4/29|Reiko Yazaki|
+|7|”Become a Member”|Log out and go to “Home”|Click on “Become a Member”|Redirected to ” Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|Reiko Yazaki|
+|8|”Log in”|Go to “Home”|Click on “Log in”|Redirected to ”Log in”| Redirected to “Log in”|pass|2023/4/29|Reiko Yazaki|
+||**links in the footer**|||||||
+|9|link to facebook |Go to “Home”|Click on the facebook icon|Redirected to facebook site| Redirected to facebook site| pass|2023/4/29|Reiko Yazaki|
+|10|link to twitter |Go to “Home”|Click on the twitter icon|Redirected to twitter site| Redirected to twitter site| pass|2023/4/29|Reiko Yazaki|
+|11|link to instagram|Go to “Home”|Click on the instagram icon|Redirected to instagram site| Redirected to instagram site| pass|2023/4/29|Reiko Yazaki|
+||links on “Home”||||||||
+
+**Note:** 
+As preparatory steps for tests no. 19- , if no featured stories have been created, follow the steps below:
+1. log in
+2. go to “Write Stories” 
+3. make 3 posts
+4. go to admin panel
+5. set featured flag to True for all 3 posts.
+
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date | Test conducted by |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- | 
+|19|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|Reiko Yazaki|
+|20|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|Reiko Yazaki|
+|20|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|Reiko Yazaki|
+
+
+
+
+
+
 
 - - -
 
