@@ -1,4 +1,5 @@
-body {
+html {
+  position: relative;
   min-height: 100vh;
 }
 
@@ -155,6 +156,13 @@ footer {
   width: 100%;
   height: 60px;
   background-color: #ccc;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer-space {
+  width: 100px;
+  height: 70px;
 }
 
 .social-networks {
