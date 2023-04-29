@@ -149,6 +149,34 @@ class TestViews(TestCase):
         self.assertEqual(response.context['liked'], True)
 
 
+    def test_post_detail_GET_bookmarked_set_False_if_not_bookmarked(self):
+        response = self.c2.get(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['bookmarked'], False)
+
+
+    def test_post_detail_GET_will_set_bookmarked_True_if_bookmarked(self):
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        post.bookmark.add(self.user2)
+        post.save()
+        self.assertTrue(post.bookmark.filter(id=self.user2.id).exists())
+        response = self.c2.get(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['bookmarked'], True)
+
+
+    def test_post_detail_POST_bookmarked_set_False_if_not_bookmarked(self):
+        response = self.c2.post(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['bookmarked'], False)
+
+
+    def test_post_detail_POST_will_set_bookmarked_True_if_bookmarked(self):
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        post.bookmark.add(self.user2)
+        post.save()
+        self.assertTrue(post.bookmark.filter(id=self.user2.id).exists())
+        response = self.c2.post(f'/detail/{self.post1.slug}/')
+        self.assertEqual(response.context['bookmarked'], True)
+
+
     def test_post_detail_POST_can_post_comment(self):
         response = self.c.post(f'/detail/{self.post1.slug}/',
                                {
