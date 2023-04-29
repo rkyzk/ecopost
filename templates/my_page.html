@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 <!-- My posts -->
 <h2 class="mt-5 mb-4">Written by Me</h2>
@@ -17,7 +16,7 @@
         <span><strong>{{ post.title }}</strong></span><br>
         <span>By {{ post.author }}</span>
         <div class="d-flex justify-content-end">
-          <span>city, country {{ post.pub_date }}</span>
+          <span>{{ post.pub_date }}</span>
         </div>
         <p class="mt-1 excerpt">{{ post.excerpt }}</p>
         <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
@@ -36,6 +35,7 @@
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>
+    <hr class="line-for-lg">
     <div class="row mt-2">
         {% endif %}
       {% endif %}

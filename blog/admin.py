@@ -15,7 +15,6 @@ class PostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
     actions = ['publish_posts']
 
-
     def publish_posts(self, request, queryset):
         queryset.update(status=2)
         queryset.update(published_on=datetime.utcnow())
@@ -24,6 +23,7 @@ class PostAdmin(SummernoteModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
 
-    list_display = ('commenter', 'body', 'post', 'created_on', 'comment_status')
+    list_display = ('commenter', 'body', 'post',
+                    'created_on', 'comment_status')
     list_filter = ('created_on', 'comment_status')
     search_fields = ('commenter', 'body')

@@ -7,7 +7,6 @@ from django.shortcuts import reverse, get_object_or_404
 
 class TestAdmin(TestCase):
 
-
     def setUp(self):
         """create a test user and test post."""
         self.user1 = User.objects.create_user(username="user1")
@@ -18,7 +17,6 @@ class TestAdmin(TestCase):
                                          content='content',
                                          region='N/A',
                                          category='others')
-
 
     def test_func_publish_posts_will_set_status_2(self):
         posts = Post.objects.all()

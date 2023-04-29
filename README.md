@@ -4,7 +4,7 @@
 
 This application offers a platform where individuals around the world can share their stories on what they are doing to save the environment.  Many people feel helpless, thinking that individuals cannot do so much.  Here, visitors can read posts written by others, leave comments and write their own stories.  Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope. 
 
-![ecopost in different screen sizes](/assets/images/ecopost.png)
+![ecopost in different screen sizes]()
 
 ## User Stories
 
@@ -161,6 +161,39 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - Additionally, since posts should not be updated or deleted once submitted, the program is written to send a 403 page if users try to get to update page of a post that’s been submitted.
 - Delete Posts view function has a program at line 149 in views.py to test if the user is the author of the post and that the post hasn’t been submitted and otherwise sends a 403.  Here Mixins are not used, since the post will be deleted before the test_func is run, which throws an error (explained also in bugs section.)
 
+## MANUAL TESTING
+
+### Testing User Stories
+
+No. | Goals | How they are achieved | 
+|:---| :--- | :--- | 
+|| `First Time Visitors` ||   
+|1| Understand what the site is for and how to use it. | An introductory paragraph on the home page describes what the site is for and how to use it. | 
+|2| Become a member. | The introduction on the home page invites new users to become a member and offers a link. Another link to sign up page is displayed also on the navbar. | 
+|3| Excerpts are listed. | Three featured stories chosen by editors are displayed on the home page for quick access.  Also the pages “More Stories from this Week” and “Readers’ Favorite Stories of All Time” provide lists of posts that are likely to interest visitors.|
+|4| Search posts | On “Search Stories” page users can search posts by various factors.  The link to the page is provided in the navbar regardless to the users’ log-in status. | 
+|| :--- | :--- |  
+||`Members`||
+|5| Leave comments | On “Detailed page” logged-in members are able to post comments.
+|6| ‘Like’ posts | Logged-in members are able to click on the heart sign to ‘like’ posts.  Clicking the heart again will undo the action.|
+|7| Write posts | On ‘Write Stories’ page users can write their own posts and submit them.  The posts will be published if admin of the site approves of them. |
+|8| Save posts | By clicking ‘Save’ button on ‘Write stories’ page users can save their drafts for editing later on. |
+|9| Edit posts | By clicking ‘Update’ button on “Detail Page,” users can update their drafts. |
+|10|Delete posts | By clicking ‘Delete’ button on “Detailed Page,” they can delete their drafts. |
+|11| Edit comments | By clicking edit icon, users can update their comments. |
+|12| Delete comments | By clicking trash bin icon, users can delete their comments. |
+|13| Quick access to one's own posts and other posts | ‘My page’ displays lists of posts written, commented and bookmarked by the user. |
+||||
+||`Admin`||
+|14| Select posts to be published | Posts’ status is set to ‘Submitted’ when users submit their drafts, and they will not be displayed in public.  Only when admin changes the status to ‘Published,’ the posts will be publicized. |
+|15| Let users see the most interesting posts |Three featured stories chosen by admin will be displayed on the home page, where the users will see immediately when they visit the site. |
+|16| Allow users to update or delete posts only before submission | Update and Delete buttons for posts appear only if posts are in ‘draft’ status.  In addition, trying to update or delete posts that have been submitted will display a 403 error page.|
+|17| Allow only the author to update/delete the posts & comments | LoginRequiredMixin and UserPassestestMixin allow only the user who is logged in as the author of the posts and comments to update or delete their writings. |
+|18|Allow users to access only their own “My page” | LoginRequiredMixin and UserPassestestMixin will allow users to access only their own “My Page.” |
+
+- - -
+
+
 ### How User Stories are reflected in the app
 **User Story: What the site is for and how to use it are clear  #1**
 - As a visitor I can easily understand what the site is meant for and how I can use it so I can immediately start using it.
@@ -248,7 +281,8 @@ LoginRequiredMixin and UserPassestestMixin allow only the user who is logged in 
 
 LoginRequiredMixin and UserPassestestMixin allow users to access only their own “My Page.”
 
-
+## Wireframes
+Wireframes for the app can be found [here](https://wireframe.cc/pro/pp/873798723651976)
 
 
 

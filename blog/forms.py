@@ -8,7 +8,6 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'content', 'featured_image', 'region', 'category']
 
-
         def __init__(self, *args, **kwargs):
             super(PostForm, self).__init__(*args, **kwargs)
             self.fields['featured_image'].required = False
@@ -21,4 +20,3 @@ class CommentForm(forms.ModelForm):
         labels = {
             'body': ''
         }
-

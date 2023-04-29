@@ -70,10 +70,8 @@ class Post(models.Model):
     bookmark = models.ManyToManyField(User, related_name='bookmarked',
                                       blank=True)
 
-
     class Meta:
         ordering = ['-created_on', '-published_on']
-
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -82,14 +80,11 @@ class Post(models.Model):
             self.published_on = datetime.utcnow()
         super().save(*args, **kwargs)
 
-        
     def __str__(self):
         return self.title
 
-
     def number_of_likes(self):
         return self.likes.count()
-
 
     def pub_date(self):
         if self.status == 2:
@@ -97,11 +92,9 @@ class Post(models.Model):
         else:
             return 'Not published'
 
-
     def excerpt(self):
         excerpt = str(self.content)[0:199] + "..."
         return excerpt
-
 
     def get_absolute_url(self):
         return reverse('detail_page', kwargs={'slug': self.slug})
@@ -121,5 +114,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.body} by {self.commenter.username}"
-
-

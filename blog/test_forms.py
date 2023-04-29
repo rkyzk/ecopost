@@ -1,3 +1,4 @@
+
 from django.test import TestCase
 from django.contrib.auth.models import User
 from .forms import PostForm, CommentForm
@@ -11,7 +12,6 @@ class TestPostForm(TestCase):
         self.user_1 = User.objects.create(username="test1",
                                           password="password")
 
-
     def test_post_title_is_required(self):
         form = PostForm({
             'title': '',
@@ -24,7 +24,6 @@ class TestPostForm(TestCase):
         self.assertIn('title', form.errors.keys())
         self.assertEqual(form.errors['title'][0], 'This field is required.')
 
-    
     def test_post_content_is_required(self):
         form = PostForm({
             'title': 'title_3',
@@ -38,7 +37,6 @@ class TestPostForm(TestCase):
         self.assertEqual(form.errors['content'][0],
                          'This field is required.')
 
-
     def test_post_featured_image_is_not_required(self):
         form = PostForm({
             'title': 'title_3',
@@ -49,11 +47,9 @@ class TestPostForm(TestCase):
         })
         self.assertTrue(form.is_valid())
 
-
     # def test_post_form_init_method_will_set_image_required_to_False(self):
     #     PostForm.__init__()
     #     self.asserFalse(PostForm.fields['featured_image'].required)
-
 
     def test_post_region_is_required(self):
         form = PostForm({
@@ -68,7 +64,6 @@ class TestPostForm(TestCase):
         self.assertEqual(form.errors['region'][0],
                          'This field is required.')
 
-
     def test_post_category_is_required(self):
         form = PostForm({
             'title': 'title_3',
@@ -81,7 +76,6 @@ class TestPostForm(TestCase):
         self.assertIn('category', form.errors.keys())
         self.assertEqual(form.errors['category'][0],
                          'This field is required.')
-
 
     def test_fields_are_explicit_in_form_metaclass(self):
         form = PostForm()
@@ -98,7 +92,6 @@ class TestCommentForm(TestCase):
         self.user_1 = User.objects.create(username="test1",
                                           password="password")
 
-
     def test_comment_body_is_required(self):
         form = CommentForm({
             'body': '',
@@ -108,13 +101,13 @@ class TestCommentForm(TestCase):
         self.assertIn('body', form.errors.keys())
         self.assertEqual(form.errors['body'][0], 'This field is required.')
 
-
     def test_fields_are_explicit_in_form_metaclass(self):
         form = CommentForm()
         self.assertEqual(
             form.Meta.fields,
             ('body',)
         )
+
 
 if __name__ == "__main__":
     main()
