@@ -146,7 +146,7 @@ class DeletePost(LoginRequiredMixin, View):
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
-        if post.author == self.request.user:
+        if post.author == self.request.user and post.status == 0:
             post.delete()
             message = 'Your draft has been deleted.'
             messages.add_message(request, messages.SUCCESS, message)

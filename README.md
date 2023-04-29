@@ -152,25 +152,36 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - If no input was made or only spaces are entered, a note will say, 'Please enter at least one field.'
 - If no match was found, a note will say, 'No matching results found'
 
-**Note on other pages**
-“Become a Member” (sign up page), “log in” and “sign out” pages were taken from allauth with a minor modification.  
+### Notes on other pages
+- “Become a Member” (sign up page), “log in” and “sign out” pages were taken from allauth.
+- The pages were styled with my own css to match other pages.
+- Line 42 in login.html was modified in order to display a note:
+  'Email admin@ecopost.com if you've forgotten your password.' since setting a system to
+  reset passwords is beyond this current project.
 
+### Notes on form validation
+- I used crispy forms and its validation system will display messages if the form is not valid.
 
-### Control  ----?
-- Some pages of this app are equipped with UserRequiredMixin and UserPassesTestMixin so they are accessible only for certain users and will send 403 errors if others attempt to reach the pages.
-- 'Write Stories' can be accessed only by logged in members.
-- 'Update Post' can be accessed only by the author of the post when he/she is logged in.
-- 'Update Comment' can be accessed only by the writer of the comment when he/she is logged in.
-- 'My Page' is accessible only by the user   ??  when he/she is logged in.
+**"Write Stories" and "Update Post" pages**
+- If the title or the content, or both are empty, and ‘save’ or ‘submit’ button is clicked, the validation error message will say, ‘Please fill out this field’ for the first required field that’s left empty.
+- Since Post model requires the title to be unique, if an existing title is entered, a validation message will say, ‘Post with this Title already exists.’
 
-**other forms of control**
-- Besides the two Mixin,   control access by displaying elements of html depending on the conditions.
-- Update and delete buttons are displayed only when the user is the one who wrote the posts or the comments.
+**Comment form on “Detail Page” and on “Update Comment” page**
+- If form is submitted while the body of the comment is empty, the validation error message will say, ‘Please fill out this field.’
 
+### Access Control
+**By Desgin**
+- Only logged-in users will see links to ‘Write Stories,’ and ‘My Page,’ so other users can’t get to the page via links.  
+- Update and Delete buttons for posts and comments appear only if the user is the writer of the posts or of the comments.  Others can’t get to update pages or delete posts and comments through buttons.
+- Update and Delete buttons for posts will appear only if the posts are in draft states (before submission).
 
+**LoginRequiredMixin and UserPassestestMixin**
+- In addition to access control mentioned above, in order to prevent users from getting to certain pages by entering URLs or accessing view functions (delete posts and comments), LoginRequiredMixin and/or UserPassestestMixin are used.
+- ‘Write Stories’ has LoginRequiredMixin, so users who are not logged in will be sent to a 403 error page.
+- ‘Update Post,’ ‘Update Comment’ and ‘Delete Comment’ views are controlled by LoginRequiredMixin and UserPassestestMixin, which checks if the user is the writer of the posts or the comments, other users will be sent to a 403 error page.
+- Additionally, since posts should not be updated or deleted once submitted, the program is written to send a 403 page if users try to get to update page of a post that’s been submitted.
+- Delete Posts view function has a program at line 149 in views.py to test if the user is the author of the post and that the post hasn’t been submitted and otherwise sends a 403.  Here Mixins are not used, since the post will be deleted before the test_func is run, which throws an error (explained also in bugs section.)
 
-crispy forms are used.
-allauth is used.  Login, Sign out, Sign up pages
 
 
 \
