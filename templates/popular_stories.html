@@ -7,7 +7,7 @@
       <div class="col-md-4">
         <div class="image-wrapper d-flex justify-content-center">
           {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
+            <img class="card-img-top " src="{{ '/media/' default.jpg }}" alt="forest graphic">
           {% else %}
             <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
           {% endif %}

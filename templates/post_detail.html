@@ -14,7 +14,7 @@
     </div>
     <div class="img-box">
     {% if "placeholder" in post.featured_image.url %}
-      <img src="/media/default.jpg" width="100%" alt="graphic of forest">
+      <img src="{{ '/media/' default.jpg }}" width="100%" alt="graphic of forest">
     {% else %}
       <img src="{{ post.featured_image.url }}" width="100%" alt="{{ post.title }}">
     {% endif %}

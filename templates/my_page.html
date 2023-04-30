@@ -7,7 +7,7 @@
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
         {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
+          <img class="card-img-top " src="{{ '/media/' default.jpg }}" alt="forest graphic">
         {% else %}
           <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
         {% endif %}
@@ -52,7 +52,7 @@
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
         {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
+          <img class="card-img-top " src="{{ '/media/' default.jpg }}" alt="forest graphic">
         {% else %}
           <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
         {% endif %}
@@ -96,7 +96,7 @@
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
         {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
+          <img class="card-img-top " src="{{ '/media/' default.jpg }}" alt="forest graphic">
         {% else %}
           <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
         {% endif %}
@@ -132,25 +132,4 @@
     <p>No posts</p>
   {% endfor %}
 </div>
-
-<script>
-// let showPostsButton = document.getElementById('show-my-posts');
-// showPostsButton.addEventListener("click", function(){
-//   let myPosts = document.getElementById('my-posts');
-//   myPosts.classList.remove('hide');
-//   myPosts.classList.add('show');
-//   let showMoreBtn = document.getElementById('show-my-posts');
-//   showMoreBtn.textContent = 'Show less'
-// })
-
-// let hideButton = document.getElementById('hide-my-posts');
-// hideButton.addEventListener("click", function(){
-//   let myPosts = document.getElementById('my-posts');
-//   myPosts.classList.remove('show');
-//   myPosts.classList.add('hide');
-//   let showMoreBtn = document.getElementById('show-my-posts');
-//   showMoreBtn.textContent = 'Show more'
-// })
-
-</script>
 {% endblock %}
