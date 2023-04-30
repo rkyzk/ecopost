@@ -194,38 +194,82 @@ No. | Goals | How they are achieved |
 
 ### Testing Features
 
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date | Test conducted by |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- | 
-||Logo||||||||
-|1.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|Reiko Yazaki|
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|1.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
 ||**Navigation links**|||||||
 ||Test each link will redirect to the right page |||||||
-|2|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home | Redirected to ”Home”|pass|2023/4/29|Reiko Yazaki|
-|3|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories” | Redirected to ”Search Stories”|pass|2023/4/29|Reiko Yazaki|
-|4|”Write Stories”|Go to “Home”|Click on “Write Stories”|Redirected to ” Write Stories” | Redirected to ” Write Stories”|pass|2023/4/29|Reiko Yazaki|
-|5|”My Page”|Go to “Home”|Click on “My Page”|Redirected to ”My Page” | Redirected to “My Page”|pass|2023/4/29|Reiko Yazaki|
-|6|”Log out”|Go to “Home” |Click on “Log out”|Redirected to ”Log out” | Redirected to “Log out”|pass|2023/4/29|Reiko Yazaki|
-|7|”Become a Member”|Log out and go to “Home”|Click on “Become a Member”|Redirected to ” Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|Reiko Yazaki|
-|8|”Log in”|Go to “Home”|Click on “Log in”|Redirected to ”Log in”| Redirected to “Log in”|pass|2023/4/29|Reiko Yazaki|
-||**links in the footer**|||||||
-|9|link to facebook |Go to “Home”|Click on the facebook icon|Redirected to facebook site| Redirected to facebook site| pass|2023/4/29|Reiko Yazaki|
-|10|link to twitter |Go to “Home”|Click on the twitter icon|Redirected to twitter site| Redirected to twitter site| pass|2023/4/29|Reiko Yazaki|
-|11|link to instagram|Go to “Home”|Click on the instagram icon|Redirected to instagram site| Redirected to instagram site| pass|2023/4/29|Reiko Yazaki|
-||links on “Home”||||||||
+|2|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
+|3|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
+|4|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
+|5|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
+|6|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
+|7|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
+|8|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
+||**links in the footer**||||||
+|9|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
+|10|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
+|11|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 
-**Note:** 
-As preparatory steps for tests no. 19- , if no featured stories have been created, follow the steps below:
+**Testing "Home" page specifically"**
+*Note:*
+As preparatory steps for tests no. 19-21, if no featured stories have been created, follow the steps below:
 1. log in
 2. go to “Write Stories” 
 3. make 3 posts
 4. go to admin panel
-5. set featured flag to True for all 3 posts.
+5. set featured flag True for all 3 posts.
 
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date | Test conducted by |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- | 
-|19|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|Reiko Yazaki|
-|20|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|Reiko Yazaki|
-|20|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|Reiko Yazaki|
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||links on “Home”||||||||
+|19|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
+|20|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
+|21|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
+|22|link ”More stories from this week” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
+|23|link ”Readers’ favorite stories of all time” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
+
+#### "Become a Member" page
+
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
+
+- Testing validation messages
+
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
+||Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
+||Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
+||Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully logged in as testuser1” | Redirected to “Home” page and the message says “Successfully logged in as testuser1” |pass|2023/4/30|
+||Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
+||Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|2023/4/30|
+||Use already registered email| Enter “testuser2” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|2023/4/30|
+||Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the first password field; “password” for the second password field |click “Sign up” button|A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
+||enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
+||Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully logged in as testuser2” | Redirected to “Home” page, and a message says “Successfully logged in as testuser2”| pass|2023/4/30|
+
+### Log in page
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
+
+**Testing validation messages**
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully logged in as testuser2” | Redirected to “Home” page, and a message says “Successfully logged in as testuser2”| pass|2023/4/30|
+||Leave username empty| Enter “swUf8LcR” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
+||Leave password empty| Enter “testuser2” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
+||Enter wrong password| Enter “testuser2” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+||Enter wrong username| Enter “testuser3” for username; "swUf8LcR" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+||Remember me function| Enter “testuser2” for username; "swUf8LcR" for password; check "Remember me" sign in. Log out and go back to log in page| click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+
+### Log out page
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||“Sign out” button|Log in, click on "Log out"|Click on "Sign out"|Redirected to "Home" page| Redirected to "Home" page |pass|2023/4/30|
+
 
 
 
