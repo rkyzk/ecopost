@@ -724,16 +724,54 @@ class TestSearchView(TestCase):
                                     'region': 'Choose...',
                                     'search': 'search'})
         print(list(response.context['queryset']))
-        self.assertEqual(len(response.context['queryset']), 2)
-        
+        self.assertEqual(len(response.context['queryset']), 2)       
 
-    # def test_search_by_date_min_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_date_min_will_return_empty_queryset_if_no_match(self):
+        self.post1.published_on = datetime.utcnow() - timedelta(days=10)
+        self.post2.published_on = datetime.utcnow() - timedelta(days=10)
+        self.post3.published_on = datetime.utcnow() - timedelta(days=10)
+        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
+        print(date)
+        response = self.client.get('/search_story/',
+                                   {'date_min': date,
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(len(response.context['queryset']), 0)
 
-    # def test_search_by_date_min_will_return_right_post_if_match(self):
+    def test_search_by_date_max_will_return_right_post_if_match(self):
+        self.post1.published_on = datetime.utcnow() - timedelta(days=10)
+        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
+        print(date)
+        response = self.client.get('/search_story/',
+                                   {'date_max': date,
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(len(response.context['queryset']), 1)
+        self.assertEqual(list(response.context['queryset']),
+                         [self.post1])
 
-    # def test_search_by_date_min_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_date_max_will_return_empty_queryset_if_no_match(self):
+        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
+        print(date)
+        response = self.client.get('/search_story/',
+                                   {'date_max': date,
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(len(response.context['queryset']), 0)
 
-    # def test_search_by_category_will_return_right_post_if_match(self):
+    def test_search_by_category_will_return_right_post_if_match(self):
+        self.post1.category = 'saving resources'
+        response = self.client.get('/search_story/',
+                                   {'date_max': date,
+                                    'category': 'saving resources',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(len(response.context['queryset']), 1)
+        self.assertEqual(list(response.context['queryset']),
+                         [self.post1])
 
     # def test_search_by_category_will_return_empty_queryset_if_no_match(self):
 

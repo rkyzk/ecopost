@@ -10,6 +10,13 @@ STATUS = ((0, "Draft"), (1, "Submitted"), (2, "Published"), (3, "Declined"))
 
 COMMENT_STATUS = ((0, "original"), (1, "edited"), (2, "deleted"))
 
+CATEGORY = (('animals', 'Protecting animals'),
+            ('aquatic system', 'Protecting the aquatic system'),
+            ('saving soil & trees', 'Protecting soil & trees'),
+            ('saving resources', 'Saving resources'),
+            ('eco-conscious diet', 'Eco-conscious diet'),
+            ('others', 'Others'))
+
 REGION = (('N/A', 'N/A'),
           ('NAM', 'North America'),
           ('CAM', 'Central America'),
@@ -31,14 +38,6 @@ REGION = (('N/A', 'N/A'),
           ('SAS', 'Southeastern Asia'),
           ('ANZ', 'Australia and New Zealand'),
           ('PIS', 'Pacific Islands'))
-
-CATEGORY = (('animals', 'Protecting animals'),
-            ('aquatic system', 'Protecting the aquatic system'),
-            ('saving soil & trees', 'Protecting soil & trees'),
-            ('saving resources', 'Saving resources'),
-            ('eco-conscious diet', 'Eco-conscious diet'),
-            ('others', 'Others'))
-
 
 class Post(models.Model):
     title = models.CharField(max_length=80, unique=True)
