@@ -267,7 +267,7 @@ class Search(View):
         qs = []
         query_lists = []
         no_input = True
-
+        
         if title_query is not None:
             if title_query.replace(' ', '') != '':
                 no_input = False
@@ -308,14 +308,13 @@ class Search(View):
                 if qs_liked != []:
                     query_lists.append(qs_liked)
 
-        if pub_date_min_query is not None:
-            if pub_date_min_query.replace(' ', '') != '':
-                no_input = False
-                min_date_str = pub_date_min_query
-                min_date = datetime.strptime(min_date_str, '%Y-%m-%d')
-                qs_min_pub_date = posts.filter(
-                    published_on__date__gte=min_date)
-                query_lists.append(qs_min_pub_date)
+        if pub_date_min_query is not None:   
+            no_input = False
+            print(pub_date_min_query)
+            min_date = datetime.strptime(pub_date_min_query, '%Y-%m-%d')
+            qs_min_pub_date = posts.filter(
+                published_on__date__gte=min_date)
+            query_lists.append(qs_min_pub_date)
 
         if pub_date_max_query is not None:
             if pub_date_max_query.replace(' ', '') != '':
@@ -364,7 +363,7 @@ class MoreStories(generic.ListView):
     paginate_by = 6
     filterargs = {
             'status': 2,
-            'published_on__date__gte': datetime.utcnow() - timedelta(days=30),
+            'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
             'featured_flag': False
             }
     posts = Post.objects.filter(**filterargs).order_by("-published_on")

@@ -115,7 +115,7 @@
             <span><strong>{{ post.title }}</strong></span><br>
             <span>By {{ post.author }}</span>
             <div class="d-flex justify-content-end">
-              <span>city, country {{ post.pub_date }}</span>
+              <span>{{ post.pub_date }}</span>
             </div>
             <p class="mt-1 excerpt">{{ post.excerpt }}</p>
             <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
@@ -130,5 +130,6 @@
         {% endfor %}       
     </div>
   {% endif %}
+  <div class="padding-bottom"></div>
 </div>
 {% endblock %}

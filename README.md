@@ -170,7 +170,7 @@ No. | Goals | How they are achieved |
 |:---| :--- | :--- | 
 ||**First Time Visitors**||   
 |1| Understand what the site is for and how to use it. | An introductory paragraph on the home page describes what the site is for and how to use it. | 
-|2| Become a member. | The introduction on the home page invites new users to become a member and offers a link. Another link to sign up page is displayed also on the navbar. | 
+|2| Become a member. | An introductory paragraph on the home page invites users to become a member.  In addition, a link to sign up page is displayed in the navbar. | 
 |3| Excerpts are listed. | Three featured stories chosen by editors are displayed on the home page for quick access.  Also the pages “More Stories from this Week” and “Readers’ Favorite Stories of All Time” provide lists of posts that are likely to interest visitors.|
 |4| Search posts | On “Search Stories” page users can search posts by various factors.  The link to the page is provided in the navbar regardless to the users’ log-in status. | 
 ||||  
@@ -197,23 +197,23 @@ No. | Goals | How they are achieved |
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |1.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
-||**Navigation links**|||||||
-||Test each link will redirect to the right page |||||||
-|2|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
-|3|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
-|4|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
-|5|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
-|6|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
-|7|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
-|8|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
+|2|**Navigation links**|||||||
+|3|Test each link will redirect to the right page |||||||
+|4|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
+|5|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
+|6|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
+|7|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
+|8|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
+|9|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
+|10|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
 ||**links in the footer**||||||
-|9|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
-|10|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
-|11|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
+|11|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
+|12|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
+|13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 
 **Testing "Home" page specifically"**
 *Note:*
-As preparatory steps for tests no. 19-21, if no featured stories have been created, follow the steps below:
+As preparatory steps for tests no. 14-16, if no featured stories have been created, follow the steps below:
 1. log in
 2. go to “Write Stories” 
 3. make 3 posts
@@ -223,11 +223,11 @@ As preparatory steps for tests no. 19-21, if no featured stories have been creat
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||links on “Home”||||||||
-|19|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
-|20|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
-|21|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
-|22|link ”More stories from this week” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
-|23|link ”Readers’ favorite stories of all time” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
+|14|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
+|15|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
+|16|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
+|17|link ”More stories from this week” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
+|18|link ”Readers’ favorite stories of all time” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
 
 #### "Become a Member" page
 
@@ -235,53 +235,157 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
 
-- Testing validation messages
+- Testing sign up function and validation messages
 
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
-||Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
-||Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
-||Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully logged in as testuser1” | Redirected to “Home” page and the message says “Successfully logged in as testuser1” |pass|2023/4/30|
-||Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
-||Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|2023/4/30|
-||Use already registered email| Enter “testuser2” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|2023/4/30|
-||Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the first password field; “password” for the second password field |click “Sign up” button|A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
-||enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
-||Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully logged in as testuser2” | Redirected to “Home” page, and a message says “Successfully logged in as testuser2”| pass|2023/4/30|
+|19|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
+|20|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
+|21|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
+|22|Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully signed in as testuser1” | Redirected to “Home” page and the message says “Successfully signed in as testuser1” |pass|2023/4/30|
+|23|Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
+|24|Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|2023/4/30|
+|25|Use already registered email| Enter “testuser2” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|2023/4/30|
+|26|Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the first password field; “password” for the second password field |click “Sign up” button|A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
+|27|enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
+|28|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
 
 ### Log in page
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
+|29|link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
 
-**Testing validation messages**
+**Testing log-in function and validation messages**
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully logged in as testuser2” | Redirected to “Home” page, and a message says “Successfully logged in as testuser2”| pass|2023/4/30|
-||Leave username empty| Enter “swUf8LcR” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
-||Leave password empty| Enter “testuser2” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
-||Enter wrong password| Enter “testuser2” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-||Enter wrong username| Enter “testuser3” for username; "swUf8LcR" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-||Remember me function| Enter “testuser2” for username; "swUf8LcR" for password; check "Remember me" sign in. Log out and go back to log in page| click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|30|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
+|31|Leave username empty| Enter “swUf8LcR” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
+|32|Leave password empty| Enter “testuser2” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
+|33|Enter wrong password| Enter “testuser2” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|34|Enter wrong username| Enter “testuser3” for username; "swUf8LcR" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|35|Remember me function| Enter “testuser2” for username; "swUf8LcR" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser2" and see if the password will be automatically filled | The password will be automatically filled | The password is not filled out. | fail|2023/4/30|
 
 ### Log out page
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||“Sign out” button|Log in, click on "Log out"|Click on "Sign out"|Redirected to "Home" page| Redirected to "Home" page |pass|2023/4/30|
+|36|“Sign out” button|Log in, click on "Log out"|Click on "Sign out"|Redirected to "Home" page| Redirected to "Home" page |pass|2023/4/30|
 
+### Validation messages on "Write Stories" (Functions other than the validation messages are tested in automated testing. )
 
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|39|Leave title empty | Enter "content" for content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|40|Leave title empty | Enter "content" for content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|41|Leave content empty | Enter "test title 1" for title | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
+|42|Leave content empty | Enter "test title 1" for title | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
 
+### Validation messages on "Update Stories" (Functions other than the validation messages are tested in automated testing. )
+As preparation for tests no 43-48.  
+- Log in, go to "Write Stories," enter "test title 1" for title; "content" for the content
+- click "Save"
+- go to "My page" and click on the link "Read the full story" of the blog "test title 1"
+- click "Update" 
 
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|43|Leave all fields empty| delete prepopulated title and content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|44|Leave all fields empty| delete prepopulated title and content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|45|Leave title empty | delete the title | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|46|Leave title empty | delete the title | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|47|Leave content empty | delete the content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
+|48|Leave content empty | delete the content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
 
+### Validation messages on Leave Comments section on “Detail Page”
+As preparation for test no. 49, 
+1.	log in as testuser2
+2.	go to “My Page”
+3.	Click on the link “Read the full story” of the blog “test title 1”
 
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|49|Leave the field empty| -- | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
 
+### Validation messages on “Update Comments”
+As preparation for test no. 50, 
+1.	log in as testuser2
+2.	go to “My Page”
+3.	Click on the link “Read the full story” of the blog “test title 1”
+4.	Enter “test comment” in the leave comments section and click on “Submit”
+5.	Click on the update comment icon
+
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|50|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+
+### Testing JaveScript in script.js
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|51| code in ln 9-19 | set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
+|52| code in ln 2-6 | log out | log in as testuser2 | Redirected to the home page, and the message "Successfully signed in as testuser2" will be displayed.  The message disappears after 3 seconds. |Redirected to the home page, and the message "Successfully signed in as testuser2" is displayed.  The message disappears after 3 seconds.| pass|2023/4/30|
+
+As preparation for tests no. 53-62, 
+1. log in as testuser2
+2. make 4 posts
+3. go to admin panel and publish the posts
+4. go to detail page of the posts and bookmark them.
+5. enter comments "test comment" and click on "submit"
+
+**Testing show more and show less buttons in "Written by me" section**
+Conduct test no. 53-55 consecutively without taking any other steps than written items.
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|53| code in ln 22-36 | -- |Click on "Show more"| The fouth post is displayed. The label of the clicked button will change to "Show less" | The fouth post is displayed.  The clicked button says "Show less"| pass|2023/4/30|
+|54| code in ln 22-36 | -- |Click on "Show less" (The upper of the two "Show less" buttons)| The fouth post will disappear. The clicked button will say "Show more" | The fouth post is displayed.  The clicked button says "Show more" | pass|2023/4/30|
+|55| code in ln 22-36 | click on "Show more" in "Commented by me" |Click on "Show less" (One below the fourth post)| The fouth post will disappear. The upper button will say "Show more" | The fouth post disappears.  The upper button says "Show more" | pass|2023/4/30|
+
+**Testing show more and show less buttons in "Commented by me" section**
+Conduct test no. 56-58 consecutively without taking any other steps than written items.
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|56| code in ln 22-36 | -- |Click on "Show more"| The fouth post is displayed. The label of the clicked button will change to "Show less" | The fouth post is displayed.  The clicked button says "Show less"| pass|2023/4/30|
+|57| code in ln 22-36 | -- |Click on "Show less" (The upper of the two "Show less" buttons)| The fouth post will disappear. The clicked button will say "Show more" | The fouth post is displayed.  The clicked button says "Show more" | pass|2023/4/30|
+|58| code in ln 22-36 | click on "Show more" in "Commented by me" |Click on "Show less" (One below the fourth post)| The fouth post will disappear. The upper button will say "Show more" | The fouth post disappears.  The upper button says "Show more" | pass|2023/4/30|
+
+**Testing show more and show less buttons in "Bookmarked by me" section**
+Conduct test no. 59-61 consecutively without taking any other steps than written items.
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|59| code in ln 22-36 | -- |Click on "Show more"| The fouth post is displayed. The label of the clicked button will change to "Show less" | The fouth post is displayed.  The clicked button says "Show less"| pass|2023/4/30|
+|60| code in ln 22-36 | -- |Click on "Show less" (The upper of the two "Show less" buttons)| The fouth post will disappear. The clicked button will say "Show more" | The fouth post is displayed.  The clicked button says "Show more" | pass|2023/4/30|
+|61| code in ln 22-36 | click on "Show more" in "Bookmarked by me" |Click on "Show less" (One below the fourth post)| The fouth post will disappear. The upper button will say "Show more" | The fouth post disappears.  The upper button says "Show more" | pass|2023/4/30|
+
+**Testing if clicking on show more & show less buttons in different sections don't disrupt the functions**
+As preparation
+1. click on "Show more" in "Written by me"
+2. click on "Show more" in "Commented by me"
+|62|code in ln 22-36 | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| The fouth post of "Commented by me" will disappear. The upper button in "Commented by me" section will say "Show more" | The fouth post of "Commented by me" disappears. The upper button in "Commented by me" section says "Show more"  | pass|2023/4/30|
+
+### Testing JaveScript in dialog.js
+As preparation
+1. log in as testuser2
+2. make a post titled "test blog 1" and click on save
+3. make a post titled "test blog 2" and submit
+4. go to admin panel and publish "test blog 2"
+5. go to detail page of test blog 2, and leave comment "test comment" and submit
+
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|59| code in ln 2-5 | go to detail page of test blog 1 | click on delete | a dialog box will show up and say "Are you sure you want to delete your post?  You won't be able to retrieve the draft." | The message "Are you sure you want to delete your post?  You won't be able to retrieve the draft." shows up in a dialog box| pass|2023/4/30|
+|60| code in ln 8-11 | go to detail page of test blog 2 | click on the trash bin icon of the comment "test comment" | a dialog box will show up and say "Are you sure you want to delete your comment?" | The message "Are you sure you want to delete your comment?" shows up in a dialog box| pass|2023/4/30|
+|61| code in ln 14-18 | go to "My page" click on the link "Read the full story" of "test blog 1" | Click on "Submit" | a dialog box will show up and say "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" | The message "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" shows up in a dialog box| pass|2023/4/30|
+|62| code in ln 14-18 | go to "Write Stories." Enter "test blog 3" for title; "content" for "content" | Click on "Submit" | a dialog box will show up and say "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" | The message "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" shows up in a dialog box| pass|2023/4/30|
+
+### Test summary
+All features are functioning normally except for "Remember me" function in the test no. 35.
+in general clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to logs in the next time.  But as the test result suggests, the password doesn't get prepopulated. It needs to be fixed in the future.
 
 - - -
 
-
 ## Wireframes
-Wireframes for the app can be found [here](https://wireframe.cc/pro/pp/873798723651976)
+Wireframes for the app can be found [here.](https://wireframe.cc/pro/pp/873798723651976)
+Please click on "Homepage" in the upper left corner to see wireframes of each page of the app.
 
 
 

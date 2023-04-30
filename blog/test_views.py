@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import reverse, get_object_or_404
 from django.contrib.messages import get_messages
 from django.core.exceptions import PermissionDenied
+from datetime import datetime, timedelta
 
 
 class TestViews(TestCase):
@@ -518,15 +519,17 @@ class TestSearchView(TestCase):
                                    {'search': 'search'})
         self.assertEqual(response.context['search_clicked'], True)
 
-    def test_search_without_fields_will_keep_no_input_True(self):
+    def test_search_without_fields_will_show_message(self):
         response = self.client.get('/search_story/',
                                    {'category': 'Choose...',
-                                   'region': 'Choose...',
-                                   'search': 'search'})
+                                    'region': 'Choose...',
+                                    'search': 'search'})
         self.assertTrue(response.context['no_input'])
+        self.assertContains(response,
+                            '<p>Please enter at least one field</p>')
 
-    def test_search_entering_only_spaces_will_keep_no_input_True(self):
-        response = self.client.get('/search_story/',
+    def test_search_entering_only_spaces_will_show_message(self):
+        response = self.client.get('/search_story/',    
                                    {'title_input': ' ',
                                     'author_input': ' ',
                                     'keyword_1': ' ',
@@ -536,6 +539,22 @@ class TestSearchView(TestCase):
                                     'region': 'Choose...',
                                     'search': 'search'})
         self.assertTrue(response.context['no_input'])
+        self.assertContains(response,
+                            '<p>Please enter at least one field</p>')
+
+    def test_search_show_message_no_matching_results_if_no_match(self):
+        response = self.client.get('/search_story/',    
+                                   {'title_input': 'non existing post',
+                                    'author_input': '',
+                                    'keyword_1': '',
+                                    'keyword_2': '',
+                                    'keyword_3': '',
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        self.assertEqual(len(response.context['queryset']), 0)
+        self.assertContains(response,
+                            '<p>No matching results found</p>')
 
     def test_search_by_title_contains_will_get_right_posts(self):
         response = self.client.get('/search_story/',
@@ -546,9 +565,10 @@ class TestSearchView(TestCase):
                                     'search': 'search'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+        self.assertEqual(list(response.context['queryset']),
+                         [self.post2, self.post1])
 
-    def test_search_by_title_contains_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_title_contains_returns_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
                                    {'title_input': 'rabbit',
                                     'title_filter': 'contains',
@@ -559,7 +579,7 @@ class TestSearchView(TestCase):
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 0)
 
-    def test_search_by_title_is_exactly_will_return_right_post_for_exact_title(self):
+    def test_search_by_exact_title_returns_right_post(self):
         response = self.client.get('/search_story/',
                                    {'title_input': 'gray cat',
                                     'title_filter': 'is_exactly',
@@ -571,7 +591,7 @@ class TestSearchView(TestCase):
         self.assertEqual(len(response.context['queryset']), 1)
         self.assertEqual(response.context['queryset'][0], self.post1)
 
-    def test_search_by_title_is_exactly_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_exact_title_returns_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
                                    {'title_input': 'green cat',
                                     'title_filter': 'is_exactly',
@@ -592,9 +612,10 @@ class TestSearchView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+        self.assertEqual(list(response.context['queryset']),
+                         [self.post2, self.post1])
 
-    def test_search_by_author_contains_will_return_empty_queryset_if_no_match(self):
+    def test_search_author_contains_returns_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
                                    {'author_input': 'cat',
                                     'author_filter': 'contains',
@@ -605,7 +626,7 @@ class TestSearchView(TestCase):
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 0)
 
-    def test_search_by_author_is_exactly_will_return_right_post_for_exact_author(self):
+    def test_search_by_exact_author_returns_right_post(self):
         response = self.client.get('/search_story/',
                                    {'author_input': 'user2',
                                     'author_filter': 'is_exactly',
@@ -617,7 +638,7 @@ class TestSearchView(TestCase):
         self.assertEqual(len(response.context['queryset']), 1)
         self.assertEqual(response.context['queryset'][0], self.post2)
 
-    def test_search_by_author_is_exactly_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_exact_author_returns_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
                                    {'author_input': 'user',
                                     'author_filter': 'is_exactly',
@@ -650,7 +671,8 @@ class TestSearchView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+        self.assertEqual(list(response.context['queryset']),
+                         [self.post2, self.post1])
 
     def test_search_by_keywords_will_return_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
@@ -677,7 +699,8 @@ class TestSearchView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']), [self.post2, self.post1])
+        self.assertEqual(list(response.context['queryset']),
+                         [self.post2, self.post1])
 
     def test_search_by_min_likes_will_return_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
@@ -689,7 +712,20 @@ class TestSearchView(TestCase):
         self.assertTemplateUsed(response, 'search.html')
         self.assertEqual(len(response.context['queryset']), 0)
 
-    # def test_search_by_date_min_will_return_right_post_if_match(self):
+    def test_search_by_date_min_will_return_right_post_if_match(self):
+        self.post1.published_on = datetime.utcnow() - timedelta(days=10)
+        print(self.post1.published_on)
+        print(self.post2.published_on)
+        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
+        print(date)
+        response = self.client.get('/search_story/',
+                                   {'date_min': date,
+                                    'category': 'Choose...',
+                                    'region': 'Choose...',
+                                    'search': 'search'})
+        print(list(response.context['queryset']))
+        self.assertEqual(len(response.context['queryset']), 2)
+        
 
     # def test_search_by_date_min_will_return_empty_queryset_if_no_match(self):
 
@@ -701,9 +737,24 @@ class TestSearchView(TestCase):
 
     # def test_search_by_category_will_return_empty_queryset_if_no_match(self):
 
-    # def test_search_by_region_will_return_right_post_if_match(self):
+    def test_search_by_region_will_return_right_post_if_match(self):
+        self.post1.region = "NAM"
+        response = self.client.get('/search_story/',
+                                   {'category': 'Choose...',
+                                    'region': 'North America',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 1)
 
-    # def test_search_by_region_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_region_will_return_empty_queryset_if_no_match(self):
+        response = self.client.get('/search_story/',
+                                   {'category': 'Choose...',
+                                    'region': 'North America',
+                                    'search': 'search'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 0)
 
 if __name__ == '__main__':
     main()
