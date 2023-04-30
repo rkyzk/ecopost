@@ -25,26 +25,28 @@
         </a>
         <button class="hamburger" onclick="{openMenu()}">|||</button>
       </div>
-      <nav class="nav-menu">     
-        <ul class="nav-list">
-          <li><a class="list_item" href="{% url 'home' %}">Home</a></li>
-          <li><a class="list-item" href="{% url 'search' %}">Search Stories</a></li>
-          {% if user.is_authenticated %}
-          <li><a class="list-item" href="{% url 'add_story' %}">Write stories</a></li>
-          <li><a class="list-item" href="{% url 'mypage' user.pk %}">My Page</a></li>
-          <li><a class="list-item" href="{% url 'account_logout' %}">Log Out</a></li>
-          {% else %}
-          <li><a class="list-item" href="{% url 'account_signup' %}">Become a Member</a></li>
-          <li><a class="list-item" href="{% url 'account_login' %}">Log in</a></li>
-          {% endif %}
-        </ul>    
+      <nav class="nav-menu">
+        <div class="pop-up-menu">  
+          <ul class="nav-list">
+            <li><a class="list_item" href="{% url 'home' %}">Home</a></li>
+            <li><a class="list-item" href="{% url 'search' %}">Search Stories</a></li>
+            {% if user.is_authenticated %}
+            <li><a class="list-item" href="{% url 'add_story' %}">Write stories</a></li>
+            <li><a class="list-item" href="{% url 'mypage' user.pk %}">My Page</a></li>
+            <li><a class="list-item" href="{% url 'account_logout' %}">Log Out</a></li>
+            {% else %}
+            <li><a class="list-item" href="{% url 'account_signup' %}">Become a Member</a></li>
+            <li><a class="list-item" href="{% url 'account_login' %}">Log in</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </nav>
     </header>
-    <div class="container d-flex justify-content-end">
+    <div class="container-fluid d-flex justify-content-end login-status">
       {% if user.is_authenticated %}
-      <span>Logged in as {{user.username}}</span>
+      <span><em>Logged in as {{user.username}}</em></span>
       {% else %}
-      <span>You aren't logged in</span>
+      <span><em></em>You aren't logged in</em></span>
       {% endif %}
     </div>
     <!-- Message -->
@@ -55,7 +57,7 @@
             </div>
           {% endfor %}
     </div> 
-    <div class="container">
+    <div class="container block-content">
       {% block content %}
       {% endblock content %}
     </div>

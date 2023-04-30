@@ -64,6 +64,10 @@ a:hover {
   text-decoration: underline;
 }
 
+.login-status {
+  color:rgb(65, 60, 53);
+}
+
 .post-text > p {
   line-height: 20px;
 }
@@ -275,7 +279,7 @@ a {
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
   .hamburger {
     display: block;
   }
@@ -289,6 +293,16 @@ a {
   .header {
     flex-direction: column;
     padding: 20px;
+    position: relative;
+  }
+
+  .pop-up-menu {
+    background-color: #ccc;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    z-index: 2;
+    padding: 5px 5px;
   }
 
   .nav-list {
@@ -296,12 +310,16 @@ a {
     list-style-type: none;
     row-gap: 10px;
     column-gap: 0;
-    justify-items: center;
+    justify-items: start;
   }
 
   .nav-menu {
     display: none;
  }
+
+  .block-content {
+    margin-top: 20px;
+  }
 
   /* account_base.html */
   .account-forms {
@@ -315,7 +333,7 @@ a {
   }
 }
 
-@media screen and (min-width: 621px) {
+@media screen and (min-width: 701px) {
   .nav-menu {
     display: block !important;
   }
