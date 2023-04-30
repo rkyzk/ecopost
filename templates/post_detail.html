@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 {% load crispy_forms_tags %}
 <main class="justify-content-center">
   <section class="d-md-flex title-img-box">
@@ -14,7 +12,7 @@
     </div>
     <div class="img-box">
     {% if "placeholder" in post.featured_image.url %}
-      <img src="{{ '/media/' default.jpg }}" width="100%" alt="graphic of forest">
+      <img src="{{ MEDIA_URL }} default.jpg" width="100%" alt="graphic of forest">
     {% else %}
       <img src="{{ post.featured_image.url }}" width="100%" alt="{{ post.title }}">
     {% endif %}
@@ -75,7 +73,7 @@
       </form>
       <form method="POST" action="{% url 'delete_post' post.slug %}">
         {% csrf_token %}
-        <button type="submit" class="btn btn-submit delete-post item-right" name="delete_post" value="{{post.slug}}">Delete</button>
+        <button type="submit" id="delete-post" class="btn btn-submit item-right" name="delete_post" value="{{post.slug}}">Delete</button>
       </form> 
     </div> 
     {% endif %}

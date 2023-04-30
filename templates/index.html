@@ -3,7 +3,7 @@
 <!-- intro -->
 <div class="d-flex justify-content-center">
   <h1 class="align-self-center">ecopost</h1>
-  <img src="{{ '/media/' blue-earth.jpeg }}" alt="blue and green earth" class="earth">
+  <img src="{{ MEDIA_URL }} blue-earth.jpeg" alt="blue and green earth" class="earth">
 </div>
 <div class="d-flex justify-content-center">
   <div class="intro-box mt-2">
@@ -27,7 +27,7 @@
         <div class="col-md-4">
           <div class="image-wrapper d-flex justify-content-center">
             {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top " src="{{ '/media/' default.jpg }}" alt="forest graphic">
+              <img class="card-img-top " src="{{ MEDIA_URL }} default.jpg" alt="forest graphic">
             {% else %}
               <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
             {% endif %}
