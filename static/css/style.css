@@ -81,6 +81,9 @@ a:hover {
   height: 70px;
 }
 
+.date-city {
+  list-style: none;
+}
 /*   -- index.html --  */
 h1 {
   font-family: 'Montserrat Alternates', sans-serif;

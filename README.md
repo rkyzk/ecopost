@@ -8,7 +8,7 @@ This application offers a platform where individuals around the world can share 
 
 ## User Stories
 
-User stories can be found [here](https://github.com/users/rkyzk/projects/5/views/1?layout=board)
+User stories can be found [here.](https://github.com/users/rkyzk/projects/5/views/1?layout=board)
 
 ## Features in Nutshell:
 Users can see lists of excerpts from
@@ -18,26 +18,26 @@ Users can see lists of excerpts from
 -	posts written by them
 -	posts commented by them
 -	posts bookmarked by them
-Users can read the entire content of the post
-Users can search stories by title, authors and other factors
-Users can sign up to become members
-Members can like and bookmark posts
-Members can leave comments for the posts
-Members can edit and delete comments
-Members can write their own stories and submit them for evaluation
-Members can update or delete their posts before submitting them
+
+Users can read the entire content of the post<br>
+Users can search stories by title, authors and other factors<br>
+Users can sign up to become members<br>
+Members can like and bookmark posts<br>
+Members can leave comments for the posts<br>
+Members can edit and delete comments<br>
+Members can write their own stories and submit them for evaluation<br>
+Members can update or delete their posts before submitting them<br>
 
 ## Notes on the Design 
 The overall appearance is kept simple and clean in order to avoid interfering with various colors that the featured images will bring in.
 
 **About the Colors**
-- The background is kept white.
-- Beige, green and blue are used for titles, navigation and links since these colors are the colors of soil, the ocean, the sky and plants, which suits the theme of the site.
-- In order to offer some originality, I used greenish blue and greenish beige instead of typical blue and beige.
+- The background is white.
+- Beige, green and blue are used for titles and navigation links. These colors are the colors of soil, the ocean, the sky and plants, so they suit the theme of the site.
 
 **About the Fonts**
-- Montserrat was used for headings because it is stylish and gives a pleasant contrast to the rest when used sparingly.
-- For the content Lato is used since it is readable and familiar to users. 
+- Montserrat was used for headings because it's stylish and stands out from the rest when used sparingly.
+- For the content Lato is used since it's readable and familiar to users. 
 
 ## Detailed Look at Each Part and Function
 

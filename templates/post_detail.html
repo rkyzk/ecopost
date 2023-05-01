@@ -4,10 +4,13 @@
 <main class="justify-content-center">
   <section class="d-md-flex title-img-box">
     <div class="title-box item-left">
-      <h1 class="">{{ post.title }}</h1>
+      <h1>{{ post.title }}</h1>
       <span>Author: {{ post.author }}</span>
       <div class="d-flex justify-content-end">
-        <span>{{ post.pub_date }}</span>
+        <ul class="date-city">
+          <li>{{ post.pub_date }}</li>
+          <li>{{ post.city }}, {{ post.country.name }}</li>
+        </ul>
       </div>
     </div>
     <div class="img-box">

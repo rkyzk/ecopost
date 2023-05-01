@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
+from django_countries.fields import CountryField
 from datetime import datetime
 from cloudinary.models import CloudinaryField
 
@@ -17,27 +18,6 @@ CATEGORY = (('animals', 'Protecting animals'),
             ('eco-conscious diet', 'Eco-conscious diet'),
             ('others', 'Others'))
 
-REGION = (('N/A', 'N/A'),
-          ('NAM', 'North America'),
-          ('CAM', 'Central America'),
-          ('CRB', 'Caribbean'),
-          ('SAM', 'South America'),
-          ('NEU', 'Northern Europe'),
-          ('WEU', 'Western Europe'),
-          ('EEU', 'Eastern Europe'),
-          ('SEU', 'Southern Europe'),
-          ('NAF', 'North Africa'),
-          ('WAF', 'Western Africa'),
-          ('MAF', 'Middle Africa'),
-          ('EAF', 'Eastern Africa'),
-          ('SAF', 'Southern Africa'),
-          ('WAS', 'Western Asia'),
-          ('CAS', 'Central Asia'),
-          ('EAS', 'Eastern Asia'),
-          ('SAS', 'Southern Asia'),
-          ('SAS', 'Southeastern Asia'),
-          ('ANZ', 'Australia and New Zealand'),
-          ('PIS', 'Pacific Islands'))
 
 class Post(models.Model):
     title = models.CharField(max_length=80, unique=True)
@@ -63,7 +43,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(User,
                                    related_name='post_likes',
                                    blank=True)
-    region = models.CharField(max_length=30, choices=REGION, default='N/A')
+    city = models.CharField(max_length=25, blank=True, null=True)
+    country = CountryField(blank=True, max_length=25, null=True)
     category = models.CharField(max_length=30, choices=CATEGORY,
                                 default='Others')
     bookmark = models.ManyToManyField(User, related_name='bookmarked',
@@ -84,6 +65,10 @@ class Post(models.Model):
 
     def number_of_likes(self):
         return self.likes.count()
+
+    # def country(self):
+    #     COUNTRY_DICT = dict(countries)
+    #     return COUNTRY_DICT.get(self)
 
     def pub_date(self):
         if self.status == 2:
@@ -113,3 +98,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.body} by {self.commenter.username}"
+

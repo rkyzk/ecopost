@@ -377,4 +377,3 @@ class PopularStories(generic.ListView):
     posts = Post.objects.filter(
         status=2, featured_flag=False).order_by("-published_on")
     queryset = [post for post in posts if post.number_of_likes() > 0]
-
