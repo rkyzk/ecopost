@@ -1,6 +1,17 @@
 # Ecopost
 
-## Overview:
+## CONTENTS
+
+* [Overview](#overview)
+* [User Stories](#user-stories)
+* [Features in Nutshell](#features-in-nutshell)
+* [Notes on Design](#notes-on-design)
+* [Each Part and Function in Detail](#each-part-and-function-in-detail)
+* [Automated Testing](#automated-testing)
+* [Manual Testing](#manual-testing)
+- - -
+
+## Overview
 
 This application offers a platform where individuals around the world can share their stories on what they are doing to save the environment.  Many people feel helpless, thinking that individuals cannot do so much.  Here, visitors can read posts written by others, leave comments and write their own stories.  Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope. 
 
@@ -19,16 +30,16 @@ Users can see lists of excerpts from
 -	posts commented by them
 -	posts bookmarked by them
 
-Users can read the entire content of the post<br>
+Users can read the entire content of the posts<br>
 Users can search stories by title, authors and other factors<br>
 Users can sign up to become members<br>
 Members can like and bookmark posts<br>
 Members can leave comments for the posts<br>
-Members can edit and delete comments<br>
 Members can write their own stories and submit them for evaluation<br>
+Members can edit and delete comments<br>
 Members can update or delete their posts before submitting them<br>
 
-## Notes on the Design 
+## Notes on Design 
 The overall appearance is kept simple and clean in order to avoid interfering with various colors that the featured images will bring in.
 
 **About the Colors**
@@ -39,7 +50,7 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - Montserrat was used for headings because it's stylish and stands out from the rest when used sparingly.
 - For the content Lato is used since it's readable and familiar to users. 
 
-## Detailed Look at Each Part and Function
+## Each Part and Function in Detail
 
 ### Navigation (common to all pages)
 - The logo of the website is located on the left side of the navigation bar.
@@ -83,7 +94,7 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - The managers can set the number of likes above which posts are going to be included on this page.
 - Each page will show 6 posts, and if there are more than 6 posts, the posts will be paginated.
 
-### Detail Page
+### Post Detail Page
 - The full content of the post is presented.
 - At the top left, the title, author, region and published dates are stated.
 - At the top right the featured image is shown.
@@ -131,26 +142,16 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - If no input was made or only spaces are entered, a note will say, 'Please enter at least one field.'
 - If no match was found, a note will say, 'No matching results found'
 
-### Notes on other pages
+### Notes on Other Pages
 - “Become a Member” (sign up page), “log in” and “sign out” pages were taken from allauth.
 - The pages were styled with my own css to match other pages.
 - Line 42 in login.html was modified in order to display a note:
   'Email admin@ecopost.com if you've forgotten your password.' since setting a system to
   reset passwords is beyond this current project.
 
-### Notes on form validation
-- I used crispy forms and its validation system will display messages if the form is not valid.
-
-**"Write Stories" and "Update Post" pages**
-- If the title or the content, or both are empty, and ‘save’ or ‘submit’ button is clicked, the validation error message will say, ‘Please fill out this field’ for the first required field that’s left empty.
-- Since Post model requires the title to be unique, if an existing title is entered, a validation message will say, ‘Post with this Title already exists.’
-
-**Comment form on “Detail Page” and on “Update Comment” page**
-- If form is submitted while the body of the comment is empty, the validation error message will say, ‘Please fill out this field.’
-
 ### Access Control
 **By Desgin**
-- Only logged-in users will see links to ‘Write Stories,’ and ‘My Page,’ so other users can’t get to the page via links.  
+- Only logged-in users will find links to ‘Write Stories’ and ‘My Page’ in the navigation bar so other users can’t get to the page via the links.  
 - Update and Delete buttons for posts and comments appear only if the user is the writer of the posts or of the comments.  Others can’t get to update pages or delete posts and comments through buttons.
 - Update and Delete buttons for posts will appear only if the posts are in draft states (before submission).
 
@@ -162,7 +163,9 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - Delete Posts view function has a program at line 149 in views.py to test if the user is the author of the post and that the post hasn’t been submitted and otherwise sends a 403.  Here Mixins are not used, since the post will be deleted before the test_func is run, which throws an error (explained also in bugs section.)
 
 - - -
-## MANUAL TESTING
+## Automated Testing
+
+## Manual Testing
 
 ### Testing User Stories
 
@@ -193,47 +196,50 @@ No. | Goals | How they are achieved |
 |18|Allow users to access only their own “My page” | LoginRequiredMixin and UserPassestestMixin will allow users to access only their own “My Page.” |
 
 ### Testing Features
+As preparatory steps for the following tests:
+1. create a user with username "testuser" and a password "gR48NmYr1"
+2. Log in as "testuser"
+3. delete all existing posts and make 7 posts with following titles and contents:
+Title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7
+Content: (for all of them): test content
+City: Dublin
+Country: Ireland
+4. go to admin panel
+5. set featured flag True for blog 1, blog 2, blog 3
 
+**Testing links**
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|1.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
-|py|**Navigation links**|||||||
-|3|Test each link will redirect to the right page |||||||
-|4|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
-|5|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
-|6|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
-|7|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
+|19.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
+|||||||||
+||**Navigation links**|||||||
+|20|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
+|21|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
+|22|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
+|23|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
 |8|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
 |9|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
 |10|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
+|||||||||
 ||**links in the footer**||||||
 |11|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
 |12|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
-
-**Testing "Home" page specifically"**
-*Note:*
-As preparatory steps for tests no. 14-16, if no featured stories have been created, follow the steps below:
-1. log in
-2. go to “Write Stories” 
-3. make 3 posts
-4. go to admin panel
-5. set featured flag True for all 3 posts.
-
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||links on “Home”||||||||
+|||||||||
+||**links on “Home”**||||||||
 |14|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
 |15|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
 |16|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
 |17|link ”More stories from this week” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
 |18|link ”Readers’ favorite stories of all time” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
-
-#### "Become a Member" page
-
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|||||||||
+||**"Become a Member" page**|||||||
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
+|||||||||
+||**"Post Detail" page if the user isn't logged in**|||||||
+||link to "Become a Member"|--|Click on the link|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
+||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
+
 
 - Testing sign up function and validation messages
 
