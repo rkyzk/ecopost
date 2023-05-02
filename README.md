@@ -207,10 +207,10 @@ Country: Ireland
 4. go to admin panel
 5. set featured flag True for blog 1, blog 2, blog 3
 
-**Testing links**
+#### Testing common features in all pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|19.|Logo|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
+|19.|Logo link|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
 |||||||||
 ||**Navigation links**|||||||
 |20|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
@@ -220,25 +220,46 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |8|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
 |9|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
 |10|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
-|||||||||
+
+**Testing hamburger menu for screen sizes below 700px**
+*Conduct test no. and consecutively without any actions in between*
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||Hamburger menu| set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
+||Hamburger menu| --| click on the hamburger menu for the second time | the Menu box closes |the Menu box closes| pass|2023/4/30|
 ||**links in the footer**||||||
 |11|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
 |12|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 |||||||||
-||**links on “Home”**||||||||
+||**“Home” Page**||||||||
 |14|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
 |15|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
 |16|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
 |17|link ”More stories from this week” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
 |18|link ”Readers’ favorite stories of all time” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
 |||||||||
+||**"Post Detail"**|||||||
+||link to "Become a Member" when the user isn't logged in|--|Click on the link|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
+||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
+
+*Testing validation messages on Leave Comments section on “Detail Page”*
+As preparation for test no. , 
+1.	log in as testuser
+2.	go to “My Page”
+3.	Click on the link “Read the full story” of the blog “test title 1”
+
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|49|Leave the field empty| -- | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+|49|Enter a space| Enter a space in the comment text box | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"|  ||
+
+|||||||||
 ||**"Become a Member" page**|||||||
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
-|||||||||
-||**"Post Detail" page if the user isn't logged in**|||||||
-||link to "Become a Member"|--|Click on the link|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
-||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
+
+
+
 
 
 - Testing sign up function and validation messages
@@ -303,15 +324,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |47|Leave content empty | delete the content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
 |48|Leave content empty | delete the content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
 
-### Validation messages on Leave Comments section on “Detail Page”
-As preparation for test no. 49, 
-1.	log in as testuser2
-2.	go to “My Page”
-3.	Click on the link “Read the full story” of the blog “test title 1”
 
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|49|Leave the field empty| -- | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
 
 ### Validation messages on “Update Comments”
 As preparation for test no. 50, 
@@ -328,7 +341,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ### Testing JaveScript in script.js
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|51| code in ln 9-19 | set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
+
 |52| code in ln 2-6 | log out | log in as testuser2 | Redirected to the home page, and the message "Successfully signed in as testuser2" will be displayed.  The message disappears after 3 seconds. |Redirected to the home page, and the message "Successfully signed in as testuser2" is displayed.  The message disappears after 3 seconds.| pass|2023/4/30|
 
 As preparation for tests no. 53-62, 

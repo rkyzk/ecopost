@@ -24,8 +24,76 @@ class TestViews(TestCase):
         self.post1 = Post.objects.create(title='title1',
                                          author=self.user1,
                                          content='content',
-                                         region='N/A',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         featured_flag=True,
                                          category='others')
+        self.post2 = Post.objects.create(title='title2',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         featured_flag=True,
+                                         category='others')
+        self.post3 = Post.objects.create(title='title3',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         featured_flag=True,
+                                         category='others')
+        self.post4 = Post.objects.create(title='title4',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         category='others')
+        self.post5 = Post.objects.create(title='title5',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         category='others')
+        self.post6 = Post.objects.create(title='title6',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         category='others')
+        self.post7 = Post.objects.create(title='title7',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         category='others')
+        self.post8 = Post.objects.create(title='title8',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         category='others')
+        self.post9 = Post.objects.create(title='title9',
+                                         author=self.user1,
+                                         content='content',
+                                         city='Dublin',
+                                         country='IR',
+                                         status=2,
+                                         category='others')
+        self.post10 = Post.objects.create(title='title10',
+                                          author=self.user1,
+                                          content='content',
+                                          city='Dublin',
+                                          country='IR',
+                                          status=2,
+                                          category='others')                          
         self.comment1 = Comment.objects.create(body='test comment',
                                                commenter=self.user1,
                                                post=self.post1)
@@ -34,6 +102,21 @@ class TestViews(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html', 'base.html')
+
+    def test_get_postlist_display_3_featured_stories(self):
+        response = self.client.get('/')
+        self.assertEqual(len(response.context['post_list']), 3)
+        self.assertEqual(list(response.context['post_list']),
+                         [self.post3, self.post2, self.post1])
+        self.assertContains(response,
+                            '<span><strong>title1</strong></span>',
+                            status_code=200)
+        self.assertContains(response,
+                            '<span><strong>title2</strong></span>',
+                            status_code=200)
+        self.assertContains(response,
+                            '<span><strong>title3</strong></span>',
+                            status_code=200)
 
     def test_get_add_story_will_redirect_to_login_if_not_logged_in(self):
         response = self.client.get(reverse('add_story'))
@@ -459,10 +542,30 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'more_stories.html')
 
-    # need to test the content of object_list?
-    def test_can_get_more_stories(self):
+    def test_more_stories_display_posts_published_in_the_prev_7_days(self):
+        self.post4.published_on = datetime.utcnow() - timedelta(days=10)
+        self.post4.save()
         response = self.client.get('/more_stories/')
-        print(response.context['object_list'])
+        self.assertEqual(len(response.context['object_list']), 6)
+        self.assertEqual(list(response.context['object_list']),
+                         [self.post10, self.post9, self.post8,
+                          self.post7, self.post6, self.post5,])
+
+    # page1&2
+
+    def test_can_get_readers_favorite_stories(self):
+        response = self.client.get('/popular_stories/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'popular_stories.html')
+
+    def test_popular_stories_display_posts_according_to_num_likes(self):
+        self.post4.likes.add(self.user2)
+        self.post4.save()
+        print(self.post4.number_of_likes())
+        response = self.client.get('/popular_stories/')
+        # self.assertEqual(len(response.context['object_list']), 1)
+        #self.assertEqual(response.context['object_list'][0],
+        #                 self.post4)
 
     def test_my_page_GET_will_get_page_if_user(self):
         response = self.c.get('/mypage/user1/')

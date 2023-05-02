@@ -12,7 +12,8 @@ from .models import Post, Comment
 
 class PostList(generic.ListView):
     model = Post
-    queryset = Post.objects.filter(featured_flag=True).order_by("-created_on")[:3]
+    queryset = Post.objects.filter(featured_flag=True).order_by(
+        "-created_on")[:3]
     template_name = "index.html"
 
 
@@ -27,7 +28,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         message = 'Your draft has been saved.'
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1       
-            message = 'Your story has been submitted for evaluation.'            
+            message = 'Your story has been submitted for evaluation.'     
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
@@ -335,7 +336,6 @@ class Search(View):
                 if qs_city != []:
                     query_lists.append(qs_city)
 
-
         if country != 'Choose...':
             no_input = False
             qs_country = [post for post in posts if \
@@ -347,7 +347,6 @@ class Search(View):
             no_input = False
             qs_category = [post for post in posts if post.get_category_display() == category]
             query_lists.append(qs_category)
-        print(query_lists)
         if query_lists != []:
             qs = query_lists[0]
         # filter posts that are present in all lists in query lists (which are
