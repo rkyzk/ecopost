@@ -78,8 +78,8 @@ class PostDetail(View):
                                  'You posted a comment.')
         else:
             comment_form = CommentForm()
-            messages.add_message(request, messages.INFO, "Error occuered. + \
-                                 Your comment was not saved.")
+            messages.add_message(request, messages.INFO, "Error occuered." +
+                                 " Your comment was not saved.")
         return render(
             request,
             "post_detail.html",

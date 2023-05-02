@@ -199,13 +199,15 @@ No. | Goals | How they are achieved |
 As preparatory steps for the following tests:
 1. create a user with username "testuser" and a password "gR48NmYr1"
 2. Log in as "testuser"
-3. delete all existing posts and make 7 posts with following titles and contents:
-Title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7
+3. make 10 posts with following titles and contents:
+Title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
 Content: (for all of them): test content
 City: Dublin
 Country: Ireland
-4. go to admin panel
-5. set featured flag True for blog 1, blog 2, blog 3
+4. go to admin panel.
+5. publish blog 1-10 one by one in the order.
+6. set featured_flag True for blog 1-3.
+7. go to "Post Detail" of blog 4-10 and click on like button
 
 #### Testing common features in all pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
@@ -244,28 +246,54 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 ||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
 
 *Testing validation messages on Leave Comments section on “Detail Page”*
-As preparation for test no. , 
-1.	log in as testuser
-2.	go to “My Page”
-3.	Click on the link “Read the full story” of the blog “test title 1”
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|49|Leave the comment text box empty| Log in as testuser and go to "Post Detail" page of "blog 1"| click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+|||||||||
+||**"More Stories"**|Conduct test. no   consecutively||||||
+||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
+||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
+||**"Popular Stories"**|Conduct test. no   consecutively||||||
+||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
+||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
+
+*Testing validation messages on "Write Stories" page*
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|39|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|40|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|41|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|42|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|41|Leave city empty | Enter 'test title 1' for title, 'content' for content, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
+|42|Leave city empty | Enter "test title 1" for title, 'content' for content, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
+|41|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click on 'save' | A message says "Please select an item in the field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
+|42|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click on 'submit' | A message says "Please select an item in the field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
+||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
+||confirmation dialog|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass||
+||confirmation dialog-cancel|Click on 'Cancel' in the dialog|The dialog disappears, and no change has been made to the page.|The dialog disappears, and no change has been made to the page.| pass||
+||confirmation dialog-submit|Click on 'OK' in the dialog|Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass||
+
+*Testing validation messages on "Update Stories"*
+As preparation for tests no 43-48.  
+- Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
+- click "Save"
+- go to "My page" and click on the link "Read the full story" of the blog "test title 2"
+- click on "Update" 
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|49|Leave the field empty| -- | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
-|49|Enter a space| Enter a space in the comment text box | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"|  ||
-
+|43|Leave all fields empty| delete prepopulated title, content, city | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|44|Leave all fields empty| delete prepopulated title and content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|45|Leave title empty | delete the title | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|46|Leave title empty | delete the title | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|47|Leave content empty | delete the content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
+|48|Leave content empty | delete the content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
 |||||||||
 ||**"Become a Member" page**|||||||
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
-
-
-
-
-
-- Testing sign up function and validation messages
-
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||**"Sign up" page**|||||||
 |19|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
 |20|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
 |21|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
@@ -276,67 +304,29 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |26|Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the first password field; “password” for the second password field |click “Sign up” button|A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
 |27|enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
 |28|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
-
-### Log in page
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||**"Sign up" page**|||||||
 |29|link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
-
-**Testing log-in function and validation messages**
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||**"Log in" page**|||||||
 |30|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
 |31|Leave username empty| Enter “swUf8LcR” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
 |32|Leave password empty| Enter “testuser2” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
 |33|Enter wrong password| Enter “testuser2” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
 |34|Enter wrong username| Enter “testuser3” for username; "swUf8LcR" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
 |35|Remember me function| Enter “testuser2” for username; "swUf8LcR" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser2" and see if the password will be automatically filled | The password will be automatically filled | The password is not filled out. | fail|2023/4/30|
-
-### Log out page
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||**"Sign out" page**|||||||
 |36|“Sign out” button|Log in, click on "Log out"|Click on "Sign out"|Redirected to "Home" page| Redirected to "Home" page |pass|2023/4/30|
 
-### Validation messages on "Write Stories" (Functions other than the validation messages are tested in automated testing. )
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|39|Leave title empty | Enter "content" for content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|40|Leave title empty | Enter "content" for content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|41|Leave content empty | Enter "test title 1" for title | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
-|42|Leave content empty | Enter "test title 1" for title | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
-
-### Validation messages on "Update Stories" (Functions other than the validation messages are tested in automated testing. )
-As preparation for tests no 43-48.  
-- Log in, go to "Write Stories," enter "test title 1" for title; "content" for the content
-- click "Save"
-- go to "My page" and click on the link "Read the full story" of the blog "test title 1"
-- click "Update" 
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|43|Leave all fields empty| delete prepopulated title and content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|44|Leave all fields empty| delete prepopulated title and content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|45|Leave title empty | delete the title | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|46|Leave title empty | delete the title | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|47|Leave content empty | delete the content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
-|48|Leave content empty | delete the content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
-
-
-
-### Validation messages on “Update Comments”
+*Testing validation messages on “Update Comments”*
 As preparation for test no. 50, 
-1.	log in as testuser2
-2.	go to “My Page”
-3.	Click on the link “Read the full story” of the blog “test title 1”
+1.	log in as testuser
+2.	On the home page, click on the link “Read the full story” of the blog “blog 1”
 4.	Enter “test comment” in the leave comments section and click on “Submit”
 5.	Click on the update comment icon
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |50|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+|50|Eneter only a space | delete the prepopulated comment and enter a space | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
 
 ### Testing JaveScript in script.js
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |

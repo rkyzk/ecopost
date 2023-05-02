@@ -44,7 +44,7 @@ class Post(models.Model):
                                    related_name='post_likes',
                                    blank=True)
     city = models.CharField(max_length=25)
-    country = CountryField(max_length=25, default="--")
+    country = CountryField(max_length=25)
     category = models.CharField(max_length=30, choices=CATEGORY,
                                 default='Others')
     bookmark = models.ManyToManyField(User, related_name='bookmarked',

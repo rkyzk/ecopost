@@ -194,7 +194,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
-    # the following 4 needs self.assertRedirects(response, f'/detail/{post.slug}/')?
     def test_post_detail_GET_liked_set_False_if_not_liked(self):
         response = self.c2.get(f'/detail/{self.post1.slug}/')
         self.assertEqual(response.context['liked'], False)
@@ -265,7 +264,17 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_detail.html', 'base.html')
 
-    def test_detail_GET_will_show_update_and_delete_btn_if_status_0_and_user_is_author(self):
+    def test_post_detail_POST_error_message_if_a_space_entered(self):
+        response = self.c.post(f'/detail/{self.post1.slug}/',
+                               {
+                                    'body': ' '
+                                }
+                               )
+        self.assertContains(response, 'Error occuered. ' +
+                            'Your comment was not saved',
+                            status_code=200)
+
+    def test_detail_GET_shows_update_and_delete_btn_if_draft_and_author(self):
         response = self.c.get(f'/detail/{self.post1.slug}/')
         self.assertContains(response,
                             '<button class="btn btn-submit" type="submit">Update</button>',
@@ -274,7 +283,7 @@ class TestViews(TestCase):
                             '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
                             status_code=200)
 
-    def test_detail_GET_will_not_show_update_and_delete_btn_if_status_1_and_user_is_author(self):
+    def test_detail_GET_not_show_update_and_delete_btn_if_status1_and_author(self):
         self.post1.status = 1
         self.post1.save()
         response = self.c.get(f'/detail/{self.post1.slug}/')
@@ -285,7 +294,7 @@ class TestViews(TestCase):
                                '<button type="submit" class="btn btn-submit delete_post item-right" name="delete_post" value="{{post.slug}}">Delete</button>',
                                status_code=200)
     
-    def test_detail_GET_will_not_show_update_and_delete_btn_if_status_2_and_user_is_author(self):
+    def test_detail_GET_not_show_update_and_delete_btn_if_status2_and_author(self):
         self.post1.status = 2
         self.post1.save()
         response = self.c.get(f'/detail/{self.post1.slug}/')
