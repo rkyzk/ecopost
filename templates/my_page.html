@@ -4,25 +4,34 @@
 <h2 class="mt-5 mb-4">Written by Me</h2>
 <div class="row">
   {% for post in my_posts %}
-    <div class="col-md-4">
-      <div class="image-wrapper d-flex justify-content-center">
-        {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top " src="{{ MEDIA_URL }} default.jpg" alt="forest graphic">
-        {% else %}
-          <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-        {% endif %}
-      </div>
-      <div class="mx-2 mt-2 post-text">
-        <span><strong>{{ post.title }}</strong></span><br>
-        <span>By {{ post.author }}</span>
-        <div class="d-flex justify-content-end">
-          <span>{{ post.pub_date }}</span>
-        </div>
-        <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-        <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-      </div>
-      <hr class="line">
+  <div class="col-md-4">
+    <div class="image-wrapper d-flex justify-content-center">
+      {% if "placeholder" in post.featured_image.url %}
+        <img class="card-img-top"
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+          alt="forest graphic">
+      {% else %}
+        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      {% endif %}
     </div>
+    <div class="mx-2 mt-2 post-text">
+      <span><strong>{{ post.title }}</strong></span>
+      <span class="excerpt-author">By {{ post.author }}</span>
+      <div class="date-city d-flex justify-content-end">
+        <ul>
+          {% if post.status == 2 %}
+            <li>Published on {{ post.pub_date }}</li>
+          {% else %}
+            <li>{{ post.status_value }}</li>
+            <li>Created on {{ post.created_on }}</li>
+          {% endif %}
+        </ul>
+      </div>
+      <p class="mt-1 excerpt">{{ post.excerpt }}</p>
+      <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
+    </div>
+    <hr class="line">
+  </div>
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
@@ -49,25 +58,34 @@
 <h2 class="mt-5 mb-4">Commented by Me</h2>
 <div class="row">
   {% for post in commented_posts %}
-    <div class="col-md-4">
-      <div class="image-wrapper d-flex justify-content-center">
-        {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top " src="{{ MEIDA_URL }} default.jpg" alt="forest graphic">
-        {% else %}
-          <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-        {% endif %}
-      </div>
-      <div class="mx-2 mt-2 post-text">
-        <span><strong>{{ post.title }}</strong></span><br>
-        <span>By {{ post.author }}</span>
-        <div class="d-flex justify-content-end">
-          <span>city, country {{ post.pub_date }}</span>
-        </div>
-        <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-        <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-      </div>
-      <hr class="line">
+  <div class="col-md-4">
+    <div class="image-wrapper d-flex justify-content-center">
+      {% if "placeholder" in post.featured_image.url %}
+        <img class="card-img-top"
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+          alt="forest graphic">
+      {% else %}
+        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      {% endif %}
     </div>
+    <div class="mx-2 mt-2 post-text">
+      <span><strong>{{ post.title }}</strong></span>
+      <span class="excerpt-author">By {{ post.author }}</span>
+      <div class="date-city d-flex justify-content-end">
+        <ul>
+          {% if post.status == 2 %}
+            <li>Published on {{ post.pub_date }}</li>
+          {% else %}
+            <li>{{ post.status_value }}</li>
+            <li>Created on {{ post.created_on }}</li>
+          {% endif %}
+        </ul>
+      </div>
+      <p class="mt-1 excerpt">{{ post.excerpt }}</p>
+      <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
+    </div>
+    <hr class="line">
+  </div>
     {% if commented_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
@@ -93,25 +111,34 @@
 <h2 class="mt-5 mb-4">Bookmarked by Me</h2>
 <div class="row">
   {% for post in bookmarked_posts %}
-    <div class="col-md-4">
-      <div class="image-wrapper d-flex justify-content-center">
-        {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top " src="{{ MEDIA_URL }} default.jpg" alt="forest graphic">
-        {% else %}
-          <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-        {% endif %}
-      </div>
-      <div class="mx-2 mt-2 post-text">
-        <span><strong>{{ post.title }}</strong></span><br>
-        <span>By {{ post.author }}</span>
-        <div class="d-flex justify-content-end">
-          <span>city, country {{ post.pub_date }}</span>
-        </div>
-        <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-        <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-      </div>
-      <hr class="line">
+  <div class="col-md-4">
+    <div class="image-wrapper d-flex justify-content-center">
+      {% if "placeholder" in post.featured_image.url %}
+        <img class="card-img-top"
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+          alt="forest graphic">
+      {% else %}
+        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      {% endif %}
     </div>
+    <div class="mx-2 mt-2 post-text">
+      <span><strong>{{ post.title }}</strong></span>
+      <span class="excerpt-author">By {{ post.author }}</span>
+      <div class="date-city d-flex justify-content-end">
+        <ul>
+          {% if post.status == 2 %}
+            <li>Published on {{ post.pub_date }}</li>
+          {% else %}
+            <li>{{ post.status_value }}</li>
+            <li>Created on {{ post.created_on }}</li>
+          {% endif %}
+        </ul>
+      </div>
+      <p class="mt-1 excerpt">{{ post.excerpt }}</p>
+      <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
+    </div>
+    <hr class="line">
+  </div>
     {% if bookmarked_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>

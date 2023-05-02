@@ -8,7 +8,7 @@
       {% csrf_token %}         
       {{ form | crispy }}
       <p class="mt-2">Click 'Save' if you want to edit your draft later.
-        Click 'Submit' if you want to have the draft evaluated for submission.
+        Click 'Submit' if you want to have the draft evaluated for publication.
       </p>
       <button type="submit" class="btn-submit btn-lg mt-2" name="save" value="draft">Save</button>
       <button type="submit" class="btn-submit btn-lg mt-2 btn-right submit-post" name="submit" value="complete">Submit</button> 

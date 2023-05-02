@@ -3,7 +3,8 @@
 <!-- intro -->
 <div class="d-flex justify-content-center">
   <h1 class="align-self-center">ecopost</h1>
-  <img src="/media/blue-earth.jpeg" alt="blue and green earth" class="earth">
+  <img src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682986156/r1a2kw75h5shwzl1e6ur.png"
+    alt="blue and green earth" class="earth">
 </div>
 <div class="d-flex justify-content-center">
   <div class="intro-box mt-2">
@@ -30,15 +31,19 @@
         <div class="col-md-4">
           <div class="image-wrapper d-flex justify-content-center">
             {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top " src="/media/default.jpg" alt="forest graphic">
+              <img class="card-img-top"
+                src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+                alt="forest graphic">
             {% else %}
               <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
             {% endif %}
           </div>
           <div class="mx-2 mt-2 post-text">
-            <span><strong>{{ post.title }}</strong></span><br>
-            <span>By {{ post.author }}</span>
-            <div class="d-flex justify-content-end">
+            <span><strong>{{ post.title }}</strong></span>
+            <span class="item-right"><i class="far fa-heart"></i></span>
+              {{ post.number_of_likes }}</span><br>
+            <span class="excerpt-author">By {{ post.author }}</span>
+            <div class="d-flex justify-content-end pub-date">
               <span>{{ post.pub_date }}</span>
             </div>
             <p class="mt-1 excerpt">{{ post.excerpt }}</p>

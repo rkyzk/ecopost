@@ -248,8 +248,8 @@ class Search(View):
     def get(self, request, *args, **kwargs):
         category_choices = Post._meta.get_field('category').choices
         categories = [cat[1] for cat in category_choices]
-        region_choices = Post._meta.get_field('region').choices
-        regions = [region[1] for region in region_choices]
+        country_choices = Post._meta.get_field('country').choices
+        countries = [country.name for country in country_choices]
         posts = Post.objects.filter(status=2).order_by('-published_on')
         title_query = request.GET.get('title_input')
         title_filter_type = request.GET.get('title_filter')
@@ -263,11 +263,12 @@ class Search(View):
         pub_date_min_query = request.GET.get('date_min')
         pub_date_max_query = request.GET.get('date_max')
         category = request.GET.get('category')
-        region = request.GET.get('region')
+        city = request.GET.get('city')
+        country = request.GET.get('country')
         qs = []
         query_lists = []
         no_input = True
-        
+
         if title_query is not None:
             if title_query.replace(' ', '') != '':
                 no_input = False
@@ -277,7 +278,7 @@ class Search(View):
                     qs_title = posts.filter(title__exact=title_query)
                 if qs_title != []:
                     query_lists.append(qs_title)
-
+        
         if author_query is not None:
             if author_query.replace(' ', '') != '':
                 no_input = False
@@ -289,7 +290,7 @@ class Search(View):
                         author__username__exact=author_query)
                 if qs_author != []:
                     query_lists.append(qs_author)
-
+        
         for kw in kw_query_list:
             if kw is not None:
                 if kw.replace(' ', '') != '':
@@ -298,7 +299,6 @@ class Search(View):
                         Q(title__icontains=kw) | Q(content__icontains=kw))
                     if qs_kw != []:
                         query_lists.append(qs_kw)
-               
 
         if min_liked_query is not None and min_liked_query != '':
             if min_liked_query != 0:
@@ -308,32 +308,46 @@ class Search(View):
                 if qs_liked != []:
                     query_lists.append(qs_liked)
 
-        if pub_date_min_query is not None:   
-            no_input = False
-            print(pub_date_min_query)
-            min_date = datetime.strptime(pub_date_min_query, '%Y-%m-%d')
-            qs_min_pub_date = posts.filter(
-                published_on__date__gte=min_date)
-            query_lists.append(qs_min_pub_date)
+        if pub_date_min_query is not None:
+            if pub_date_min_query.replace(' ', '') != '':
+                no_input = False
+                min_date = datetime.strptime(pub_date_min_query, '%Y-%m-%d')
+                qs_min_pub_date = posts.filter(
+                    published_on__date__gte=min_date)
+                if qs_min_pub_date != []:
+                    if str(qs_min_pub_date) != "<QuerySet []>":
+                        query_lists.append(qs_min_pub_date)
 
         if pub_date_max_query is not None:
             if pub_date_max_query.replace(' ', '') != '':
                 no_input = False
-                max_date_str = pub_date_max_query
-                max_date = datetime.strptime(max_date_str, '%Y-%m-%d')
+                max_date = datetime.strptime(pub_date_max_query, '%Y-%m-%d')
                 qs_max_pub_date = posts.filter(
                     published_on__date__lte=max_date)
-                query_lists.append(qs_max_pub_date)
+                if qs_max_pub_date != []:
+                    if str(qs_max_pub_date) != "<QuerySet []>":
+                        query_lists.append(qs_max_pub_date)
 
-        if region != 'Choose...':
+        if city is not None:
+            if city.replace(' ', '') != '':
+                no_input = False
+                qs_city = posts.filter(city=city)
+                if qs_city != []:
+                    query_lists.append(qs_city)
+
+
+        if country != 'Choose...':
             no_input = False
-            qs_region = [post for post in posts if post.get_region_display() == region]
-            query_lists.append(qs_region)
+            qs_country = [post for post in posts if \
+                          post.get_country_display() == country]
+            if qs_country != []:
+                query_lists.append(qs_country)
+
         if category != 'Choose...':
             no_input = False
             qs_category = [post for post in posts if post.get_category_display() == category]
             query_lists.append(qs_category)
-
+        print(query_lists)
         if query_lists != []:
             qs = query_lists[0]
         # filter posts that are present in all lists in query lists (which are
@@ -349,7 +363,7 @@ class Search(View):
 
         context = {
             'categories': categories,
-            'regions': regions,
+            'countries': countries,
             'queryset': qs,
             'search_clicked': search_clicked,
             'no_input': no_input
@@ -376,4 +390,4 @@ class PopularStories(generic.ListView):
     paginate_by = 6
     posts = Post.objects.filter(
         status=2, featured_flag=False).order_by("-published_on")
-    queryset = [post for post in posts if post.number_of_likes() > 0]
+    queryset = [post for post in posts if post.number_of_likes() >= 1]

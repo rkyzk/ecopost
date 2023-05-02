@@ -412,6 +412,9 @@ Reverse for 'post_detail' with arguments '('',)' not found.
 The word 'search' was recognized as slug.  changed the url from '<slug:slug>/post_detail' to 'detail/<slug:slug>'
 and search.html was rendered.
 
+when search is clicked, ideally, the page should show the seach results section instead of the top of the pages
+so users don't have to scroll down.
+
 urls.py
 '/detail/' added slash at the end and the issue was resolved.
 

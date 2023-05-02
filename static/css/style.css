@@ -66,6 +66,7 @@ a:hover {
 
 .login-status {
   color:rgb(65, 60, 53);
+  padding-right: 20px;
 }
 
 .post-text > p {
@@ -81,9 +82,18 @@ a:hover {
   height: 70px;
 }
 
-.date-city {
-  list-style: none;
+.item-left {
+  padding-right: 20px;
 }
+
+.excerpt-author {
+  margin-top: 5px;
+}
+
+.pub-date {
+  margin-top: 0;
+}
+
 /*   -- index.html --  */
 h1 {
   font-family: 'Montserrat Alternates', sans-serif;
@@ -127,12 +137,14 @@ h1 {
 }
 
 /* post_detail.html */
-.item-left {
-  padding-right: 20px;
+
+.date-city > ul {
+  list-style: none;
 }
 
 .title-box {
   width: 60%;
+  padding-right: 30px;
 }
 
 .img-box {
@@ -195,7 +207,7 @@ a {
 /* Write Stories, Update Posts and Update Comments */
 
 .form-section {
-  min-height: 830px;
+  min-height: 880px;
 }
 
 /* account login */

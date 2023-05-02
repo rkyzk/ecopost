@@ -2,20 +2,28 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <main class="justify-content-center">
-  <section class="d-md-flex title-img-box">
-    <div class="title-box item-left">
+  <section class="d-md-flex title-img-box mt-2">
+    <div class="title-box">
       <h1>{{ post.title }}</h1>
-      <span>Author: {{ post.author }}</span>
-      <div class="d-flex justify-content-end">
-        <ul class="date-city">
-          <li>{{ post.pub_date }}</li>
-          <li>{{ post.city }}, {{ post.country.name }}</li>
-        </ul>
+      <div class="author-date">
+        <span>Author: {{ post.author }}</span>
+        <div class="date-city d-flex justify-content-end">
+          <ul>
+            {% if post.status == 2 %}
+              <li>Published on {{ post.pub_date }}</li>
+            {% else %}
+              <li>{{ post.status_value }}</li>
+              <li>Created on {{ post.created_on }}</li>
+            {% endif %}
+            <li>{{ post.city }}, {{ post.country.name }}</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="img-box">
     {% if "placeholder" in post.featured_image.url %}
-      <img src="{{ MEDIA_URL }} default.jpg" width="100%" alt="graphic of forest">
+      <img src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+        width="100%" alt="graphic of forest">
     {% else %}
       <img src="{{ post.featured_image.url }}" width="100%" alt="{{ post.title }}">
     {% endif %}

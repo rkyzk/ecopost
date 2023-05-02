@@ -7,7 +7,9 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'content', 'featured_image', 'city', 'country', 'category']
+        fields = ['title', 'content', 'featured_image',
+                  'city', 'country', 'category']
+        country = CountryField(blank_label="(select country)")
 
         def __init__(self, *args, **kwargs):
             super(PostForm, self).__init__(*args, **kwargs)

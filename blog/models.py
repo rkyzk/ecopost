@@ -43,8 +43,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(User,
                                    related_name='post_likes',
                                    blank=True)
-    city = models.CharField(max_length=25, blank=True, null=True)
-    country = CountryField(blank=True, max_length=25, null=True)
+    city = models.CharField(max_length=25)
+    country = CountryField(max_length=25, default="--")
     category = models.CharField(max_length=30, choices=CATEGORY,
                                 default='Others')
     bookmark = models.ManyToManyField(User, related_name='bookmarked',
@@ -66,9 +66,13 @@ class Post(models.Model):
     def number_of_likes(self):
         return self.likes.count()
 
-    # def country(self):
-    #     COUNTRY_DICT = dict(countries)
-    #     return COUNTRY_DICT.get(self)
+    def status_value(self):
+        if self.status == 0:
+            return "Saved as draft"
+        elif self.status in [1, 2]:
+            return dict(STATUS)[self.status]
+        else:
+            return "Not published"
 
     def pub_date(self):
         if self.status == 2:
@@ -99,3 +103,10 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.body} by {self.commenter.username}"
 
+
+class Photo(models.Model):
+    name = models.CharField(max_length=25)
+    image = CloudinaryField('image', blank=True)
+
+    def __str__(self):
+        return self.name

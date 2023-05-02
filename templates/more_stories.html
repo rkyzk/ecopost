@@ -4,25 +4,29 @@
   <h2>More Stories</h2>
   <div class="row posts">
     {% for post in object_list %}
-      <div class="col-md-4">
-        <div class="image-wrapper d-flex justify-content-center">
-          {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top " src="{{ MEDIA_URL }} default.jpg" alt="forest graphic">
-          {% else %}
-            <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-          {% endif %}
-        </div>
-        <div class="mx-2 mt-2 post-text">
-          <span><strong>{{ post.title }}</strong></span><br>
-          <span>By {{ post.author }}</span>
-          <div class="d-flex justify-content-end">
-            <span>city, country {{ post.pub_date }}</span>
-          </div>
-          <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-          <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-        </div>
-        <hr class="line">
+    <div class="col-md-4">
+      <div class="image-wrapper d-flex justify-content-center">
+        {% if "placeholder" in post.featured_image.url %}
+          <img class="card-img-top"
+            src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+            alt="forest graphic">
+        {% else %}
+          <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+        {% endif %}
       </div>
+      <div class="mx-2 mt-2 post-text">
+        <span><strong>{{ post.title }}</strong></span>
+        <span class="item-right"><i class="far fa-heart"></i></span>
+          {{ post.number_of_likes }}</span><br>
+        <span class="excerpt-author">By {{ post.author }}</span>
+        <div class="d-flex justify-content-end pub-date">
+          <span>{{ post.pub_date }}</span>
+        </div>
+        <p class="mt-1 excerpt">{{ post.excerpt }}</p>
+        <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
+      </div>
+      <hr class="line">
+    </div>
       {% if forloop.counter|divisibleby:3 %}
     </div>
     <hr class="line-for-lg">

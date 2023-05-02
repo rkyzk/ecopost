@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="d-flex justify-content-center">
   <div class="search-content">
   <h1 class="mt-3">Search Posts</h1>
   <form method="GET" action="{% url 'search' %}">
   {% csrf_token %}
-  <!-- Search by title -->
+    <!-- Search by title -->
     <div class="d-sm-flex mt-3">
       <label for="title_search" class="col-form-label">Title</label>
       <div class="item-right">
@@ -66,33 +65,36 @@
         <input type="date" class="form-control mt-2" id="publishDateMax" name="date_max">
       </div>
     </div>
+    <!-- Search by category -->
+    <div class="form-group d-sm-flex mt-4">
+      <label for="category" class="col-form-label">Category</label>
+      <select id="category" class="form-control item-right" name="category">
+        <option selected>Choose...</option>
+          {% for category in categories %}
+        <option value="{{ category }}">{{ category }}</option>
+          {% endfor %}
+      </select>
+    </div>
+    <!-- Search by city -->
     <div class="d-sm-flex mt-4">
-      <!-- Search by category -->
-      <div class="form-group d-sm-flex">
-        <label for="category" class="col-form-label">Category</label>
-        <select id="category" class="form-control item-right" name="category">
-          <option selected>Choose...</option>
-            {% for category in categories %}
-          <option value="{{ category }}">{{ category }}</option>
-            {% endfor %}
-        </select>
-      </div>
-      <!-- Search by region -->
-      <!-- <div class="form-group d-sm-flex">
-        <label for="region" class="col-form-label item-right">Region</label>
-        <select id="region" class="form-control item-right" name="region">
-          <option selected>Choose...</option>
-            {% for region in regions %}
-          <option value="{{ region }}">{{ region }}</option>
-            {% endfor %}
-        </select>
-      </div> -->
+      <label for="city" class="col-form-label">City</label>
+      <input class="form-control border-right-0 border item-right" type="search" name="city">
+    </div>
+    <!-- Search by country -->
+    <div class="form-group d-sm-flex mt-3">
+      <label for="country" class="col-form-label">Country</label>
+      <select id="country" class="form-control item-right" name="country">
+        <option selected>Choose...</option>
+          {% for country in countries %}
+        <option value="{{ country }}">{{ country }}</option>
+          {% endfor %}
+      </select>
     </div>
     <button type="submit" class="btn-lg btn-submit mt-3" name="search" value="search">Search</button>
   </form>
   </div>
 </div>
-<div class="results">
+<div id="results">
   {% if search_clicked %}
   <hr/>
   <h3 mt-3>Search Results</h3>
@@ -106,15 +108,19 @@
         <div class="col-md-4">
           <div class="image-wrapper d-flex justify-content-center">
             {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top " src="{{ MEDIA_URL }} default.jpg" alt="forest graphic">
+              <img class="card-img-top"
+                src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+                alt="forest graphic">
             {% else %}
               <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
             {% endif %}
           </div>
           <div class="mx-2 mt-2 post-text">
-            <span><strong>{{ post.title }}</strong></span><br>
-            <span>By {{ post.author }}</span>
-            <div class="d-flex justify-content-end">
+            <span><strong>{{ post.title }}</strong></span>
+            <span class="item-right"><i class="far fa-heart"></i></span>
+              {{ post.number_of_likes }}</span><br>
+            <span class="excerpt-author">By {{ post.author }}</span>
+            <div class="d-flex justify-content-end pub-date">
               <span>{{ post.pub_date }}</span>
             </div>
             <p class="mt-1 excerpt">{{ post.excerpt }}</p>
