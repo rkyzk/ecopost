@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  var ButtonValue;
 
   // Confirm before deleting the post
   const DELETE_POST = "Are you sure you want to delete your post?  You won't be able to retrieve the draft."
@@ -14,8 +15,13 @@ $(document).ready(function(){
 
   // Confirm before submitting posts
   const SUBMIT_POST = "After submiiting your post, you won't be able to" +
-                      "update or delete it.  Would you like to proceed?"
+                      " update or delete it.  Would you like to proceed?"
   $('.submit-post').click(function() {
-    return confirm(SUBMIT_POST);
+      ButtonValue = $(this).val();
+  })
+  $('.submit-post-form').submit(function() {
+    if(ButtonValue == 'complete') {
+      return confirm(SUBMIT_POST);
+    }
   })
 });

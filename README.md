@@ -253,17 +253,19 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||**"More Stories"**|Conduct test. no   consecutively||||||
 ||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
 ||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
+||content of the page|--|Go to "More Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
 ||**"Popular Stories"**|Conduct test. no   consecutively||||||
 ||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
 ||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
+||content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
 
 *Testing validation messages on "Write Stories" page*
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|39|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|40|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
+|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|39|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
+|40|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
 |41|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|2023/4/30|
 |42|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
 |41|Leave city empty | Enter 'test title 1' for title, 'content' for content, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
@@ -271,9 +273,9 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |41|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click on 'save' | A message says "Please select an item in the field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
 |42|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click on 'submit' | A message says "Please select an item in the field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
 ||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
-||confirmation dialog|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass||
-||confirmation dialog-cancel|Click on 'Cancel' in the dialog|The dialog disappears, and no change has been made to the page.|The dialog disappears, and no change has been made to the page.| pass||
-||confirmation dialog-submit|Click on 'OK' in the dialog|Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass||
+||confirmation dialog|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass|2023/5/2|
+||confirmation dialog-cancel|--|Click on 'Cancel' in the dialog|The dialog disappears, and no change has been made to the page.|The dialog disappears, and no change has been made to the page.| pass|2023/5/23|
+||confirmation dialog-submit|--|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|Click on 'OK' in the dialog|Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass||
 
 *Testing validation messages on "Update Stories"*
 As preparation for tests no 43-48.  
@@ -284,14 +286,21 @@ As preparation for tests no 43-48.
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|43|Leave all fields empty| delete prepopulated title, content, city | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|44|Leave all fields empty| delete prepopulated title and content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|45|Leave title empty | delete the title | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|46|Leave title empty | delete the title | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the title | pass|2023/4/30|
-|47|Leave content empty | delete the content | click on 'save' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
-|48|Leave content empty | delete the content | click on 'submit' | A message says "Please fill out this field" for the title |  A message says "Please fill out this field" for the content | pass|2023/4/30|
-|||||||||
-||**"Become a Member" page**|||||||
+|43|Make all fields empty| delete prepopulated title, content, city and unselect the country | click on 'save' | A message says "Please fill out this field" for the title | the title field is selected with light blue rim, but the validation message doesn't show up | fail |2023/4/30|
+|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|45|Make title field empty | delete the title but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the title | the title field is selected with light blue rim, but the validation message doesn't show up | fail|2023/4/30|
+|46|Make title field empty | delete the title but keep the other fields populated| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|47|Make content field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|48|Make content field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|47|Make city field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|2023/4/30|
+|48|Make city field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city| pass|2023/4/30|
+|47|Unselect country | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
+|48|Unselect country | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
+* As for testing the flash message in case a space is enetered in the field, please refer to the automated test no.
+
+**"Become a Member" page**
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
 ||**"Sign up" page**|||||||
 |19|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
@@ -326,7 +335,7 @@ As preparation for test no. 50,
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |50|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
-|50|Eneter only a space | delete the prepopulated comment and enter a space | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+* As for testing the flash message in case a space is enetered in the field, please refer to the automated test no.
 
 ### Testing JaveScript in script.js
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |

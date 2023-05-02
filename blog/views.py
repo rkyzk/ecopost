@@ -78,7 +78,7 @@ class PostDetail(View):
                                  'You posted a comment.')
         else:
             comment_form = CommentForm()
-            messages.add_message(request, messages.INFO, "Error occuered." +
+            messages.add_message(request, messages.INFO, "Error occurred." +
                                  " Your comment was not saved.")
         return render(
             request,
@@ -158,7 +158,6 @@ class DeletePost(LoginRequiredMixin, View):
 
 class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
-
     def get(self, request, id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=id)
         comment_form = CommentForm(instance=comment)
@@ -171,24 +170,22 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
             }
         )
 
-
     def post(self, request, id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=id)
         slug = comment.post.slug
         if 'cancel' in request.POST.keys():
             return HttpResponseRedirect(reverse('detail_page', args=[slug]))
         comment_form = CommentForm(self.request.POST, instance=comment)
-        updated = comment_form.save(commit=False)
-        updated.commneter = request.user
-        updated.comment_status = 1
         if comment_form.is_valid():
+            updated = comment_form.save(commit=False)
+            updated.commneter = request.user
+            updated.comment_status = 1
             updated.save()
         else:
             comment_form = CommentForm()
-            messages.add_message(request, messages.INFO, "Error occuered. + \
-                                 Your comment was not saved.")
+            messages.add_message(request, messages.INFO, "Error occurred." +
+                                 " Your comment was not saved.")
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
-
 
     def test_func(self):
         id = self.kwargs.get('id')
@@ -207,7 +204,6 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
         messages.add_message(request, messages.SUCCESS, message)
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
 
-    
     def test_func(self):
         id = self.kwargs.get('id')
         comment = get_object_or_404(Comment, id=id)
@@ -240,7 +236,6 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
             },
         )
 
-
     def test_func(self):
         return self.kwargs.get('pk') == self.request.user.pk
 
@@ -258,8 +253,7 @@ class Search(View):
         author_filter_type = request.GET.get('author_filter')
         kw_query_list = [request.GET.get('keyword_1'),
                          request.GET.get('keyword_2'),
-                         request.GET.get('keyword_3')
-                        ]
+                         request.GET.get('keyword_3')]
         min_liked_query = request.GET.get('liked_count_min')
         pub_date_min_query = request.GET.get('date_min')
         pub_date_max_query = request.GET.get('date_max')
@@ -279,7 +273,7 @@ class Search(View):
                     qs_title = posts.filter(title__exact=title_query)
                 if qs_title != []:
                     query_lists.append(qs_title)
-        
+
         if author_query is not None:
             if author_query.replace(' ', '') != '':
                 no_input = False
@@ -291,7 +285,7 @@ class Search(View):
                         author__username__exact=author_query)
                 if qs_author != []:
                     query_lists.append(qs_author)
-        
+ 
         for kw in kw_query_list:
             if kw is not None:
                 if kw.replace(' ', '') != '':

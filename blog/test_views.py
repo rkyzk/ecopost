@@ -270,8 +270,9 @@ class TestViews(TestCase):
                                     'body': ' '
                                 }
                                )
-        self.assertContains(response, 'Error occuered. ' +
-                            'Your comment was not saved',
+        self.assertContains(response, '<div class="alert alert-info alert-dismissible fade show" id="msg" role="alert">',
+                            status_code=200)
+        self.assertContains(response, '"Error occurred. Your comment was not saved."',
                             status_code=200)
 
     def test_detail_GET_shows_update_and_delete_btn_if_draft_and_author(self):
@@ -560,13 +561,12 @@ class TestViews(TestCase):
                          [self.post10, self.post9, self.post8,
                           self.post7, self.post6, self.post5,])
 
-    # page1&2
-
     def test_can_get_readers_favorite_stories(self):
         response = self.client.get('/popular_stories/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'popular_stories.html')
 
+    #
     def test_popular_stories_display_posts_according_to_num_likes(self):
         self.post4.likes.add(self.user2)
         self.post4.save()
