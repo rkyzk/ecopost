@@ -197,7 +197,7 @@ No. | Goals | How they are achieved |
 
 ### Testing Features
 As preparatory steps for the following tests:
-1. create a user with username "testuser" and a password "gR48NmYr1"
+1. create a user with username "testuser", an email "test@ecopost.com" and a password "gR48NmYr1"
 2. Log in as "testuser"
 3. make 10 posts with following titles and contents:
 Title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
@@ -215,7 +215,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |19.|Logo link|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
 |||||||||
 ||**Navigation links**|||||||
-|20|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home|Redirected to ”Home”|pass|2023/4/29|
+|20|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home"|Redirected to ”Home”|pass|2023/4/29|
 |21|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
 |22|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
 |23|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
@@ -223,41 +223,51 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |9|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
 |10|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
 
-**Testing hamburger menu for screen sizes below 700px**
+**Testing hamburger menu for screen sizes below 700px**<br>
 *Conduct test no. and consecutively without any actions in between*
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||Hamburger menu| set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
 ||Hamburger menu| --| click on the hamburger menu for the second time | the Menu box closes |the Menu box closes| pass|2023/4/30|
+|||||||||
 ||**links in the footer**||||||
 |11|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
 |12|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 |||||||||
+||**The flash message**||||||
+|| code in ln 2-6 in script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 3 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 3 seconds.| pass|2023/4/30|
+
+#### Testing features on individual pages
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||**“Home” Page**||||||||
-|14|link ”Read the full story” at the bottom of the first excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
-|15|link ”Read the full story” at the bottom of the second excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
-|16|link ”Read the full story” at the bottom of the third excerpt |Go to “Home”|Click on the link|Detail page of the post will be displayed.| Detail page of the post will be displayed.|pass|2023/4/29|
-|17|link ”More stories from this week” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
-|18|link ”Readers’ favorite stories of all time” at the bottom of the third excerpt |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
+|14|link ”Read the full story” at the bottom of "blog 3" |Go to “Home”|Click on the link|Detail page of "blog 3" will be displayed.| Detail page of "blog 3" is displayed.|pass|2023/4/29|
+|15|link ”Read the full story” at the bottom of "blog 2" |Go to “Home”|Click on the link|Detail page of "blog 2" will be displayed.| Detail page of "blog2" is displayed.|pass|2023/4/29|
+|16|link ”Read the full story” at the bottom of "blog1" |Go to “Home”|Click on the link|Detail page of "blog 1" will be displayed.| Detail page of "blog 1" is displayed.|pass|2023/4/29|
+|17|link ”More stories from this week” |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
+|18|link ”Readers’ favorite stories of all time” |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
 |||||||||
 ||**"Post Detail"**|||||||
-||link to "Become a Member" when the user isn't logged in|--|Click on the link|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
+||link to "Become a Member"|Log out|Click on the link|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
 ||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
 
 *Testing validation messages on Leave Comments section on “Detail Page”*
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|49|Leave the comment text box empty| Log in as testuser and go to "Post Detail" page of "blog 1"| click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+|49|Leave the comment text box empty| Log in as testuser and go to "Post Detail" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
 |||||||||
 ||**"More Stories"**|Conduct test. no   consecutively||||||
 ||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
-||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
+||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
 ||content of the page|--|Go to "More Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
 ||**"Popular Stories"**|Conduct test. no   consecutively||||||
 ||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
 ||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
 ||content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
+|||||||||
+||**"Search Stories" page|||||||
+||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/23|
 
 *Testing validation messages on "Write Stories" page*
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
@@ -275,7 +285,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
 ||confirmation dialog|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass|2023/5/2|
 ||confirmation dialog-cancel|--|Click on 'Cancel' in the dialog|The dialog disappears, and no change has been made to the page.|The dialog disappears, and no change has been made to the page.| pass|2023/5/23|
-||confirmation dialog-submit|--|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|Click on 'OK' in the dialog|Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass||
+||confirmation dialog-submit|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country. Click on 'Submit'|Click on 'OK' in the dialog|Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass|2023/5/2|
 
 *Testing validation messages on "Update Stories"*
 As preparation for tests no 43-48.  
@@ -298,9 +308,9 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |48|Unselect country | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
 * As for testing the flash message in case a space is enetered in the field, please refer to the automated test no.
 
-**"Become a Member" page**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||**"Become a Member" page**|||||||
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
 ||**"Sign up" page**|||||||
 |19|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
@@ -316,14 +326,14 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||**"Sign up" page**|||||||
 |29|link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
 ||**"Log in" page**|||||||
-|30|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
-|31|Leave username empty| Enter “swUf8LcR” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
-|32|Leave password empty| Enter “testuser2” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
-|33|Enter wrong password| Enter “testuser2” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-|34|Enter wrong username| Enter “testuser3” for username; "swUf8LcR" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-|35|Remember me function| Enter “testuser2” for username; "swUf8LcR" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser2" and see if the password will be automatically filled | The password will be automatically filled | The password is not filled out. | fail|2023/4/30|
+|30|Enter all appropriate data| Enter “testuser”; “test@ecopost.com” for email; “gR48NmYr1” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser” | Redirected to “Home” page, and a message says “Successfully signed in as testuser”| pass|2023/4/30|
+|31|Leave username empty| Enter “gR48NmYr1” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
+|32|Leave password empty| Enter “testuser” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
+|33|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|34|Enter wrong username| Enter “testuser2” for username; "gR48NmYr1" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|35|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser" for username | The password will be automatically filled | The password is not automatically filled out. | fail|2023/4/30|
 ||**"Sign out" page**|||||||
-|36|“Sign out” button|Log in, click on "Log out"|Click on "Sign out"|Redirected to "Home" page| Redirected to "Home" page |pass|2023/4/30|
+|36|“Sign out” button|Log in as "testuser", click on "Log out"|Click on "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|2023/4/30|
 
 *Testing validation messages on “Update Comments”*
 As preparation for test no. 50, 
@@ -337,48 +347,46 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |50|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
 * As for testing the flash message in case a space is enetered in the field, please refer to the automated test no.
 
-### Testing JaveScript in script.js
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-
-|52| code in ln 2-6 | log out | log in as testuser2 | Redirected to the home page, and the message "Successfully signed in as testuser2" will be displayed.  The message disappears after 3 seconds. |Redirected to the home page, and the message "Successfully signed in as testuser2" is displayed.  The message disappears after 3 seconds.| pass|2023/4/30|
-
+**Testing "My Page"**
 As preparation for tests no. 53-62, 
-1. log in as testuser2
-2. make 4 posts
-3. go to admin panel and publish the posts
-4. go to detail page of the posts and bookmark them.
-5. enter comments "test comment" and click on "submit"
+1. sign up as a new user testuser3
+2. go to "Write Stories" page, and make 4 new posts with the titles: blog 11, blog 12, blog 13, blog 14.
+3. go to admin panel and publish the 4 posts one by one in the ascending order.
+4. go to detail page of the 4 posts and bookmark them.
+5. enter "test comment" as comment in all 4 posts and click on "submit"
 
-**Testing show more and show less buttons in "Written by me" section**
-Conduct test no. 53-55 consecutively without taking any other steps than written items.
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|53| code in ln 22-36 | -- |Click on "Show more"| The fouth post is displayed. The label of the clicked button will change to "Show less" | The fouth post is displayed.  The clicked button says "Show less"| pass|2023/4/30|
-|54| code in ln 22-36 | -- |Click on "Show less" (The upper of the two "Show less" buttons)| The fouth post will disappear. The clicked button will say "Show more" | The fouth post is displayed.  The clicked button says "Show more" | pass|2023/4/30|
-|55| code in ln 22-36 | click on "Show more" in "Commented by me" |Click on "Show less" (One below the fourth post)| The fouth post will disappear. The upper button will say "Show more" | The fouth post disappears.  The upper button says "Show more" | pass|2023/4/30|
+||**"Written by me" section**|||||||
+||The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appears in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appears in the orderand, and "Show more" button is shown.|pass|2023/5/23|
+||The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
+||**"Commented by me" section**|||||||
+||The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appears in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appears in the orderand, and "Show more" button is shown.|pass|2023/5/23|
+||The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
+||**"Bookmarked by me" section**|||||||
+||The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appears in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appears in the order, and "Show more" button is shown.|pass|2023/5/23|
+||The layout in "Bookmarked by me"|--| Click on "Show more" | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appears in the order, and the "Show more" button is shown. | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appears in the orderand, and the "Show more" button is shown.|pass|2023/5/23|
+|||||||||
+||**Show more/less buttons in "Written by me" section**|||||||
+|53|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
+|54|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
+|54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
+||**Show more/less buttons in "Commented by me" section**|||||||
+|53|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
+|54|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
+|54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
+||**Show more/less buttons in "Bookmarked by me" section**|||||||
+|53|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
+|54|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
+|54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
 
-**Testing show more and show less buttons in "Commented by me" section**
-Conduct test no. 56-58 consecutively without taking any other steps than written items.
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|56| code in ln 22-36 | -- |Click on "Show more"| The fouth post is displayed. The label of the clicked button will change to "Show less" | The fouth post is displayed.  The clicked button says "Show less"| pass|2023/4/30|
-|57| code in ln 22-36 | -- |Click on "Show less" (The upper of the two "Show less" buttons)| The fouth post will disappear. The clicked button will say "Show more" | The fouth post is displayed.  The clicked button says "Show more" | pass|2023/4/30|
-|58| code in ln 22-36 | click on "Show more" in "Commented by me" |Click on "Show less" (One below the fourth post)| The fouth post will disappear. The upper button will say "Show more" | The fouth post disappears.  The upper button says "Show more" | pass|2023/4/30|
-
-**Testing show more and show less buttons in "Bookmarked by me" section**
-Conduct test no. 59-61 consecutively without taking any other steps than written items.
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|59| code in ln 22-36 | -- |Click on "Show more"| The fouth post is displayed. The label of the clicked button will change to "Show less" | The fouth post is displayed.  The clicked button says "Show less"| pass|2023/4/30|
-|60| code in ln 22-36 | -- |Click on "Show less" (The upper of the two "Show less" buttons)| The fouth post will disappear. The clicked button will say "Show more" | The fouth post is displayed.  The clicked button says "Show more" | pass|2023/4/30|
-|61| code in ln 22-36 | click on "Show more" in "Bookmarked by me" |Click on "Show less" (One below the fourth post)| The fouth post will disappear. The upper button will say "Show more" | The fouth post disappears.  The upper button says "Show more" | pass|2023/4/30|
-
-**Testing if clicking on show more & show less buttons in different sections don't disrupt the functions**
+**Testing if clicking on show more & show less buttons in different sections doesn't disrupt the functions**
 As preparation
 1. click on "Show more" in "Written by me"
 2. click on "Show more" in "Commented by me"
-|62|code in ln 22-36 | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| The fouth post of "Commented by me" will disappear. The upper button in "Commented by me" section will say "Show more" | The fouth post of "Commented by me" disappears. The upper button in "Commented by me" section says "Show more"  | pass|2023/4/30|
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|62|Show more/less buttons across different sections | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| "blog 11" in "Commented by me" will disappear. The upper button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The upper button in "Commented by me" section says "Show more" | pass|2023/4/30|
 
 ### Testing JaveScript in dialog.js
 As preparation
@@ -396,7 +404,9 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |62| code in ln 14-18 | go to "Write Stories." Enter "test blog 3" for title; "content" for "content" | Click on "Submit" | a dialog box will show up and say "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" | The message "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" shows up in a dialog box| pass|2023/4/30|
 
 ### Test summary
-All features are functioning normally except for "Remember me" function in the test no. 35.
+For the most part the features are functioning normally.
+Tests that failed are as follows: 
+- "Remember me" function in the test no. 35.
 in general clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to logs in the next time.  But as the test result suggests, the password doesn't get prepopulated. It needs to be fixed in the future.
 
 - - -
