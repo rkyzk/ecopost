@@ -160,18 +160,16 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     template_name = "update_post.html"
     form_class = PostForm
 
+    def get_context_data(self, **kwargs):
+        context = super(UpdatePost, self).get_context_data(**kwargs)
+        context['slug'] = self.kwargs.get('slug')
+        return context
+
     def form_valid(self, form):
         """
         validates the form. If validated, saves it.
         arguments: form
         """
-        # if 'cancel' is clicked, show 'post detail'
-        # without updating the post.
-        if 'cancel' in self.request.POST.keys():
-            slug = self.kwargs.get('slug')
-            message = "Your story wasn't updated."
-            messages.add_message(self.request, messages.INFO, message)
-            return HttpResponseRedirect(reverse('detail_page', args=[slug]))
         form.instance.author = self.request.user
         message = 'The change has been saved.'
         # If the post is submitted, set status to 1 ('Submitted')

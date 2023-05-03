@@ -13,7 +13,7 @@
         </p>
         <button type="submit" class="btn-submit btn-lg" name="save" value="draft">Save changes</button>
         <button type="submit" class="btn-submit btn-lg item-right submit-post" name="submit" value="complete">Submit</button>
-        <button type="submit" class="btn-submit btn-lg item-right" name="cancel" value="cancel">Cancel Update</button>
+        <a href="{% url 'detail_page' slug %}" class="btn-submit btn-lg item-right">Cancel Update</a>
       </div>
     </form>
   </div>
