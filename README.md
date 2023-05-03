@@ -200,10 +200,10 @@ As preparatory steps for the following tests:
 1. create a user with username "testuser", an email "test@ecopost.com" and a password "gR48NmYr1"
 2. Log in as "testuser"
 3. make 10 posts with following titles and contents:
-Title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
-Content: (for all of them): test content
-City: Dublin
-Country: Ireland
+title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
+content: (for all of them): test content
+city: Dublin
+country: Ireland
 4. go to admin panel.
 5. publish blog 1-10 one by one in the order.
 6. set featured_flag True for blog 1-3.
@@ -236,7 +236,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 |||||||||
 ||**The flash message**||||||
-|| code in ln 2-6 in script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 3 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 3 seconds.| pass|2023/4/30|
+|| setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 3 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 3 seconds.| pass|2023/4/30|
 
 #### Testing features on individual pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
@@ -249,7 +249,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |18|link ”Readers’ favorite stories of all time” |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
 |||||||||
 ||**"Post Detail"**|||||||
-||link to "Become a Member"|Log out|Click on the link|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
+||link to "Become a Member"|Log out|Click on the link on the right side of the comments section|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
 ||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
 
 *Testing validation messages on Leave Comments section on “Detail Page”*
@@ -258,16 +258,39 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |49|Leave the comment text box empty| Log in as testuser and go to "Post Detail" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
 |||||||||
 ||**"More Stories"**|Conduct test. no   consecutively||||||
-||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
+||link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
 ||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
 ||content of the page|--|Go to "More Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
 ||**"Popular Stories"**|Conduct test. no   consecutively||||||
-||link 'NEXT' when paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
-||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|Click on PREV|The first page is displayed.|pass|2023/5/2|
+||link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
+||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
 ||content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
 |||||||||
 ||**"Search Stories" page|||||||
-||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/23|
+||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
+**Testing case sensitivity**
+As preparatory steps for test no. :
+- Create a user "John" and "susan" 
+- log in as "John," and on "Write Stories" page, make two posts:
+1. title: 'Gray Cat'; content: 'test'; city: 'lowercased city'; country: 'Afghanistan'
+2. title: 'white cat'; content: 'test'; city: 'Capitalized City'; country: 'Afghanistan'
+- log in as "susan" and make one post:
+title: 'Brown Dog'; content: 'test'; city: 'test'; country: 'Afghanistan'
+
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||get capitalized title - contains|go to "Search" page. | Enter 'gray cat' for title, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+||get capitalized title - is exactly |go to "Search" page. | Enter 'gray cat' for title, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+||get lowercased title - contains|go to "Search" page. | Enter 'White Cat' for title, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
+||get lowercased title - is exactly |go to "Search" page. | Enter 'White Cat' for title, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
+||get capitalized author - contains|go to "Search" page. | Enter 'john smith' for author, select 'contains,' click on 'Search'|Blogs "Gray Cat" and "white cat" will be displayed.|Blogs "Gray Cat" and "white cat" are displayed.|pass|2023/5/2|
+||get capitalized author - is exactly |go to "Search" page. | Enter 'Susan Adams' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+||get lowercased author - contains|go to "Search" page. | Enter 'Susan Adams' for author, select 'contains,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+||get lowercased title - is exactly |go to "Search" page. | Enter 'Susan Adams' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+||get capitalized city - contains|go to "Search" page. | Enter 'capitalized city' for city, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" are displayed.|pass|2023/5/2|
+||get capitalized city - is exactly |go to "Search" page. | Enter 'capitalized city' for city, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
+||get lowercased city - contains|go to "Search" page. | Enter 'Lowercased City' for city, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+||get lowercased city - is exactly |go to "Search" page. | Enter 'Lowercased City' for city, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
 
 *Testing validation messages on "Write Stories" page*
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |

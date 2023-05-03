@@ -644,7 +644,7 @@ class TestSearchView(TestCase):
                             '<p>Please enter at least one field</p>')
 
     def test_search_entering_only_spaces_will_show_message(self):
-        response = self.client.get('/search_story/',    
+        response = self.client.get('/search_story/', 
                                    {'title_input': ' ',
                                     'author_input': ' ',
                                     'keyword_1': ' ',
@@ -658,7 +658,7 @@ class TestSearchView(TestCase):
                             '<p>Please enter at least one field</p>')
 
     def test_search_show_message_no_matching_results_if_no_match(self):
-        response = self.client.get('/search_story/',    
+        response = self.client.get('/search_story/',
                                    {'title_input': 'non existing post',
                                     'author_input': '',
                                     'keyword_1': '',
@@ -680,6 +680,7 @@ class TestSearchView(TestCase):
                                     'search': 'search'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
+        self.assertEqual(len(response.context['queryset']), 2)
         self.assertEqual(list(response.context['queryset']),
                          [self.post2, self.post1])
 
@@ -688,7 +689,6 @@ class TestSearchView(TestCase):
                                    {'title_input': 'rabbit',
                                     'title_filter': 'contains',
                                     'category': 'Choose...',
-                                    'region': 'Choose...',
                                     'search': 'search'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')

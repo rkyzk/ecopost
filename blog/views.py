@@ -334,7 +334,7 @@ class Search(View):
                 if title_filter_type == "contains":
                     qs_title = posts.filter(title__icontains=title_query)
                 else:
-                    qs_title = posts.filter(title__exact=title_query)
+                    qs_title = posts.filter(title__iexact=title_query)
                 if qs_title != []:
                     query_lists.append(qs_title)
 
@@ -346,7 +346,7 @@ class Search(View):
                         author__username__icontains=author_query)
                 else:
                     qs_author = posts.filter(
-                        author__username__exact=author_query)
+                        author__username__iexact=author_query)
                 if qs_author != []:
                     query_lists.append(qs_author)
  
@@ -390,7 +390,7 @@ class Search(View):
         if city is not None:
             if city.replace(' ', '') != '':
                 no_input = False
-                qs_city = posts.filter(city__exact=city)
+                qs_city = posts.filter(city__iexact=city)
                 if qs_city != []:
                     query_lists.append(qs_city)
 
