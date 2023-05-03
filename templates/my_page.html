@@ -23,7 +23,7 @@
             <li>Published on {{ post.pub_date }}</li>
           {% else %}
             <li>{{ post.status_value }}</li>
-            <li>Created on {{ post.created_on }}</li>
+            <li>Created on {{ post.created_on|date:'M d, Y'  }}</li>
           {% endif %}
         </ul>
       </div>

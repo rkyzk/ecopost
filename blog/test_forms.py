@@ -17,7 +17,8 @@ class TestPostForm(TestCase):
             'title': '',
             'author': self.user_1,
             'content': 'content',
-            'region': 'N/A',
+            'city': 'test',
+            'country': 'IR',
             'category': 'others'
         })
         self.assertFalse(form.is_valid())
@@ -29,7 +30,8 @@ class TestPostForm(TestCase):
             'title': 'title_3',
             'author': self.user_1,
             'content': '',
-            'region': 'N/A',
+            'city': 'test',
+            'country': 'IR',
             'category': 'others'
         })
         self.assertFalse(form.is_valid())
@@ -42,34 +44,19 @@ class TestPostForm(TestCase):
             'title': 'title_3',
             'author': self.user_1,
             'content': 'content',
-            'region': 'N/A',
+            'city': 'test',
+            'country': 'IR',
             'category': 'others'
         })
         self.assertTrue(form.is_valid())
-
-    # def test_post_form_init_method_will_set_image_required_to_False(self):
-    #     PostForm.__init__()
-    #     self.asserFalse(PostForm.fields['featured_image'].required)
-
-    def test_post_region_is_required(self):
-        form = PostForm({
-            'title': 'title_3',
-            'author': self.user_1,
-            'content': 'content',
-            'region': '',
-            'category': 'others'
-        })
-        self.assertFalse(form.is_valid())
-        self.assertIn('region', form.errors.keys())
-        self.assertEqual(form.errors['region'][0],
-                         'This field is required.')
 
     def test_post_category_is_required(self):
         form = PostForm({
             'title': 'title_3',
             'author': self.user_1,
             'content': 'content',
-            'region': 'N/A',
+            'city': 'test',
+            'country': 'IR',
             'category': ''
         })
         self.assertFalse(form.is_valid())
@@ -77,11 +64,39 @@ class TestPostForm(TestCase):
         self.assertEqual(form.errors['category'][0],
                          'This field is required.')
 
+    def test_post_city_is_required(self):
+        form = PostForm({
+            'title': 'title_3',
+            'author': self.user_1,
+            'content': 'content',
+            'city': '',
+            'country': 'IR',
+            'category': 'others'
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn('city', form.errors.keys())
+        self.assertEqual(form.errors['city'][0],
+                         'This field is required.')
+
+    def test_post_country_is_required(self):
+        form = PostForm({
+            'title': 'title_3',
+            'author': self.user_1,
+            'content': 'content',
+            'city': 'test',
+            'category': 'others'
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn('country', form.errors.keys())
+        self.assertEqual(form.errors['country'][0],
+                         'This field is required.')
+
     def test_fields_are_explicit_in_form_metaclass(self):
         form = PostForm()
         self.assertEqual(
             form.Meta.fields,
-            ['title', 'content', 'featured_image', 'region', 'category']
+            ['title', 'content', 'featured_image',
+            'city', 'country', 'category']
         )
 
 

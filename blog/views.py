@@ -175,7 +175,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         # If the post is submitted, set status to 1 ('Submitted')
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
-            message = "Your story has been submitted for evaluation." + \
+            message = "You submitted your post. " + \
                       "We'll contact you when evaluation is done."
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
@@ -347,7 +347,7 @@ class Search(View):
                         author__username__iexact=author_query)
                 if qs_author != []:
                     query_lists.append(qs_author)
- 
+
         for kw in kw_query_list:
             if kw is not None:
                 if kw.replace(' ', '') != '':
@@ -391,14 +391,14 @@ class Search(View):
                 qs_city = posts.filter(city__iexact=city)
                 if qs_city != []:
                     query_lists.append(qs_city)
-
-        if country != 'Choose...':
+       
+        if country is not None:
             no_input = False
             qs_country = [post for post in posts if \
                           post.get_country_display() == country]
             if qs_country != []:
                 query_lists.append(qs_country)
-
+        print(category)
         if category != 'Choose...':
             no_input = False
             qs_category = [post for post in posts if post.get_category_display() == category]
@@ -443,6 +443,6 @@ class PopularStories(generic.ListView):
     model = Post
     template_name = "popular_stories.html"
     paginate_by = 6
-    posts = Post.objects.filter(
-        status=2, featured_flag=False).order_by("-published_on")
+    posts = Post.objects.filter(status=2,
+                                featured_flag=False).order_by("-published_on")
     queryset = [post for post in posts if post.number_of_likes() >= 1]

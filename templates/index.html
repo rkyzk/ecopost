@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- intro -->
+<!-- heading -->
 <div class="d-flex justify-content-center">
   <h1 class="align-self-center">ecopost</h1>
   <img src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682986156/r1a2kw75h5shwzl1e6ur.png"
@@ -12,13 +12,13 @@
     <p>Feel like individuals can't do much to save the environment?
        Don't give up.  This website is for anyone who wants to find out
        what some local communities and individuals all over the world are doing
-       to tackle the environment crisis.  Read their stories, get inspired,
+       to tackle the environmental crisis.  Read their stories, get inspired,
        leave comments to the posts and share your stories.
-       You can connect with those who are taking actions, join activities
+       You can connect with those who are taking actions, join the activities
        in your region, or start up your own movements.
     </p>
-    <p>In order to submit your stories for publication and leave comments
-       on posts, <a href="{% url 'account_signup' %}">sign up</a> for a membership.
+    <p>In order to submit your stories for publication and/or leave comments
+       on the posts, <a href="{% url 'account_signup' %}">become a member</a>.
     </p>
     <hr>
   </div>
@@ -40,8 +40,8 @@
           </div>
           <div class="mx-2 mt-2 post-text">
             <span><strong>{{ post.title }}</strong></span>
-            <span class="item-right"><i class="far fa-heart"></i></span>
-              {{ post.number_of_likes }}</span><br>
+            <span class="item-right text-secondary"><i class="far fa-heart"></i></span>
+            <span class="left-space text-secondary">{{ post.number_of_likes }}</span><br>
             <span class="excerpt-author">By {{ post.author }}</span>
             <div class="d-flex justify-content-end pub-date">
               <span>{{ post.pub_date }}</span>

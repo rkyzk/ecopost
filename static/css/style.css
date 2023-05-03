@@ -124,6 +124,10 @@ h1 {
   margin-top: 15px;
 }
 
+.left-space {
+  margin-left: 2px;
+}
+
 .more-posts {
   margin-top: 50px;
  }
@@ -196,10 +200,6 @@ footer {
   display: block;
 }
 
-/* .bm-text {
-  font-size: 0.5rem;
-} */
-
 a {
   text-decoration: none;
 }
@@ -215,10 +215,31 @@ a {
   display: block;
 }
 
+.authentication {
+  margin: 0 auto;
+  width: 500px;
+}
+
 /* search.html */
 
 .item-right {
   margin-left: 10px;
+}
+
+/* update_post.html  */
+
+.cancel {
+  padding: 0.7rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+  background-color: rgb(141, 111, 56);
+  border: none;
+  color: #fff;
+}
+
+.cancel:hover {
+  text-decoration: none;
+  color: #fff;
 }
 
 @media screen and (max-width: 1150px) {
@@ -367,6 +388,10 @@ a {
   .d-sm-mt-custom {
     margin-top: 10px;
   }
+
+  .authentication {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -382,7 +407,7 @@ a {
 }
 
 @media screen and (max-width: 420px) {
-  .intro-box, .content, .search-contnet, section {
+  .intro-box, .content, .search-contnet, section, .authentication {
     width: 100%;
   }
 

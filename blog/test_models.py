@@ -5,7 +5,7 @@ from sqlite3 import IntegrityError
 from .models import Post, Comment
 
 
-class TestPostModels(TestCase):
+class TestPostModel(TestCase):
 
     def setUp(self):
         """create test users and posts"""
@@ -35,11 +35,11 @@ class TestPostModels(TestCase):
     def test_featured_image_default_to_placeholder(self):
         self.assertEqual(self.post1.featured_image, 'placeholder')
 
-    def test_region_default_to_NA(self):
-        self.assertEqual(self.post1.region, 'N/A')
-
     def test_category_default_to_Others(self):
         self.assertEqual(self.post1.category, 'Others')
+
+    def test_status_default_to_0(self):
+        self.assertEqual(self.post1.status, 0)
 
     def test_posts_ordered_by_created_on_newest_to_oldest(self):
         posts = Post.objects.all()
@@ -58,6 +58,21 @@ class TestPostModels(TestCase):
         self.post1.likes.add(self.user2)
         self.assertEqual(self.post1.number_of_likes(),
                          self.post1.likes.count())
+
+    def test_status_value_returns_saved_as_draft_if_status_0(self):
+        self.assertEqual(self.post1.status_value(), 'Saved as draft')
+
+    def test_status_value_returns_submitted_if_status_1(self):
+        self.post1.status = 1
+        self.assertEqual(self.post1.status_value(), 'Submitted')
+
+    def test_status_value_returns_submitted_if_status_2(self):
+        self.post1.status = 2
+        self.assertEqual(self.post1.status_value(), 'Published')
+
+    def test_status_value_returns_not_published_if_status_3(self):
+        self.post1.status = 3
+        self.assertEqual(self.post1.status_value(), 'Not published')
 
     def test_pub_date_returns_string_message_if_not_published(self):
         self.assertEqual(self.post2.pub_date(), 'Not published')

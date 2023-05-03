@@ -43,11 +43,10 @@ Members can update or delete their posts before submitting them<br>
 The overall appearance is kept simple and clean in order to avoid interfering with various colors that the featured images will bring in.
 
 **About the Colors**
-- The background is white.
 - Beige, green and blue are used for titles and navigation links. These colors are the colors of soil, the ocean, the sky and plants, so they suit the theme of the site.
 
 **About the Fonts**
-- Montserrat was used for headings because it's stylish and stands out from the rest when used sparingly.
+- Montserrat Alternates was used for headings because it's stylish and stands out from the rest when used sparingly.
 - For the content Lato is used since it's readable and familiar to users. 
 
 ## Each Part and Function in Detail
@@ -94,7 +93,7 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - The managers can set the number of likes above which posts are going to be included on this page.
 - Each page will show 6 posts, and if there are more than 6 posts, the posts will be paginated.
 
-### Post Detail Page
+### Detail Page
 - The full content of the post is presented.
 - At the top left, the title, author, region and published dates are stated.
 - At the top right the featured image is shown.
@@ -164,8 +163,23 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 
 - - -
 ## Automated Testing
+Automated tests can be found in test_models.py, test_forms.py and test_views.py
+
+Line index of views tested in test_views.py
+- PostListView line 86-156
+- AddStoryView line 159-291
+- PostLikeView line 294-308
+- BookmarkView line 311-316
+- UpdateCommentView line 328-359
+- DeleteCommentView line 362-367
+- UpdatePostView line 370-521
+- DeletePostView line 524-554
+- MoreStoriesView line 557-568
+- PopularStoriesView line 571
+- MyPageView line
 
 ## Manual Testing
+I conducted manual testing for the aspects that weren't covered in automated testing.
 
 ### Testing User Stories
 
@@ -186,7 +200,7 @@ No. | Goals | How they are achieved |
 |10|Delete posts | By clicking ‘Delete’ button on “Detailed Page,” they can delete their drafts. |
 |11| Edit comments | By clicking edit icon, users can update their comments. |
 |12| Delete comments | By clicking trash bin icon, users can delete their comments. |
-|13| Quick access to one's own posts and other posts | ‘My page’ displays lists of posts written, commented and bookmarked by the user. |
+|13| Quick access to one's own posts and other posts |‘My page’ displays lists of posts written, commented and bookmarked by the user.|
 ||||
 ||**Admin**||
 |14| Select posts to be published | Posts’ status is set to ‘Submitted’ when users submit their drafts, and they will not be displayed in public.  Only when admin changes the status to ‘Published,’ the posts will be publicized. |
@@ -199,7 +213,7 @@ No. | Goals | How they are achieved |
 As preparatory steps for the following tests:
 1. create a user with username "testuser", an email "test@ecopost.com" and a password "gR48NmYr1"
 2. Log in as "testuser"
-3. make 10 posts with following titles and contents:
+3. make 10 posts with the following field values:
 title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
 content: (for all of them): test content
 city: Dublin
@@ -207,7 +221,7 @@ country: Ireland
 4. go to admin panel.
 5. publish blog 1-10 one by one in the order.
 6. set featured_flag True for blog 1-3.
-7. go to "Post Detail" of blog 4-10 and click on like button
+7. go to "Detail Page" of blog 4-10 and click on like button
 
 #### Testing common features in all pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
@@ -235,27 +249,35 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |12|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 |||||||||
-||**The flash message**||||||
+||**The flash messages**||||||
 || setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 3 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 3 seconds.| pass|2023/4/30|
 
 #### Testing features on individual pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||**“Home” Page**||||||||
+|14|link ”become a member” in the introduction |Go to “Home”|Click on the link|Redirected to "Become a member."| Redirected to "Become a member."|pass|2023/4/29|
 |14|link ”Read the full story” at the bottom of "blog 3" |Go to “Home”|Click on the link|Detail page of "blog 3" will be displayed.| Detail page of "blog 3" is displayed.|pass|2023/4/29|
 |15|link ”Read the full story” at the bottom of "blog 2" |Go to “Home”|Click on the link|Detail page of "blog 2" will be displayed.| Detail page of "blog2" is displayed.|pass|2023/4/29|
 |16|link ”Read the full story” at the bottom of "blog1" |Go to “Home”|Click on the link|Detail page of "blog 1" will be displayed.| Detail page of "blog 1" is displayed.|pass|2023/4/29|
 |17|link ”More stories from this week” |Go to “Home” page|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
 |18|link ”Readers’ favorite stories of all time” |Go to “Home” page|Click on the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
 |||||||||
-||**"Post Detail"**|||||||
+||**"Detail Page"**|||||||
 ||link to "Become a Member"|Log out|Click on the link on the right side of the comments section|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
 ||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
 
 *Testing validation messages on Leave Comments section on “Detail Page”*
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|49|Leave the comment text box empty| Log in as testuser and go to "Post Detail" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
+|49|Leave the comment text box empty| Log in as testuser and go to "Detail Page" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
+
+*Testing buttons to update/delete comments*
+Conduct test no. consecutively.
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||Update comment button|Log in as testuser and go to "Detail Page" of "blog 1." Enter "test comment" in the text box and click on 'Submit' | Click on the update icon next to the comment.|"Update Comment" page will be displayed.|"Update Comment" page will be displayed.|pass|2023/5/2 
+||Delete comment button|Log in as testuser and go to "Detail Page" of "blog 1." | Click on the trash bin icon next to the comment.|Confirmation dialog "Are you sure you want to delete your comment?" will show up. |Confirmation dialog "Are you sure you want to delete your comment?" shows up. |pass|2023/5/2 |
 |||||||||
 ||**"More Stories"**|Conduct test. no   consecutively||||||
 ||link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
@@ -268,9 +290,10 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |||||||||
 ||**"Search Stories" page|||||||
 ||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
-**Testing case sensitivity**
+
+*Testing case sensitivity
 As preparatory steps for test no. :
-- Create a user "John" and "susan" 
+- Create users "John" and "susan" 
 - log in as "John," and on "Write Stories" page, make two posts:
 1. title: 'Gray Cat'; content: 'test'; city: 'lowercased city'; country: 'Afghanistan'
 2. title: 'white cat'; content: 'test'; city: 'Capitalized City'; country: 'Afghanistan'
@@ -292,7 +315,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||get lowercased city - contains|go to "Search" page. | Enter 'Lowercased City' for city, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
 ||get lowercased city - is exactly |go to "Search" page. | Enter 'Lowercased City' for city, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
 
-*Testing validation messages on "Write Stories" page*
+**Testing "Write Stories" page**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | The title field gets selected with light blue rim.  No validation message shows up. | fail |2023/4/30|
@@ -305,17 +328,17 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |42|Leave city empty | Enter "test title 1" for title, 'content' for content, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
 |41|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click on 'save' | A message says "Please select an item in the list" for the country" | A message says "Please fill out this list" for the country" | pass|2023/4/30|
 |42|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click on 'submit' | A message says "Please select an item in the list" for the country | A message says "Please fill out this list" for the country | pass|2023/4/30|
-|100|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|101|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'submit' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
-|102|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'submit' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
+|100|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'save' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
+|101|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
+|102|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
+|103|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'submit' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
 ||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
 ||confirmation dialog|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass|2023/5/2|
 ||confirmation dialog-cancel|--|Click on 'Cancel' in the dialog|The dialog disappears, and no change has been made to the page.|The dialog disappears, and no change has been made to the page.| pass|2023/5/23|
-||confirmation dialog-submit|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country. Click on 'Submit'|Click on 'OK' in the dialog|Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Post Detail" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass|2023/5/2|
+||confirmation dialog-ok|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country. Click on 'Submit'|Click on 'OK' in the dialog|Redirected to "Detail Page" of the blog "test title 1," and the flash message says "Your post has been submitted." |Redirected to "Detail Page" of the blog "test title 1," and the flash message says "Your post has been submitted."| pass|2023/5/2|
 
-*Testing validation messages on "Update Stories"*
-As preparation for tests no 43-48.  
+**Testing "Update Stories"**
+As preparation for tests no 43-48: 
 - Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
 - click "Save"
 - go to "My page" and click on the link "Read the full story" of the blog "test title 2"
@@ -325,26 +348,33 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |43|Make all fields empty| delete prepopulated title, content, city and unselect the country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
 |44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
+|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
 |45|Make title field empty | delete the title but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
 |46|Make title field empty | delete the title but keep the other fields populated| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|46|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
+|46|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
 |47|Make content field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
 |48|Make content field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|48|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
+|48|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the content | fail|2023/5/2|
 |47|Make city field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|2023/4/30|
 |48|Make city field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city| pass|2023/4/30|
-|48|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
-|47|Unselect country | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
-|48|Unselect country | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the country | A message says "Please fill out this field" for the country | pass|2023/4/30|
-|48|Unselect country | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
-|100|enter spaces | enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|101|enter spaces | enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'submit' | A message says "Please fill out this field" for the title | Confirmation dialog asking if users really want to submit the post shows up. | fail |2023/4/30|
-|102|enter spaces | enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
-|103|enter spaces, select country | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
-|103|enter spaces, select country | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'submit' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
-|103|enter spaces, select country | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country|| click on 'cancel' | Redirected to "post detail" | Redirected to "post detail" | pass|2023/5/2|
-* As for testing the flash message in case a space is enetered in the field, please refer to the automated test no.
+|48|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for city |fail|2023/5/2|
+|47|Unselect country | unselect the country  | click on 'save' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
+|48|Unselect country | unselect the country | click on 'submit' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
+|48|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country. Unselect country. | fail|2023/5/2|
+|100|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
+|101|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'submit' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
+|102|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country | fail|2023/5/2|
+|103|enter spaces (leave country selected) | enter spaces in 'title,' 'content,' 'city'| click on 'save' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
+|103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'submit' | A message says "Please fill out this field" for the title | Confirmation dialog asking if users really want to submit the post shows up. | fail |2023/5/2| 
+|103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | An error message "This field is required" for the country" appears for title, content and city. |fail|2023/5/2|
+||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
+||confirmation dialog|change the title to 'test title 2 updated' |click on 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass|2023/5/3|
+||confirmation dialog-cancel||Click on 'Cancel' in the dialog|The dialog disappears. Redirected to "Detail Page." The title reads 'test title 2' |The dialog disappears. Redirected to "Detail Page." The title reads 'test title 2'| pass|2023/5/3|
+||confirmation dialog-ok|Click on 'Submit'|Click on 'OK' in the dialog|Redirected to "Detail Page." of blog "test title 2," the title has changed to 'test title 2 updated,' and the flash message says "You submitted your post. We'll contact you when evaluation is done." |Redirected to "Detail Page." of blog "test title 2," the title has changed to 'test title 2 updated,' and the flash message says "You submitted your post. We'll contact you when evaluation is done."| pass|2023/5/3|
+||||||||
+||**Testing confirmation dialog before deleting posts**|Write a story and save. Conduct no. without any actions in between.|||||||
+||Confirmation dialog |Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."Write a story and save.|Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."|pass|2023/5/3|
+||Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|2023/5/3|
 
 **Testing “Update Comments”**
 As preparation for test no. 50, 
@@ -356,6 +386,11 @@ As preparation for test no. 50,
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |50|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+|||||||||
+||**Testing confirmation dialog before deleting comments**|Log in as testuser, go to "Detail Page" of "blog 1." Conduct no. without any actions in between.|||||||
+||Confirmation dialog |--|Click on the trash bin icon next to the comment 'test comment'|A confirmation dialog appears.|A confirmation dialog appears.|pass|2023/5/3|
+||Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and "Detail Page" remains unchanged.|pass|2023/5/3|
+||Confirmation dialog - ok|Click on the trash bin icon.|Click on 'OK' in the dialog.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|pass|2023/5/3|
 
 **Testing "My Page"**
 As preparation for tests no. 53-62, 
@@ -425,27 +460,34 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||**"Sign out" page**|||||||
 |36|“Sign out” button|Log in as "testuser." Click on "Log out" in the navigation bar. |Click on "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|2023/4/30|
 
-
-### Testing JaveScript in dialog.js
-As preparation
-1. log in as testuser2
-2. make a post titled "test blog 1" and click on save
-3. make a post titled "test blog 2" and submit
-4. go to admin panel and publish "test blog 2"
-5. go to detail page of test blog 2, and leave comment "test comment" and submit
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|59| code in ln 2-5 | go to detail page of test blog 1 | click on delete | a dialog box will show up and say "Are you sure you want to delete your post?  You won't be able to retrieve the draft." | The message "Are you sure you want to delete your post?  You won't be able to retrieve the draft." shows up in a dialog box| pass|2023/4/30|
-|60| code in ln 8-11 | go to detail page of test blog 2 | click on the trash bin icon of the comment "test comment" | a dialog box will show up and say "Are you sure you want to delete your comment?" | The message "Are you sure you want to delete your comment?" shows up in a dialog box| pass|2023/4/30|
-|61| code in ln 14-18 | go to "My page" click on the link "Read the full story" of "test blog 1" | Click on "Submit" | a dialog box will show up and say "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" | The message "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" shows up in a dialog box| pass|2023/4/30|
-|62| code in ln 14-18 | go to "Write Stories." Enter "test blog 3" for title; "content" for "content" | Click on "Submit" | a dialog box will show up and say "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" | The message "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?" shows up in a dialog box| pass|2023/4/30|
-
 ### Test summary
-For the most part the features are functioning normally.
-Tests that failed are as follows: 
+Some tests failed 
 - "Remember me" function in the test no. 35.
 in general clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to logs in the next time.  But as the test result suggests, the password doesn't get prepopulated. It needs to be fixed in the future.
+- test no.<br>
+When all fields were left empty, a built-in message "Please fill out this field" didn't show up.
+
+
+When spaces are entered for title, content and city and the country was unselected, clicking on 'Save' or 'Submit' didn't show the Django form error message didn't show up for the title but for the country.  It seems that Django error messages don't show up when spaces are entered for required fields.
+When the country was specified while the title, content and city were left empty, clicking on 'Save' or 'Submit' showed crispy form error message "This field is required."
+As of May 2nd, 2023 I decided to leave the program unchanged, since the page still allows only suffiently filled-out forms to be submitted.  But for consistency purpose, in the future, I will consider finding a way to display the Django form error messages for required fields that were filled out with spaces.
+
+"update post" page
+tests   failed, because the Django form error messages appeared before redirection.  If 'Cancel' button is clicked, the user should be promptly redirected to "detail page," so this program needed to be changed.  I used anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") and repeated the tests:  
+ 
+ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|46|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|48|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|48|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
+|48|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|102|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
+
+
+
+
 
 - - -
 
@@ -486,13 +528,21 @@ add-story bottom confirm submit JS not working
 post-detail footer appears in the middle if content is small
 
 
-
+Unit test login 
+the code for logging in the test user
 https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests
 
-my page how to get parameter id to test user == id
 
+Credits:
+ my mentor and tutors for their dedicated support.
+I used the Code Institute's 'Code Star' project as the starting point of this application.
+I used  
+divisible by 3 
+likes 
+posting comment in detail page 
 
+footer from 
 
-turn navbar to hamburger menu
+I used the code to turn navbar to hamburger menu in the following link
 https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design
 
