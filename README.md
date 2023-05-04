@@ -515,30 +515,61 @@ Refer to
 I reset it so that the dialog appears when the form will be submitted.  I also had to target specifically the events in which 'Submit' is clicked, so I rewrote code as in line 17-28 in dialog.js.
 The issue was resolved for cases in which fields are left empty or the country is unselected.  The problem remains, when spaces are entered for the title, content or city as discussed in manual testing.  I will fix the issue in the future.  
 
+## Aspects to be improved in the future:
+- As discussed in “Manual Testing” and “Bugs” sections, the mechanism to display validation messages for PostForm needs to be improved.
+- Remember me function on “Log in” page also needs to be fixed.
+- Currently on "Search Stories" page, if users click on 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the search results easily.
+- In addition, I will make Contact page where users can write and submit messages to admin.
+- I also want to make the system to update comments simpler.  I plan to display a small input box for updating comments where the comment is displayed, since a comment form shouldn't need a whole another page.
+
+## Credits:
+Many thanks to my mentor Jubril Akolade and tutors at Code Institute for their dedicated support and encouragement.<br>
+For this application, I used the Code Institute's 'Code Star' project as a starting point.
+
+Code snippets that were taken from 'Code Star' are as follows:
+
+- The code to display 3 excerpts of posts in a row 
+{% if forloop.counter|divisibleby:3 %}
+was used in “More Stories,” “Popular Stories” and “My Page.” 
+
+- The code to paginate post lists was used in lines 39-53 in “More Stories” and “Popular Stories.”
+
+- The code to display “Comments” and “Leave Comments” sections was used on “Detail Page.”
+
+- The code to display the heart and the number of likes was used in “More Stories,” “Popular Stories” and “Detail Page”
+
+- The code to ‘like’ posts was used in line 61-63, 89-91 in “PostDetail” view in views.py.
+ It was also used in ‘bookmark’ function in line 66-68, 93-95 in “PostDetail” view in views.py.
+
+- The code to post comments was used in line 96-103 in PostLike View in views.py
+
+Other sources for code snippets taken in this project:
+- The code to display links to social networks (lines in 68-87 in base.html) was taken from “Love Running” project.
+
+- The code for turning the navbar to a hamburger menu (lines 9-19 in script.js & lines 21-45 in base.html) was taken from the following site:
+https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design
+
+- The code to display confirmation dialog when ‘Submit’ is clicked (line 17-25 in dialog.js) is taken from the following site:
 
 
 
-when search is clicked, ideally, the page should show the seach results section instead of the top of the pages
-so users don't have to scroll down.
-
-
-
-
-Unit test login 
-the code for logging in the test user
+- The code to log in a testuser (lines  in test_views.py) was taken from the following site:
 https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests
 
+## Media used
 
-Credits:
- my mentor and tutors for their dedicated support.
-I used the Code Institute's 'Code Star' project as the starting point of this application.
-I used  
-divisible by 3 
-likes 
-posting comment in detail page 
+Logo image: clover 
+https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
 
-footer from 
+Heading image: blue earth
+https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
 
-I used the code to turn navbar to hamburger menu in the following link
-https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design
+Default featured image
+https://www.freepik.com/free-vector/background-zoom_8764554.htm#page=5&query=nature%20graphics&position=24&from_view=search&track=ais
+
+test_transformation
+https://www.pexels.com/photo/city-fashion-man-people-15839341/
+
+
+
 
