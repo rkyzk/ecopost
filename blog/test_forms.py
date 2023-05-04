@@ -1,3 +1,4 @@
+"""This module holds tests for forms."""
 
 from django.test import TestCase
 from django.contrib.auth.models import User
@@ -6,9 +7,10 @@ from .models import Post, Comment
 
 
 class TestPostForm(TestCase):
+    """Tests Post form."""
 
     def setUp(self):
-        """create test user"""
+        """create a test user"""
         self.user_1 = User.objects.create(username="test1",
                                           password="password")
 
@@ -101,6 +103,7 @@ class TestPostForm(TestCase):
 
 
 class TestCommentForm(TestCase):
+    """Tests comment form"""
 
     def setUp(self):
         """create test user"""

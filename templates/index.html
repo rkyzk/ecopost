@@ -6,6 +6,7 @@
   <img src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682986156/r1a2kw75h5shwzl1e6ur.png"
     alt="blue and green earth" class="earth">
 </div>
+<!-- Introduction -->
 <div class="d-flex justify-content-center">
   <div class="intro-box mt-2">
     <hr>
@@ -23,6 +24,7 @@
     <hr>
   </div>
 </div>
+<!-- Featured stories -->
 <div class="d-flex justify-content-center mt-5">
   <div class="content">
     <h2>Featured Stories</h2>
@@ -40,8 +42,8 @@
           </div>
           <div class="mx-2 mt-2 post-text">
             <span><strong>{{ post.title }}</strong></span>
-            <span class="item-right text-secondary"><i class="far fa-heart"></i></span>
-            <span class="left-space text-secondary">{{ post.number_of_likes }}</span><br>
+            <span class="item-right text-secondary space-right"><i class="far fa-heart"></i></span>
+            <span class="text-secondary">{{ post.number_of_likes }}</span><br>
             <span class="excerpt-author">By {{ post.author }}</span>
             <div class="d-flex justify-content-end pub-date">
               <span>{{ post.pub_date }}</span>
@@ -54,6 +56,7 @@
       {% empty %}
         <p>No posts</p>
       {% endfor %}
+        <!-- links to 'More Stories' and 'Popular Stories' -->
         <div class="more-posts">
           <a href="{% url 'more_stories' %}"><p>More stories from this week &raquo;</p></a>
           <a href="{% url 'popular_stories' %}" class="link-to-favorites">

@@ -95,16 +95,20 @@
   </div>
 </div>
 <div id="results">
+  <!-- if 'Search' has been clicked, display search results.  -->
   {% if search_clicked %}
   <hr/>
   <h3 mt-3>Search Results</h3>
+    <!-- if no input was given, tell them to enter at least one field. -->
     {% if no_input %}
       <p>Please enter at least one field</p>
     {% elif not queryset %}
+      <!-- if no matching results were found -->
       <p>No matching results found</p>
     {% endif %}
     <div class="row">
         {% for post in queryset %}
+        <!-- display excerpts of matching posts -->
         <div class="col-md-4">
           <div class="image-wrapper d-flex justify-content-center">
             {% if "placeholder" in post.featured_image.url %}

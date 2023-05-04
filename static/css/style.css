@@ -1,3 +1,4 @@
+/* Common rules for multiple pages */
 html {
   min-height: 100vh;
   position: relative; 
@@ -57,6 +58,10 @@ h4 {
 
 a, .font-blue {
   color:rgb(46, 122, 145);
+}
+
+a {
+  text-decoration: none;
 }
 
 a:hover {
@@ -124,8 +129,8 @@ h1 {
   margin-top: 15px;
 }
 
-.left-space {
-  margin-left: 2px;
+.space-right {
+  margin-right: 3px;
 }
 
 .more-posts {
@@ -166,9 +171,12 @@ h1 {
 }
 
 .btn-submit {
-  background-color:rgb(141, 111, 56);
-  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+  background-color: rgb(141, 111, 56);
   border: none;
+  color: #fff;
 }
 
 .btn-right {
@@ -200,10 +208,6 @@ footer {
   display: block;
 }
 
-a {
-  text-decoration: none;
-}
-
 /* Write Stories, Update Posts and Update Comments */
 
 .form-section {
@@ -228,15 +232,6 @@ a {
 
 /* update_post.html  */
 
-.update-btns {
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  border-radius: 0.3rem;
-  background-color: rgb(141, 111, 56);
-  border: none;
-  color: #fff;
-}
-
 .cancel {
   padding: 0.7rem 1rem;
 }
@@ -254,7 +249,6 @@ a {
 }
 
 @media screen and (max-width: 991px) {
-
   .mt-custom {
     margin-top: 40px;
   }
@@ -361,11 +355,6 @@ a {
     margin-top: 20px;
   }
 
-  /* account_base.html */
-  .account-forms {
-    width: 90%;
-  }
-
   /* post_detail.html */
   section {
     width: 80%;
@@ -402,14 +391,15 @@ a {
   h1 {
     font-size: 2.5rem;
   }
-
+  
+  /* ------ index.html ----------*/
   .earth {
     width: 30%;
     height: auto;
     padding-left: 15px;
   }
 
-  /* Update Post */
+  /* ------- Update Post ---------*/
   .update-post-btns {
     display: flex;
     flex-direction: column;

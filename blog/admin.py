@@ -1,3 +1,5 @@
+"""This module holds classes to customize the admin panel."""
+
 from django.contrib import admin
 from django.db import models
 from .models import Post, Comment, Photo
@@ -7,7 +9,7 @@ from datetime import datetime
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
-
+    """Customizes the appearance of Post model on the admin panel."""
     list_display = ('title', 'slug', 'status', 'created_on')
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
@@ -16,13 +18,18 @@ class PostAdmin(SummernoteModelAdmin):
     actions = ['publish_posts']
 
     def publish_posts(self, request, queryset):
+        """
+        Sets the status to 'Published'
+        and stores the published date and time.
+        arguments: self, request, queryset: posts to be published
+        """
         queryset.update(status=2)
         queryset.update(published_on=datetime.utcnow())
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-
+    """Customizes the appearance of Comment model on the admin panel."""
     list_display = ('commenter', 'body', 'post',
                     'created_on', 'comment_status')
     list_filter = ('created_on', 'comment_status')
@@ -31,4 +38,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
+    """Customizes the appearance of Photo model on the admin panel."""
     list_display = ('name',)

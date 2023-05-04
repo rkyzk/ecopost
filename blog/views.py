@@ -32,7 +32,9 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         """
         Validates the form.
-        arguments: self, form: Post form         
+        arguments: self, form: Post form
+        :return: super()
+        :rtype: method
         """
         form.instance.author = self.request.user
         message = 'Your draft has been saved.'
@@ -55,6 +57,8 @@ class PostDetail(View):
         """
         renders 'post detail' page.
         argument: self, request, slug
+        :return: render()
+        :rtype: method
         """
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.order_by('created_on')
@@ -84,6 +88,9 @@ class PostDetail(View):
         Receives posted comment form and validates it.
         If validated, saves it and displays the comment.
         If not, displays an error message and an empty comment form.
+        arguments: self, request, slug, *args, **kwargs
+        :return: render()
+        :rtype: method
         """
         post = Post.objects.filter(slug=slug)[0]
         comments = post.comments.order_by('created_on')
@@ -128,7 +135,8 @@ class PostLike(View):
         """
         If user exists in 'likes' of the post, removes him/her.
         If not, add the user to 'likes.'
-        arguments: slug
+        arguments: self, request, slug, *args, **kwargs
+        :return: HttpResponseRedirect
         """
         post = get_object_or_404(Post, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
@@ -145,7 +153,9 @@ class Bookmark(View):
         """
         If user exists in 'bookmark,' removes him/her.
         If not, add the user to 'bookmark.'
-        arguments: slug
+        arguments: self, request, slug, *args, **kwargs
+        :return: HttpResponseRedirect()
+        :rtype: method
         """
         post = get_object_or_404(Post, slug=slug)
         if post.bookmark.filter(id=request.user.id).exists():
@@ -162,6 +172,12 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     form_class = PostForm
 
     def get_context_data(self, **kwargs):
+        """
+        Add slug to context data.
+        arguments: self, **kwargs
+        :return: context
+        :rtype: dict
+        """
         context = super(UpdatePost, self).get_context_data(**kwargs)
         context['slug'] = self.kwargs.get('slug')
         return context
@@ -169,7 +185,9 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     def form_valid(self, form):
         """
         validates the form. If validated, saves it.
-        arguments: form
+        arguments: self, form
+        :return: super()
+        :rtype: method
         """
         form.instance.author = self.request.user
         message = 'The change has been saved.'
@@ -187,7 +205,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         """
         test if status of the post is 0 ('draft')
         and user is the author of the post.
-        :return: True if it passes the check, False if not.
+        :return: True/False
         :rtype: boolean
         """
         slug = self.kwargs.get('slug')
@@ -202,7 +220,8 @@ class DeletePost(LoginRequiredMixin, View):
         """
         Deletes post and redirects to 'home.'
         arguments: self, request, slug, *args. **kwargs
-        :returns: HttpResponseRedirect
+        :returns: HttpResponseRedirect()
+        :rtype: method
         """
         post = get_object_or_404(Post, slug=slug)
         if post.author == self.request.user and post.status == 0:
@@ -222,7 +241,9 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
         Gets comment from the DB,
         stores it in comment form and displays the update form
         for users to update the body.
-        arguments: id: comment id
+        arguments: self, request, id: comment id, *args, **kwargs
+        :returns: render()
+        :rtype: method
         """
         comment = get_object_or_404(Comment, id=id)
         comment_form = CommentForm(instance=comment)
@@ -236,10 +257,12 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def post(self, request, id, *args, **kwargs):
         """
-        Receives comment form, validates it. If it's valid, updates the comment.
+        Receives comment form, validates it.
+        If it's valid, updates the comment.
         If not, stores an error message. Redirects to "Detail Page."
         arguments: id: comment id
-        :returns: HttpResponseRedirect
+        :returns: HttpResponseRedirect()
+        :rtype: method
         """
         comment = get_object_or_404(Comment, id=id)
         slug = comment.post.slug
@@ -274,7 +297,8 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
         """
         Changes the status of comments to 2 ('Deleted').
         arguments: id: comment id
-        :returns: HttpResponseRedirect
+        :returns: HttpResponseRedirect()
+        :rtype: method
         """
         comment = get_object_or_404(Comment, id=id)
         comment.comment_status = 2
@@ -303,20 +327,19 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
         2) posts commented by the user
         3) posts bookmarked by the user,
         sends the three lists to 'My page'
-        arguments: pk: pk of the user
+        arguments: self, request, pk: pk of the user, *args, **kwargs
+        :returns: render()
+        :rtype: method
         """    
         my_posts = Post.objects.filter(author=pk)
+        # Make a list of posts commented by the user
         comments = Comment.objects.filter(commenter__id=pk,
                                           comment_status__in=[0, 1])
         commented_posts = [comment.post for comment in comments]
         # remove duplicates
         commented_posts = list(dict.fromkeys(commented_posts))
-        # this can be made more concise
-        all_posts = Post.objects.all()
-        bookmarked_posts = []
-        for post in all_posts:
-            if post.bookmark.filter(id=request.user.id).exists():
-                bookmarked_posts.append(post)
+        # Make a list of posts bookmarked by the user
+        bookmarked_posts = Post.objects.filter(bookmark__in=[request.user.id])
 
         return render(
             request,
@@ -345,7 +368,9 @@ class Search(View):
         Displays "Search Stories" page, receives users' input,
         runs search based on the input, returns a queryset of
         the matching posts and displays the search results.
-
+        arguments: self, request, *args, **kwargs
+        :returns: render(0)
+        :rtype: method
         """
         category_choices = Post._meta.get_field('category').choices
         categories = [cat[1] for cat in category_choices]
@@ -434,7 +459,7 @@ class Search(View):
                 qs_city = posts.filter(city__iexact=city)
                 if qs_city != []:
                     query_lists.append(qs_city)
-       
+
         if country != 'Choose...':
             no_input = False
             qs_country = [post for post in posts if \
@@ -444,7 +469,8 @@ class Search(View):
 
         if category != 'Choose...':
             no_input = False
-            qs_category = [post for post in posts if post.get_category_display() == category]
+            qs_category = [post for post in posts if
+                           post.get_category_display() == category]
             query_lists.append(qs_category)
         if query_lists != []:
             qs = query_lists[0]
@@ -453,8 +479,9 @@ class Search(View):
         if len(query_lists) > 1:
             i = 0
             for i in range(len(query_lists) - 1):
-                qs = [post for post in query_lists[i] if post in query_lists[i+1]]
-                i += 1  
+                qs = [post for post in query_lists[i] if
+                      post in query_lists[i+1]]
+                i += 1
         search_clicked = False
         if 'search' in self.request.GET:
             search_clicked = True

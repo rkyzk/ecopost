@@ -340,7 +340,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |103|confirmation dialog - cancel|--|Click on 'cancel' | The dialog disappears. | The dialog disappears. | pass |2023/5/4|
 |103|confirmation dialog - ok|--|Click on 'Submit' and 'OK' in the dialog | Message 'This field is required' will be displayed for title, content and city. | Message 'This field is required' will be displayed for title, content and city. | pass |2023/5/4|
 
-**Testing transformation of images during upload**
+**Testing transformation of images during upload** (Applies to "Write Stories" and "Update Stories")
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|

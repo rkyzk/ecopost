@@ -4,6 +4,7 @@
   <h2>More Stories</h2>
   <div class="row posts">
     {% for post in object_list %}
+    <!-- display 3 posts in a row -->
     <div class="col-md-4">
       <div class="image-wrapper d-flex justify-content-center">
         {% if "placeholder" in post.featured_image.url %}
@@ -27,6 +28,7 @@
       </div>
       <hr class="line">
     </div>
+      <!-- For every 3 posts, open a new row -->
       {% if forloop.counter|divisibleby:3 %}
     </div>
     <hr class="line-for-lg">
@@ -36,6 +38,8 @@
       <p>No posts</p>
     {% endfor %}
   </div>
+  <!-- if there are more than 6 posts in object_list,
+    display 'NEXT' and/or 'PREV' buttons -->
   {% if is_paginated %}
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center mt-4">

@@ -16,9 +16,8 @@ $(document).ready(function(){
   // Confirm before submitting posts
   const SUBMIT_POST = "After submiiting your post, you won't be able to" +
                       " update or delete it.  Would you like to proceed?"
-  $('.submit-post').click(function() {
-      ButtonValue = $(this).val();
-      console.log(ButtonValue)
+  $('.btn-submit').click(function() {
+    ButtonValue = $(this).val();
   })
   $('.submit-post-form').submit(function() {
     if(ButtonValue == 'complete') {

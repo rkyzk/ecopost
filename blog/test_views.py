@@ -1,3 +1,5 @@
+"""This module holds tests for views."""
+
 from django.test import TestCase, Client
 from blog.models import Post, Comment
 from django.contrib.auth.models import User
@@ -10,7 +12,7 @@ from datetime import datetime, timedelta
 class TestViews(TestCase):
 
     def setUp(self):
-        """create a test user and test post.  Log in the test user."""
+        """Creates test users and posts.  Logs in the test users."""
         self.user1 = User.objects.create_user(username="user1")
         self.user1.set_password('password')
         self.user1.save()

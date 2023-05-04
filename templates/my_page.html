@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- My posts -->
+<!-- Posts written by the user -->
 <h2 class="mt-5 mb-4">Written by Me</h2>
 <div class="row">
   {% for post in my_posts %}
@@ -19,9 +19,11 @@
       <span class="excerpt-author">By {{ post.author }}</span>
       <div class="date-city d-flex justify-content-end">
         <ul>
+          <!-- if the post has been published, display the published date. -->
           {% if post.status == 2 %}
             <li>Published on {{ post.pub_date }}</li>
           {% else %}
+            <!-- state if the post is a draft or has been submitted -->
             <li>{{ post.status_value }}</li>
             <li>Created on {{ post.created_on|date:'M d, Y'  }}</li>
           {% endif %}
@@ -32,6 +34,7 @@
     </div>
     <hr class="line">
   </div>
+    <!-- If there are more than 3 posts in this category, display them when 'Show more' button is clicked. -->
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>

@@ -9,9 +9,11 @@
         <span>Author: {{ post.author }}</span>
         <div class="date-city d-flex justify-content-end">
           <ul>
+            <!-- if the post has been submitted, show the published date -->
             {% if post.status == 2 %}
               <li>Published on {{ post.pub_date }}</li>
             {% else %}
+            <!-- if not published, state the date created. -->
               <li>{{ post.status_value }}</li>
               <li>Created on {{ post.created_on|date:'M d, Y' }}</li>
             {% endif %}
@@ -19,7 +21,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> <!-- title-box -->
     <div class="img-box">
     {% if "placeholder" in post.featured_image.url %}
       <img src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
@@ -29,15 +31,18 @@
     {% endif %}
       <!-- likes and bookmark buttons -->
       <div class="d-flex justify-content-start">
-        {% if post.status == 2 %}  <!-- if the post has been published -->
+        <!-- if the post has been published and the user is logged in show 'like' buttons -->
+        {% if post.status == 2 %}
           {% if user.is_authenticated %}
           <strong>
             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
             {% csrf_token %}
+            <!-- if liked, show a solid heart -->
             {% if liked %}
               <button type="submit" value="{{post.slug}}" class="btn">
                 <i class="fa-solid fa-heart"></i>
               </button>
+            <!-- if not liked, show a heart outline -->
             {% else %}
               <button type="submit" value="{{post.slug}}" class="btn">
                 <i class="fa-regular fa-heart"></i>
@@ -45,24 +50,27 @@
             {% endif %}
             </form>
           {% else %}
-            <span><i class="far fa-heart"></i></span>
+            <!-- if not logged in, show a heart (without 'like' button function) -->
+            <span><i class="far fa-heart space-right"></i></span>
           {% endif %}
-            <span class="text-secondary left-space">{{ post.number_of_likes }}</span>
+            <span class="text-secondary">{{ post.number_of_likes }}</span>
           </strong>
           <!-- bookmark -->
           {% if user.is_authenticated %}
           <form class="d-inline" action="{% url 'bookmark' post.slug %}" method="POST">
             {% csrf_token %}
+            <!-- if already bookmarked, show a filled-out book icon -->
             {% if bookmarked %}
               <button type="submit" value="{{post.slug}}" class="btn">
                 <i class="fa fa-bookmark" aria-hidden="true"></i>
               </button>
-              <span class="bm-text text-secondary">Bookmarked</span>
+              <span class="text-secondary">Bookmarked</span>
             {% else %}
+              <!-- if not bookmarked, show the outline of a book icon -->
               <button type="submit" value="{{post.slug}}" class="btn">
                 <i class="fa fa-bookmark-o" aria-hidden="true"></i>
               </button>
-              <span class="bm-text text-secondary">Click to bookmark</span>
+              <span class="text-secondary">Click to bookmark</span>
             {% endif %}           
           </form>
           {% endif %}
@@ -138,6 +146,7 @@
         {% endfor %}     
     </div>
     <div class="mt-custom comments-right">
+        <!-- if user is logged in, invite them to leave comments -->
         {% if user.is_authenticated %}
           <h3>Leave a comment:</h3>
           <p class="mt-3">Posting as: {{ user.username }}</p>
@@ -147,6 +156,7 @@
             <button type="submit" class="btn-submit btn-lg mt-3">Submit</button>
           </form>
         {% else %}
+          <!-- if user is not logged in, provide the links to sign up or sign in -->
           <h3>Want to leave comments?</h3>
             <p><a href="{% url 'account_signup' %}">Become a member</a>or
                <a href="{% url 'account_login' %}">Log in</a>.

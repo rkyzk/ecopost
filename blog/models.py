@@ -1,3 +1,5 @@
+"""This module holds models used in ecopost."""
+
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
@@ -20,6 +22,7 @@ CATEGORY = (('animals', 'Protecting animals'),
 
 
 class Post(models.Model):
+    """Lists fields of Post model and functions around them."""
     title = models.CharField(max_length=80, unique=True)
     slug = models.SlugField(max_length=80, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -54,6 +57,11 @@ class Post(models.Model):
         ordering = ['-created_on', '-published_on']
 
     def save(self, *args, **kwargs):
+        """
+        As the post is saved, assign a slug if the post has no slug.
+        If the status is 'Published,' but the published date
+        hasn't been stored, assign the current date and time.
+        """
         if not self.slug:
             self.slug = slugify(self.title)
         if self.status == 2 and not self.published_on:
@@ -61,12 +69,27 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns the title.
+        :return: title
+        :rtype: str
+        """
         return self.title
 
     def number_of_likes(self):
+        """
+        Returns the number of likes.
+        :return: number of likes
+        :rtype: int
+        """
         return self.likes.count()
 
     def status_value(self):
+        """
+        Returns presentable values for status.
+        :return: status descrption
+        :rtype: str
+        """
         if self.status == 0:
             return "Saved as draft"
         elif self.status in [1, 2]:
@@ -75,20 +98,36 @@ class Post(models.Model):
             return "Not published"
 
     def pub_date(self):
+        """
+        Returns the published date.
+        If the post hasn't been published, return 'Not published.'
+        :returns: published_on or 'Not published'
+        :rtype: str
+        """
         if self.status == 2:
             return self.published_on.strftime("%B %d, %Y")
         else:
             return 'Not published'
 
     def excerpt(self):
+        """
+        Returns the first 200 letters of the post.
+        :returns: excerpt
+        :rtype: str
+        """
         excerpt = str(self.content)[0:199] + "..."
         return excerpt
 
     def get_absolute_url(self):
+        """
+        Returns the URL of 'Detail Page.'
+        :return: reverse
+        """
         return reverse('detail_page', kwargs={'slug': self.slug})
 
 
 class Comment(models.Model):
+    """Lists fields of Comment model and the functions around them."""
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
     commenter = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -101,12 +140,23 @@ class Comment(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
+        """
+        Returns the comment body and the commenter.
+        :return: comment and the commenter in string
+        :rtype: str
+        """
         return f"{self.body} by {self.commenter.username}"
 
 
 class Photo(models.Model):
+    """Lists fields of Photo model and a function."""
     name = models.CharField(max_length=25)
     image = CloudinaryField('image', blank=True)
 
     def __str__(self):
+        """
+        Returns the name of the photo.
+        :return: name
+        :rtype: str
+        """
         return self.name
