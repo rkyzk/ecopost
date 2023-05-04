@@ -645,6 +645,7 @@ class TestSearchView(TestCase):
     def test_search_without_fields_will_show_message(self):
         response = self.client.get('/search_story/',
                                    {'category': 'Choose...',
+                                    'country': 'Choose...',
                                     'search': 'search'})
         self.assertTrue(response.context['no_input'])
         self.assertContains(response,

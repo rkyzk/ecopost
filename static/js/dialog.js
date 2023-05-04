@@ -18,6 +18,7 @@ $(document).ready(function(){
                       " update or delete it.  Would you like to proceed?"
   $('.submit-post').click(function() {
       ButtonValue = $(this).val();
+      console.log(ButtonValue)
   })
   $('.submit-post-form').submit(function() {
     if(ButtonValue == 'complete') {

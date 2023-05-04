@@ -39,7 +39,8 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         # If submitted, set the status to 1 ('Submitted.')
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1 
-            message = 'Your story has been submitted for evaluation.'
+            message = "You submitted your post. " + \
+                      "We'll contact you when evaluation is done."
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
@@ -195,12 +196,13 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
      
 
 class DeletePost(LoginRequiredMixin, View):
-    """Deletes post."""
+    """Deletes posts."""
 
     def post(self, request, slug, *args, **kwargs):
         """
         Deletes post and redirects to 'home.'
-        arguments: slug
+        arguments: self, request, slug, *args. **kwargs
+        :returns: HttpResponseRedirect
         """
         post = get_object_or_404(Post, slug=slug)
         if post.author == self.request.user and post.status == 0:
@@ -208,7 +210,7 @@ class DeletePost(LoginRequiredMixin, View):
             message = 'Your draft has been deleted.'
             messages.add_message(request, messages.SUCCESS, message)
             return HttpResponseRedirect(reverse('home'))
-        else:     
+        else:
             raise PermissionDenied()   
 
 
@@ -233,6 +235,12 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
         )
 
     def post(self, request, id, *args, **kwargs):
+        """
+        Receives comment form, validates it. If it's valid, updates the comment.
+        If not, stores an error message. Redirects to "Detail Page."
+        arguments: id: comment id
+        :returns: HttpResponseRedirect
+        """
         comment = get_object_or_404(Comment, id=id)
         slug = comment.post.slug
         if 'cancel' in request.POST.keys():
@@ -250,6 +258,11 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
 
     def test_func(self):
+        """
+        Tests if the user has written the comment.
+        :returns: True/False
+        :rtype: boolean
+        """
         id = self.kwargs.get('id')
         comment = get_object_or_404(Comment, id=id)
         return comment.commenter == self.request.user
@@ -258,6 +271,11 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
 class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def post(self, request, id, *args, **kwargs):
+        """
+        Changes the status of comments to 2 ('Deleted').
+        arguments: id: comment id
+        :returns: HttpResponseRedirect
+        """
         comment = get_object_or_404(Comment, id=id)
         comment.comment_status = 2
         comment.save()
@@ -267,6 +285,11 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
 
     def test_func(self):
+        """
+        Tests if the user has written the comment.
+        :returns: True/False
+        :rtype: boolean
+        """
         id = self.kwargs.get('id')
         comment = get_object_or_404(Comment, id=id)
         return comment.commenter == self.request.user
@@ -274,7 +297,14 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
 
 class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
 
-    def get(self, request, pk, *args, **kwargs):     
+    def get(self, request, pk, *args, **kwargs):
+        """
+        Makes lists of 1) the posts written by the user,
+        2) posts commented by the user
+        3) posts bookmarked by the user,
+        sends the three lists to 'My page'
+        arguments: pk: pk of the user
+        """    
         my_posts = Post.objects.filter(author=pk)
         comments = Comment.objects.filter(commenter__id=pk,
                                           comment_status__in=[0, 1])
@@ -299,11 +329,24 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
         )
 
     def test_func(self):
+        """
+        Tests if the user is trying to get to his/her own 'My Page'
+        :returns: True/False
+        :rtype: boolean
+        """
         return self.kwargs.get('pk') == self.request.user.pk
 
 
 class Search(View):
+    """Holds functions to run the search system of the posts."""
+
     def get(self, request, *args, **kwargs):
+        """
+        Displays "Search Stories" page, receives users' input,
+        runs search based on the input, returns a queryset of
+        the matching posts and displays the search results.
+
+        """
         category_choices = Post._meta.get_field('category').choices
         categories = [cat[1] for cat in category_choices]
         country_choices = Post._meta.get_field('country').choices
@@ -392,13 +435,13 @@ class Search(View):
                 if qs_city != []:
                     query_lists.append(qs_city)
        
-        if country is not None:
+        if country != 'Choose...':
             no_input = False
             qs_country = [post for post in posts if \
                           post.get_country_display() == country]
             if qs_country != []:
                 query_lists.append(qs_country)
-        print(category)
+
         if category != 'Choose...':
             no_input = False
             qs_category = [post for post in posts if post.get_category_display() == category]
@@ -427,6 +470,10 @@ class Search(View):
 
 
 class MoreStories(generic.ListView):
+    """
+    Gets posts published in the past 7 days from DB,
+    sends the queryset and displays 'More Stories' page.
+    """
     model = Post
     template_name = "more_stories.html"
     paginate_by = 6
@@ -435,11 +482,14 @@ class MoreStories(generic.ListView):
             'published_on__date__gte': datetime.utcnow() - timedelta(days=7),
             'featured_flag': False
             }
-    posts = Post.objects.filter(**filterargs).order_by("-published_on")
     queryset = Post.objects.filter(**filterargs).order_by("-published_on")
 
 
 class PopularStories(generic.ListView):
+    """
+    Gets posts liked more than once from DB,
+    sends the queryset and displays 'Popular Stories' page.
+    """
     model = Post
     template_name = "popular_stories.html"
     paginate_by = 6

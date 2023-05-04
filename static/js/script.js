@@ -3,7 +3,7 @@ setTimeout(function() {
     let messages =document.getElementById("msg");
     let alert = new bootstrap.Alert(messages);
     alert.close();
-}, 3000);
+}, 5000);
 
 // For mobile devices, clicking the hamburger icon will display the menu.
 const menu = document.querySelector(".nav-menu");

@@ -5,6 +5,7 @@
 * [Overview](#overview)
 * [User Stories](#user-stories)
 * [Features in Nutshell](#features-in-nutshell)
+* [Wireframes](#wireframes)
 * [Notes on Design](#notes-on-design)
 * [Each Part and Function in Detail](#each-part-and-function-in-detail)
 * [Automated Testing](#automated-testing)
@@ -38,6 +39,10 @@ Members can leave comments for the posts<br>
 Members can write their own stories and submit them for evaluation<br>
 Members can edit and delete comments<br>
 Members can update or delete their posts before submitting them<br>
+
+## Wireframes
+Wireframes for the app can be found [here.](https://wireframe.cc/pro/pp/873798723651976)
+Please click on "Homepage" in the upper left corner to see wireframes of each page of the app.
 
 ## Notes on Design 
 The overall appearance is kept simple and clean in order to avoid interfering with various colors that the featured images will bring in.
@@ -250,7 +255,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 |||||||||
 ||**The flash messages**||||||
-|| setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 3 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 3 seconds.| pass|2023/4/30|
+|| setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|2023/4/30|
 
 #### Testing features on individual pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
@@ -318,8 +323,8 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 **Testing "Write Stories" page**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | The title field gets selected with light blue rim.  No validation message shows up. | fail |2023/4/30|
-|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title | The title field gets selected with light blue rim.  No validation message shows up. | fail |2023/4/30|
+|37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
+|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
 |39|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
 |40|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
 |41|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|2023/4/30|
@@ -331,7 +336,14 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |100|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'save' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
 |101|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
 |102|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'submit' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
+|103|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country (Go on to test no. without any actions.)| click on 'submit' | A message says "Please fill out this field" for the title | Confimation dialog before submitting posts appears | fail |2023/4/30|
+|103|confirmation dialog - cancel|--|Click on 'cancel' | The dialog disappears. | The dialog disappears. | pass |2023/5/4|
+|103|confirmation dialog - ok|--|Click on 'Submit' and 'OK' in the dialog | Message 'This field is required' will be displayed for title, content and city. | Message 'This field is required' will be displayed for title, content and city. | pass |2023/5/4|
+
+**Testing transformation of images during upload**
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
 ||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
 ||confirmation dialog|Enter 'test title 1' for title, 'content' for content, 'test city' for city, select 'Afghanistan' for country|click 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass|2023/5/2|
 ||confirmation dialog-cancel|--|Click on 'Cancel' in the dialog|The dialog disappears, and no change has been made to the page.|The dialog disappears, and no change has been made to the page.| pass|2023/5/23|
@@ -365,7 +377,9 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |101|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'submit' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
 |102|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country | fail|2023/5/2|
 |103|enter spaces (leave country selected) | enter spaces in 'title,' 'content,' 'city'| click on 'save' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'submit' | A message says "Please fill out this field" for the title | Confirmation dialog asking if users really want to submit the post shows up. | fail |2023/5/2| 
+|103|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'submit' (Go on to test no. without any other actions.) | A message says "Please fill out this field" for the title | Confirmation dialog asking if users really want to submit the post shows up. | fail |2023/5/2| 
+|103|confirmation dialog - cancel|--|Click on 'cancel' | The dialog disappears. | The dialog disappears. | pass |2023/5/4|
+|103|confirmation dialog - ok|--|Click on 'Submit' and 'OK' in the dialog | Message 'This field is required' will be displayed for title, content and city. | Message 'This field is required' will be displayed for title, content and city. | pass |2023/5/4|
 |103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | An error message "This field is required" for the country" appears for title, content and city. |fail|2023/5/2|
 ||**Test jquery code to confirm before submitting posts**|Conduct test no.  consecutively.||||||
 ||confirmation dialog|change the title to 'test title 2 updated' |click on 'Submit'|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"|A confirmation box appears and says, "After submiiting your post, you won't be able to update or delete it.  Would you like to proceed?"| pass|2023/5/3|
@@ -375,6 +389,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||**Testing confirmation dialog before deleting posts**|Write a story and save. Conduct no. without any actions in between.|||||||
 ||Confirmation dialog |Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."Write a story and save.|Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."|pass|2023/5/3|
 ||Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|2023/5/3|
+||Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|2023/5/3|
 
 **Testing “Update Comments”**
 As preparation for test no. 50, 
@@ -461,19 +476,18 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |36|“Sign out” button|Log in as "testuser." Click on "Log out" in the navigation bar. |Click on "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|2023/4/30|
 
 ### Test summary
-Some tests failed 
+
 - "Remember me" function in the test no. 35.
-in general clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to logs in the next time.  But as the test result suggests, the password doesn't get prepopulated. It needs to be fixed in the future.
-- test no.<br>
-When all fields were left empty, a built-in message "Please fill out this field" didn't show up.
+In general clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to logs in the next time.  But as recorded, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May 4th, 2023, I will leave it as it is, but it needs to be fixed in the future.
 
-
-When spaces are entered for title, content and city and the country was unselected, clicking on 'Save' or 'Submit' didn't show the Django form error message didn't show up for the title but for the country.  It seems that Django error messages don't show up when spaces are entered for required fields.
-When the country was specified while the title, content and city were left empty, clicking on 'Save' or 'Submit' showed crispy form error message "This field is required."
-As of May 2nd, 2023 I decided to leave the program unchanged, since the page still allows only suffiently filled-out forms to be submitted.  But for consistency purpose, in the future, I will consider finding a way to display the Django form error messages for required fields that were filled out with spaces.
+- test no.  <br>
+When spaces are entered for the title, content and city, and the country is unselected, clicking 'Save' or 'Submit' will display the validation message for the country.  
+When spaces are entered for the title, content and city while the country is selected, clicking 'Save' will display a message 'This field is required.' for the title, content and city.  Clicking 'Submit' in this case will cause the confirmation dialog to appear.
+In all four cases, the form will be submitted only if it’s sufficiently filled out, so I will leave the code unchanged as of May 4th, 2023.  
+Ideally, I want to design the validation to display messages for all the required fields that are left empty or are filled out with spaces at the first time users save or submit the form.  Also the confirmation dialog should appear only if there are no validation messages to be displayed.  I will rewrite the code to change these aspects in the future.
 
 "update post" page
-tests   failed, because the Django form error messages appeared before redirection.  If 'Cancel' button is clicked, the user should be promptly redirected to "detail page," so this program needed to be changed.  I used anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") and repeated the tests:  
+tests   failed, because the Django form error messages appeared before redirection.  If 'Cancel' button is clicked, the user should be promptly redirected to "detail page."  I used anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") and repeated the tests:  
  
  Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
@@ -485,47 +499,29 @@ tests   failed, because the Django form error messages appeared before redirecti
 |102|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
 |103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
 
-
-
-
+Test no.   
+Refer to 
 
 - - -
+## Bugs
 
-## Wireframes
-Wireframes for the app can be found [here.](https://wireframe.cc/pro/pp/873798723651976)
-Please click on "Homepage" in the upper left corner to see wireframes of each page of the app.
+1. For “Update Stories” I was using View class instead of UpdateView class.  When I updated posts, if the post had a featured image originally, and if I updated other fields (but not the image) and saved the change, the image was lost.<br><br>**Solution:** I rewrote “Update Stories” using UpdateView class and the issue was resolved.
 
+2. “Search Stories” page didn’t get displayed.  An error page appeared with the message “Reverse for 'post_detail' with arguments '('',)' not found.”<br><br>**Solution:** I was forgetting a slash at the end of the url in urls.py, so I changed the url from ‘search_story’ to ‘search_story/,’ and the issue was resolved.
 
-
-\
-
-bugs
-
-* Post couldn't be created through add_story.html.  Integrity error.  Set slugify and worked.
-* When posts are made on the admin panel, they have p tags (<p> and </p>) around the content and 
-that appears on the page.  --> still need to fix.
+3. On “Write Stories” and “Update Stories” pages, if I left the fields empty and clicked on ‘Submit’, the confirmation dialog showed up instead of the validation error message.In this case, the validation message should appear, and only if there are no validation messages to be displayed, the dialog should appear.<br><br>
+**Solution:** This happened because I set the dialog to appear when ‘Submit’ button was clicked, using<br> 
+  $('.submit-post').click(function() {...  
+I reset it so that the dialog appears when the form will be submitted.  I also had to target specifically the events in which 'Submit' is clicked, so I rewrote code as in line 17-28 in dialog.js.
+The issue was resolved for cases in which fields are left empty or the country is unselected.  The problem remains, when spaces are entered for the title, content or city as discussed in manual testing.  I will fix the issue in the future.  
 
 
-log in user id =2, click on my page and got
-Reverse for 'post_detail' with arguments '('',)' not found.
 
-search.html
-Reverse for 'post_detail' with arguments '('',)' not found.
-The word 'search' was recognized as slug.  changed the url from '<slug:slug>/post_detail' to 'detail/<slug:slug>'
-and search.html was rendered.
 
 when search is clicked, ideally, the page should show the seach results section instead of the top of the pages
 so users don't have to scroll down.
 
-urls.py
-'/detail/' added slash at the end and the issue was resolved.
 
-test_views 
-can_add_post didn't created a post.  logged in the user and was able to create a post.
-
-add-story bottom confirm submit JS not working 
-
-post-detail footer appears in the middle if content is small
 
 
 Unit test login 
