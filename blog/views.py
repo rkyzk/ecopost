@@ -8,8 +8,10 @@ from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.core.exceptions import PermissionDenied
+from django_countries.fields import CountryField
+from django_countries import countries
 from .forms import PostForm, CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, CATEGORY
 
 
 class PostList(generic.ListView):
@@ -369,7 +371,7 @@ class Search(View):
         runs search based on the input, returns a queryset of
         the matching posts and displays the search results.
         arguments: self, request, *args, **kwargs
-        :returns: render(0)
+        :returns: render()
         :rtype: method
         """
         category_choices = Post._meta.get_field('category').choices
@@ -393,28 +395,26 @@ class Search(View):
         qs = []
         query_lists = []
         no_input = True
+        filterargs = {}
+        search_clicked = False
+        if 'search' in self.request.GET:
+            search_clicked = True
 
         if title_query is not None:
             if title_query.replace(' ', '') != '':
                 no_input = False
                 if title_filter_type == "contains":
-                    qs_title = posts.filter(title__icontains=title_query)
+                    filterargs['title__icontains'] = title_query
                 else:
-                    qs_title = posts.filter(title__iexact=title_query)
-                if qs_title != []:
-                    query_lists.append(qs_title)
+                    filterargs['title__iexact'] = title_query
 
         if author_query is not None:
             if author_query.replace(' ', '') != '':
                 no_input = False
                 if author_filter_type == "contains":
-                    qs_author = posts.filter(
-                        author__username__icontains=author_query)
+                    filterargs['author__username__icontains'] = author_query
                 else:
-                    qs_author = posts.filter(
-                        author__username__iexact=author_query)
-                if qs_author != []:
-                    query_lists.append(qs_author)
+                    filterargs['author__username__iexact'] = author_query
 
         for kw in kw_query_list:
             if kw is not None:
@@ -437,41 +437,35 @@ class Search(View):
             if pub_date_min_query.replace(' ', '') != '':
                 no_input = False
                 min_date = datetime.strptime(pub_date_min_query, '%Y-%m-%d')
-                qs_min_pub_date = posts.filter(
-                    published_on__date__gte=min_date)
-                if qs_min_pub_date != []:
-                    if str(qs_min_pub_date) != "<QuerySet []>":
-                        query_lists.append(qs_min_pub_date)
+                filterargs['published_on__date__gte'] = min_date
 
         if pub_date_max_query is not None:
             if pub_date_max_query.replace(' ', '') != '':
                 no_input = False
                 max_date = datetime.strptime(pub_date_max_query, '%Y-%m-%d')
-                qs_max_pub_date = posts.filter(
-                    published_on__date__lte=max_date)
-                if qs_max_pub_date != []:
-                    if str(qs_max_pub_date) != "<QuerySet []>":
-                        query_lists.append(qs_max_pub_date)
+                filterargs['published_on__date__lte'] = max_date
 
         if city is not None:
             if city.replace(' ', '') != '':
                 no_input = False
-                qs_city = posts.filter(city__iexact=city)
-                if qs_city != []:
-                    query_lists.append(qs_city)
+                filterargs['city__iexact'] = city
 
         if country != 'Choose...':
             no_input = False
-            qs_country = [post for post in posts if \
-                          post.get_country_display() == country]
-            if qs_country != []:
-                query_lists.append(qs_country)
+            filterargs['country__name'] = country
 
-        if category != 'Choose...':
-            no_input = False
-            qs_category = [post for post in posts if
-                           post.get_category_display() == category]
-            query_lists.append(qs_category)
+        category_dict = dict(CATEGORY)
+        keys = list(category_dict.keys())
+        values = list(category_dict.values())
+
+        if category is not None:
+            if category != 'Choose...':
+                no_input = False
+                category_key = keys[values.index(category)]
+                filterargs['category'] = category_key
+
+        qs2 = Post.objects.filter(**filterargs).order_by("-published_on")
+        query_lists.append(qs2)
         if query_lists != []:
             qs = query_lists[0]
         # filter posts that are present in all lists in query lists (which are
@@ -482,9 +476,6 @@ class Search(View):
                 qs = [post for post in query_lists[i] if
                       post in query_lists[i+1]]
                 i += 1
-        search_clicked = False
-        if 'search' in self.request.GET:
-            search_clicked = True
 
         context = {
             'categories': categories,
