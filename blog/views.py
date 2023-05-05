@@ -426,12 +426,11 @@ class Search(View):
                         query_lists.append(qs_kw)
 
         if min_liked_query is not None and min_liked_query != '':
-            if min_liked_query != 0:
-                no_input = False
-                qs_liked = [post for post in posts if (
-                            post.number_of_likes()>=int(min_liked_query))]
-                if qs_liked != []:
-                    query_lists.append(qs_liked)
+            no_input = False
+            qs_liked = [post for post in posts if (
+                        post.number_of_likes()>=int(min_liked_query))]
+            if qs_liked != []:
+                query_lists.append(qs_liked)
 
         if pub_date_min_query is not None:
             if pub_date_min_query.replace(' ', '') != '':
@@ -450,7 +449,7 @@ class Search(View):
                 no_input = False
                 filterargs['city__iexact'] = city
 
-        if country != 'Choose...':
+        if country != 'Choose...' and country is not None:
             no_input = False
             filterargs['country__name'] = country
 
@@ -463,9 +462,10 @@ class Search(View):
                 no_input = False
                 category_key = keys[values.index(category)]
                 filterargs['category'] = category_key
-
-        qs2 = Post.objects.filter(**filterargs).order_by("-published_on")
-        query_lists.append(qs2)
+        if filterargs != {}:
+            qs2 = Post.objects.filter(**filterargs).order_by("-published_on")
+            if len(qs2) > 0:
+                query_lists.append(qs2)
         if query_lists != []:
             qs = query_lists[0]
         # filter posts that are present in all lists in query lists (which are

@@ -17,6 +17,13 @@ $(document).ready(function(){
   const SUBMIT_POST = "After submiiting your post, you won't be able to" +
                       " update or delete it.  Would you like to proceed?"
   $('.btn-submit').click(function() {
+    $( ".submit-post-form" ).validate({
+      rules: {
+          title: {required: true},
+          content: {required: true},
+          city: {required: true}
+      }
+  });
     ButtonValue = $(this).val();
   })
   $('.submit-post-form').submit(function() {

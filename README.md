@@ -292,9 +292,21 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
 ||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
 ||content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
-|||||||||
-||**"Search Stories" page|||||||
+||Check if the right posts will be listed.|Log in as testuser and create a new post with title 'blog 11.' Publish the post on the admin panel.|Go to "Detail Page" of blog 11 and 'like' the post.|'blog 11' will be displayed on 'Popular Stories' page.|'blog 11' is not shown immediately after it is made. When I stopped the server and reran it, blog 11 appeared on the page.|fail|2023/5/5|
+
+**"Search Stories" page**
+As preparatory steps:
+1. log in as testuser
+2. Make a post
+title: blog test search
+content: content
+city: Berlin
+country: Germany
+
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
+||test search by country|--|Enter 'Germany' for country.  Click on 'Search'|'blog test search' will be displayed under Search Results|'blog test search' is displayed under Search Results|pass|2023/5/4|
 
 *Testing case sensitivity
 As preparatory steps for test no. :
@@ -311,10 +323,10 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||get capitalized title - is exactly |go to "Search" page. | Enter 'gray cat' for title, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
 ||get lowercased title - contains|go to "Search" page. | Enter 'White Cat' for title, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
 ||get lowercased title - is exactly |go to "Search" page. | Enter 'White Cat' for title, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-||get capitalized author - contains|go to "Search" page. | Enter 'john smith' for author, select 'contains,' click on 'Search'|Blogs "Gray Cat" and "white cat" will be displayed.|Blogs "Gray Cat" and "white cat" are displayed.|pass|2023/5/2|
-||get capitalized author - is exactly |go to "Search" page. | Enter 'Susan Adams' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-||get lowercased author - contains|go to "Search" page. | Enter 'Susan Adams' for author, select 'contains,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-||get lowercased title - is exactly |go to "Search" page. | Enter 'Susan Adams' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+||get capitalized author - contains|go to "Search" page. | Enter 'john' for author, select 'contains,' click on 'Search'|Blogs "Gray Cat" and "white cat" will be displayed.|Blogs "Gray Cat" and "white cat" are displayed.|pass|2023/5/2|
+||get capitalized author - is exactly |go to "Search" page. | Enter 'john' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+||get lowercased author - contains|go to "Search" page. | Enter 'Susan' for author, select 'contains,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+||get lowercased title - is exactly |go to "Search" page. | Enter 'Susan' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
 ||get capitalized city - contains|go to "Search" page. | Enter 'capitalized city' for city, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" are displayed.|pass|2023/5/2|
 ||get capitalized city - is exactly |go to "Search" page. | Enter 'capitalized city' for city, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
 ||get lowercased city - contains|go to "Search" page. | Enter 'Lowercased City' for city, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
@@ -340,7 +352,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |103|confirmation dialog - cancel|--|Click on 'cancel' | The dialog disappears. | The dialog disappears. | pass |2023/5/4|
 |103|confirmation dialog - ok|--|Click on 'Submit' and 'OK' in the dialog | Message 'This field is required' will be displayed for title, content and city. | Message 'This field is required' will be displayed for title, content and city. | pass |2023/5/4|
 
-**Testing transformation of images during upload** (Applies to "Write Stories" and "Update Stories")
+**Testing transformation of images during upload** ("Write Stories" and "Update Stories")
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
@@ -478,13 +490,26 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ### Test summary
 
 - "Remember me" function in the test no. 35.
-In general clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to logs in the next time.  But as recorded, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May 4th, 2023, I will leave it as it is, but it needs to be fixed in the future.
+For log in systems in general, clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to log in the next time.  But as recorded, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May, 2023, I will leave it as it is.  It needs to be fixed in the future.
 
 - test no.  <br>
-When spaces are entered for the title, content and city, and the country is unselected, clicking 'Save' or 'Submit' will display the validation message for the country.  
+When spaces are entered for the title, content and city, and the country is unselected, clicking 'Save' or 'Submit' will display the validation message for the country.
 When spaces are entered for the title, content and city while the country is selected, clicking 'Save' will display a message 'This field is required.' for the title, content and city.  Clicking 'Submit' in this case will cause the confirmation dialog to appear.
-In all four cases, the form will be submitted only if it’s sufficiently filled out, so I will leave the code unchanged as of May 4th, 2023.  
-Ideally, I want to design the validation to display messages for all the required fields that are left empty or are filled out with spaces at the first time users save or submit the form.  Also the confirmation dialog should appear only if there are no validation messages to be displayed.  I will rewrite the code to change these aspects in the future.
+
+In above cases validation is not displayed as expected.  Especially, in cases as in test no.    it would be strange for users to see a confirmation dialog, click on 'OK' for submitting the draft and then to see validation messages.  I added a
+validate function in line 20-25 in script.js, and that took care of the cases in which spaces are entered as well.  I repeated test no. :
+
+ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
+||validation messages on "Write Stories"|Enter 'test validation' for titel, 'content' for content, 'test' for city, 'Afghanistan' for country|Click on 'Submit'| Validation messages appear |Validation message 'This field is required' appears for the title, content and city.|pass|2023/5/5|
+||validation messages on "Update Stories"|Make a draft and save.  Go to "Detail Page" of the blog.  Delete values in the title, content and city and insert spaces. |Click on 'Submit'| Validation messages appear |Validation message 'This field is required' appears for the title, content and city.|pass|2023/5/5|
+
+
+Adding a validate function in line 20-25 in script.js didn't change the results for test no.  .
+It seems that the program to display the validation message for country field is fired even before I can capture with jquery.
+I wasn't able to fix this issue but in the future I will 
+
+
 
 "update post" page
 tests   failed, because the Django form error messages appeared before redirection.  If 'Cancel' button is clicked, the user should be promptly redirected to "detail page."  I used anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") and repeated the tests:  
@@ -510,10 +535,15 @@ Refer to
 2. “Search Stories” page didn’t get displayed.  An error page appeared with the message “Reverse for 'post_detail' with arguments '('',)' not found.”<br><br>**Solution:** I was forgetting a slash at the end of the url in urls.py, so I changed the url from ‘search_story’ to ‘search_story/,’ and the issue was resolved.
 
 3. On “Write Stories” and “Update Stories” pages, if I left the fields empty and clicked on ‘Submit’, the confirmation dialog showed up instead of the validation error message.In this case, the validation message should appear, and only if there are no validation messages to be displayed, the dialog should appear.<br><br>
-**Solution:** This happened because I set the dialog to appear when ‘Submit’ button was clicked, using<br> 
-  $('.submit-post').click(function() {...  
-I reset it so that the dialog appears when the form will be submitted.  I also had to target specifically the events in which 'Submit' is clicked, so I rewrote code as in line 17-28 in dialog.js.
-The issue was resolved for cases in which fields are left empty or the country is unselected.  The problem remains, when spaces are entered for the title, content or city as discussed in manual testing.  I will fix the issue in the future.  
+**Solution:** This happened because I set the dialog to appear when ‘Submit’ button was clicked.
+I changed the code so that the dialog appears when the form will be submitted.  I also had to target specifically the events in which 'Submit' is clicked, so I rewrote code as after line 17 in dialog.js.
+The issue was resolved for cases in which fields are left empty or the country is unselected.  The problem remains, when spaces are entered for the title, content or city as discussed in 'Manual Testing' section.  I will fix the issue in the future.  
+
+4. On “Write Stories” and “Update Stories” pages, the following steps resulted in an unexpected outcome:
+Fill out all required fields, click on ‘Submit,’ click on ‘Cancel’ in the dialog, click on ‘Save’
+-> a confirmation dialog before form submission showed up.
+What happened was: when ‘Submit’ was clicked, the value ‘complete’ was stored in the variable ‘ButtonValue.’  When ‘Save’ was clicked, since the value of ‘ButtonValue’ was ‘complete,’ the confirm function in line 24 in script.js was fired.<br>
+**Solution:** I added the class name ‘btn-submit’ to 'Save' button as well, so when ‘Save’ button is clicked, value ‘draft’ will be stored in ButtonValue, which will not fire the confirm function.  
 
 ## Aspects to be improved in the future:
 - As discussed in “Manual Testing” and “Bugs” sections, the mechanism to display validation messages for PostForm needs to be improved.
@@ -548,6 +578,9 @@ Other sources for code snippets taken in this project:
 
 - The code for turning the navbar to a hamburger menu (lines 9-19 in script.js & lines 21-45 in base.html) was taken from the following site:
 https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design
+
+- For the code for search system, I took basic ideas from the following youtube video:
+
 
 - The code to display confirmation dialog when ‘Submit’ is clicked (line 17-25 in dialog.js) is taken from the following site:
 

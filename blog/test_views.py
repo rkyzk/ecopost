@@ -155,7 +155,8 @@ class TestViews(TestCase):
                                 'submit': 'complete'})
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]),
-                         'Your story has been submitted for evaluation.')
+                         "You submitted your post. We'll contact " +
+                         "you when evaluation is done.")
 
     # Testing "PostDetailView" -----------------------------------------
     def test_can_get_detail_page(self):
@@ -443,7 +444,7 @@ class TestViews(TestCase):
         self.assertEqual(post.content, 'content')
         self.assertEqual(post.city, 'test city 2')
         self.assertEqual(post.country, 'IR')
-        self.assertEqual(post.category, 'Others')
+        self.assertEqual(post.category, 'others')
         self.assertRedirects(response, f'/detail/{post.slug}/')
 
     def test_update_post_POST_will_update_country(self):
@@ -494,7 +495,7 @@ class TestViews(TestCase):
         self.assertEqual(post.content, 'content updated')
         self.assertEqual(post.city, 'test city')
         self.assertEqual(post.country, 'IR')
-        self.assertEqual(post.category, 'Others')
+        self.assertEqual(post.category, 'others')
         self.assertRedirects(response, f'/detail/{post.slug}/')
 
     def test_update_post_POST_msg_says_change_saved_if_saved(self):
@@ -574,16 +575,6 @@ class TestViews(TestCase):
         response = self.client.get('/popular_stories/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'popular_stories.html')
-
-    # NG
-    # def test_popular_stories_display_posts_according_to_num_likes(self):
-    #     self.post4.likes.add(self.user2)
-    #     self.post4.likes.add(self.user1)
-    #     self.post4.save()
-    #     response = self.client.get('/popular_stories/')
-    #     self.assertEqual(len(response.context['object_list']), 1)
-    #     self.assertEqual(response.context['object_list'][0],
-    #                      self.post4)
 
     # Testing "MyPageView" ----------------------------------
     def test_my_page_GET_will_get_page_if_user(self):
@@ -867,7 +858,7 @@ class TestSearchView(TestCase):
         self.assertEqual(len(response.context['queryset']), 0)
 
     def test_search_by_category_will_return_right_post_if_match(self):
-        self.post1.category = 'Protecting animals'
+        self.post1.category = 'animals'
         self.post1.save()
         response = self.client.get('/search_story/',
                                    {'category': 'Protecting animals',
@@ -893,30 +884,10 @@ class TestSearchView(TestCase):
         self.assertEqual(list(response.context['queryset']),
                          [self.post1])
 
-    def test_search_by_region_will_return_empty_queryset_if_no_match(self):
+    def test_search_by_city_will_return_empty_queryset_if_no_match(self):
         response = self.client.get('/search_story/',
                                    {'category': 'Choose...',
                                     'city': 'test',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 0)
-
-    def test_search_by_country_will_return_right_post_if_match(self):
-        response = self.client.get('/search_story/',
-                                   {'category': 'Choose...',
-                                    'country': 'Ireland',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post1])
-
-    def test_search_by_country_will_return_empty_queryset_if_no_match(self):
-        response = self.client.get('/search_story/',
-                                   {'category': 'Choose...',
-                                    'country': 'NZ',
                                     'search': 'search'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
@@ -942,6 +913,7 @@ class TestSearchView(TestCase):
                                     'country': '',
                                     'search': 'search'})
         self.assertEqual(len(response.context['queryset']), 0)
+
 
 if __name__ == '__main__':
     main()
