@@ -88,7 +88,7 @@
         {% csrf_token %}
           <button class="btn btn-submit" type="submit">Update</button>
       </form>
-      <form method="POST" id="delete-form" action="{% url 'delete_post' post.slug %}">
+      <form method="POST" id="delete-post" action="{% url 'delete_post' post.slug %}">
         {% csrf_token %}
         <button type="submit" class="btn btn-submit item-right" name="delete_post" value="{{post.slug}}">Delete</button>
       </form> 

@@ -62,10 +62,10 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - On the right side, links to other pages are provided.
 - Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Log out.’
 - Other users will find links to ‘Home,’ ‘Search,’ ‘Become a Member,’ and ‘Log in.’
-- These terms clearly indicates what these linked pages will present.
+- These terms clearly indicate what these linked pages will present.
 - Only the content of 'My Page' may not be clear for first-time visitors, but if they navigate to the page, they will see lists of posts that are grouped by labeled categories, so that should become clear. 
 
-### Logged in status
+### Login status
 - At the top right corner, logged-in status says ‘Logged in as (username)’ or ‘You’re not logged in.’
 
 ### Footer (common to all pages)
@@ -125,9 +125,7 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 - The fields are: title, content, featured image (optional), cateogry (select box), city, country (select box)
 - if no image is uploaded as featured image, a default image will be set for the post.
 - Users can click on 'Save' to save drafts so they can edit them later, or click 'Submit' to submit the articles.
-- I had in my mind, that the admin will read submitted posts and then decide the posts will be published or not.
-They should contact the authors when the decision has been made.
-- If 'Submit' button is clicked, a confirmation dialog box will tell users that they will not be able to edit or delete the post after submitting it and ask them if they want to proceed.
+- The admin will read submitted posts and then decide the posts will be published or not.  They will contact the authors when the decision has been made.
 
 ### Update Post
 - Authors of the posts can update their own drafts before submitting them.
@@ -170,30 +168,30 @@ They should contact the authors when the decision has been made.
 - ‘Write Stories’ has LoginRequiredMixin, so users who are not logged in will be sent to a 403 error page.
 - ‘Update Post,’ ‘Update Comment’ and ‘Delete Comment’ views are controlled by LoginRequiredMixin and UserPassestestMixin, and these check if the user is the writer of the posts or of the comments.  Other users will be sent to a 403 error page.
 - Additionally, since posts should not be updated or deleted once submitted, the program is written to send a 403 page if users attempt to update or delete posts that have been submitted.
-- For DeletePosts view function, a program is wrriten to raise 403 error in case forbidden attempts are made.  The reason why I didn't use Mixins will be discussed in "Bugs" section.  **ADD Line index**
+- For DeletePosts view function, a program is wrriten to raise 403 error in case forbidden attempts are made (line 232, 237-238 in views.py.)  I first used Mixins, but it resulted in error so instead I wrote this program (discussed further in 'Bugs' section).
 
 - - -
 ## Automated Testing
 Automated tests can be found in test_models.py, test_forms.py and test_views.py
 
-Line index of views tested in test_views.py
-- PostListView line 86-156
-- AddStoryView line 159-291
-- PostLikeView line 294-308
-- BookmarkView line 311-316
-- UpdateCommentView line 328-359
-- DeleteCommentView line 362-367
-- UpdatePostView line 370-521
-- DeletePostView line 524-554
-- MoreStoriesView line 557-568
-- PopularStoriesView line 571
-- MyPageView line
+Views were tested in test_views.py in the following order
+- PostListView
+- AddStoryView
+- PostLikeView
+- BookmarkView
+- UpdateCommentView
+- DeleteCommentView
+- UpdatePostView
+- DeletePostView
+- MoreStoriesView
+- PopularStoriesView
+- MyPageView
+- SearchView
 
 ## Manual Testing
 I conducted manual testing for the aspects that weren't covered by automated testing.
 
 ### Testing User Stories
-
 No. | Goals | How they are achieved | 
 |:---| :--- | :--- | 
 ||**First Time Visitors**||   
@@ -281,7 +279,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
 |49|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
 
-*Testing buttons to update/delete comments*
+- Testing buttons to update/delete comments<br>
 As preparation for no. - : Log in as testuser and go to "Detail Page" of "blog 1." Enter "test comment" in the text box and click on 'Submit.'
 Conduct test no. consecutively.
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
@@ -300,7 +298,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|2023/5/3|
 
 **Testing “Update Comments”**
-As preparation for test no. 50, 
+As preparation for test no. 50:
 1.	log in as testuser
 2.	On the home page, click on the link “Read the full story” of the blog “blog 1”
 4.	Enter “test comment” in the leave comments section and click on “Submit”
@@ -328,25 +326,21 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 **"Search Stories" page**
 As preparatory steps:
 1. log in as testuser
-2. Make a post
-title: blog test search
-content: content
-city: Freiburg
-country: Germany
+2. Make a post with title: 'blog test search'; content: 'content'; city: 'Freiburg'; country: Germany
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
 ||test search by country|--|Enter 'Germany' for country.  Click on 'Search'|'blog test search' will be displayed under Search Results|'blog test search' is displayed under Search Results|pass|2023/5/4|
 
-*Testing case sensitivity
+**Testing case sensitivity**
 As preparatory steps for test no. :
-- Create users "John" and "susan" 
-- log in as "John," and on "Write Stories" page, make two posts:
-1. title: 'Gray Cat'; content: 'test'; city: 'lowercased city'; country: 'Afghanistan'
-2. title: 'white cat'; content: 'test'; city: 'Capitalized City'; country: 'Afghanistan'
-- log in as "susan" and make one post:
-title: 'Brown Dog'; content: 'test'; city: 'test'; country: 'Afghanistan'
+1. Create users "John" and "susan" 
+2. log in as "John," and on "Write Stories" page, make two posts:
+- title: 'Gray Cat'; content: 'test'; city: 'lowercased city'; country: 'Afghanistan'
+- title: 'white cat'; content: 'test'; city: 'Capitalized City'; country: 'Afghanistan'
+3. log in as "susan" and make one post:
+- title: 'Brown Dog'; content: 'test'; city: 'test'; country: 'Afghanistan'
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
@@ -388,10 +382,10 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 
 **Testing "Update Stories"**
 As preparation for tests no 43-48: 
-- Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
-- click "Save"
-- go to "My page" and click on the link "Read the full story" of the blog "test title 2"
-- click on "Update" 
+1. Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
+2. click "Save"
+3. go to "My page" and click on the link "Read the full story" of the blog "test title 2"
+4. click on "Update" 
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
@@ -451,18 +445,18 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
 
 **Testing if clicking on show more & show less buttons in different sections doesn't disrupt the functions**<br>
-As preparation
+Preparation:
 1. click on "Show more" in "Written by me"
 2. click on "Show more" in "Commented by me"
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |62|Show more/less buttons across different sections | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| "blog 11" in "Commented by me" will disappear. The upper button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The upper button in "Commented by me" section says "Show more" | pass|2023/4/30|
 
+**Become a Member, Log in, Log out pages**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||**"Become a Member" page**|||||||
 ||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
-||**"Sign up" page**|||||||
 |19|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
 |20|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
 |21|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
@@ -517,23 +511,17 @@ tests   failed, because the Django form error messages appeared before redirecti
 
 2. “Search Stories” page didn’t get displayed.  An error page appeared with the message “Reverse for 'post_detail' with arguments '('',)' not found.”<br><br>**Solution:** I was forgetting a slash at the end of the url in urls.py, so I changed the url from ‘search_story’ to ‘search_story/,’ and the issue was resolved.
 
-3. Delete Posts
-
-4. On “Write Stories” and “Update Stories” pages, the following steps resulted in an unexpected outcome:
-Fill out all required fields, click on ‘Submit,’ click on ‘Cancel’ in the dialog, click on ‘Save’
--> a confirmation dialog before form submission showed up.
-What happened was: when ‘Submit’ was clicked, the value ‘complete’ was stored in the variable ‘ButtonValue.’  When ‘Save’ was clicked, since the value of ‘ButtonValue’ was ‘complete,’ the confirm function in line 24 in script.js was fired.<br>
-**Solution:** I added the class name ‘btn-submit’ to 'Save' button as well, so when ‘Save’ button is clicked, value ‘draft’ will be stored in ButtonValue, which will not fire the confirm function.  
+3. For "Delete Posts" Page, I first used LoginRequiredMixin and UserPassestestMixin in order to make sure the user is the author of the post and that the post hasn't been submitted. That resulted in an error, since the post was deleted before the test func was run, and the test func couldn't find the post in the database.<br><br>**Solution:**I wrote the program on line 232, 237-238 in views.py to go around the issue, and now the access control is functioning.
 
 ## Aspects to be improved in the future:
-- As discussed in “Manual Testing” and “Bugs” sections, the mechanism to display validation messages for PostForm needs to be improved.
 - Remember me function on “Log in” page also needs to be fixed.
-- Currently on "Search Stories" page, if users click on 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the search results easily.
-- In addition, I will make Contact page where users can write and submit messages to admin.
-- I also want to make the system to update comments simpler.  I plan to display a small input box for updating comments where the comment is displayed, since a comment form shouldn't need a whole another page.
+- Currently on "Search Stories" page, after users run a 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the resultsmore easily.
+- I will make Contact page where users can write and submit messages to admin.
+- I also want to simplify the process to update comments.  Instead of displaying a whole new page of 'Update Comments,' I want to display a small input box for updating comments on "Detail Page" where the original comment is displayed.
 
 ## Credits:
-Many thanks to my mentor Jubril Akolade and tutors at Code Institute for their dedicated support and encouragement.<br>
+Many thanks to my mentor Jubril Akolade and tutors at Code Institute for their guidance and dedicated support.<br>
+
 For this application, I used the Code Institute's 'Code Star' project as a starting point.
 
 Code snippets that were taken from 'Code Star' are as follows:
@@ -542,37 +530,30 @@ Code snippets that were taken from 'Code Star' are as follows:
 {% if forloop.counter|divisibleby:3 %}
 was used in “More Stories,” “Popular Stories” and “My Page.” 
 
-- The code to paginate post lists was used in lines 39-53 in “More Stories” and “Popular Stories.”
+- The code to paginate post lists was used in “More Stories” (after ln 43) and “Popular Stories” (after ln 41).
 
 - The code to display “Comments” and “Leave Comments” sections was used on “Detail Page.”
 
-- The code to display the heart and the number of likes was used in “More Stories,” “Popular Stories” and “Detail Page”
+- The code to display the heart icon and the number of likes was used in “More Stories,” “Popular Stories” and “Detail Page”
 
-- The code to ‘like’ posts was used in line 61-63, 89-91 in “PostDetail” view in views.py.
- It was also used in ‘bookmark’ function in line 66-68, 93-95 in “PostDetail” view in views.py.
+- The code to ‘like’ posts was used in line 71-73, 102-104 in “PostDetail” view in views.py.
+The same program was also used for ‘bookmark’ function in line 74-76, 105-107 in “PostDetail” view in views.py.
 
-- The code to post comments was used in line 96-103 in PostLike View in views.py
+- The code to post comments was used in line 108-117 in PostLikeView in views.py
 
 Other sources for code snippets taken in this project:
 - The code to display links to social networks (lines in 68-87 in base.html) was taken from “Love Running” project.
 
-- The code for turning the navbar to a hamburger menu (lines 9-19 in script.js & lines 21-45 in base.html) was taken from the following site:
-https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design
+- The code for turning the navbar to a hamburger menu (lines 9-19 in script.js & lines 21-45 in base.html) was taken from [this site.](https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design)
 
-- For the code for search system, I took basic ideas from the following youtube video:
+- For the code for search system, I took basic ideas from this [youtube video](https://www.youtube.com/watch?v=vU0VeFN-abU&t=26s)
 
-
-- The code to display confirmation dialog when ‘Submit’ is clicked (line 17-25 in dialog.js) is taken from the following site:
-
-
-
-- The code to log in a testuser (lines  in test_views.py) was taken from the following site:
-https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests
+- The code to log in a testuser (line 16-20 in test_views.py) was taken from [this site](https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests)
 
 ## Media used
 
-Logo image: clover 
-https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
+Logo image: clover
+https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais)
 
 Heading image: blue earth
 https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais

@@ -13,8 +13,9 @@ from django_countries import countries
 from .forms import PostForm, CommentForm
 from .models import Post, Comment, CATEGORY
 
-# For "Popular Stories," set the number of likes above which posts will be included.
+# Set the num. of likes above which posts will be included in "Popular Stories"
 min_num_likes = 1
+
 
 class PostList(generic.ListView):
     """Gets queryset of featured posts and displays them on the home page."""
@@ -46,7 +47,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1 
             message = "You submitted your post. " + \
-                      "We'll contact you when evaluation is done."
+                      "We'll contact you when decision has been made."
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(AddStory, self).form_valid(form)
@@ -109,7 +110,7 @@ class PostDetail(View):
         if comment_form.is_valid():
             comment_form.instance.commenter = request.user
             comment = comment_form.save(commit=False)
-            # stores in post attribute of comment,
+            # Stores in post attribute of comment,
             # to which post this comment belongs.
             comment.post = post
             comment.save()
@@ -176,17 +177,6 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     template_name = "update_post.html"
     form_class = PostForm
 
-    def get_context_data(self, **kwargs):
-        """
-        Add slug to context data.
-        arguments: self, **kwargs
-        :return: context
-        :rtype: dict
-        """
-        context = super(UpdatePost, self).get_context_data(**kwargs)
-        context['slug'] = self.kwargs.get('slug')
-        return context
-
     def form_valid(self, form):
         """
         validates the form. If validated, saves it.
@@ -200,11 +190,10 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         if 'submit' in self.request.POST.keys():
             form.instance.status = 1
             message = "You submitted your post. " + \
-                      "We'll contact you when evaluation is done."
+                      "We'll contact you when decision has been made."
         form.save()
         messages.add_message(self.request, messages.SUCCESS, message)
         return super(UpdatePost, self).form_valid(form)
-
 
     def test_func(self):
         """
@@ -235,7 +224,7 @@ class DeletePost(LoginRequiredMixin, View):
             messages.add_message(request, messages.SUCCESS, message)
             return HttpResponseRedirect(reverse('home'))
         else:
-            raise PermissionDenied()   
+            raise PermissionDenied()
 
 
 class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -271,8 +260,6 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
         """
         comment = get_object_or_404(Comment, id=id)
         slug = comment.post.slug
-        if 'cancel' in request.POST.keys():
-            return HttpResponseRedirect(reverse('detail_page', args=[slug]))
         comment_form = CommentForm(self.request.POST, instance=comment)
         if comment_form.is_valid():
             updated = comment_form.save(commit=False)
@@ -306,6 +293,7 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, View):
         :rtype: method
         """
         comment = get_object_or_404(Comment, id=id)
+        # comment_status 2 indicates 'Deleted'
         comment.comment_status = 2
         comment.save()
         slug = comment.post.slug
@@ -377,11 +365,16 @@ class Search(View):
         :returns: render()
         :rtype: method
         """
+        # get category choices to provide the list for the select box
         category_choices = Post._meta.get_field('category').choices
         categories = [cat[1] for cat in category_choices]
+        # get country choices to provide the list for the select box
         country_choices = Post._meta.get_field('country').choices
         countries = [country.name for country in country_choices]
+        # Get posts that have been published in the order of
+        # newest to oldest published dates
         posts = Post.objects.filter(status=2).order_by('-published_on')
+        # get input data in the search form
         title_query = request.GET.get('title_input')
         title_filter_type = request.GET.get('title_filter')
         author_query = request.GET.get('author_input')
@@ -400,9 +393,11 @@ class Search(View):
         no_input = True
         filterargs = {}
         search_clicked = False
+        # distinguish if the 'search' was run or not.
         if 'search' in self.request.GET:
             search_clicked = True
 
+        # the search criteria will be stored in filterargs
         if title_query is not None:
             if title_query.replace(' ', '') != '':
                 no_input = False
@@ -423,6 +418,9 @@ class Search(View):
             if kw is not None:
                 if kw.replace(' ', '') != '':
                     no_input = False
+                    # 'Or' condition can't be filtered along with other
+                    # filterargs so objects will be filtered here and are
+                    # stored in query_lists.  
                     qs_kw = posts.filter(
                         Q(title__icontains=kw) | Q(content__icontains=kw))
                     if qs_kw != []:
@@ -456,12 +454,14 @@ class Search(View):
         if category is not None:
             if category != 'Choose...':
                 no_input = False
+                # get category's key from the value
                 category_dict = dict(CATEGORY)
                 keys = list(category_dict.keys())
                 values = list(category_dict.values())
                 category_key = keys[values.index(category)]
                 filterargs['category'] = category_key
         if filterargs != {}:
+            # add another criteria status='Published'
             filterargs['status'] = 2
             qs2 = Post.objects.filter(**filterargs).order_by("-published_on")
             if len(qs2) > 0:
@@ -469,7 +469,7 @@ class Search(View):
         if query_lists != []:
             qs = query_lists[0]
         # filter posts that are present in all lists in query lists (which are
-        # the posts that match all criteria)
+        # the posts that satisfy all criteria)
         if len(query_lists) > 1:
             i = 0
             for i in range(len(query_lists) - 1):

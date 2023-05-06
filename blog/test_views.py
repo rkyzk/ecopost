@@ -156,7 +156,7 @@ class TestViews(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]),
                          "You submitted your post. We'll contact " +
-                         "you when evaluation is done.")
+                         "you when decision has been made.")
 
     # Testing "PostDetailView" -----------------------------------------
     def test_can_get_detail_page(self):

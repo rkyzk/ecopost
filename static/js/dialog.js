@@ -1,7 +1,7 @@
 $(document).ready(function(){
   // Confirm before deleting the post
   const DELETE_POST = "Are you sure you want to delete your post?  You won't be able to retrieve the draft."
-  $('#delete-form').submit(function(e) {
+  $('#delete-post').submit(function(e) {
     return confirm(DELETE_POST);
   });
 
