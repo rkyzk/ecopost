@@ -98,7 +98,7 @@ class TestPostForm(TestCase):
         self.assertEqual(
             form.Meta.fields,
             ['title', 'content', 'featured_image',
-            'city', 'country', 'category']
+             'city', 'country', 'category']
         )
 
 

@@ -142,7 +142,7 @@ class TestViews(TestCase):
                                 'country': 'IR',
                                 'category': 'others',
                                 'save': 'draft'})
-        messages = list(get_messages(response.wsgi_request))       
+        messages = list(get_messages(response.wsgi_request))  
         self.assertEqual(str(messages[0]), 'Your draft has been saved.')
 
     def test_message_says_draft_is_submitted_if_submitted(self):
@@ -223,7 +223,7 @@ class TestViews(TestCase):
     def test_post_detail_POST_msg_says_comment_posted_if_submitted(self):
         response = self.c.post(f'/detail/{self.post1.slug}/',
                                {'body': 'test comment'})
-        messages = list(response.context['messages']) 
+        messages = list(response.context['messages'])
         self.assertEqual(str(messages[0]), 'You posted a comment.')
 
     def test_post_detail_POST_error_message_if_a_space_entered(self):
@@ -599,7 +599,7 @@ class TestSearchView(TestCase):
         """create test posts."""
         self.user1 = User.objects.create_user(username="user1", password="pw1")
         self.user2 = User.objects.create_user(username="user2", password="pw2")
-        self.user3 = User.objects.create_user(username="test3", password="pw3")   
+        self.user3 = User.objects.create_user(username="test3", password="pw3")
         self.post1 = Post.objects.create(title='gray cat',
                                          author=self.user1,
                                          content='abc',

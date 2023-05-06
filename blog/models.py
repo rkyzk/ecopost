@@ -1,5 +1,6 @@
 """This module holds models used in ecopost."""
 
+import random, string
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
@@ -23,7 +24,7 @@ CATEGORY = (('animals', 'Protecting animals'),
 
 class Post(models.Model):
     """Lists fields of Post model and functions around them."""
-    title = models.CharField(max_length=80, unique=True)
+    title = models.CharField(max_length=80)
     slug = models.SlugField(max_length=80, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name="posts")
@@ -64,12 +65,18 @@ class Post(models.Model):
         hasn't been stored, assign the current date and time.
         """
         if not self.slug:
-            self.slug = slugify(self.title)
+            # add a random string after the title
+            random_str = ''.join(random.choices(string.ascii_letters +
+                                 string.digits, k=16))
+            self.slug = slugify(self.title + '-' + random_str)
+        # if the post has been published but published_on is empty
+        # assign the current datetime 
         if self.status == 2 and not self.published_on:
             self.published_on = datetime.utcnow()
         if self.id is not None:
             self.num_of_likes = self.likes.count()
         super().save(*args, **kwargs)
+ 
 
     def __str__(self):
         """

@@ -24,12 +24,6 @@ class PostForm(forms.ModelForm):
             super(PostForm, self).__init__(*args, **kwargs)
 
 
-class NoSpacesField(forms.CharField):
-
-    def validate(self, value):
-        # if value.replace()
-        pass
-
 class CommentForm(forms.ModelForm):
     """Form for comments."""
     class Meta:

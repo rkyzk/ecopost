@@ -24,7 +24,7 @@ class TestPostModel(TestCase):
             content="test 2 sentences"
             )
 
-    def test_two_posts_cannot_have_the_same_title(self):                              
+    def test_two_posts_cannot_have_the_same_title(self):                      
         with self.assertRaises(Exception) as raised:
             Post.objects.create(title="title1", author=self.user2,
                                 content="test sentences", category='others',

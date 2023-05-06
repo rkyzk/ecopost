@@ -84,7 +84,7 @@ a:hover {
 
 .padding-bottom {
   width: 100%;
-  height: 70px;
+  height: 90px;
 }
 
 .item-left {
@@ -405,8 +405,8 @@ footer {
     flex-direction: column;
   }
 
-  .cancel {
-    width: 180px;
+  .btn-submit {
+    width: 200px;
   }
 }
 
