@@ -32,7 +32,6 @@
   <p>{% blocktrans %}If you have not created an account yet, then please
   <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
   {% endif %}
-
   <form class="login" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
     {{ form.as_p }}
@@ -42,5 +41,6 @@
     <p><em>Email admin@ecopost.com if you've forgotten your password.</em></p>
     <button class="btn btn-submit btn-sign-in mt-2" type="submit">{% trans "Sign In" %}</button>
   </form>
+  <div class="padding-bottom"></div>
 </div>
 {% endblock %}

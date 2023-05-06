@@ -8,11 +8,13 @@
       {% csrf_token %}
       {{ form | crispy }}
       <div class="mt-3">
-        <p>By clicking 'Submit' you'll submit the draft to be evaluated for publication.</p>
+        <p class="mt-2">By clicking 'Submit' you'll submit the draft to be evaluated
+          for publication.  Once submitted, you won't be able to edit or delete it.
+        </p>
         <div class="update-post-btns">
           <button type="submit" class="btn-submit" name="save" value="draft">Save changes</button>
           <button type="submit" class="btn-submit item-right submit-post" name="submit" value="complete">Submit</button>
-          <a href="{% url 'detail_page' slug %}" class="item-right update-btns cancel">Cancel Update</a>
+          <a href="{% url 'detail_page' slug %}" class="item-right btn-submit cancel">Cancel Update</a>
         </div> 
       </div>
     </form>

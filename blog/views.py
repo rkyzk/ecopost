@@ -13,6 +13,8 @@ from django_countries import countries
 from .forms import PostForm, CommentForm
 from .models import Post, Comment, CATEGORY
 
+# For "Popular Stories," set the number of likes above which posts will be included.
+min_num_likes = 1
 
 class PostList(generic.ListView):
     """Gets queryset of featured posts and displays them on the home page."""
@@ -145,6 +147,7 @@ class PostLike(View):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
+        post.save()
         return HttpResponseRedirect(reverse('detail_page', args=[slug]))
 
 
@@ -427,10 +430,7 @@ class Search(View):
 
         if min_liked_query is not None and min_liked_query != '':
             no_input = False
-            qs_liked = [post for post in posts if (
-                        post.number_of_likes()>=int(min_liked_query))]
-            if qs_liked != []:
-                query_lists.append(qs_liked)
+            filterargs['num_of_likes__gte'] = min_liked_query
 
         if pub_date_min_query is not None:
             if pub_date_min_query.replace(' ', '') != '':
@@ -453,16 +453,16 @@ class Search(View):
             no_input = False
             filterargs['country__name'] = country
 
-        category_dict = dict(CATEGORY)
-        keys = list(category_dict.keys())
-        values = list(category_dict.values())
-
         if category is not None:
             if category != 'Choose...':
                 no_input = False
+                category_dict = dict(CATEGORY)
+                keys = list(category_dict.keys())
+                values = list(category_dict.values())
                 category_key = keys[values.index(category)]
                 filterargs['category'] = category_key
         if filterargs != {}:
+            filterargs['status'] = 2
             qs2 = Post.objects.filter(**filterargs).order_by("-published_on")
             if len(qs2) > 0:
                 query_lists.append(qs2)
@@ -474,8 +474,7 @@ class Search(View):
             i = 0
             for i in range(len(query_lists) - 1):
                 qs = [post for post in query_lists[i] if
-                      post in query_lists[i+1]]
-                i += 1
+                      post in query_lists[i + 1]]
 
         context = {
             'categories': categories,
@@ -511,6 +510,8 @@ class PopularStories(generic.ListView):
     model = Post
     template_name = "popular_stories.html"
     paginate_by = 6
-    posts = Post.objects.filter(status=2,
-                                featured_flag=False).order_by("-published_on")
-    queryset = [post for post in posts if post.number_of_likes() >= 1]
+    queryset = Post.objects.filter(
+            status=2,
+            featured_flag=False,
+            num_of_likes__gte=min_num_likes
+        ).order_by("-published_on")

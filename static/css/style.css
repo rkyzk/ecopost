@@ -405,7 +405,7 @@ footer {
     flex-direction: column;
   }
 
-  .update-btns {
+  .cancel {
     width: 180px;
   }
 }

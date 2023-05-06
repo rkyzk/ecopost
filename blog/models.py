@@ -46,10 +46,11 @@ class Post(models.Model):
     likes = models.ManyToManyField(User,
                                    related_name='post_likes',
                                    blank=True)
+    num_of_likes = models.IntegerField(default=0)
     city = models.CharField(max_length=25)
     country = CountryField(max_length=25)
     category = models.CharField(max_length=30, choices=CATEGORY,
-                                default='Others')
+                                default='others')
     bookmark = models.ManyToManyField(User, related_name='bookmarked',
                                       blank=True)
 
@@ -66,6 +67,8 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         if self.status == 2 and not self.published_on:
             self.published_on = datetime.utcnow()
+        if self.id is not None:
+            self.num_of_likes = self.likes.count()
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -75,14 +78,6 @@ class Post(models.Model):
         :rtype: str
         """
         return self.title
-
-    def number_of_likes(self):
-        """
-        Returns the number of likes.
-        :return: number of likes
-        :rtype: int
-        """
-        return self.likes.count()
 
     def status_value(self):
         """
