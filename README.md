@@ -379,6 +379,8 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
+[info of the original photo used: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683369497/q7glk2zlcfmetk9gj6li.jpg)
+[info after the image was uploaded and saved on Cloudinary: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683369526/llocybj5tymehepo3wky.png)
 
 **Testing "Update Stories"**
 As preparation for tests no 43-48: 
@@ -519,6 +521,42 @@ tests   failed, because the Django form error messages appeared before redirecti
 - I will make Contact page where users can write and submit messages to admin.
 - I also want to simplify the process to update comments.  Instead of displaying a whole new page of 'Update Comments,' I want to display a small input box for updating comments on "Detail Page" where the original comment is displayed.
 
+## Validating python, CSS, Html code with Tools.
+
+- I checked the code in all python modules at CI Python Linter and came out with no errors.
+- I validated style.css at jigsaw (https://jigsaw.w3.org/)<br>
+I got one error saying ‘Property rotate doesn’t exist.’  But clearly property ‘rotate’ is a widely used property of CSS, and so I left the rule as it is.
+
+## Checking Performance and Accessibility using Google Chrome Developers' Tools
+
+I checked the performance and accessibility of all pages using Lighthouse.
+All aspects turned out to be above 90%, except 82% mark for accessibility of "Detail Page."
+The report stated that the causes of the lower accessibility are that buttons don't have accessible names and that the textarea for the comment section doesn't have a label.  I provided proper names for all button tags, but the result didn't improve afterwards.  As for the label, I intentionally didn't provide any label, since I thought it'd be redundant to insert a label under the heading "Leave Comments."
+
+Screenshots of the reports are available at following links.
+[Home](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362738/wnju3qxizjjywet71spw.png)
+[Detail Page](https://res.cloudinary.com/ds66fig3o/image/upload/v1683368581/cj1hjpz9lw0pjddjkt5l.png)
+[Search Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362958/egaowxn47qrydtc7icir.png)
+[Write Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683363036/znesvokidykowgdjbps3.png)
+[Update Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362989/bcjduw1dhhbbx4cfeioj.png)
+[My Page](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362926/dbigmhkts5na9ezqatkh.png)
+[Become a Member](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362765/m584inzbzbobwx1zuidy.png)
+[Sign in](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362898/icu0q7w11r6me0nqwgl1.png)
+
+## Media used
+
+Logo image: clover
+https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
+
+Heading image: blue earth
+https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
+
+Default featured image
+https://www.pexels.com/photo/forest-345522/
+
+test_transformation
+https://www.pexels.com/photo/city-fashion-man-people-15839341/
+
 ## Credits:
 Many thanks to my mentor Jubril Akolade and tutors at Code Institute for their guidance and dedicated support.<br>
 
@@ -549,20 +587,6 @@ Other sources for code snippets taken in this project:
 - For the code for search system, I took basic ideas from this [youtube video](https://www.youtube.com/watch?v=vU0VeFN-abU&t=26s)
 
 - The code to log in a testuser (line 16-20 in test_views.py) was taken from [this site](https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests)
-
-## Media used
-
-Logo image: clover
-https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais)
-
-Heading image: blue earth
-https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
-
-Default featured image
-https://www.freepik.com/free-vector/background-zoom_8764554.htm#page=5&query=nature%20graphics&position=24&from_view=search&track=ais
-
-test_transformation
-https://www.pexels.com/photo/city-fashion-man-people-15839341/
 
 
 

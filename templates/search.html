@@ -7,7 +7,7 @@
   {% csrf_token %}
     <!-- Search by title -->
     <div class="d-sm-flex mt-3">
-      <label for="title_search" class="col-form-label">Title</label>
+      <label for="title_input" class="col-form-label">Title</label>
       <div class="item-right">
         <select name="title_filter" id="title_filter" class="form-select">
           <option value="contains" selected>contains</option>
@@ -15,12 +15,12 @@
         </select>
       </div>
       <div class="item-right">
-        <input id="title_search" class="form-control border-right-0 border" type="search" name="title_input">       
+        <input id="title_input" class="form-control border-right-0 border" type="search" name="title_input">       
       </div>
     </div>
     <!-- Search by author -->
     <div class="d-sm-flex mt-3">
-      <label for="author_search" class="col-form-label">Author</label>
+      <label for="author_input" class="col-form-label">Author</label>
       <div class="item-right">
         <select name="title_option" id="author_filter" class="form-select">
           <option value="contains" selected>contains</option>
@@ -28,12 +28,12 @@
         </select>
       </div>
       <div class="item-right">
-        <input id="author_search" class="form-control border-right-0 border" type="search" name="author_input">
+        <input id="author_input" class="form-control border-right-0 border" type="search" name="author_input">
       </div> 
     </div>
     <!-- Search by keywords -->
     <div class="d-sm-flex mt-3">
-      <label for="author_search" class="col-form-label">Keyword(s): Title or Content contains</label>
+      <label for="keywords" class="col-form-label">Keyword(s): Title or Content contains</label>
     </div>
     <div class="d-sm-flex">
       <div>
@@ -48,21 +48,21 @@
     </div>
     <!-- Search by number of likes -->
     <div class="d-sm-flex mt-4">
-      <label class="col-form-label">Liked</label>
+      <label for="liked_count_min" class="col-form-label">Liked</label>
       <div class="item-right">
-        <input type="number" min=0 class="form-control" id="likedCountMin" placeholder=0 name="liked_count_min">
+        <input type="number" min=0 class="form-control" id="liked_count_min" placeholder=0 name="liked_count_min">
       </div>
       <span class="item-right col-form-label">times or more</span>
     </div>
     <!-- Search by published dates -->
     <div class="d-sm-flex mt-4">
       <div class="form-group">
-        <label for="publishDateMin">Published after:</label>
-        <input type="date" class="form-control mt-2" id="publishDateMin" name="date_min">
+        <label for="date_min">Published after:</label>
+        <input type="date" class="form-control mt-2" id="date_min" name="date_min">
       </div>
       <div class="form-group item-right d-sm-mt-custom">
-        <label for="publishDateMin">Published before:</label>
-        <input type="date" class="form-control mt-2" id="publishDateMax" name="date_max">
+        <label for="date_max">Published before:</label>
+        <input type="date" class="form-control mt-2" id="date_max" name="date_max">
       </div>
     </div>
     <!-- Search by category -->
@@ -78,7 +78,7 @@
     <!-- Search by city -->
     <div class="d-sm-flex mt-4">
       <label for="city" class="col-form-label">City</label>
-      <input class="form-control border-right-0 border item-right" type="search" name="city">
+      <input id="city" class="form-control border-right-0 border item-right" type="search" name="city">
     </div>
     <!-- Search by country -->
     <div class="form-group d-sm-flex mt-3">
@@ -113,7 +113,7 @@
           <div class="image-wrapper d-flex justify-content-center">
             {% if "placeholder" in post.featured_image.url %}
               <img class="card-img-top"
-                src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
+                src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
                 alt="forest graphic">
             {% else %}
               <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- Posts written by the user -->
-<h2 class="mt-5 mb-4">Written by Me</h2>
+<h2 class="mt-5">Written by Me</h2>
 <div class="row">
   {% for post in my_posts %}
   <div class="col-md-4">
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
         <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
-          alt="forest graphic">
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
+          alt="forest">
       {% else %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
       {% endif %}
@@ -38,7 +38,7 @@
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link show-posts mt-5 mb-4">Show more</button>
+      <button class="btn btn-link show-posts mb-4">Show more</button>
       <div class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
@@ -56,8 +56,8 @@
     <p>No posts</p>
   {% endfor %}
 </div>
-<hr/>
 <!-- Commented Posts -->
+<hr>
 <h2 class="mt-5 mb-4">Commented by Me</h2>
 <div class="row">
   {% for post in commented_posts %}
@@ -65,8 +65,8 @@
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
         <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
-          alt="forest graphic">
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
+          alt="forest">
       {% else %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
       {% endif %}
@@ -92,7 +92,7 @@
     {% if commented_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link show-posts mt-5 mb-4">Show more</button>
+      <button class="btn btn-link show-posts mb-4">Show more</button>
       <div class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
@@ -101,6 +101,7 @@
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>
+    <hr class="line-for-lg">
     <div class="row mt-2">
         {% endif %}
       {% endif %}
@@ -109,8 +110,8 @@
     <p>No posts</p>
   {% endfor %}
 </div>
-<hr/>
 <!-- Bookmarked Posts -->
+<hr>
 <h2 class="mt-5 mb-4">Bookmarked by Me</h2>
 <div class="row">
   {% for post in bookmarked_posts %}
@@ -118,8 +119,8 @@
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
         <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1682985822/vztj3tb8arc3jmnrk9ki.jpg"
-          alt="forest graphic">
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
+          alt="forest">
       {% else %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
       {% endif %}
@@ -154,6 +155,7 @@
       {% elif forloop.counter > 3 %}
         {% if forloop.counter|divisibleby:3 %}
     </div>
+    <hr class="line-for-lg">
     <div class="row mt-2">
         {% endif %}
       {% endif %}
