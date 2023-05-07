@@ -8,7 +8,7 @@
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
         <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
           alt="forest">
       {% else %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
@@ -25,7 +25,7 @@
           {% else %}
             <!-- state if the post is a draft or has been submitted -->
             <li>{{ post.status_value }}</li>
-            <li>Created on {{ post.created_on|date:'M d, Y'  }}</li>
+            <li>Created on {{ post.created_on|date:'M d, Y' }}</li>
           {% endif %}
         </ul>
       </div>
@@ -38,8 +38,8 @@
     {% if my_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link show-posts mb-4">Show more</button>
-      <div class="hide">
+      <button id="show-my-posts" class="btn btn-link show-posts mb-4">Show more</button>
+      <div id="my-posts" class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
      </div>
@@ -65,7 +65,7 @@
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
         <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
           alt="forest">
       {% else %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
@@ -119,7 +119,7 @@
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
         <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683358771/x4vpop0zebg9nmim4zuy.jpg"
+          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
           alt="forest">
       {% else %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
@@ -146,7 +146,7 @@
     {% if bookmarked_posts|length > 3 %}
       {% if forloop.counter == 3 %}
       </div>
-      <button class="btn btn-link show-posts mt-5 mb-4">Show more</button>
+      <button class="btn btn-link show-posts mb-4">Show more</button>
       <div class="hide">
         <div class="row mt-2">
       {% elif forloop.last %}
@@ -165,4 +165,49 @@
   {% endfor %}
 </div>
 <div class="padding-bottom"></div>
+<script>
+// let btn = document.getElementById('show-my-posts')
+// btn.addEventListener(click(), function(){
+//   console.log('fired')
+//   let posts = document.getElementById("my-posts")
+//   if (this.textContent == 'Show more') {
+//     this.textContent = 'Show less'
+//     posts.classList.remove('hide');
+//     posts.classList.add('show');      
+//   } else {
+//     this.textContent = 'Show more'
+//     posts.classList.remove('show');
+//     posts.classList.add('hide');     
+//   }
+// })
+
+
+// Clicking 'Show more' button will display more posts.
+// let button = document.getElementsByClassName('show-posts');
+// for (btn of button) {
+//   btn.addEventListener("click", function(){
+//     let posts = this.nextElementSibling;
+//     if (this.textContent == 'Show more') {
+//       this.textContent = 'Show less'
+//       posts.classList.remove('hide');
+//       posts.classList.add('show');      
+//     } else {
+//       this.textContent = 'Show more'
+//       posts.classList.remove('show');
+//       posts.classList.add('hide');     
+//     }
+//   });
+// }
+
+// // Clicking 'Show less' button will hide posts.
+// let hideButton = document.getElementsByClassName('hide-posts');
+// for (hideBtn of hideButton) {
+//   hideBtn.addEventListener("click", function(){
+//     let posts = this.parentElement;
+//     posts.previousElementSibling.textContent = 'Show more'
+//     posts.classList.remove('show');
+//     posts.classList.add('hide');
+//   });
+// }
+</script>
 {% endblock %}

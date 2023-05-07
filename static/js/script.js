@@ -18,7 +18,7 @@ function openMenu() {
   }
 }
 
-// Clicking 'Show more' button will display more posts.
+// Show more posts with show more button
 let button = document.getElementsByClassName('show-posts');
 for (btn of button) {
   btn.addEventListener("click", function(){
@@ -45,3 +45,19 @@ for (hideBtn of hideButton) {
     posts.classList.add('hide');
   });
 }
+
+// Show more button with IDs
+// let btn = document.getElementById('show-my-posts')
+// btn.addEventListener(click(), function(){
+//   console.log('fired')
+//   let posts = document.getElementById("my-posts")
+//   if (this.textContent == 'Show more') {
+//     this.textContent = 'Show less'
+//     posts.classList.remove('hide');
+//     posts.classList.add('show');      
+//   } else {
+//     this.textContent = 'Show more'
+//     posts.classList.remove('show');
+//     posts.classList.add('hide');     
+//   }
+// })

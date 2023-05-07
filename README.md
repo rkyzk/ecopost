@@ -279,9 +279,12 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 ||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
 |49|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
 
-- Testing buttons to update/delete comments<br>
-As preparation for no. - : Log in as testuser and go to "Detail Page" of "blog 1." Enter "test comment" in the text box and click on 'Submit.'
-Conduct test no. consecutively.
+**Testing buttons to update/delete comments**<br>
+As preparation for no. - :<br>
+- Log in as testuser and go to "Detail Page" of "blog 1."
+- Enter "test comment" in the text box and click on 'Submit.'
+- Conduct test no. consecutively.
+
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||Update comment button|--| Click on the update icon next to the comment.|"Update Comment" page will be displayed.|"Update Comment" page will be displayed.|pass|2023/5/2 
@@ -379,8 +382,9 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
-[info of the original photo used: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683369497/q7glk2zlcfmetk9gj6li.jpg)
-[info after the image was uploaded and saved on Cloudinary: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683369526/llocybj5tymehepo3wky.png)
+
+[info of the original photo used: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414062/zw5p55v4c6pmyvqxizlr.jpg)
+[info after the image was uploaded and saved on Cloudinary: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414027/iuip1sf91u1lvrcsqawe.png)
 
 **Testing "Update Stories"**
 As preparation for tests no 43-48: 
@@ -450,6 +454,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 Preparation:
 1. click on "Show more" in "Written by me"
 2. click on "Show more" in "Commented by me"
+
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |62|Show more/less buttons across different sections | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| "blog 11" in "Commented by me" will disappear. The upper button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The upper button in "Commented by me" section says "Show more" | pass|2023/4/30|
@@ -534,19 +539,24 @@ All aspects turned out to be above 90%, except 82% mark for accessibility of "De
 The report stated that the causes of the lower accessibility are that buttons don't have accessible names and that the textarea for the comment section doesn't have a label.  I provided proper names for all button tags, but the result didn't improve afterwards.  As for the label, I intentionally didn't provide any label, since I thought it'd be redundant to insert a label under the heading "Leave Comments."
 
 Screenshots of the reports are available at following links.
-[Home](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362738/wnju3qxizjjywet71spw.png)
-[Detail Page](https://res.cloudinary.com/ds66fig3o/image/upload/v1683368581/cj1hjpz9lw0pjddjkt5l.png)
-[Search Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362958/egaowxn47qrydtc7icir.png)
-[Write Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683363036/znesvokidykowgdjbps3.png)
-[Update Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362989/bcjduw1dhhbbx4cfeioj.png)
-[My Page](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362926/dbigmhkts5na9ezqatkh.png)
-[Become a Member](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362765/m584inzbzbobwx1zuidy.png)
-[Sign in](https://res.cloudinary.com/ds66fig3o/image/upload/v1683362898/icu0q7w11r6me0nqwgl1.png)
+[Home]()
+[Detail Page](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414093/hhmnfwf7bb03ocujfslr.png)
+[More Pages]()
+[Popular Stories]()
+[Search Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414425/sqodghn6pl6qmjp052yt.png)
+[Write Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414135/yipnrweicrxxsdcngr9g.png)
+[Update Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414338/xm2alt2qvnboelnfnkiw.png)
+[My Page]()
+[Become a Member]()
+[Sign in]()
 
 ## Media used
 
 Logo image: clover
 https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
+
+Favicon: Clover
+https://icons8.com/icons/set/favicon-clover
 
 Heading image: blue earth
 https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
