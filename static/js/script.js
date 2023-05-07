@@ -1,22 +1,22 @@
-// Let messages appear for 3 seconds
-setTimeout(function() {
+  // Let messages appear for 5 seconds
+  setTimeout(function() {
     let messages =document.getElementById("msg");
     let alert = new bootstrap.Alert(messages);
     alert.close();
-}, 5000);
+  }, 5000);
 
-// For mobile devices, clicking the hamburger icon will display the menu.
-const menu = document.querySelector(".nav-menu");
-let open;
-function openMenu() {
-  if (open) {
-    menu.style.display = "none";
-    open = false;
-  } else if (!open) {
-    menu.style.display = "block";
-    open = true;
+  // For mobile devices, clicking the hamburger icon will display the menu.
+  const menu = document.querySelector(".nav-menu");
+  let open;
+  function openMenu() {
+    if (open) {
+      menu.style.display = "none";
+      open = false;
+    } else if (!open) {
+      menu.style.display = "block";
+      open = true;
+    }
   }
-}
 
 // Show more posts with show more button
 let button = document.getElementsByClassName('show-posts');
@@ -45,19 +45,3 @@ for (hideBtn of hideButton) {
     posts.classList.add('hide');
   });
 }
-
-// Show more button with IDs
-// let btn = document.getElementById('show-my-posts')
-// btn.addEventListener(click(), function(){
-//   console.log('fired')
-//   let posts = document.getElementById("my-posts")
-//   if (this.textContent == 'Show more') {
-//     this.textContent = 'Show less'
-//     posts.classList.remove('hide');
-//     posts.classList.add('show');      
-//   } else {
-//     this.textContent = 'Show more'
-//     posts.classList.remove('show');
-//     posts.classList.add('hide');     
-//   }
-// })
