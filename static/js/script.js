@@ -1,3 +1,16 @@
+// For mobile devices, clicking the hamburger icon will display the menu.
+let open;
+const menu = document.querySelector("#nav-menu");
+function openMenu() {
+  if (open) {
+    menu.style.display = "none";
+    open = false;
+  } else if (!open) {
+    menu.style.display = "block";
+    open = true;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // Let messages appear for 5 seconds
     setTimeout(function() {
@@ -5,19 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
       let alert = new bootstrap.Alert(messages);
       alert.close();
     }, 5000);
-
-    // For mobile devices, clicking the hamburger icon will display the menu.
-    const menu = document.querySelector(".nav-menu");
-    let open;
-    function openMenu() {
-      if (open) {
-        menu.style.display = "none";
-        open = false;
-      } else if (!open) {
-        menu.style.display = "block";
-        open = true;
-      }
-    }
 
   // Show more posts with show more button
   let button = document.getElementsByClassName('show-posts');
