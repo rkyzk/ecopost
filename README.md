@@ -31,7 +31,7 @@ Users can see lists of excerpts from
 -	posts commented by them
 -	posts bookmarked by them
 
-Users can read the entire content of the posts<br>
+Users can read the entire content of published posts<br>
 Users can search stories by title, authors and other factors<br>
 Users can sign up to become members<br>
 Members can like and bookmark posts<br>
@@ -235,23 +235,23 @@ country: Ireland
 #### Testing common features in all pages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|19.|Logo link|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
+|1|Logo link|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
 |||||||||
 ||**Navigation links**|||||||
-|20|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home"|Redirected to ”Home”|pass|2023/4/29|
-|21|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
-|22|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
-|23|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
-|8|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
-|9|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
-|10|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
+|2|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home"|Redirected to ”Home”|pass|2023/4/29|
+|3|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
+|4|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
+|5|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
+|6|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
+|7|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
+|8|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
 
 **Testing hamburger menu for screen sizes below 700px**<br>
-*Conduct test no. and consecutively without any actions in between*
+Conduct test no. 9 & 10 without any actions in between*
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||Hamburger menu| set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
-||Hamburger menu| --| click on the hamburger menu for the second time | the Menu box closes |the Menu box closes| pass|2023/4/30|
+|9|Hamburger menu| set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
+|10|Hamburger menu| --| click on the hamburger menu for the second time | the Menu box closes |the Menu box closes| pass|2023/4/30|
 |||||||||
 ||**links in the footer**||||||
 |11|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
@@ -259,49 +259,49 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
 |||||||||
 ||**The flash messages**||||||
-|| setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|2023/4/30|
+|14| setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|2023/4/30|
 
 #### Testing features on individual pages
 **“Home”**
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|14|link ”become a member” in the introduction |--|Click on the link|Redirected to "Become a member."| Redirected to "Become a member."|pass|2023/4/29|
-|14|link ”Read the full story” at the bottom of "blog 3" |--|Click on the link|Detail page of "blog 3" will be displayed.| Detail page of "blog 3" is displayed.|pass|2023/4/29|
-|15|link ”Read the full story” at the bottom of "blog 2" |--|Click on the link|Detail page of "blog 2" will be displayed.| Detail page of "blog2" is displayed.|pass|2023/4/29|
-|16|link ”Read the full story” at the bottom of "blog1" |--|Click on the link|Detail page of "blog 1" will be displayed.| Detail page of "blog 1" is displayed.|pass|2023/4/29|
-|17|link ”More stories from this week” |--|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
-|18|link ”Readers’ favorite stories of all time” |--|Click on the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
+|15|link ”become a member” in the introduction |--|Click on the link|Redirected to "Become a member."| Redirected to "Become a member."|pass|2023/4/29|
+|16|link ”Read the full story” at the bottom of "blog 3" |--|Click on the link|Detail page of "blog 3" will be displayed.| Detail page of "blog 3" is displayed.|pass|2023/4/29|
+|17|link ”Read the full story” at the bottom of "blog 2" |--|Click on the link|Detail page of "blog 2" will be displayed.| Detail page of "blog2" is displayed.|pass|2023/4/29|
+|18|link ”Read the full story” at the bottom of "blog1" |--|Click on the link|Detail page of "blog 1" will be displayed.| Detail page of "blog 1" is displayed.|pass|2023/4/29|
+|19|link ”More stories from this week” |--|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
+|20|link ”Readers’ favorite stories of all time” |--|Click on the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
 
 **"Detail Page"**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||link to "Become a Member"|Log out|Click on the link on the right side of the comments section|Redirected to "Sign up" page|Redirected to "Sign up" page|pass|2023/5/1|
-||link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
-|49|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
+|21|link to "Become a Member"|Log out|Click on the link on the right side of the comments section|Redirected to "Become a Member" page|Redirected to "Become a Member" page|pass|2023/5/1|
+|22|link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
+|23|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
 
 **Testing buttons to update/delete comments**<br>
-As preparation for no. - :<br>
+As preparation for no. 24-28 :<br>
 - Log in as testuser and go to "Detail Page" of "blog 1."
 - Enter "test comment" in the text box and click on 'Submit.'
-- Conduct test no. consecutively.
+- Conduct test no. 24-25 consecutively.
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||Update comment button|--| Click on the update icon next to the comment.|"Update Comment" page will be displayed.|"Update Comment" page will be displayed.|pass|2023/5/2 
-||Delete comment button|--| Click on the trash bin icon next to the comment.|Confirmation dialog "Are you sure you want to delete your comment?" will show up. |Confirmation dialog "Are you sure you want to delete your comment?" shows up. |pass|2023/5/2 |
+|24|Update comment button|--| Click on the update icon next to the comment.|"Update Comment" page will be displayed.|"Update Comment" page will be displayed.|pass|2023/5/2 
+|25|Delete comment button|--| Click on the trash bin icon next to the comment.|Confirmation dialog "Are you sure you want to delete your comment?" will show up. |Confirmation dialog "Are you sure you want to delete your comment?" shows up. |pass|2023/5/2 |
 |||||||||
-||**Testing confirmation dialog before deleting comments**|Log in as testuser, go to "Detail Page" of "blog 1." Conduct no. without any actions in between.|||||||
-||Confirmation dialog |--|Click on the trash bin icon next to the comment 'test comment'|A confirmation dialog appears.|A confirmation dialog appears.|pass|2023/5/3|
-||Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and "Detail Page" remains unchanged.|pass|2023/5/3|
-||Confirmation dialog - ok|Click on the trash bin icon.|Click on 'OK' in the dialog.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|pass|2023/5/3|
+||**Testing confirmation dialog before deleting comments**|Log in as testuser, go to "Detail Page" of "blog 1." Conduct no. 26-28 without any actions in between.|||||||
+|26|Confirmation dialog |--|Click on the trash bin icon next to the comment 'test comment'|A confirmation dialog appears.|A confirmation dialog appears.|pass|2023/5/3|
+|27|Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and "Detail Page" remains unchanged.|pass|2023/5/3|
+|28|Confirmation dialog - ok|Click on the trash bin icon.|Click on 'OK' in the dialog.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|pass|2023/5/3|
 |||||||||
-||**Testing confirmation dialog before deleting posts**|Write a story and save. Conduct no. without any actions in between.|||||||
-||Confirmation dialog |Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."Write a story and save.|Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."|pass|2023/5/3|
-||Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|2023/5/3|
-||Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|2023/5/3|
+||**Testing confirmation dialog before deleting posts**|Write a story and save. Conduct no. 29-31 without any actions in between.|||||||
+|29|Confirmation dialog |Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."Write a story and save.|Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."|pass|2023/5/3|
+|30|Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|2023/5/3|
+|31|Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|2023/5/3|
 
 **Testing “Update Comments”**
-As preparation for test no. 50:
+As preparation for test no. 32:
 1.	log in as testuser
 2.	On the home page, click on the link “Read the full story” of the blog “blog 1”
 4.	Enter “test comment” in the leave comments section and click on “Submit”
@@ -309,22 +309,22 @@ As preparation for test no. 50:
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|50|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
+|32|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
 
 **"More Stories"**
 Conduct test. no   consecutively.
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||content of the page|--|Go to "More Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
-||link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
-||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
+|33|content of the page|--|Go to "More Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
+|34|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
+|35|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
 
 **"Popular Stories"**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
-||link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
-||link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
+|36|content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
+|37|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
+|38|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
 
 **"Search Stories" page**
 As preparatory steps:
@@ -333,11 +333,11 @@ As preparatory steps:
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
-||test search by country|--|Enter 'Germany' for country.  Click on 'Search'|'blog test search' will be displayed under Search Results|'blog test search' is displayed under Search Results|pass|2023/5/4|
+|39|Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
+|40|test search by country|--|Enter 'Germany' for country.  Click on 'Search'|'blog test search' will be displayed under Search Results|'blog test search' is displayed under Search Results|pass|2023/5/4|
 
 **Testing case sensitivity**
-As preparatory steps for test no. :
+As preparatory steps for test no. 41-52:
 1. Create users "John" and "susan" 
 2. log in as "John," and on "Write Stories" page, make two posts:
 - title: 'Gray Cat'; content: 'test'; city: 'lowercased city'; country: 'Afghanistan'
@@ -347,47 +347,47 @@ As preparatory steps for test no. :
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||get capitalized title - contains|go to "Search" page. | Enter 'gray cat' for title, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-||get capitalized title - is exactly |go to "Search" page. | Enter 'gray cat' for title, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-||get lowercased title - contains|go to "Search" page. | Enter 'White Cat' for title, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-||get lowercased title - is exactly |go to "Search" page. | Enter 'White Cat' for title, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-||get capitalized author - contains|go to "Search" page. | Enter 'john' for author, select 'contains,' click on 'Search'|Blogs "Gray Cat" and "white cat" will be displayed.|Blogs "Gray Cat" and "white cat" are displayed.|pass|2023/5/2|
-||get capitalized author - is exactly |go to "Search" page. | Enter 'john' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-||get lowercased author - contains|go to "Search" page. | Enter 'Susan' for author, select 'contains,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-||get lowercased title - is exactly |go to "Search" page. | Enter 'Susan' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-||get capitalized city - contains|go to "Search" page. | Enter 'capitalized city' for city, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" are displayed.|pass|2023/5/2|
-||get capitalized city - is exactly |go to "Search" page. | Enter 'capitalized city' for city, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-||get lowercased city - contains|go to "Search" page. | Enter 'Lowercased City' for city, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-||get lowercased city - is exactly |go to "Search" page. | Enter 'Lowercased City' for city, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+|41|get capitalized title - contains|go to "Search" page. | Enter 'gray cat' for title, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+|42|get capitalized title - is exactly |go to "Search" page. | Enter 'gray cat' for title, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+|43|get lowercased title - contains|go to "Search" page. | Enter 'White Cat' for title, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
+|44|get lowercased title - is exactly |go to "Search" page. | Enter 'White Cat' for title, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
+|45|get capitalized author - contains|go to "Search" page. | Enter 'john' for author, select 'contains,' click on 'Search'|Blogs "Gray Cat" and "white cat" will be displayed.|Blogs "Gray Cat" and "white cat" are displayed.|pass|2023/5/2|
+|46|get capitalized author - is exactly |go to "Search" page. | Enter 'john' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+|47|get lowercased author - contains|go to "Search" page. | Enter 'Susan' for author, select 'contains,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+|48|get lowercased title - is exactly |go to "Search" page. | Enter 'Susan' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
+|49|get capitalized city - contains|go to "Search" page. | Enter 'capitalized city' for city, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" are displayed.|pass|2023/5/2|
+|50|get capitalized city - is exactly |go to "Search" page. | Enter 'capitalized city' for city, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
+|51|get lowercased city - contains|go to "Search" page. | Enter 'Lowercased City' for city, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
+|52|get lowercased city - is exactly |go to "Search" page. | Enter 'Lowercased City' for city, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
 
 **"Write Stories"**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|37|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|38|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|39|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|40|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|41|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|42|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|41|Leave city empty | Enter 'test title 1' for title, 'content' for content, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
-|42|Leave city empty | Enter "test title 1" for title, 'content' for content, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
-|41|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click on 'save' | A message says "Please select an item in the list" for the country" | A message says "Please fill out this list" for the country" | pass|2023/4/30|
-|42|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click on 'submit' | A message says "Please select an item in the list" for the country | A message says "Please fill out this list" for the country | pass|2023/4/30|
-|100|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'save' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
-|101|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
-|102|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country (Go on to test no. without any actions.)| click on 'submit' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
+|53|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
+|54|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
+|55|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
+|56|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|57|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|58|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|59|Leave city empty | Enter 'test title 1' for title, 'content' for content, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
+|60|Leave city empty | Enter "test title 1" for title, 'content' for content, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
+|61|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click on 'save' | A message says "Please select an item in the list" for the country" | A message says "Please fill out this list" for the country" | pass|2023/4/30|
+|62|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click on 'submit' | A message says "Please select an item in the list" for the country | A message says "Please fill out this list" for the country | pass|2023/4/30|
+|63|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'save' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
+|64|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
+|65|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
+|66|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country (Go on to test no. without any actions.)| click on 'submit' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
 
 **Testing transformation of images during upload** ("Write Stories" and "Update Stories")
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
+|67|code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
 
 [info of the original photo used: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414062/zw5p55v4c6pmyvqxizlr.jpg)
 [info after the image was uploaded and saved on Cloudinary: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414027/iuip1sf91u1lvrcsqawe.png)
 
 **Testing "Update Stories"**
-As preparation for tests no 43-48: 
+As preparation for tests no 68-88: 
 1. Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
 2. click "Save"
 3. go to "My page" and click on the link "Read the full story" of the blog "test title 2"
@@ -395,30 +395,30 @@ As preparation for tests no 43-48:
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|43|Make all fields empty| delete prepopulated title, content, city and unselect the country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
-|45|Make title field empty | delete the title but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|46|Make title field empty | delete the title but keep the other fields populated| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|46|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
-|47|Make content field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|48|Make content field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|48|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the content | fail|2023/5/2|
-|47|Make city field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|2023/4/30|
-|48|Make city field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city| pass|2023/4/30|
-|48|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for city |fail|2023/5/2|
-|47|Unselect country | unselect the country  | click on 'save' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
-|48|Unselect country | unselect the country | click on 'submit' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
-|48|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country. Unselect country. | fail|2023/5/2|
-|100|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|101|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'submit' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|102|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country | fail|2023/5/2|
-|103|enter spaces (leave country selected) | enter spaces in 'title,' 'content,' 'city'| click on 'save' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'submit' (Go on to test no. without any other actions.) | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/5/2| 
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'cancel' | Redirected to "Detail Page" | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/5/2| 
+|68|Make all fields empty| delete prepopulated title, content, city and unselect the country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
+|69|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|70|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
+|71|Make title field empty | delete the title but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|72|Make title field empty | delete the title but keep the other fields populated| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
+|73|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
+|74|Make content field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|75|Make content field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
+|76|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the content | fail|2023/5/2|
+|77|Make city field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|2023/4/30|
+|78|Make city field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city| pass|2023/4/30|
+|79|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for city |fail|2023/5/2|
+|80|Unselect country | unselect the country  | click on 'save' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
+|81|Unselect country | unselect the country | click on 'submit' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
+|82|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country. Unselect country. | fail|2023/5/2|
+|83|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
+|84|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'submit' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
+|85|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country | fail|2023/5/2|
+|86|enter spaces (leave country selected) | enter spaces in 'title,' 'content,' 'city'| click on 'save' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
+|87|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'submit' (Go on to test no. without any other actions.) | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/5/2| 
+|88|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'cancel' | Redirected to "Detail Page" | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/5/2| 
 
 **Testing "My Page"**
-As preparation for tests no. 53-62, 
+As preparation for tests no. 89-103, 
 1. sign up as a new user testuser3
 2. go to "Write Stories" page, and make 4 new posts with the titles: blog 11, blog 12, blog 13, blog 14.
 3. go to admin panel and publish the 4 posts one by one in the ascending order.
@@ -428,27 +428,27 @@ As preparation for tests no. 53-62,
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||**"Written by me" section**|||||||
-||The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
-||The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
+|89|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
+|90|The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
 ||**"Commented by me" section**|||||||
-||The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
-||The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
+|91|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
+|92|The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
 ||**"Bookmarked by me" section**|||||||
-||The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
-||The layout in "Bookmarked by me"|--| Click on "Show more" | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appear in the order, and the "Show more" button is shown. | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appear in the order, and the "Show more" button is shown.|pass|2023/5/23|
+|93|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
+|94|The layout in "Bookmarked by me"|--| Click on "Show more" | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appear in the order, and the "Show more" button is shown. | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appear in the order, and the "Show more" button is shown.|pass|2023/5/23|
 |||||||||
 ||**Show more/less buttons in "Written by me" section**|||||||
-|53|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
-|54|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
-|54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
+|95|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
+|96|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
+|97|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
 ||**Show more/less buttons in "Commented by me" section**|||||||
-|53|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
-|54|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
-|54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
+|98|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
+|99|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
+|100|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
 ||**Show more/less buttons in "Bookmarked by me" section**|||||||
-|53|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
-|54|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
-|54|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
+|101|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
+|102|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
+|103|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
 
 **Testing if clicking on show more & show less buttons in different sections doesn't disrupt the functions**<br>
 Preparation:
@@ -457,59 +457,60 @@ Preparation:
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|62|Show more/less buttons across different sections | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| "blog 11" in "Commented by me" will disappear. The upper button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The upper button in "Commented by me" section says "Show more" | pass|2023/4/30|
+|104|Show more/less buttons across different sections | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| "blog 11" in "Commented by me" will disappear. The upper button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The upper button in "Commented by me" section says "Show more" | pass|2023/4/30|
 
 **Become a Member, Log in, Log out pages**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 ||**"Become a Member" page**|||||||
-||link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
-|19|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
-|20|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
-|21|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
-|22|Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully signed in as testuser1” | Redirected to “Home” page and the message says “Successfully signed in as testuser1” |pass|2023/4/30|
-|23|Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the two password fields; |click on “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
-|24|Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|2023/4/30|
-|25|Use already registered email| Enter “testuser2” for the username; "test@ecopost.com” for the email; “swUf8LcR” for the two password fields |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|2023/4/30|
-|26|Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the two password fields |click “Sign up” button |A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
-|27|enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
-|28|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
+|105|link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
+|106|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
+|107|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
+|108|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
+|109|Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully signed in as testuser1” | Redirected to “Home” page and the message says “Successfully signed in as testuser1” |pass|2023/4/30|
+|110|Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the two password fields; |click on “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
+|111|Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|2023/4/30|
+|112|Use already registered email| Enter “testuser2” for the username; "test@ecopost.com” for the email; “swUf8LcR” for the two password fields |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|2023/4/30|
+|113|Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the two password fields |click “Sign up” button |A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
+|114|enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
+|115|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
 ||**"Sign up" page**|||||||
-|29|link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
+|116|link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
 ||**"Log in" page**|||||||
-|30|Enter all appropriate data| Enter “testuser”; “test@ecopost.com” for email; “gR48NmYr1” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser” | Redirected to “Home” page, and a message says “Successfully signed in as testuser”| pass|2023/4/30|
-|31|Leave username empty| Enter “gR48NmYr1” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
-|32|Leave password empty| Enter “testuser” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
-|33|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-|34|Enter wrong username| Enter “testuser2” for username; "gR48NmYr1" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-|35|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|2023/4/30|
+|117|Enter all appropriate data| Enter “testuser”; “test@ecopost.com” for email; “gR48NmYr1” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser” | Redirected to “Home” page, and a message says “Successfully signed in as testuser”| pass|2023/4/30|
+|118|Leave username empty| Enter “gR48NmYr1” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
+|119|Leave password empty| Enter “testuser” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
+|120|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|121|Enter wrong username| Enter “testuser2” for username; "gR48NmYr1" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
+|122|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|2023/4/30|
 ||**"Sign out" page**|||||||
-|36|“Sign out” button|Log in as "testuser." Click on "Log out" in the navigation bar. |Click on "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|2023/4/30|
+|123|“Sign out” button|Log in as "testuser." Click on "Log out" in the navigation bar. |Click on "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|2023/4/30|
 
 ### Test summary
 
-- "Remember me" function in the test no. 35.
+- "Remember me" function in the test no. 122.
 For log-in systems in general, clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to log in the next time.  But in this app, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May, 2023, I will leave it as it is.  It needs to be fixed in the future.
 
-- test no.  <br>
+- Test no. 63, 64 on "Write Stories" and no. 83, 84 on "Update Stories"<br>
 When spaces are entered for the title, content and city, and the country is unselected, clicking 'Save' or 'Submit' will display the validation error message for the country before the form is submitted.
 Usually, a validation message appears for the first field that is left empty (in this case the title).  It seems that spaces are not recognized as invalid data.  I couldn't figure out how to customize the validation that happens before the form is submitted. 
-So I left this mechanism unchanged.  It will not cause a serious issue, since there's another validation that happens after the form is submitted (Django form validation) and that will catch fields that are filled with spaces and will display error messages 'This field is required.'
+So I left this mechanism unchanged.  It will not cause a serious issue, since there's another validation that happens after the form is submitted (Django form validation) and that will catch fields that are filled with spaces and will display error message 'This field is required.'
 
-As for tests no.       , the results were not as expected, but they are of no problems.  When spaces are entered for the title, content and city, and the country is selected, the validation that happens before form submission will not display error messages. Once the form is submitted, Django form validation will state "This field is required" for all three fields.
+- Test no. 65, 66 on "Write Stories" and no. 86, 87 on "Update Stories"
+These present no problems.  Only, the results were not as expected.  When spaces are entered for the title, content and city, and the country is selected, what I expected "Please fill in this field." didn't appear. After the form is submitted, Django form validation will state "This field is required" for all three fields, so the validation is functioning fine in these cases.
 
-- Tests no.   for "Update post" page
-tests   failed, because the Django form error messages appeared before redirection.  If 'Cancel' button is clicked, the user should be promptly redirected to "detail page."  I used anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") and repeated the tests:  
+- Tests no. 73, 76, 79, 82, 85, 88 on "Update Post" page
+These tests failed, because the Django form error messages appeared before redirection to "Post Detail."  If 'Cancel' button is clicked, the user should be promptly redirected to "Detail Page."  Earlier, I wrote program to redirect to "Detail Page" after the form is submitted.  I rewrote the code --I used an anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") so no dialog box appears.  I repeated the tests as follows: 
  
  Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|44|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|46|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|48|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|48|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
-|48|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|102|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|103|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
+|124|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|125|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|126|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|127|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
+|128|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|129|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
+|130|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
 
 - - -
 ## Bugs
@@ -518,30 +519,35 @@ tests   failed, because the Django form error messages appeared before redirecti
 
 2. “Search Stories” page didn’t get displayed.  An error page appeared with the message “Reverse for 'post_detail' with arguments '('',)' not found.”<br><br>**Solution:** I was forgetting a slash at the end of the url in urls.py, so I changed the url from ‘search_story’ to ‘search_story/,’ and the issue was resolved.
 
-3. For "Delete Posts" Page, I first used LoginRequiredMixin and UserPassestestMixin in order to make sure the user is the author of the post and that the post hasn't been submitted. That resulted in an error, since the post was deleted before the test func was run, and the test func couldn't find the post in the database.<br><br>**Solution:**I wrote the program on line 232, 237-238 in views.py to go around the issue, and now the access control is functioning.
+3. For "Delete Posts" Page, I first used LoginRequiredMixin and UserPassestestMixin in order to make sure the user is the author of the post and that the post hasn't been submitted. That resulted in an error, since the post was deleted before the test func was run, and the test func couldn't find the post in the database.<br><br>**Solution:** I wrote the program on line 221, 226-227 in views.py to bypass the issue, and now the access control is functioning.
 
 ## Aspects to be improved in the future:
-- Remember me function on “Log in” page also needs to be fixed.
-- Currently on "Search Stories" page, after users run a 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the resultsmore easily.
+- Remember me function on “Log in” page needs to be fixed.
+- Currently on "Search Stories" page, after users run a 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the results more easily.
 - I will make Contact page where users can write and submit messages to admin.
-- I also want to simplify the process to update comments.  Instead of displaying a whole new page of 'Update Comments,' I want to display a small input box for updating comments on "Detail Page" where the original comment is displayed.
+- I also want to simplify the process of updating comments.  Instead of displaying a whole new page of 'Update Comments,' I want to display a small input box on "Detail Page" where the original comment is displayed.
 
 ## Validating python, CSS, Html code with Tools.
 
 - I checked the code in all python modules at CI Python Linter and came out with no errors.
 - I validated style.css at jigsaw (https://jigsaw.w3.org/)<br>
 I got one error saying ‘Property rotate doesn’t exist.’  But clearly property ‘rotate’ is a widely used property of CSS, and so I left the rule as it is.
+- I validated html at https://validator.w3.org
+Errors corrected:
+- Error: Stray start tag footer.
+I was putting footer tags outside body tags on base.html.  I corrected it by inserting the footer inside the body tags.
 
-Error: Stray start tag footer.
-- I was putting footer tags outside body tags.  I corrected it by inserting the footer inside the body tags.
+- Other errors:
+'width="100%"' in some img tags
+span tags in ul tag in more_stories.html ln 45-55 --> I used div instead of ul
 
-
+After correction the html validation shows no errors.
 
 ## Checking Performance and Accessibility using Google Chrome Developers' Tools
 
 I checked the performance and accessibility of all pages using Lighthouse.
 All aspects turned out to be above 90%, except 82% mark for accessibility of "Detail Page."
-The report stated that the causes of the lower accessibility are that buttons don't have accessible names and that the textarea for the comment section doesn't have a label.  I provided proper names for all button tags, but the result didn't improve afterwards.  As for the label, I intentionally didn't provide any label, since I thought it'd be redundant to insert a label under the heading "Leave Comments."
+The report said that the causes of the lower accessibility are that the buttons don't have accessible names and that the textarea for the comment section doesn't have a label.  I provided proper names for all button tags, but the result didn't improve afterwards.  As for the label, I intentionally didn't provide any label, since I thought it'd be redundant to insert a label under the heading "Leave Comments."
 
 Screenshots of the reports are available at following links.
 [Home](media/lighthouse-home.png)
