@@ -245,7 +245,8 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin, View):
             request,
             "update_comment.html",
             {
-                "comment_form": comment_form
+                "comment_form": comment_form,
+                "slug": comment.post.slug
             }
         )
 

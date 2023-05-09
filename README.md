@@ -532,6 +532,11 @@ tests   failed, because the Django form error messages appeared before redirecti
 - I validated style.css at jigsaw (https://jigsaw.w3.org/)<br>
 I got one error saying ‘Property rotate doesn’t exist.’  But clearly property ‘rotate’ is a widely used property of CSS, and so I left the rule as it is.
 
+Error: Stray start tag footer.
+- I was putting footer tags outside body tags.  I corrected it by inserting the footer inside the body tags.
+
+
+
 ## Checking Performance and Accessibility using Google Chrome Developers' Tools
 
 I checked the performance and accessibility of all pages using Lighthouse.

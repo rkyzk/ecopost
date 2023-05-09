@@ -11,10 +11,10 @@
         <p class="mt-2">By clicking 'Submit' you'll submit the draft to be evaluated
           for publication.  Once submitted, you won't be able to edit or delete it.
         </p>
-        <div class="update-post-btns">
-          <button type="submit" class="btn-submit" name="save" value="draft">Save changes</button>
-          <button type="submit" class="btn-submit item-right submit-post" name="submit" value="complete">Submit</button>
-          <a href="{% url 'detail_page' post.slug %}" class="item-right btn-submit cancel">Cancel Update</a>
+        <div class="update-post-btn-box">
+          <button type="submit" class="btn-submit update-post-btn" name="save" value="draft">Save changes</button>
+          <button type="submit" class="btn-submit update-post-btn submit-post" name="submit" value="complete">Submit</button>
+          <a href="{% url 'detail_page' post.slug %}" class="btn-submit cancel">Cancel Update</a>
         </div> 
       </div>
     </form>
