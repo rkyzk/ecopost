@@ -544,16 +544,16 @@ All aspects turned out to be above 90%, except 82% mark for accessibility of "De
 The report stated that the causes of the lower accessibility are that buttons don't have accessible names and that the textarea for the comment section doesn't have a label.  I provided proper names for all button tags, but the result didn't improve afterwards.  As for the label, I intentionally didn't provide any label, since I thought it'd be redundant to insert a label under the heading "Leave Comments."
 
 Screenshots of the reports are available at following links.
-[Home]()
-[Detail Page](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414093/hhmnfwf7bb03ocujfslr.png)
-[More Pages]()
-[Popular Stories]()
-[Search Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414425/sqodghn6pl6qmjp052yt.png)
-[Write Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414135/yipnrweicrxxsdcngr9g.png)
-[Update Stories](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414338/xm2alt2qvnboelnfnkiw.png)
-[My Page]()
-[Become a Member]()
-[Sign in]()
+[Home](media/lighthouse-home.png)
+[Detail Page](media/lighthouse-detail.png)
+[More Stories](media/lh-more_stories.png)
+[Popular Stories](media/lh-popular-stories.png)
+[Search Stories](media/lighthouse-Search-Stories.png)
+[Write Stories](media/lighthouse-Write-Stories.png)
+[Update Stories](media/lighthouse-Update.png)
+[My Page](media/lighthouse-mypage.png)
+[Become a Member](media/lighthouse-become-a-member.png)
+[Sign in](media/lighthouse-signin.png)
 
 ## Media used
 
