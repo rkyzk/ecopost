@@ -110,7 +110,7 @@
             {% if comment.comment_status == 1 %}
               <span class="text-muted">edited</span>
             {% endif %}
-          <span>{{ comment.body | linebreaks }}</span>
+              {{ comment.body | linebreaks }}
           <!-- if the comment has been written by the user, show update and delete buttons -->
             {% if comment.commenter == user %}
             <div class="d-flex justify-content-end">
