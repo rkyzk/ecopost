@@ -12,11 +12,12 @@
 * [Manual Testing](#manual-testing)
 - - -
 
+![ecopost-home](media/ecopost-home.png)
+![ecopost-mobile](media/ecopost-mobile.png)
+
 ## Overview
 
 This application offers a platform where individuals around the world can share their stories on what they are doing to save the environment.  Many people feel helpless, thinking that individuals cannot do so much.  Here, visitors can read posts written by others, leave comments and write their own stories.  Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope. 
-
-![ecopost in different screen sizes]()
 
 ## User Stories
 
@@ -57,6 +58,7 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 ## Each Part and Function in Detail
 
 ### Navigation (common to all pages)
+![nav-bar](media/navbar.png)
 - The logo of the website is located on the left side of the navigation bar.
 - A clover is chosen for the logo because it’s a widely liked symbol and is associated with good luck and hope, giving a friendly and positive impression.   
 - On the right side, links to other pages are provided.
@@ -74,6 +76,7 @@ The overall appearance is kept simple and clean in order to avoid interfering wi
 ### Home Page
 
 **Heading**
+![heading](media/ecopost-heading.png)
 - The heading at the center states the title of this website ‘ecopost.’
 - A graphic of earth is placed on the right side.
 - This graphic serves as a reminder that we want to protect this beautiful planet.  
@@ -383,8 +386,8 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |67|code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
 
-[info of the original photo used: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414062/zw5p55v4c6pmyvqxizlr.jpg)
-[info after the image was uploaded and saved on Cloudinary: ](https://res.cloudinary.com/ds66fig3o/image/upload/v1683414027/iuip1sf91u1lvrcsqawe.png)
+[info of the original photo used: ](media/test_transformation_original_photo_info.jpg)
+[info after the image was uploaded and saved on Cloudinary: ](media/test_transformation_results.png)
 
 **Testing "Update Stories"**
 As preparation for tests no 68-88: 
