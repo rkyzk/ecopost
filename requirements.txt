@@ -10,6 +10,7 @@ django-countries==7.5.1
 django-crispy-forms==1.14.0
 django-filter==23.2
 django-summernote==0.8.20.0
+django-widget-tweaks==1.4.12
 gunicorn==21.2.0
 oauthlib==3.2.2
 psycopg2==2.9.7
