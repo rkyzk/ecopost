@@ -369,7 +369,8 @@ h1 {
   }
 
   .pop-up-menu {
-    background-color: #ccc;
+    background-color: #f8f8f8;
+    opacity: 0.9;
     position: absolute;
     top: 50px;
     right: 50px;
