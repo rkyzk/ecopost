@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.db import models
-from .models import Post, Comment, Photo
+from .models import Post, Comment
 from django_summernote.admin import SummernoteModelAdmin
 from datetime import datetime
 
@@ -34,9 +34,3 @@ class CommentAdmin(admin.ModelAdmin):
                     'created_on', 'comment_status')
     list_filter = ('created_on', 'comment_status')
     search_fields = ('commenter', 'body')
-
-
-@admin.register(Photo)
-class PhotoAdmin(admin.ModelAdmin):
-    """Customizes the appearance of Photo model on the admin panel."""
-    list_display = ('name',)
