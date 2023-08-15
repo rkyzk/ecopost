@@ -3,23 +3,23 @@
 <!-- heading -->
 <div class="d-flex justify-content-center">
   <h1 class="align-self-center">ecopost</h1>
-  <img src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683357574/wyk5xltczipbc3anyfbu.png"
-    alt="blue and green earth" class="earth">
+  <img src="https://res.cloudinary.com/dacgkk0so/image/upload/v1691891794/blue-earth_dvkptz.png" class="earth"
+    alt="blue and green earth">
 </div>
 <!-- Introduction -->
 <div class="d-flex justify-content-center">
   <div class="intro-box mt-2">
     <hr>
     <p>Feel like individuals can't do much to save the environment?
-       Don't give up.  This website is for anyone who wants to find out
-       what some local communities and individuals all over the world are doing
-       to protect the environmental.  Read their stories, get inspired,
-       leave comments to the posts and share your stories.
-       You can connect with those who are taking actions, join activities
-       in your region, or start up your own movements.
+      Don't give up. This website is for anyone who wants to find out
+      what some local communities and individuals all over the world are doing
+      to protect the environmental. Read their stories, get inspired,
+      leave comments to the posts and share your stories.
+      You can connect with those who are taking actions, join activities
+      in your region, or start up your own movements.
     </p>
     <p>In order to submit your own stories for publication and/or leave comments
-       on the posts, <a href="{% url 'account_signup' %}">become a member</a>.
+      on the posts, <a href="{% url 'account_signup' %}">become a member</a>.
     </p>
     <hr>
   </div>
@@ -30,40 +30,41 @@
     <h2>Featured Stories</h2>
     <div class="row posts">
       {% for post in post_list %}
-        <div class="col-md-4">
-          <div class="image-wrapper d-flex justify-content-center">
-            {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top"
-                src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
-                alt="forest">
-            {% else %}
-              <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-            {% endif %}
-          </div>
-          <div class="mx-2 mt-2 post-text">
-            <span><strong>{{ post.title }}</strong></span>
-            <span class="item-right text-secondary space-right"><i class="far fa-heart"></i></span>
-            <span class="text-secondary">{{ post.num_of_likes }}</span>
-            <span class="excerpt-author">By {{ post.author }}</span>
-            <div class="d-flex justify-content-end pub-date">
-              <span>{{ post.pub_date }}</span>
-            </div>
-            <p class="mt-1 excerpt">{{ post.excerpt }}</p>
-            <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
-          </div>
-          <hr class="line">
+      <div class="col-md-4">
+        <div class="image-wrapper d-flex justify-content-center">
+          {% if "placeholder" in post.featured_image.url %}
+          <img class="card-img-top"
+            src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg" alt="forest">
+          {% else %}
+          <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+          {% endif %}
         </div>
+        <div class="mx-2 mt-2 post-text">
+          <span><strong>{{ post.title }}</strong></span>
+          <span class="item-right text-secondary space-right"><i class="far fa-heart"></i></span>
+          <span class="text-secondary">{{ post.num_of_likes }}</span>
+          <span class="excerpt-author">By {{ post.author }}</span>
+          <div class="d-flex justify-content-end pub-date">
+            <span>{{ post.pub_date }}</span>
+          </div>
+          <p class="mt-1 excerpt">{{ post.excerpt }}</p>
+          <a href="{% url 'detail_page' post.slug %}">Read the full story</a>
+        </div>
+        <hr class="line">
+      </div>
       {% empty %}
-        <p>No posts</p>
+      <p>No posts</p>
       {% endfor %}
-        <!-- links to 'More Stories' and 'Popular Stories' -->
-        <div class="links-to-posts">
-          <a href="{% url 'more_stories' %}"><p>More stories from this week &raquo;</p></a>
-          <a href="{% url 'popular_stories' %}" class="link-to-favorites">
-            <p>Readers' favorite stories of all time &raquo;</p>
-          </a>
-        </div>
-        <div class="padding-bottom"></div>
+      <!-- links to 'More Stories' and 'Popular Stories' -->
+      <div class="links-to-posts">
+        <a href="{% url 'more_stories' %}">
+          <p>More stories from this week &raquo;</p>
+        </a>
+        <a href="{% url 'popular_stories' %}" class="link-to-favorites">
+          <p>Readers' favorite stories of all time &raquo;</p>
+        </a>
+      </div>
+      <div class="padding-bottom"></div>
     </div>
   </div>
 </div>
