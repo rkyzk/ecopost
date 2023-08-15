@@ -4,8 +4,8 @@
 <div class="d-flex justify-content-center">
     <div class="content">
         <h2>Search Stories</h2>
+        <!-- Search form -->
         <form method="get">
-            {% csrf_token %}
             <div class="row mt-2">
                 <div class="col-md-6 col-12">
                     <div class="form-lable-group">
@@ -70,7 +70,9 @@
             </div>
             <button class="btn-submit mt-3" type="submit">search</button>
         </form>
+        <!-- Search results -->
         <div class="row posts">
+            <h2>Search Results</h2>
             {% for post in posts %}
             <!-- display 3 posts in a row -->
             <div class="col-md-4">
@@ -86,8 +88,8 @@
                 <div class="mx-2 mt-2 post-text">
                     <span><strong>{{ post.title }}</strong></span>
                     <span class="item-right text-secondary space-right"><i class="far fa-heart"></i></span>
-                    <span class="text-secondary">{{ post.num_of_likes }}</span>
-                    <span class="excerpt-author">By {{ post.author }}</span>
+                    <span class="text-secondary">{{ post.num_of_likes }}</span><br>
+                    <span class="excerpt-author">by {{ post.author }}</span>
                     <div class="d-flex justify-content-end pub-date">
                         <span>{{ post.pub_date }}</span>
                     </div>
