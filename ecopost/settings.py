@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['ecopost.herokuapp.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -50,11 +50,12 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'django_summernote',
     'django_countries',
+    'django_summernote',
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_filters',
-    'blog',
+    'blog'
 ]
 
 
