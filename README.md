@@ -6,7 +6,7 @@
 * [User Stories](#user-stories)
 * [Features in Nutshell](#features-in-nutshell)
 * [Wireframes](#wireframes)
-* [Notes on Design](#notes-on-design)
+* [Notes on the Design](#notes-on-the-design)
 * [Each Part and Function in Detail](#each-part-and-function-in-detail)
 * [Automated Testing](#automated-testing)
 * [Manual Testing](#manual-testing)
@@ -16,12 +16,11 @@
 ![ecopost-mobile](media/ecopost-mobile.png)
 
 ## Overview
-
-This application offers a platform where individuals around the world can share their stories on what they are doing to save the environment.  Many people feel helpless, thinking that individuals cannot do so much.  Here, visitors can read posts written by others, leave comments and write their own stories.  Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope. 
+This application offers a platform where individuals around the world can share their stories on what they are doing to protect the environment. Many people feel helpless, thinking that individuals cannot do so much. Here, visitors can read posts written by others, leave comments and write their own stories. Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope.
 
 ## User Stories
 
-User stories can be found [here.](https://github.com/users/rkyzk/projects/5/views/1?layout=board)
+User stories can be found [here.](https://github.com/users/rkyzk/projects/8)
 
 ## Features in Nutshell:
 Users can see lists of excerpts from
@@ -45,15 +44,18 @@ Members can update or delete their posts before submitting them<br>
 Wireframes for the app can be found [here.](https://wireframe.cc/pro/pp/873798723651976)
 Please click on "Homepage" in the upper left corner to see wireframes of different pages of the app.
 
-## Notes on Design 
-The overall appearance is kept simple and clean in order to avoid interfering with various colors that the featured images will bring in.
+## Notes on the Design 
+The overall appearance is kept simple and clean so as not to interfere with various colors that the featured images will bring in.
 
 **About the Colors**
-- Beige, green and blue are used for titles and navigation links. These colors are the colors of soil, the ocean, the sky and plants, so they suit the theme of the site.
+- I used beige (rgb(141, 111, 56)) for the navigation menu, headings and buttons.
+- I used blue (color: rgb(46, 122, 145)) for links in the text.
+- I used light grey (#e8e8e8) for the footer.
+- Beige and blue were chosen because they are associated with nature.
 
 **About the Fonts**
 - Montserrat Alternates was used for headings because it's stylish and visually pleasant when used sparingly.
-- For the content Lato is used since it's readable and familiar to users. 
+- For the content Lato is used since it's readable and familiar. 
 
 ## Each Part and Function in Detail
 
