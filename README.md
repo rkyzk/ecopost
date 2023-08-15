@@ -8,6 +8,7 @@
 * [Wireframes](#wireframes)
 * [Notes on the Design](#notes-on-the-design)
 * [Each Part and Function in Detail](#each-part-and-function-in-detail)
+* [Deployment Process](#deployment-process)
 * [Automated Testing](#automated-testing)
 * [Manual Testing](#manual-testing)
 - - -
@@ -176,6 +177,60 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 - For DeletePosts view function, a program is wrriten to raise 403 error in case forbidden attempts are made (line 232, 237-238 in views.py.)  I first used Mixins, but it resulted in error so instead I wrote this program (discussed further in 'Bugs' section).
 
 - - -
+## Deployment Process
+
+1. Create an app on Heroku:
+- On the dashboard on Heroku, click “New.”
+- Click “Create new app”
+- Name the app and select the region. 
+- Click “Create app”
+
+2. Create a database on ElephantSQL.com:
+
+3. At the top level in the project, make env.py file and write the following:
+
+`import os`
+
+`os.environ[“DATABASE_URL”] = “” // write copied URL from Elphant SQL`
+`os.environ[“SECRET_KEY”] = “” // make up a secret key`
+`os.environ[“PORT”] = "8000"`
+`os.environ[“CLOUDINARY_URL”] = “” // copy and paste the cloudinary url`
+
+4. Save the file, add the file name env.py to .gitignore file so the content won’t be published on Github.
+
+5. In settings.py, add the following:
+ 
+`import os`
+`import dj_database_url`
+`if os.path.isfile(‘env.py’):`
+`    import env`
+
+6. Replace SECRET_KEY as follows:
+`SECRET_KEY = os.environ.get(‘SECRET_KEY’)`
+
+7. Add the app’s URL on Heroku as allowed host
+`ALLOWED_HOSTS = [‘appname on Heroku’]`
+
+8. Comment out the original DATABASES and add the following:
+`DATABASES = {
+    ‘default’: dj_database_url.parse(os.environ.get(“DATABASE_URL”))
+    }`
+
+9. Make Procfile at the top level and write inside:
+`web: gunicorn appname.wsgi`
+
+10. Add the following so the summernote editor will be loaded when deployed.
+`X_FRAME_OPTIONS = ‘SAMEORIGIN’`
+
+11. Save, add, commit and push the change.
+Then run python3 manage.py migrate to migrate the database structure to the new ElephantSQL database.
+
+12. On Heroku dashboard, select the app, and open the Settings tab.  Add the following config vars:
+DATABASE_URL, SECRET_KEY and PORT = 8000
+
+13. Go to “Deploy” tab, in the “Deployment method” section, select “Github.”  Enter the project name in Github and click “connect.”  Scroll down to the bottom of the page and click “Deploy Branch.”
+
+_ _ _
 ## Automated Testing
 Automated tests can be found in test_models.py, test_forms.py and test_views.py
 
@@ -197,31 +252,24 @@ Views were tested in test_views.py in the following order
 I conducted manual testing for the aspects that weren't covered by automated testing.
 
 ### Testing User Stories
+**As Users**
 No. | Goals | How they are achieved | 
-|:---| :--- | :--- | 
-||**First Time Visitors**||   
-|1| Understand what the site is for and how to use it. | An introductory paragraph on the home page describes what the site is for and how to use it. | 
-|2| Invitation to become a member. | An introductory paragraph on the home page invites users to become a member.  In addition, a link to sign up page is displayed in the navbar. | 
-|3| Excerpts are listed. | Three featured stories chosen by editors are displayed on the home page for quick access.  Also the pages “More Stories from this Week” and “Readers’ Favorite Stories of All Time” provide lists of posts that are likely to interest visitors.|
-|4| Search posts | On “Search Stories” page users can search posts by various factors.  The link to the page is provided in the navbar regardless to the users’ log-in status. | 
-||||  
-||**Members**||
-|5| Leave comments | On “Detailed page” logged-in members are able to post comments.
-|6| ‘Like’ posts | Logged-in members are able to click on the heart icon to ‘like’ posts.  Clicking the icon again will undo the action.|
-|7| Write posts | On ‘Write Stories’ page users can write their own posts and submit them.  The posts will be published if admin of the site approves of them. |
-|8| Save posts | By clicking ‘Save’ button on ‘Write stories’ page users can save their drafts for editing later on. |
-|9| Edit posts | By clicking ‘Update’ button on “Detail Page,” users can update their drafts. |
-|10|Delete posts | By clicking ‘Delete’ button on “Detail Page,” they can delete their drafts. |
-|11| Edit comments | By clicking edit icon, users can update their comments. |
-|12| Delete comments | By clicking trash bin icon, users can delete their comments. |
-|13| Quick access to one's own posts and other posts |‘My page’ displays lists of (1)posts written, (2)posts commented and (3)posts bookmarked by the user.|
-||||
-||**Admin**||
-|14| Select posts to be published | Posts’ status is set to ‘Submitted’ when users submit their drafts, and they will not be displayed in public.  Only when admin changes the status to ‘Published,’ the posts will be publicized. |
-|15| Let users see the most interesting posts |Three featured stories chosen by admin will be displayed on the home page, where the users will see immediately when they visit the site. |
-|16| Allow users to update or delete posts only before submission | Update and Delete buttons for posts appear only if posts are in ‘draft’ status.  In addition, trying to update or delete posts that have been submitted will display a 403 error page.|
-|17| Allow only the author to update/delete the posts & comments | LoginRequiredMixin and UserPassestestMixin allow only the user who is logged in as the author of the posts and comments to update or delete their writings. |
-|18|Allow users to access only their own “My page” | LoginRequiredMixin and UserPassestestMixin will allow users to access only their own “My Page.” |
+|:---| :--- | :--- |  
+|1| What the site is for and how to use it are clear. | An introductory paragraph on the home page describes what the site is for and how to use it.  Also the links in the navigation bar indicate which page has which functionality so users can easily understand how to use the app. | 
+|2| Visitors can sign up. | An introductory paragraph on the home page invites users to become a member.  In addition, a link to sign up page is displayed in the navbar. | 
+|3| Featured posts are presented on the home page. | Three featured stories chosen by editors are displayed on the home page. |
+|4| Users can see the list of recently published posts. |By clicking the link on the home page 'More Stories from this week' users can see the list of recently published posts. | 
+|5| Users can see the list of popular posts. | By clicking the link on the home page 'Readers' favorite storeis of all time' users can see the list of the posts that have been liked the most. |
+|6| Users can write posts. | On ‘Write Stories’ page logged-in users can write their own posts and submit them.  The posts will be published if admin of the site approves of them. |
+|7| Users can edit posts. | By clicking 'update' on the post_detail page, users can edit their posts. |
+|8| Users can delete posts. | By clicking 'delete' on the post_detail page, users can delete their posts.|
+|9| Users can write comments. | Logged-in can leave comments on the post_detail page.|
+|10| Users can edit comments | By clicking the edit icon, users can delete their comments. |
+|11| Users can delete comments. | By clicking the trash bin icon, users can delete their comments. |
+|12| Users can search posts. | On "Search Stories" page, users can search posts by multiple factors. |
+|13| Users can like posts. |By clicking the heart icon, logged-in users can like posts.|
+|14| Users can bookmark posts. |By clicking the bookmark icon, logged-in users can bookmark posts.  The bookmarked posts will be displayed on 'My Page'.|
+|15| Users have easy access to 1. posts witten by the user 2. posts commented by the user and 3. posts bookmarked by the user |'My page' displays these three groups of posts.|
 
 ### Testing Features
 As preparatory steps for the following tests:
@@ -526,7 +574,7 @@ These tests failed, because the Django form error messages appeared before redir
 
 3. For "Delete Posts" Page, I first used LoginRequiredMixin and UserPassestestMixin in order to make sure the user is the author of the post and that the post hasn't been submitted. That resulted in an error, since the post was deleted before the test func was run, and the test func couldn't find the post in the database.<br><br>**Solution:** I wrote the program on line 221, 226-227 in views.py to bypass the issue, and now the access control is functioning.
 
-## Aspects to be improved in the future:
+## Aspects to be improved in the future
 - Remember me function on “Log in” page needs to be fixed.
 - Currently on "Search Stories" page, after users run a 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the results more easily.
 - I will make Contact page where users can write and submit messages to admin.
@@ -566,7 +614,7 @@ Screenshots of the reports are available at following links.
 [Become a Member](media/lighthouse-become-a-member.png)
 [Sign in](media/lighthouse-signin.png)
 
-## Media used
+## Media
 
 Logo image: clover
 https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
@@ -583,7 +631,7 @@ https://www.pexels.com/photo/forest-345522/
 test_transformation
 https://www.pexels.com/photo/city-fashion-man-people-15839341/
 
-## Credits:
+## Credits
 Many thanks to my mentor Jubril Akolade and tutors at Code Institute for their guidance and dedicated support.<br>
 
 For this application, I used the Code Institute's 'Code Star' project as a starting point.
