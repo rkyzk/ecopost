@@ -280,9 +280,9 @@ No. | Goals | How they are achieved |
 |19| Allow only the authors to update/delete the posts & comments | LoginRequiredMixin and UserPassestestMixin allow only the users who are logged in as the authors of posts and comments to update or delete their writings. |
 |20|Allow users to access only their own “My page” | LoginRequiredMixin and UserPassestestMixin will allow users to access only their own “My Page.” |
 
-### Testing Features
-As preparatory steps for the following tests:
-1. create a user with username "testuser", an email "test@ecopost.com" and a password "gR48NmYr1"
+#### Testing Features
+As preparatory steps,
+1. create a user with username "testuser" and a password "gR48NmYr1" (leave the email blank)
 2. Log in as "testuser"
 3. make 10 posts with the following field values:
 title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
@@ -292,36 +292,44 @@ country: Ireland
 4. go to admin panel.
 5. publish blog 1-10 one by one in the order.
 6. set featured_flag True for blog 1-3.
-7. go to "Detail Page" of blog 4-10 and click on 'like' button
+7. go to "Detail Page" of blog 4-10 and click 'like' button
 
-#### Testing common features in all pages
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|1|Logo link|Go to “Search Stories”|Click on the logo|Redirected to the home page|Redirected to the home page|pass|2023/4/29|
-|||||||||
-||**Navigation links**|||||||
-|2|”Home”|Go to “Search Stories” page|Click on “Home”|Redirected to ”Home"|Redirected to ”Home”|pass|2023/4/29|
-|3|”Search stories”|Go to “Home”|Click on “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|2023/4/29|
-|4|”Become a Member”|Log out if you haven't.  Go to “Home” page|Click on “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|2023/4/29|
-|5|”Log in”|Go to “Home” page|Click on “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|2023/4/29|
-|6|”Write Stories”|Log in and go to “Home” page|Click on “Write Stories”|Redirected to ” Write Stories”|Redirected to ” Write Stories”|pass|2023/4/29|
-|7|”My Page”|Go to “Home” page|Click on “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|2023/4/29|
-|8|”Log out”|Go to “Home” page|Click on “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|2023/4/29|
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image|Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|Logo link|Go to “Search Stories”|Click the logo|Redirected to the home page|Redirected to the home page|pass|[image](./media/manual-tests/navlinks/1.png)|2023/8/14|
+|2|Link to ”Home”|Go to “Search Stories” page|Click the link “Home”|Redirected to ”Home"|Redirected to ”Home”|pass|[image](./media/manual-tests/navlinks/2.png)|2023/8/14|
+|3|Link to ”Search stories”|Go to “Home”|Click “Search Stories”|Redirected to ”Search Stories”|Redirected to ”Search Stories”|pass|[image](./media/manual-tests/navlinks/3.png)|2023/8/14|
+|4|”Become a Member”|Go to “Home” page|Click “Become a Member”|Redirected to ”Become a Member” | Redirected to “Become a Member”|pass|[image](./media/manual-tests/navlinks/4.png)|2023/8/14|
+|5|”Log in”|Go to “Home” page|Click “Log in”|Redirected to ”Log in”|Redirected to “Log in”|pass|[image](./media/manual-tests/navlinks/5.png)|2023/8/14|
+|6|”Write Stories”|Log in and go to “Home”|Click “Write Stories”|Redirected to ”Write Stories”|Redirected to ” Write Stories”|pass|[image](./media/manual-tests/navlinks/6.png)|2023/8/14|
+|7|”My Page”|Go to “Home” page|Click “My Page”|Redirected to ”My Page”|Redirected to “My Page”|pass|[image](./media/manual-tests/navlinks/7.png)|2023/8/14|
+|8|”Log out”|Go to “Home” page|Click “Log out”|Redirected to ”Log out”|Redirected to “Log out”|pass|[image](./media/manual-tests/navlinks/8.png)|2023/8/14|
 
-**Testing hamburger menu for screen sizes below 700px**<br>
-Conduct test no. 9 & 10 without any actions in between*
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|9|Hamburger menu| set the window size to 690px | click on the hamburger menu | the Menu box opens |the Menu box opens| pass|2023/4/30|
-|10|Hamburger menu| --| click on the hamburger menu for the second time | the Menu box closes |the Menu box closes| pass|2023/4/30|
-|||||||||
-||**links in the footer**||||||
-|11|link to facebook|Go to “Home” page|Click on the facebook icon|Redirected to facebook site|Redirected to facebook site| pass|2023/4/29|
-|12|link to twitter|Go to “Home” page|Click on the twitter icon|Redirected to twitter site|Redirected to twitter site| pass|2023/4/29|
-|13|link to instagram|Go to “Home” page|Click on the instagram icon|Redirected to instagram site|Redirected to instagram site| pass|2023/4/29|
-|||||||||
-||**The flash messages**||||||
-|14| setTimeout function in line 2-6 of script.js | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|2023/4/30|
+#### Burger Menu for screen sizes below 700px
+*Conduct test no. 2 & 3 without any actions in between.*
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image|Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|Hamburger menu| Set the window size to 690px | Check if the burger menu appears. | The burger menu appears. |The burger menu appears.| pass|[image](./media/manual-tests/burger/1.png)|2023/8/15|
+|2|Hamburger menu| --| Click the hamburger menu | The menu box opens |The menu box opens| pass|[image](./media/manual-tests/burger/2.png)|2023/8/15|
+|3|Hamburger menu| --| Click the link 'Search Stories' | The menu box closes. Redirected to "Search Stories." |The menu box closes. Redirected to "Search Stories." | pass|[image](./media/manual-tests/burger/3.png)|2023/8/15|
+|4|Hamburger menu| --| Click the burger to open the menu. Click again on the burger.| The menu box closes. |The menu box closes. | pass|[image](./media/manual-tests/burger/4.png)|2023/8/15|
+|5|Hamburger menu| --| Click the burger to open the menu. Click outside the menu.| The menu box closes. |The menu box closes. | pass|[image](./media/manual-tests/burger/5.png)|2023/8/15|
+
+#### Links in the footer
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image|Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|link to facebook|--|Click the facebook icon|Redirected to the facebook site|Redirected to the facebook site| pass|[image](./media/manual-tests/footer/1.png)|2023/8/15|
+|2|link to twitter|--|Click the twitter icon|Redirected to the twitter site|Redirected to the twitter site| pass|[image](./media/manual-tests/footer/2.png)|2023/8/15|
+|3|link to instagram|--|Click the instagram icon|Redirected to the instagram site|Redirected to the instagram site| pass|[image](./media/manual-tests/footer/3.png)|2023/8/15|
+
+#### The flash messages
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image|Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1| Message disappears after 5 seconds. | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|[image](./media/manual-tests/flash_messages/1.png)|2023/8/15|
+
+
+
+
 
 #### Testing features on individual pages
 **“Home”**
