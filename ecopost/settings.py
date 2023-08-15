@@ -29,11 +29,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-ALLOWED_HOSTS = ['ecopost.herokuapp.com', '8000-rkyzk-ecopost-n6x391rl0r4.ws-us103.gitpod.io']
+ALLOWED_HOSTS = [
+    'ecopost.herokuapp.com',
+    '8000-rkyzk-ecopost-n6x391rl0r4.ws-us103.gitpod.io'
+]
 
 # Application definition
 
