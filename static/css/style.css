@@ -50,6 +50,7 @@ html {
 h2 {
   font-family: 'Lato', sans-serif;
   color: rgb(78, 75, 70);
+  font-size: 1.6rem;
 }
 
 h4 {
@@ -137,7 +138,8 @@ footer {
   margin-left: 5px;
 }
 
-.content {
+.content,
+.detail-content {
   width: 80%;
 }
 
@@ -270,10 +272,9 @@ h1 {
   margin-top: 50px;
 }
 
-@media screen and (max-width: 1150px) {
-  section {
-    width: 85%;
-    margin: auto;
+@media screen and (max-width: 1200px) {
+  .detail-content {
+    width: 95%;
   }
 }
 
@@ -390,12 +391,6 @@ h1 {
 
   .block-content {
     margin-top: 20px;
-  }
-
-  /* --------- post_detail.html ----------------------*/
-  section {
-    width: 80%;
-    margin: 0 auto;
   }
 }
 
