@@ -24,9 +24,11 @@ class PostFilter(django_filters.FilterSet):
                                                widget=Input(
                                                     attrs={'min': int(0),
                                                            'type': 'number'}))
-    category = django_filters.ChoiceFilter(choices=CATEGORY)
+    category = django_filters.ChoiceFilter(choices=CATEGORY,
+                                           empty_label='Choose...')
     city = django_filters.CharFilter(lookup_expr='icontains')
-    country = django_filters.ChoiceFilter(choices=CountryField().get_choices())
+    country = django_filters.ChoiceFilter(choices=CountryField().get_choices(),
+                                          empty_label='Choose...')
     search_keyword = django_filters.CharFilter(method='filter_keyword',
                                                label='keyword')
 
