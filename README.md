@@ -327,12 +327,49 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
 |1| Message disappears after 5 seconds. | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|[image](./media/manual-tests/flash_messages/1.png)|2023/8/15|
 
+#### Home
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail |Image| Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|link ”become a member” in the introduction |--|Click the link|Redirected to "Become a member."| Redirected to "Become a member."|pass|[image](./media/manual-tests/home/1.png)|2023/8/15|
+|2|link ”Read the full story” at the bottom of "blog 3" |--|Click the link|Detail page of "blog 3" will be displayed.| Detail page of "blog 3" is displayed.|pass|[image](./media/manual-tests/home/2.png)|2023/8/15|
+|3|link ”Read the full story” at the bottom of "blog 2" |--|Click the link|Detail page of "blog 2" will be displayed.| Detail page of "blog2" is displayed.|pass|[image](./media/manual-tests/home/3.png)|2023/8/15|
+|4|link ”Read the full story” at the bottom of "blog1" |--|Click the link|Detail page of "blog 1" will be displayed.| Detail page of "blog 1" is displayed.|pass|[image](./media/manual-tests/home/4.png)|2023/8/15|
+|5|link ”More stories from this week” |--|Click the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|[image](./media/manual-tests/home/5.png)|2023/8/15|
+|6|link ”Readers’ favorite stories of all time” |--|Click the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|[image](./media/manual-tests/home/6.png)|2023/8/15|
+
+#### Detail Page
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail |Image| Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|link to "Become a Member"|Log out|Click the link on the right side of the comments section|Redirected to "Become a Member" page|Redirected to "Become a Member" page|pass|[image](./media/manual-tests/detail_page/1.png)|2023/8/15|
+|2|link to "Sign in"|--|Click the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|[image](./media/manual-tests/detail_page/2.png)|2023/8/15|
+|3|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| leave the comment field blank, and click 'Submit' | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|[image](./media/manual-tests/detail_page/3.png)|2023/8/15|
+
+**Update/Delete comments**<br>
+As preparation,<br>
+- Log in as testuser and go to "Detail Page" of "blog 1."
+- Enter "test comment" in the text box and click 'Submit.'
+- Conduct test no. 1-2 consecutively.
+
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|Update comment button|--| Click the update icon next to the comment.|"Update Comment" page will be displayed.|"Update Comment" page is displayed.|pass|[image](./media/manual-tests/detail_page_comments/1.png)|2023/8/15|
+|2|Delete comment button|--| Click the trash bin icon next to the comment.|Confirmation dialog "Are you sure you want to delete your comment?" will show up. |Confirmation dialog "Are you sure you want to delete your comment?" shows up. |pass|[image](./media/manual-tests/detail_page_comments/2.png)|2023/8/15|
+|3|Confirmation dialog - cancel|--|Click 'Cancel'|The dialog diappears, and "Detail Page" is displayed.|The dialog diappears and "Detail Page" is displayed.|pass|[image](./media/manual-tests/detail_page_comments/3.png)|2023/8/15|
+|4|Confirmation dialog - ok|Click the trash bin icon.|Click 'OK' in the dialog.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|pass|[image](./media/manual-tests/detail_page_comments/4.png)|2023/8/15|
+
+**Confirmation Dialog before Deleting Posts**<br>
+*Write a story and save. Conduct no. 1-3 without any actions in between.*
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|Confirmation dialog |--|Go to the "Detail Page" of the draft, and click "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft.|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft.|pass|[image](./media/manual-tests/detail_page_delete_posts/1.png)|2023/8/15|
+|2|Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|[image](./media/manual-tests/detail_page_delete_posts/2.png)|2023/8/15|
+|3|Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|[image](./media/manual-tests/detail_page_delete_posts/3.png)|2023/8/15|
 
 
 
 
-#### Testing features on individual pages
-**“Home”**
+
+
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |15|link ”become a member” in the introduction |--|Click on the link|Redirected to "Become a member."| Redirected to "Become a member."|pass|2023/4/29|
