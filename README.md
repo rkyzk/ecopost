@@ -13,8 +13,8 @@
 * [Manual Testing](#manual-testing)
 - - -
 
-![ecopost-home](media/ecopost-home.png)
-![ecopost-mobile](media/ecopost-mobile.png)
+![ecopost-home](media/readme/home.png)
+![ecopost-mobile](media/readme/mobile.png)
 
 ## Overview
 This application offers a platform where individuals around the world can share their stories on what they are doing to protect the environment. Many people feel helpless, thinking that individuals cannot do so much. Here, visitors can read posts written by others, leave comments and write their own stories. Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope.
@@ -189,20 +189,20 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 
 3. At the top level in the project, make env.py file and write the following:
 
-`import os`
+`import os`<br>
 
-`os.environ[“DATABASE_URL”] = “” // write copied URL from Elphant SQL`
-`os.environ[“SECRET_KEY”] = “” // make up a secret key`
-`os.environ[“PORT”] = "8000"`
-`os.environ[“CLOUDINARY_URL”] = “” // copy and paste the cloudinary url`
+`os.environ[“DATABASE_URL”] = “” // write copied URL from Elphant SQL`<br>
+`os.environ[“SECRET_KEY”] = “” // make up a secret key`<br>
+`os.environ[“PORT”] = "8000"`<br>
+`os.environ[“CLOUDINARY_URL”] = “” // copy and paste the cloudinary url`<br>
 
 4. Save the file, add the file name env.py to .gitignore file so the content won’t be published on Github.
 
 5. In settings.py, add the following:
  
-`import os`
-`import dj_database_url`
-`if os.path.isfile(‘env.py’):`
+`import os`<br>
+`import dj_database_url`<br>
+`if os.path.isfile(‘env.py’):`<br>
 `    import env`
 
 6. Replace SECRET_KEY as follows:
