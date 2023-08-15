@@ -7,11 +7,10 @@
   <div class="col-md-4">
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
-        <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
-          alt="forest">
+      <img src="https://res.cloudinary.com/dacgkk0so/image/upload/v1691891851/default-img_ojmwhd.jpg"
+        class="card-img-top" alt="forest image">
       {% else %}
-        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
       {% endif %}
     </div>
     <div class="mx-2 mt-2 post-text">
@@ -21,11 +20,11 @@
         <ul>
           <!-- if the post has been published, display the published date. -->
           {% if post.status == 2 %}
-            <li>Published on {{ post.pub_date }}</li>
+          <li>Published on {{ post.pub_date }}</li>
           {% else %}
-            <!-- state if the post is a draft or has been submitted -->
-            <li>{{ post.status_value }}</li>
-            <li>Created on {{ post.created_on|date:'M d, Y' }}</li>
+          <!-- state if the post is a draft or has been submitted -->
+          <li>{{ post.status_value }}</li>
+          <li>Created on {{ post.created_on|date:'M d, Y' }}</li>
           {% endif %}
         </ul>
       </div>
@@ -34,26 +33,26 @@
     </div>
     <hr class="line">
   </div>
-    <!-- If there are more than 3 posts in this category, display them when 'Show more' button is clicked. -->
-    {% if my_posts|length > 3 %}
-      {% if forloop.counter == 3 %}
-      </div>
-      <button id="show-my-posts" class="btn btn-link show-posts mb-4">Show more</button>
-      <div id="my-posts" class="hide">
-        <div class="row mt-2">
-      {% elif forloop.last %}
-     </div>
-     <button class="btn btn-link hide-posts mt-5">Show less</button>
-      {% elif forloop.counter > 3 %}
-        {% if forloop.counter|divisibleby:3 %}
-    </div>
-    <hr class="line-for-lg">
-    <div class="row mt-2">
-        {% endif %}
-      {% endif %}
-    {% endif %}
+  <!-- If there are more than 3 posts in this category, display them when 'Show more' button is clicked. -->
+  {% if my_posts|length > 3 %}
+  {% if forloop.counter == 3 %}
+</div>
+<button id="show-my-posts" class="btn btn-link show-posts mb-4">Show more</button>
+<div id="my-posts" class="hide">
+  <div class="row mt-2">
+    {% elif forloop.last %}
+  </div>
+  <button class="btn btn-link hide-posts mt-5">Show less</button>
+  {% elif forloop.counter > 3 %}
+  {% if forloop.counter|divisibleby:3 %}
+</div>
+<hr class="line-for-lg">
+<div class="row mt-2">
+  {% endif %}
+  {% endif %}
+  {% endif %}
   {% empty %}
-    <p>No posts</p>
+  <p>No posts</p>
   {% endfor %}
 </div>
 <!-- Commented Posts -->
@@ -64,11 +63,10 @@
   <div class="col-md-4">
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
-        <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
-          alt="forest">
+      <img src="https://res.cloudinary.com/dacgkk0so/image/upload/v1691891851/default-img_ojmwhd.jpg"
+        class="card-img-top" alt="forest image">
       {% else %}
-        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
       {% endif %}
     </div>
     <div class="mx-2 mt-2 post-text">
@@ -77,10 +75,10 @@
       <div class="date-city d-flex justify-content-end">
         <ul>
           {% if post.status == 2 %}
-            <li>Published on {{ post.pub_date }}</li>
+          <li>Published on {{ post.pub_date }}</li>
           {% else %}
-            <li>{{ post.status_value }}</li>
-            <li>Created on {{ post.created_on }}</li>
+          <li>{{ post.status_value }}</li>
+          <li>Created on {{ post.created_on }}</li>
           {% endif %}
         </ul>
       </div>
@@ -89,25 +87,25 @@
     </div>
     <hr class="line">
   </div>
-    {% if commented_posts|length > 3 %}
-      {% if forloop.counter == 3 %}
-      </div>
-      <button class="btn btn-link show-posts mb-4">Show more</button>
-      <div class="hide">
-        <div class="row mt-2">
-      {% elif forloop.last %}
-     </div>
-     <button class="btn btn-link hide-posts mt-5">Show less</button>
-      {% elif forloop.counter > 3 %}
-        {% if forloop.counter|divisibleby:3 %}
-    </div>
-    <hr class="line-for-lg">
-    <div class="row mt-2">
-        {% endif %}
-      {% endif %}
-    {% endif %}
+  {% if commented_posts|length > 3 %}
+  {% if forloop.counter == 3 %}
+</div>
+<button class="btn btn-link show-posts mb-4">Show more</button>
+<div class="hide">
+  <div class="row mt-2">
+    {% elif forloop.last %}
+  </div>
+  <button class="btn btn-link hide-posts mt-5">Show less</button>
+  {% elif forloop.counter > 3 %}
+  {% if forloop.counter|divisibleby:3 %}
+</div>
+<hr class="line-for-lg">
+<div class="row mt-2">
+  {% endif %}
+  {% endif %}
+  {% endif %}
   {% empty %}
-    <p>No posts</p>
+  <p>No posts</p>
   {% endfor %}
 </div>
 <!-- Bookmarked Posts -->
@@ -118,11 +116,10 @@
   <div class="col-md-4">
     <div class="image-wrapper d-flex justify-content-center">
       {% if "placeholder" in post.featured_image.url %}
-        <img class="card-img-top"
-          src="https://res.cloudinary.com/ds66fig3o/image/upload/v1683383811/juuj0wzknxo1vehzgsrp.jpg"
-          alt="forest">
+      <img src="https://res.cloudinary.com/dacgkk0so/image/upload/v1691891851/default-img_ojmwhd.jpg"
+        class="card-img-top" alt="forest image">
       {% else %}
-        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
       {% endif %}
     </div>
     <div class="mx-2 mt-2 post-text">
@@ -131,10 +128,10 @@
       <div class="date-city d-flex justify-content-end">
         <ul>
           {% if post.status == 2 %}
-            <li>Published on {{ post.pub_date }}</li>
+          <li>Published on {{ post.pub_date }}</li>
           {% else %}
-            <li>{{ post.status_value }}</li>
-            <li>Created on {{ post.created_on }}</li>
+          <li>{{ post.status_value }}</li>
+          <li>Created on {{ post.created_on }}</li>
           {% endif %}
         </ul>
       </div>
@@ -143,25 +140,25 @@
     </div>
     <hr class="line">
   </div>
-    {% if bookmarked_posts|length > 3 %}
-      {% if forloop.counter == 3 %}
-      </div>
-      <button class="btn btn-link show-posts mb-4">Show more</button>
-      <div class="hide">
-        <div class="row mt-2">
-      {% elif forloop.last %}
-     </div>
-     <button class="btn btn-link hide-posts mt-5">Show less</button>
-      {% elif forloop.counter > 3 %}
-        {% if forloop.counter|divisibleby:3 %}
-    </div>
-    <hr class="line-for-lg">
-    <div class="row mt-2">
-        {% endif %}
-      {% endif %}
-    {% endif %}
+  {% if bookmarked_posts|length > 3 %}
+  {% if forloop.counter == 3 %}
+</div>
+<button class="btn btn-link show-posts mb-4">Show more</button>
+<div class="hide">
+  <div class="row mt-2">
+    {% elif forloop.last %}
+  </div>
+  <button class="btn btn-link hide-posts mt-5">Show less</button>
+  {% elif forloop.counter > 3 %}
+  {% if forloop.counter|divisibleby:3 %}
+</div>
+<hr class="line-for-lg">
+<div class="row mt-2">
+  {% endif %}
+  {% endif %}
+  {% endif %}
   {% empty %}
-    <p>No posts</p>
+  <p>No posts</p>
   {% endfor %}
 </div>
 <div class="padding-bottom"></div>
