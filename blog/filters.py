@@ -2,6 +2,7 @@ import django_filters
 from .models import Post, CATEGORY
 from django_countries.fields import CountryField
 from django.forms.widgets import Input
+from django.db.models.functions import Trim
 from django.db.models import Q
 
 
@@ -19,7 +20,10 @@ class PostFilter(django_filters.FilterSet):
                                                  widget=Input(
                                                     attrs={'type': 'date'}))
     num_of_likes = django_filters.NumberFilter(method='filter_likes',
-                                               label='liked more than')
+                                               label='liked more than',
+                                               widget=Input(
+                                                    attrs={'min': int(0),
+                                                           'type': 'number'}))
     category = django_filters.ChoiceFilter(choices=CATEGORY)
     city = django_filters.CharFilter(lookup_expr='icontains')
     country = django_filters.ChoiceFilter(choices=CountryField().get_choices())
@@ -30,7 +34,7 @@ class PostFilter(django_filters.FilterSet):
         model = Post
         fields = ['title', 'author__username', 'content', 'published_on',
                   'num_of_likes', 'category', 'city', 'country']
-
+    
     def filter_keyword(self, queryset, name, value):
         return queryset.filter(Q(title__icontains=value) |
                                Q(content__icontains=value))
