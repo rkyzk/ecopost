@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
         path('', views.PostList.as_view(), name='home'),
         path('mypage/user<int:pk>/', views.MyPage.as_view(), name='mypage'),
-        path('search_story/', views.Search.as_view(), name='search'),
+        path('search_story/', views.SearchPosts.as_view(), name='search'),
         path('add_story/', views.AddStory.as_view(), name='add_story'),
         path('more_stories/', views.MoreStories.as_view(),
              name='more_stories'),

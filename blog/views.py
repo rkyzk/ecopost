@@ -486,6 +486,39 @@ class Search(View):
         return render(request, "search.html", context)
 
 
+class SearchPosts(View):
+    """Hold functions to search posts by multiple factors."""
+
+    def get(self, request, *args, **kwargs):
+        """
+        Display "Search Stories" page, receive users' input,
+        run search based on the input, return a queryset of
+        the matching posts and display the search results.
+        arguments: self, request, *args, **kwargs
+        :returns: render()
+        :rtype: method
+        """
+        # get category choices for the select box
+        category_choices = Post._meta.get_field('category').choices
+        categories = [cat[1] for cat in category_choices]
+        # get country choices for the select box
+        country_choices = Post._meta.get_field('country').choices
+        countries = [country.name for country in country_choices]
+        # Get posts that have been published, arranged from the
+        # newest to oldest published dates
+        posts = Post.objects.filter(status=2).order_by('-published_on')
+        postFilterForm = PostFilter(request.GET, queryset=posts)
+        posts = postFilterForm.qs
+
+        context = {
+            'categories': categories,
+            'countries': countries,
+            'posts': posts,
+            'postForm': postFilterForm,
+        }
+        return render(request, "search.html", context)
+
+
 class MoreStories(generic.ListView):
     """
     Gets posts published in the past 7 days from DB,
