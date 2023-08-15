@@ -271,6 +271,15 @@ No. | Goals | How they are achieved |
 |14| Users can bookmark posts. |By clicking the bookmark icon, logged-in users can bookmark posts.  The bookmarked posts will be displayed on 'My Page'.|
 |15| Users have easy access to 1. posts witten by the user 2. posts commented by the user and 3. posts bookmarked by the user |'My page' displays these three groups of posts.|
 
+**As admin**
+No. | Goals | How they are achieved | 
+|:---| :--- | :--- |  
+|16| Admin can select posts to be published. | Post’s status is set to ‘Submitted’ when users submit their drafts, and they will not be published yet.  Only when admin changes the status to ‘Published,’ the posts will be published. |
+|17| The most interesting posts are presented on "Home" |Three featured stories chosen by admin will be displayed on the home page. |
+|18| Allow users to update or delete posts only before submission | ‘Update’ and ‘Delete’ buttons for posts appear only if posts are in ‘draft’ status.  In addition, the code is programmed to raise errors if attempts are made to update or delete submitted posts. (line 206, 220 in views.py) |
+|19| Allow only the authors to update/delete the posts & comments | LoginRequiredMixin and UserPassestestMixin allow only the users who are logged in as the authors of posts and comments to update or delete their writings. |
+|20|Allow users to access only their own “My page” | LoginRequiredMixin and UserPassestestMixin will allow users to access only their own “My Page.” |
+
 ### Testing Features
 As preparatory steps for the following tests:
 1. create a user with username "testuser", an email "test@ecopost.com" and a password "gR48NmYr1"

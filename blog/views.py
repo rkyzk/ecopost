@@ -87,7 +87,6 @@ class PostDetail(View):
             },
         )
 
-
     def post(self, request, slug, *args, **kwargs):
         """
         Receives posted comment form and validates it.
