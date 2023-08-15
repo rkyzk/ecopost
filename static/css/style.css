@@ -217,6 +217,10 @@ h1 {
   aspect-ratio: 3 / 2;
 }
 
+.likes-count {
+  margin-top: 5px;
+}
+
 /* --------- Write Stories, Update Posts and Update Comments ------ */
 
 .form-section {

@@ -50,12 +50,12 @@
         </form>
         {% else %}
         <!-- if not logged in, show a heart (without 'like' button function) -->
-        <span><i class="far fa-heart space-right"></i></span>
+        <span class="likes-count"><i class="far fa-heart space-right"></i></span>
         {% endif %}
-        <span class="text-secondary">{{ post.num_of_likes }}</span>
+        <span class="text-secondary likes-count">{{ post.num_of_likes }}</span>
         <!-- bookmark -->
         {% if user.is_authenticated %}
-        <form class="d-inline" action="{% url 'bookmark' post.slug %}" method="POST">
+        <form class=" d-inline" action="{% url 'bookmark' post.slug %}" method="POST">
           {% csrf_token %}
           <!-- if already bookmarked, show a filled-out book icon -->
           {% if bookmarked %}
