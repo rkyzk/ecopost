@@ -1,23 +1,29 @@
 import django_filters
 from .models import Post, CATEGORY
 from django_countries.fields import CountryField
+from django.forms.widgets import Input
 from django.db.models import Q
 
 
 class PostFilter(django_filters.FilterSet):
-    title = django_filters.CharFilter(lookup_expr='icontains')
+    title = django_filters.CharFilter(lookup_expr='icontains',
+                                      label="title")
     author__username = django_filters.CharFilter(lookup_expr='icontains',
-                                                 label='Author')
+                                                 label='author')
     published_after = django_filters.DateFilter(method='filter_start_date',
-                                                label='published_after')
+                                                label='published_after',
+                                                widget=Input(
+                                                    attrs={'type': 'date'}))
     published_before = django_filters.DateFilter(method='filter_end_date',
-                                                 label='published_before')
+                                                 label='published_before',
+                                                 widget=Input(
+                                                    attrs={'type': 'date'}))
     num_of_likes = django_filters.NumberFilter(method='filter_likes',
                                                label='liked more than')
     category = django_filters.ChoiceFilter(choices=CATEGORY)
     city = django_filters.CharFilter(lookup_expr='icontains')
     country = django_filters.ChoiceFilter(choices=CountryField().get_choices())
-    search_keyword = django_filters.CharFilter(method='filter_keyward',
+    search_keyword = django_filters.CharFilter(method='filter_keyword',
                                                label='keyword')
 
     class Meta:

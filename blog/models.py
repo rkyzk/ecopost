@@ -77,7 +77,6 @@ class Post(models.Model):
         if self.id is not None:
             self.num_of_likes = self.likes.count()
         super().save(*args, **kwargs)
- 
 
     def __str__(self):
         """

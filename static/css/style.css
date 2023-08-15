@@ -1,7 +1,7 @@
 /* Common rules for multiple pages */
 html {
   min-height: 100vh;
-  position: relative; 
+  position: relative;
 }
 
 #logo {
@@ -31,11 +31,11 @@ html {
 }
 
 .nav-list a {
-  color:rgb(141, 111, 56);
+  color: rgb(141, 111, 56);
 }
 
 .nav-list a:hover {
-  color:rgb(65, 60, 53);
+  color: rgb(65, 60, 53);
   text-decoration: underline;
 }
 
@@ -43,21 +43,22 @@ html {
   display: none;
   border: none;
   rotate: 90deg;
-  color:rgb(65, 60, 53);
+  color: rgb(65, 60, 53);
   background-color: #fff;
 }
 
 h2 {
   font-family: 'Lato', sans-serif;
-  color:rgb(78, 75, 70);
+  color: rgb(78, 75, 70);
 }
 
 h4 {
   font-family: 'Lato', sans-serif;
 }
 
-a, .font-blue {
-  color:rgb(46, 122, 145);
+a,
+.font-blue {
+  color: rgb(46, 122, 145);
 }
 
 a {
@@ -65,16 +66,16 @@ a {
 }
 
 a:hover {
-  color:rgb(13, 48, 59);
+  color: rgb(13, 48, 59);
   text-decoration: underline;
 }
 
 .login-status {
-  color:rgb(65, 60, 53);
+  color: rgb(65, 60, 53);
   padding-right: 20px;
 }
 
-.post-text > p {
+.post-text>p {
   line-height: 20px;
 }
 
@@ -136,11 +137,15 @@ footer {
   margin-left: 5px;
 }
 
+.content {
+  width: 80%;
+}
+
 /*   ------------ index.html ------------------------  */
 h1 {
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 3rem;
-  color:rgb(141, 111, 56);
+  color: rgb(141, 111, 56);
 }
 
 .earth {
@@ -172,7 +177,7 @@ h1 {
 
 .links-to-posts {
   margin-top: 50px;
- }
+}
 
 .links-to-posts p {
   font-size: 1.4rem;
@@ -184,7 +189,7 @@ h1 {
 
 /* -------------- post_detail.html -------------------*/
 
-.date-city > ul {
+.date-city>ul {
   list-style: none;
 }
 
@@ -288,7 +293,9 @@ h1 {
 }
 
 @media screen and (max-width: 900px) {
-  .intro-box, .content {
+
+  .intro-box,
+  .content {
     width: 90%;
   }
 }
@@ -306,7 +313,7 @@ h1 {
   /* -------- index --------------- */
   .links-to-posts {
     margin-top: 0;
-   }
+  }
 
   .links-to-posts p {
     font-size: 1.1rem;
@@ -328,10 +335,11 @@ h1 {
   .title-box {
     width: 100%;
   }
-  
+
   .img-box {
     width: 100%;
   }
+
   /* --------- my page ----------------------*/
   .show-posts {
     margin-top: 0;
@@ -374,7 +382,7 @@ h1 {
 
   #nav-menu {
     display: none;
- }
+  }
 
   .block-content {
     margin-top: 20px;
@@ -394,10 +402,6 @@ h1 {
 }
 
 @media screen and (max-width: 575px) {
-  .search-content {
-    width: 80%;
-  }
-
   .item-right {
     margin-left: 0;
     margin-top: 10px;
@@ -416,7 +420,7 @@ h1 {
   h1 {
     font-size: 2.5rem;
   }
-  
+
   /* ------ index.html ----------------------*/
   .earth {
     width: 30%;
@@ -443,7 +447,12 @@ h1 {
 }
 
 @media screen and (max-width: 420px) {
-  .intro-box, .content, .search-contnet, section, .authentication {
+
+  .intro-box,
+  .content,
+  .search-contnet,
+  section,
+  .authentication {
     width: 100%;
   }
 

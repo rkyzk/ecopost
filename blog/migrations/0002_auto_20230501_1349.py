@@ -13,11 +13,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='post',
-            name='city',
-            field=models.CharField(blank=True, max_length=25, null=True),
-        ),
-        migrations.AddField(
-            model_name='post',
             name='country',
             field=django_countries.fields.CountryField(blank=True, max_length=2, null=True),
         ),
