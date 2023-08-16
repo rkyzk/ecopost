@@ -344,7 +344,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |2|link to "Sign in"|--|Click the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|[image](./media/manual-tests/detail_page/2.png)|2023/8/15|
 |3|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| leave the comment field blank, and click 'Submit' | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|[image](./media/manual-tests/detail_page/3.png)|2023/8/15|
 
-**Update/Delete comments**<br>
+#### Update/Delete Comments
 As preparation,<br>
 - Log in as testuser and go to "Detail Page" of "blog 1."
 - Enter "test comment" in the text box and click 'Submit.'
@@ -357,7 +357,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |3|Confirmation dialog - cancel|--|Click 'Cancel'|The dialog diappears, and "Detail Page" is displayed.|The dialog diappears and "Detail Page" is displayed.|pass|[image](./media/manual-tests/detail_page_comments/3.png)|2023/8/15|
 |4|Confirmation dialog - ok|Click the trash bin icon.|Click 'OK' in the dialog.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|pass|[image](./media/manual-tests/detail_page_comments/4.png)|2023/8/15|
 
-**Confirmation Dialog before Deleting Posts**<br>
+#### Confirmation Dialog before Deleting Posts
 *Write a story and save. Conduct no. 1-3 without any actions in between.*
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
@@ -365,73 +365,26 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |2|Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|[image](./media/manual-tests/detail_page_delete_posts/2.png)|2023/8/15|
 |3|Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|[image](./media/manual-tests/detail_page_delete_posts/3.png)|2023/8/15|
 
-
-
-
-
-
-Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|15|link ”become a member” in the introduction |--|Click on the link|Redirected to "Become a member."| Redirected to "Become a member."|pass|2023/4/29|
-|16|link ”Read the full story” at the bottom of "blog 3" |--|Click on the link|Detail page of "blog 3" will be displayed.| Detail page of "blog 3" is displayed.|pass|2023/4/29|
-|17|link ”Read the full story” at the bottom of "blog 2" |--|Click on the link|Detail page of "blog 2" will be displayed.| Detail page of "blog2" is displayed.|pass|2023/4/29|
-|18|link ”Read the full story” at the bottom of "blog1" |--|Click on the link|Detail page of "blog 1" will be displayed.| Detail page of "blog 1" is displayed.|pass|2023/4/29|
-|19|link ”More stories from this week” |--|Click on the link|Redirected to “More stories from this week”| Redirected to “More stories from this week”|pass|2023/4/30|
-|20|link ”Readers’ favorite stories of all time” |--|Click on the link|Redirected to ”Readers’ favorite stories of all time” |Redirected to ”Readers’ favorite stories of all time”|pass|2023/4/30|
-
-**"Detail Page"**
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|21|link to "Become a Member"|Log out|Click on the link on the right side of the comments section|Redirected to "Become a Member" page|Redirected to "Become a Member" page|pass|2023/5/1|
-|22|link to "Sign in"|--|Click on the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|2023/5/1|
-|23|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| click on 'Submit' under comment field | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|2023/4/30|
-
-**Testing buttons to update/delete comments**<br>
-As preparation for no. 24-28 :<br>
-- Log in as testuser and go to "Detail Page" of "blog 1."
-- Enter "test comment" in the text box and click on 'Submit.'
-- Conduct test no. 24-25 consecutively.
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|24|Update comment button|--| Click on the update icon next to the comment.|"Update Comment" page will be displayed.|"Update Comment" page will be displayed.|pass|2023/5/2 
-|25|Delete comment button|--| Click on the trash bin icon next to the comment.|Confirmation dialog "Are you sure you want to delete your comment?" will show up. |Confirmation dialog "Are you sure you want to delete your comment?" shows up. |pass|2023/5/2 |
-|||||||||
-||**Testing confirmation dialog before deleting comments**|Log in as testuser, go to "Detail Page" of "blog 1." Conduct no. 26-28 without any actions in between.|||||||
-|26|Confirmation dialog |--|Click on the trash bin icon next to the comment 'test comment'|A confirmation dialog appears.|A confirmation dialog appears.|pass|2023/5/3|
-|27|Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and "Detail Page" remains unchanged.|pass|2023/5/3|
-|28|Confirmation dialog - ok|Click on the trash bin icon.|Click on 'OK' in the dialog.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|The dialog disappears. A label says 'Comment deleted' where the comment originally was.|pass|2023/5/3|
-|||||||||
-||**Testing confirmation dialog before deleting posts**|Write a story and save. Conduct no. 29-31 without any actions in between.|||||||
-|29|Confirmation dialog |Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."Write a story and save.|Go to the "Detail Page" of the draft, and click on "Delete"|Confirmation dialog appears and says "Are you sure you want to delete your post?  You won't be able to retrieve the draft."|pass|2023/5/3|
-|30|Confirmation dialog - cancel|--|Click on 'Cancel'|The dialog diappears, and "Detail Page" remains unchanged.|The dialog diappears and the "Detail Page" remains unchanged.|pass|2023/5/3|
-|31|Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|2023/5/3|
-
-**Testing “Update Comments”**
-As preparation for test no. 32:
-1.	log in as testuser
-2.	On the home page, click on the link “Read the full story” of the blog “blog 1”
-4.	Enter “test comment” in the leave comments section and click on “Submit”
-5.	Click on the update comment icon
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|32|Leave the text box empty| delete the prepopulated comment | click on 'Submit' | A message says "Please fill out this field"|  A message says "Please fill out this field"| pass|2023/4/30|
-
-**"More Stories"**
+#### More Stories
 Conduct test. no   consecutively.
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|33|content of the page|--|Go to "More Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
-|34|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
-|35|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- |
+|1|pagination|--|Go to "More Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
+|2|link 'NEXT' if paginated|--|Click ‘NEXT’|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
+|3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](.media/manual-tests/more_stories/3.png)|2023/8/16|
 
-**"Popular Stories"**
+#### Popular Stories
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|36|content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in the descending order and blog 4 is displayed on the second page.|pass|2023/5/2|
-|37|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|2023/5/2|
-|38|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|2023/5/2|
+|1|content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
+|2|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
+|3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](.media/manual-tests/more_stories/3.png)|2023/8/16|
+
+
+
+
+
+
 
 **"Search Stories" page**
 As preparatory steps:
