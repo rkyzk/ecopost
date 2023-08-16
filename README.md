@@ -380,63 +380,30 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |2|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
 |3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](.media/manual-tests/more_stories/3.png)|2023/8/16|
 
+#### Write Stories
+*Log in as testuser*
 
+Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|Leave all fields empty| -- | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/write_stories/1.png)|2023/8/16|
+|2|Leave all fields empty| -- | click 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/write_stories/2.png)|2023/8/16|
+|3|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/write_stories/3.png)|2023/8/16|
+|4|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|[image](./media/manual-tests/write_stories/4.png)|2023/8/16|
+|5|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|[image](./media/manual-tests/write_stories/5.png)|2023/8/16|
+|6|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|[image](./media/manual-tests/write_stories/6.png)|2023/8/16|
+|7|Leave city empty | Enter 'test title 1' for title, 'content' for content, select 'Afghanistan' for country | click 'save' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|[image](./media/manual-tests/write_stories/7.png)|2023/8/16|
+|8|Leave city empty | Enter "test title 1" for title, 'content' for content, select 'Afghanistan' for country | click 'submit' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|[image](./media/manual-tests/write_stories/8.png)|2023/8/16|
+|9|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click 'save' | A message says "Please select an item in the list" for the country" | A message says "Please fill out this list" for the country" | pass|[image](./media/manual-tests/write_stories/9.png)|2023/8/16|
+|10|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click 'submit' | A message says "Please select an item in the list" for the country | A message says "Please fill out this list" for the country | pass|[image](./media/manual-tests/write_stories/10.png)|2023/8/16|
+|11|enter spaces | enter spaces in 'title,' 'content' and 'city'| click 'save' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |[image](./media/manual-tests/write_stories/11.png)|2023/8/16|
+|12|enter spaces | enter spaces in 'title,' 'content' and 'city'| click 'submit' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |[image](./media/manual-tests/write_stories/12.png)|2023/8/16|
+|13|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click 'save' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |[image](./media/manual-tests/write_stories/13.png)|2023/8/16|
+|14|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country (Go on to test no. without any actions.)| click 'submit' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |[image](./media/manual-tests/write_stories/14.png)|2023/8/16|
 
+- Tests no. 11-14 failed.  Even though these results turned out to be different from the expectation, a validation message tells users to fill out the field, so the features do not need to be corrected.
 
+#### Search Stories
 
-
-
-**"Search Stories" page**
-As preparatory steps:
-1. log in as testuser
-2. Make a post with title: 'blog test search'; content: 'content'; city: 'Freiburg'; country: Germany
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|39|Enter letters in the field "Liked more than" field|Enter 'a' in the field|Click on 'Search'|'a' won't be shown in the input box, and a message "Please enter at least one field." will appear in "Search Results" section.|'a' isn't shown in the input box, and a message "Please enter at least one field." appears in "Search Results" section.|pass|2023/5/2|
-|40|test search by country|--|Enter 'Germany' for country.  Click on 'Search'|'blog test search' will be displayed under Search Results|'blog test search' is displayed under Search Results|pass|2023/5/4|
-
-**Testing case sensitivity**
-As preparatory steps for test no. 41-52:
-1. Create users "John" and "susan" 
-2. log in as "John," and on "Write Stories" page, make two posts:
-- title: 'Gray Cat'; content: 'test'; city: 'lowercased city'; country: 'Afghanistan'
-- title: 'white cat'; content: 'test'; city: 'Capitalized City'; country: 'Afghanistan'
-3. log in as "susan" and make one post:
-- title: 'Brown Dog'; content: 'test'; city: 'test'; country: 'Afghanistan'
-
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|41|get capitalized title - contains|go to "Search" page. | Enter 'gray cat' for title, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-|42|get capitalized title - is exactly |go to "Search" page. | Enter 'gray cat' for title, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-|43|get lowercased title - contains|go to "Search" page. | Enter 'White Cat' for title, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-|44|get lowercased title - is exactly |go to "Search" page. | Enter 'White Cat' for title, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-|45|get capitalized author - contains|go to "Search" page. | Enter 'john' for author, select 'contains,' click on 'Search'|Blogs "Gray Cat" and "white cat" will be displayed.|Blogs "Gray Cat" and "white cat" are displayed.|pass|2023/5/2|
-|46|get capitalized author - is exactly |go to "Search" page. | Enter 'john' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-|47|get lowercased author - contains|go to "Search" page. | Enter 'Susan' for author, select 'contains,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-|48|get lowercased title - is exactly |go to "Search" page. | Enter 'Susan' for author, select 'is exactly,' click on 'Search'|Blog "Brown Dog" will be displayed.|Blog "Brown Dog" is displayed.|pass|2023/5/2|
-|49|get capitalized city - contains|go to "Search" page. | Enter 'capitalized city' for city, select 'contains,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" are displayed.|pass|2023/5/2|
-|50|get capitalized city - is exactly |go to "Search" page. | Enter 'capitalized city' for city, select 'is exactly,' click on 'Search'|Blog "white cat" will be displayed.|Blog "white cat" is displayed.|pass|2023/5/2|
-|51|get lowercased city - contains|go to "Search" page. | Enter 'Lowercased City' for city, select 'contains,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-|52|get lowercased city - is exactly |go to "Search" page. | Enter 'Lowercased City' for city, select 'is exactly,' click on 'Search'|Blog "Gray Cat" will be displayed.|Blog "Gray Cat" is displayed.|pass|2023/5/2|
-
-**"Write Stories"**
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|53|Leave all fields empty| -- | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|54|Leave all fields empty| -- | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|55|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|56|Leave title empty | Enter 'content' for content, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|57|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|58|Leave content empty | Enter 'test title 1' for title, 'test city' for city, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|59|Leave city empty | Enter 'test title 1' for title, 'content' for content, select 'Afghanistan' for country | click on 'save' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
-|60|Leave city empty | Enter "test title 1" for title, 'content' for content, select 'Afghanistan' for country | click on 'submit' | A message says "Please fill out this field" for the city | A message says "Please fill out this field" for the city | pass|2023/4/30|
-|61|Select nothing for country | Enter "test title 1" for title, 'content' for content, 'test city' for city | click on 'save' | A message says "Please select an item in the list" for the country" | A message says "Please fill out this list" for the country" | pass|2023/4/30|
-|62|Select nothing for country | Enter 'test title 1' for title, 'content' for content, 'test city' for city | click on 'submit' | A message says "Please select an item in the list" for the country | A message says "Please fill out this list" for the country | pass|2023/4/30|
-|63|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'save' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
-|64|enter spaces | enter spaces in 'title,' 'content' and 'city'| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please select an item in the list" for the country | fail |2023/4/30|
-|65|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country| click on 'save' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
-|66|enter spaces | enter spaces in 'title,' 'content,' 'city' and select 'Afghanistan' for country (Go on to test no. without any actions.)| click on 'submit' | A message says "Please fill out this field" for the title | A message says "This field is required." appears for title, content and city | fail |2023/4/30|
 
 **Testing transformation of images during upload** ("Write Stories" and "Update Stories")
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
