@@ -43,7 +43,7 @@
           <li><a class="list_item" href="{% url 'home' %}">Home</a></li>
           <li><a class="list-item" href="{% url 'search' %}">Search Stories</a></li>
           {% if user.is_authenticated %}
-          <li><a class="list-item" href="{% url 'add_story' %}">Write stories</a></li>
+          <li><a class="list-item" href="{% url 'add_story' %}">Write Stories</a></li>
           <li><a class="list-item" href="{% url 'mypage' user.pk %}">My Page</a></li>
           <li><a class="list-item" href="{% url 'account_logout' %}">Log Out</a></li>
           {% else %}

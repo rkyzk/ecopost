@@ -405,44 +405,36 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 #### Search Stories
 
 
-**Testing transformation of images during upload** ("Write Stories" and "Update Stories")
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|67|code in line 32-41 in models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click on ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|2023/5/4|
+#### Image Transformation
+("Write Stories" and "Update Stories")
 
-[info of the original photo used: ](media/test_transformation_original_photo_info.jpg)
-[info after the image was uploaded and saved on Cloudinary: ](media/test_transformation_results.png)
+Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|image transformation (code in line 40-45 in blog.models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|[image1 ](.media/manual-tests/img_transform/1.png)[image2 ](.media/manual-tests/img_transform/1-2.png)|2023/08/16|
 
-**Testing "Update Stories"**
-As preparation for tests no 68-88: 
+#### Update Stories
+As preparation,<br>
 1. Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
 2. click "Save"
 3. go to "My page" and click on the link "Read the full story" of the blog "test title 2"
-4. click on "Update" 
+4. click "Update" 
 
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|68|Make all fields empty| delete prepopulated title, content, city and unselect the country | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |2023/4/30|
-|69|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|70|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
-|71|Make title field empty | delete the title but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|72|Make title field empty | delete the title but keep the other fields populated| click on 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|2023/4/30|
-|73|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the title | fail|2023/5/2|
-|74|Make content field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|75|Make content field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|2023/4/30|
-|76|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for the content | fail|2023/5/2|
-|77|Make city field empty | delete the content but keep the other fields populated | click on 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|2023/4/30|
-|78|Make city field empty | delete the content but keep the other fields populated | click on 'submit' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city| pass|2023/4/30|
-|79|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | A message says "Please fill out this field" for city |fail|2023/5/2|
-|80|Unselect country | unselect the country  | click on 'save' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
-|81|Unselect country | unselect the country | click on 'submit' | A message says "Please fill out this field" for the country | "Please select an item in the list" for the country | pass|2023/4/30|
-|82|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country. Unselect country. | fail|2023/5/2|
-|83|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'save' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|84|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect country| click on 'submit' | A message says "Please fill out this field" for the title | "Please select an item in the list" for the country | fail |2023/4/30|
-|85|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | "Please select an item in the list" for the country | fail|2023/5/2|
-|86|enter spaces (leave country selected) | enter spaces in 'title,' 'content,' 'city'| click on 'save' | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/4/30|
-|87|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'submit' (Go on to test no. without any other actions.) | A message says "Please fill out this field" for the title | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/5/2| 
-|88|enter spaces | enter spaces in 'title,' 'content,' 'city' | click on 'cancel' | Redirected to "Detail Page" | An error message "This field is required" for the country" appears for title, content and city. | fail |2023/5/2| 
+|1|Make all fields empty| delete prepopulated title, content, city and unselect the country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/update_stories/1.png)|2023/08/16|
+|2|Make all fields empty| delete prepopulated title, content, city and unselect the country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/update_stories/2.png)|2023/08/16|
+|3|Make title field empty | delete the title but keep the other fields populated | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|[image](./media/manual-tests/update_stories/3.png)|2023/08/16|
+|4|Make title field empty | delete the title but keep the other fields populated| click 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|[image](./media/manual-tests/update_stories/4.png)|2023/08/16|
+|5|Make content field empty | delete the content but keep the other fields populated | click 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|[image](./media/manual-tests/update_stories/5.png)|2023/08/16|
+|6|Make content field empty | delete the content but keep the other fields populated | click 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|[image](./media/manual-tests/update_stories/6.png)|2023/08/16|
+|7|Make city field empty | delete the city but keep the other fields populated | click 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|[image](./media/manual-tests/update_stories/7.png)|2023/08/16|
+|8|Make city field empty | delete the city but keep the other fields populated | click 'submit' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city| pass|[image](./media/manual-tests/update_stories/8.png)|2023/08/16|
+|9|Unselect country | unselect the country  | click 'save' | A message tells the country must be selected. | "Please select an item in the list" for the country | pass|[image](./media/manual-tests/update_stories/9.png)|2023/08/16|
+|10|Unselect country | unselect the country | click 'submit' | A message telss the country must be selected.| "Please select an item in the list" for the country | pass|[image](./media/manual-tests/update_stories/10.png)|2023/08/16|
+|11|enter spaces | enter spaces in the title, content and city fields.  | click 'save' | A message tells the fields must be filled. | Message "This field is required" is displayed for the title, content and city| pass|[image1 ](./media/manual-tests/update_stories/11.png)[image2](./media/manual-tests/update_stories/11-2.png)|2023/08/16|
+|12|enter spaces | enter spaces in the title, content and city fields.  | click 'submit' | A message tells the fields must be filled. | Message "This field is required" is displayed for the title, content and city| pass|[image1 ](./media/manual-tests/update_stories/12.png)[image2](./media/manual-tests/update_stories/12-2.png)|2023/08/16|
+|13|cancel functionality | change the title and content to 'test title 2 updated' & 'content updated'. Change the country to Aland Islands| click 'cancel' | Redirected to "detail page." And the fields remain unchanged. | Redirected to "detail page." And the fields remain unchanged. | pass|[image1 ](./media/manual-tests/update_stories/13.png)[image2](./media/manual-tests/update_stories/13-2.png)|2023/08/16|
+
 
 **Testing "My Page"**
 As preparation for tests no. 89-103, 
