@@ -11,6 +11,8 @@
 * [Deployment Process](#deployment-process)
 * [Automated Testing](#automated-testing)
 * [Manual Testing](#manual-testing)
+* [Bugs](#bugs)
+* [Aspects to be improved in the future](#aspects-to-be-improved-in-the-future)
 - - -
 
 ![ecopost-home](media/readme/home.png)
@@ -435,48 +437,68 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 |12|enter spaces | enter spaces in the title, content and city fields.  | click 'submit' | A message tells the fields must be filled. | Message "This field is required" is displayed for the title, content and city| pass|[image1 ](./media/manual-tests/update_stories/12.png)[image2](./media/manual-tests/update_stories/12-2.png)|2023/08/16|
 |13|cancel functionality | change the title and content to 'test title 2 updated' & 'content updated'. Change the country to Aland Islands| click 'cancel' | Redirected to "detail page." And the fields remain unchanged. | Redirected to "detail page." And the fields remain unchanged. | pass|[image1 ](./media/manual-tests/update_stories/13.png)[image2](./media/manual-tests/update_stories/13-2.png)|2023/08/16|
 
-
-**Testing "My Page"**
-As preparation for tests no. 89-103, 
-1. sign up as a new user testuser3
+#### Testing My Page
+To prepare<br>
+1. sign up with username testuser3
 2. go to "Write Stories" page, and make 4 new posts with the titles: blog 11, blog 12, blog 13, blog 14.
 3. go to admin panel and publish the 4 posts one by one in the ascending order.
 4. go to detail page of the 4 posts and bookmark them.
-5. enter "test comment" as comment in all 4 posts and click on "submit"
+5. enter "test comment" as comment in all 4 posts and click "submit"
 
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||**"Written by me" section**|||||||
-|89|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
-|90|The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
-||**"Commented by me" section**|||||||
-|91|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
-|92|The layout|--| Click on "Show more" | blog 11 appears. | blog 11 appears.|pass|2023/5/23|
-||**"Bookmarked by me" section**|||||||
-|93|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|2023/5/23|
-|94|The layout in "Bookmarked by me"|--| Click on "Show more" | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appear in the order, and the "Show more" button is shown. | In "Bookmarked by me"  section, blog 14, blog 13, blog 12 appear in the order, and the "Show more" button is shown.|pass|2023/5/23|
-|||||||||
-||**Show more/less buttons in "Written by me" section**|||||||
-|95|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
-|96|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
-|97|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
-||**Show more/less buttons in "Commented by me" section**|||||||
-|98|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
-|99|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
-|100|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
-||**Show more/less buttons in "Bookmarked by me" section**|||||||
-|101|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|2023/4/30|
-|102|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|2023/4/30|
-|103|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-114) says "Show more" |pass|2023/4/30|
+**"Written by me" section**<br>
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/1.png)|2023/08/17|
+|2|The layout|--| Click "Show more" | blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/2.png)|2023/08/17|
 
-**Testing if clicking on show more & show less buttons in different sections doesn't disrupt the functions**<br>
+**"Commented by me" section**<br>
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|3|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/3.png)|2023/08/17|
+|4|The layout|--| Click "Show more" | blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/4.png)|2023/08/17|
+
+**"Bookmarked by me" section**<br>
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|5|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/5.png)|2023/08/17|
+|6|The layout in "Bookmarked by me"|--| Click "Show more" |blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/6.png)|2023/08/17|
+
+**Show more/less buttons in "Written by me" section**<br>
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|7|"Show more" button| -- |Click "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/7.png)|2023/08/17|
+|8|"Show less" button (upper) | -- |Click "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/8.png)|2023/08/17|
+|9|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/9.png)|2023/08/17|
+
+**Show more/less buttons in "Commented by me" section**<br>
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|10|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/10.png)|2023/08/17|
+|11|"Show less" button (upper) | -- |Click "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/11.png)|2023/08/17|
+|12|"Show less" button (lower) | Click on "Show more" |Click "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/12.png)|2023/08/17|
+
+**Show more/less buttons in "Bookmarked by me" section**<br>
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|13|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/13.png)|2023/08/17|
+|14|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/14.png)|2023/08/17|
+|15|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/15.png)|2023/08/17|
+
+**Test if clicking "Show more" and "Show less" buttons in different sections will function normally**<br>
 Preparation:
-1. click on "Show more" in "Written by me"
-2. click on "Show more" in "Commented by me"
+1. click "Show more" in "Written by me"
+2. click "Show more" in "Commented by me"
 
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|104|Show more/less buttons across different sections | -- |Click on "Show less" in "Commented by me" (One below the fourth post)| "blog 11" in "Commented by me" will disappear. The upper button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The upper button in "Commented by me" section says "Show more" | pass|2023/4/30|
+|16|Show more/less buttons in different sections | -- |Click "Show less" in "Commented by me"| "blog 11" in "Commented by me" will disappear. The button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The button in "Commented by me" section says "Show more" | pass|[image](./media/manual-tests/16.png)|2023/08/17|
+
+
+
+
+
+
+
 
 **Become a Member, Log in, Log out pages**
 Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
