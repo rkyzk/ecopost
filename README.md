@@ -4,7 +4,7 @@
 
 * [Overview](#overview)
 * [User Stories](#user-stories)
-* [Features in Nutshell](#features-in-nutshell)
+* [Features in a Nutshell](#features-in-a-nutshell)
 * [Wireframes](#wireframes)
 * [Notes on the Design](#notes-on-the-design)
 * [Each Part and Function in Detail](#each-part-and-function-in-detail)
@@ -29,7 +29,7 @@ This application offers a platform where individuals around the world can share 
 
 User stories can be found [here.](https://github.com/users/rkyzk/projects/8)
 
-## Features in Nutshell:
+## Features in a Nutshell:
 Users can see lists of excerpts from
 -	featured stories
 -	posts published in the previous 7 days
