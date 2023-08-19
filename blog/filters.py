@@ -4,6 +4,7 @@ from django_countries.fields import CountryField
 from django.forms.widgets import Input
 from django.db.models.functions import Trim
 from django.db.models import Q
+from datetime import datetime
 
 
 class PostFilter(django_filters.FilterSet):
@@ -48,4 +49,5 @@ class PostFilter(django_filters.FilterSet):
         return queryset.filter(Q(published_on__gte=value))
 
     def filter_end_date(self, queryset, name, value):
-        return queryset.filter(Q(published_on__lte=value))
+        end_date = datetime.combine(value, datetime.max.time())
+        return queryset.filter(Q(published_on__lte=end_date))
