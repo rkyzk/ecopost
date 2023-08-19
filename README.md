@@ -369,14 +369,14 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 
 #### More Stories
 Conduct test. no   consecutively.
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image | Date |
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- |
 |1|pagination|--|Go to "More Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
 |2|link 'NEXT' if paginated|--|Click ‘NEXT’|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
 |3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](.media/manual-tests/more_stories/3.png)|2023/8/16|
 
 #### Popular Stories
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |1|content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
 |2|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
@@ -385,7 +385,7 @@ Test No.| Test condition | Preparation Steps if any | Test Steps | Expected resu
 #### Write Stories
 *Log in as testuser*
 
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
 |1|Leave all fields empty| -- | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/write_stories/1.png)|2023/8/16|
 |2|Leave all fields empty| -- | click 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/write_stories/2.png)|2023/8/16|
@@ -421,7 +421,7 @@ As preparation,<br>
 3. go to "My page" and click on the link "Read the full story" of the blog "test title 2"
 4. click "Update" 
 
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |1|Make all fields empty| delete prepopulated title, content, city and unselect the country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/update_stories/1.png)|2023/08/16|
 |2|Make all fields empty| delete prepopulated title, content, city and unselect the country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/update_stories/2.png)|2023/08/16|
@@ -493,6 +493,35 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |16|Show more/less buttons in different sections | -- |Click "Show less" in "Commented by me"| "blog 11" in "Commented by me" will disappear. The button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The button in "Commented by me" section says "Show more" | pass|[image](./media/manual-tests/16.png)|2023/08/17|
 
+#### Become a Member
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|link “sign in” | Go to “Become a Member” page | Click the link where it says "Already have an account.... 'sign in'" | Redirected to the sign in page| Redirected to the sign in page |pass|[image](./media/manual-tests/become_a_member/1.png)|2023/8/19|
+|2|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|[image](./media/manual-tests/become_a_member/2.png)|2023/8/19|
+|3|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|[image](./media/manual-tests/become_a_member/3.png)|2023/8/19|
+|4|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|[image](./media/manual-tests/become_a_member/4.png)|2023/8/19|
+|5|Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully signed in as testuser1” | Redirected to “Home” page and the message says “Successfully signed in as testuser1” |pass|[image](./media/manual-tests/become_a_member/5.png)|2023/8/19|
+|6|Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the two password fields; |click on “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2[image](./media/manual-tests/become_a_member/5.png)|2023/8/19|
+|7|Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|[image](./media/manual-tests/become_a_member/7.png)|2023/8/19|
+|8|Use already registered email| Enter “testuser2” for the username; "test@ecopost.com” for the email; “swUf8LcR” for the two password fields |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|[image](./media/manual-tests/become_a_member/8.png)|2023/8/19|
+|9|Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the two password fields |click “Sign up” button |A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|[image](./media/manual-tests/become_a_member/9.png)|2023/8/19|
+|10|enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|[image](./media/manual-tests/become_a_member/10.png)|2023/8/19|
+|11|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|[image](./media/manual-tests/become_a_member/11.png)|2023/8/19|
+
+#### Sign in
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|Enter all appropriate data| Enter “testuser”; “gR48NmYr1” for both password fields| click “Sign in”|Redirected to “Home” page, and a message says “Successfully signed in as testuser” | Redirected to “Home” page, and a message says “Successfully signed in as testuser”| pass|[image](./media/manual-tests/signin/1.png)|2023/8/19|
+|2|Leave username empty| Enter “gR48NmYr1” for password| click “Sign in”|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|[image](./media/manual-tests/signin/2.png)|2023/8/19|
+|3|Leave password empty| Enter “testuser” for username| click “Sign in”|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|[image](./media/manual-tests/signin/3.png)|2023/8/19|
+|4|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in”|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|[image](./media/manual-tests/signin/4.png)|2023/8/19|
+|5|Enter wrong username| Enter “nouser” for username; "gR48NmYr1" for password | click “Sign in”|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|[image](./media/manual-tests/signin/5.png)|2023/8/19|
+|122|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Sign out and go back to the sign in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|[image](./media/manual-tests/signin/6.png)|2023/8/19|
+
+#### Sign out
+Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
+|1|“Sign out” button|Sign in as "testuser." Click "Sign out" in the navigation bar. |Click "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|[image](./media/manual-tests/signout/1.png)|2023/8/19|
 
 
 
@@ -500,32 +529,7 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 
 
 
-**Become a Member, Log in, Log out pages**
-Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-||**"Become a Member" page**|||||||
-|105|link “sign in” | Go to “Become a Member” page | Click on the link | Redirected to the log in page| Redirected to the log in page |pass|2023/4/30|
-|106|leave all fields empty| --|click “Sign up” button|A validation error message says “Please fill out this field for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
-|107|Leave the second password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the first password field |click “Sign up” button|A validation error message says “Please fill out this field” for the second password field| A validation error message says “Please fill out this field” for the second password field |pass|2023/4/30|
-|108|Leave the first password empty|Enter “testuser1” for the username; “abc@test.com” for the email; “swUf8LcR” for the second password field |click “Sign up” button|A validation error message says “Please fill out this field” for the first password field.| A validation error message says “Please fill out this field” for the first password field. |pass|2023/4/30|
-|109|Leave email empty|Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|Redirected to “Home” page and the message says “Successfully signed in as testuser1” | Redirected to “Home” page and the message says “Successfully signed in as testuser1” |pass|2023/4/30|
-|110|Leave username empty|Enter “def@test.com” for the email; “swUf8LcR” for the two password fields; |click on “Sign up” button|A validation error message says “Please fill out this field” for the username field| A validation error message says “Please fill out this field” for the username field |pass|2023/4/30|
-|111|Use already registered username| Enter “testuser1” for the username; “swUf8LcR” for the first password field; “swUf8LcR” for the second password field |click “Sign up” button|A validation message says “A user with that username already exists”| A validation message says “A user with that username already exists”| pass|2023/4/30|
-|112|Use already registered email| Enter “testuser2” for the username; "test@ecopost.com” for the email; “swUf8LcR” for the two password fields |click “Sign up” button|A validation message says “A user is already registered with this email address.”| A validation message says “A user is already registered with this email address.”| pass|2023/4/30|
-|113|Use common password| Enter “testuser2” for the username; “def@test.com” for the email; “password” for the two password fields |click “Sign up” button |A validation message says “This password is too common.”| A validation message says “This password is too common.”| pass|2023/4/30|
-|114|enter two different passwords| Enter “testuser2” for the username; “def@test.com” for the email; “rDw74kRmW” for the first password field; “Adr49PwTeB” for the second password field |click “Sign up” button|A validation message says “You must type the same password each time.”| A validation message says A validation message says “You must type the same password each time.”| pass|2023/4/30|
-|115|Enter all appropriate data| Enter “testuser2”; “def@test.com” for email; “swUf8LcR” for both password fields| click on“Sign up” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser2” | Redirected to “Home” page, and a message says “Successfully signed in as testuser2”| pass|2023/4/30|
-||**"Sign up" page**|||||||
-|116|link “sign up”|Go to “Log in” page|Click on the link|Redirected to the sign up page| Redirected to the sign page |pass|2023/4/30|
-||**"Log in" page**|||||||
-|117|Enter all appropriate data| Enter “testuser”; “test@ecopost.com” for email; “gR48NmYr1” for both password fields| click on“Sign in” button|Redirected to “Home” page, and a message says “Successfully signed in as testuser” | Redirected to “Home” page, and a message says “Successfully signed in as testuser”| pass|2023/4/30|
-|118|Leave username empty| Enter “gR48NmYr1” for password| click “Sign in” button|A message says "Please fill out this field" for username | A message says "Please fill out this field" for username| pass|2023/4/30|
-|119|Leave password empty| Enter “testuser” for username| click “Sign in” button|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|2023/4/30|
-|120|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-|121|Enter wrong username| Enter “testuser2” for username; "gR48NmYr1" for password | click “Sign in” button|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|2023/4/30|
-|122|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Log out and go back to the log in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|2023/4/30|
-||**"Sign out" page**|||||||
-|123|“Sign out” button|Log in as "testuser." Click on "Log out" in the navigation bar. |Click on "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|2023/4/30|
+
 
 ### Test summary
 
@@ -543,7 +547,7 @@ These present no problems.  Only, the results were not as expected.  When spaces
 - Tests no. 73, 76, 79, 82, 85, 88 on "Update Post" page
 These tests failed, because the Django form error messages appeared before redirection to "Post Detail."  If 'Cancel' button is clicked, the user should be promptly redirected to "Detail Page."  Earlier, I wrote program to redirect to "Detail Page" after the form is submitted.  I rewrote the code --I used an anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") so no dialog box appears.  I repeated the tests as follows: 
  
- Test No.| Test condition | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
+ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |124|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
 |125|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
