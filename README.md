@@ -1,4 +1,4 @@
-# Ecopost
+# eco post
 
 ## CONTENTS
 
@@ -13,10 +13,14 @@
 * [Manual Testing](#manual-testing)
 * [Bugs](#bugs)
 * [Aspects to be improved in the future](#aspects-to-be-improved-in-the-future)
+* [Validating python, CSS, Html code with Tools](#validating-python-css-html-code-with-tools)
+* [Checking Performance and Accessibility](#checking-performance-and-accessibility)
+* [Media](#media)
+* [Credits](#credits)
 - - -
 
-![ecopost-home](media/readme/home.png)
-![ecopost-mobile](media/readme/mobile.png)
+![ecopost-home](./media/readme/home.png)
+![ecopost-mobile](./media/readme/mobile.png)
 
 ## Overview
 This application offers a platform where individuals around the world can share their stories on what they are doing to protect the environment. Many people feel helpless, thinking that individuals cannot do so much. Here, visitors can read posts written by others, leave comments and write their own stories. Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope.
@@ -405,7 +409,37 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 - Tests no. 11-14 failed.  Even though these results turned out to be different from the expectation, a validation message tells users to fill out the field, so the features do not need to be corrected.
 
 #### Search Stories
+As preparatory steps, go to admin and change the poems as follows:
+Delete all other posts.
 
+title| author  | content | city | country | category | published date|
+|:---| :--- | :--- |:---| :--- | :--- |
+|blog 1| testuser | protecting animals odd numbers | Dublin | Ireland | protecting animals |2023/8/1|
+|blog 2| testuser | protecting aquatic system content  | Dublin | Ireland | protecting aquatic system |2023/8/1|
+|blog 3| testuser |protecting soil & trees odd numbers  | Dublin | Ireland | protecting soil & trees content |2023/8/6|
+|blog 4| testuser |saving resources content| Freiburg | Germany | saving resources |2023/8/6|
+|blog 5| admin |saving resources odd numbers | Freiburg | Germany |saving resources |2023/8/18|
+|blog 6| admin |saving resources content | Freiburg | Germany | saving resources |2023/8/18|
+
+Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image | Date |
+|:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- |
+|1|items displayed initially |—|check if all 6 blogs are displayed.|6 blogs are displayed.|6 blogs are displayed.|Pass|[image](./media/manual-tests/search_stories/1.png)|2023/8/19|
+|2|search by title|—|enter ‘6’ for title and click ‘search’|’blog 6’ will be displayed.|’blog 6’ is displayed.|Pass|[image](./media/manual-tests/search_stories/2.png)|2023/8/19|
+|3|search by author|—|enter ‘admin’ for author and click ‘search’|’blog 6’ will be displayed.|’blog 6’ is displayed.|Pass|[image](./media/manual-tests/search_stories/3.png)|2023/8/19|
+|4|search by keyword|—|enter ‘odd numbers’ for keyword and click ‘search’|blog 1, 3, 5 will be displayed.|blog 1, 3, 5 are displayed.|Pass|[image](./media/manual-tests/search_stories/4.png)|2023/8/19|
+|5|search by likes count|—|enter ‘1’ for ‘liked more than’ field and click ‘search’|blog 4, 5, 6 will be displayed.|blog 4, 5, 6 are displayed.|Pass|[image](./media/manual-tests/search_stories/5.png)|2023/8/19|
+|6|search by published date (start date)|—|enter ‘2023/08/01’ for  the published date (start date) and click ‘search’|All 6 blogs will appear.|All 6 blogs appear.|Pass|[image](./media/manual-tests/search_stories/6.png)|2023/8/19|
+|7|search by published date (start date)|—|enter ‘2023/08/02’ for  the published date (start date) and click ‘search’|blog 3-6 will appear.|blog 3-6 appear.|Pass|[image](./media/manual-tests/search_stories/7.png)|2023/8/19|
+|8|search by published date (end date)|—|enter ‘2023/08/18’ for  the published date (end date) and click ‘search’|All 6 blogs will appear.|All 6 blogs are displayed.|Pass|[image](./media/manual-tests/search_stories/8.png)|2023/8/19|
+|9|search by published date (end date)|—|enter ‘2023/08/17’ for  the published date (end date) and click ‘search’|blog 1-4 will be displayed.|blog 1-4 are displayed.|Pass|[image](./media/manual-tests/search_stories/9.png)|2023/8/19|
+|10|search by city|—|enter ‘Dublin’ for  the city and click ‘search’|blog 1-3 will be displayed.|blog 1-3 are displayed.|Pass|[image](./media/manual-tests/search_stories/10.png)|2023/8/19|
+|11|search by country|—|enter ‘Germany’ for  the country and click ‘search’|blog 4-6 will be displayed.|blog 4-6 are displayed.|Pass|[image](./media/manual-tests/search_stories/11.png)|2023/8/19|
+|12|search by category|—|enter ‘protecting animals’ for  the category and click ‘search’|blog 1 will be displayed.|blog 1 is displayed.|Pass|[image](./media/manual-tests/search_stories/12.png)|2023/8/19|
+|**| Test search by multiple factors | ||  |  ||  |  |
+|13|search by author & keyword|—|enter ‘admin’ for  the author, enter ‘odd numbers’ for the keyword and click ‘search’|blog 5 will be displayed.|blog 5 is displayed.|Pass|[image](./media/manual-tests/search_stories/13.png)|2023/8/19|
+|14|search by likes count & published start date|—|enter ‘1’ for  ‘liked more than’ field, enter ‘2023/08/10’ for the published start date and click ‘search’|blog 5 & 6 will be displayed.|blog 5 & 6 are displayed.|Pass|[image](./media/manual-tests/search_stories/14.png)|2023/8/19|
+|15|search by author & keyword & category|—|enter ‘testuser’ for  the author, ‘odd numbers’ for keyword, enter ‘saving resources’ for the category and click ‘search’|A note ’no results’ will be displayed.|Note ‘no results’ is displayed.|Pass|[image](./media/manual-tests/search_stories/15.png)|2023/8/19|
+|16|enter spaces and search|—|enter spaces for title, author, keyword and city and click ‘search’|All blogs are displayed.|All blogs are displayed.|Pass|[image](./media/manual-tests/search_stories/16.png)|2023/8/19|
 
 #### Image Transformation
 ("Write Stories" and "Update Stories")
@@ -437,7 +471,7 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |12|enter spaces | enter spaces in the title, content and city fields.  | click 'submit' | A message tells the fields must be filled. | Message "This field is required" is displayed for the title, content and city| pass|[image1 ](./media/manual-tests/update_stories/12.png)[image2](./media/manual-tests/update_stories/12-2.png)|2023/08/16|
 |13|cancel functionality | change the title and content to 'test title 2 updated' & 'content updated'. Change the country to Aland Islands| click 'cancel' | Redirected to "detail page." And the fields remain unchanged. | Redirected to "detail page." And the fields remain unchanged. | pass|[image1 ](./media/manual-tests/update_stories/13.png)[image2](./media/manual-tests/update_stories/13-2.png)|2023/08/16|
 
-#### Testing My Page
+#### My Page
 To prepare<br>
 1. sign up with username testuser3
 2. go to "Write Stories" page, and make 4 new posts with the titles: blog 11, blog 12, blog 13, blog 14.
@@ -523,39 +557,10 @@ Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected resul
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
 |1|“Sign out” button|Sign in as "testuser." Click "Sign out" in the navigation bar. |Click "Sign out"|Redirected to "Home" page, and the flash message says, "You have signed out." | Redirected to "Home" page, and the flash message says, "You have signed out." |pass|[image](./media/manual-tests/signout/1.png)|2023/8/19|
 
-
-
-
-
-
-
-
-
 ### Test summary
 
-- "Remember me" function in the test no. 122.
-For log-in systems in general, clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to sign in the next time.  But in this app, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May, 2023, I will leave it as it is.  It needs to be fixed in the future.
 
-- Test no. 63, 64 on "Write Stories" and no. 83, 84 on "Update Stories"<br>
-When spaces are entered for the title, content and city, and the country is unselected, clicking 'Save' or 'Submit' will display the validation error message for the country before the form is submitted.
-Usually, a validation message appears for the first field that is left empty (in this case the title).  It seems that spaces are not recognized as invalid data.  I couldn't figure out how to customize the validation that happens before the form is submitted. 
-So I left this mechanism unchanged.  It will not cause a serious issue, since there's another validation that happens after the form is submitted (Django form validation) and that will catch fields that are filled with spaces and will display error message 'This field is required.'
 
-- Test no. 65, 66 on "Write Stories" and no. 86, 87 on "Update Stories"
-These present no problems.  Only, the results were not as expected.  When spaces are entered for the title, content and city, and the country is selected, what I expected "Please fill in this field." didn't appear. After the form is submitted, Django form validation will state "This field is required" for all three fields, so the validation is functioning fine in these cases.
-
-- Tests no. 73, 76, 79, 82, 85, 88 on "Update Post" page
-These tests failed, because the Django form error messages appeared before redirection to "Post Detail."  If 'Cancel' button is clicked, the user should be promptly redirected to "Detail Page."  Earlier, I wrote program to redirect to "Detail Page" after the form is submitted.  I rewrote the code --I used an anchor tag and href attribute to redirect to "Detail Page" (line 16 in "update_post.html") so no dialog box appears.  I repeated the tests as follows: 
- 
- Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
-|:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|124|Make all fields empty| delete prepopulated title and content, city and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|125|Make title field empty | delete the title but keep the other fields populated| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|126|Make content field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|127|Make city field empty | delete the content but keep the other fields populated | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
-|128|Unselect country | unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|129|enter spaces. Unselect country. | Enter spaces in 'title,' 'content,' 'city' and unselect the country | click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" | pass|2023/5/2|
-|130|enter spaces | enter spaces in 'title,' 'content,' 'city'| click on 'cancel' | Redirected to "detail page" | Redirected to "detail page" |pass|2023/5/2|
 
 - - -
 ## Bugs
@@ -572,7 +577,7 @@ These tests failed, because the Django form error messages appeared before redir
 - I will make Contact page where users can write and submit messages to admin.
 - I also want to simplify the process of updating comments.  Instead of displaying a whole new page of 'Update Comments,' I want to display a small input box on "Detail Page" where the original comment is displayed.
 
-## Validating python, CSS, Html code with Tools.
+## Validating python, CSS, Html code with Tools
 
 - I checked the code in all python modules at CI Python Linter and came out with no errors.
 - I validated style.css at jigsaw (https://jigsaw.w3.org/)<br>
@@ -588,7 +593,7 @@ span tags in ul tag in more_stories.html ln 45-55 --> I used div instead of ul
 
 After correction the html validation shows no errors.
 
-## Checking Performance and Accessibility using Google Chrome Developers' Tools
+## Checking Performance and Accessibility
 
 I checked the performance and accessibility of all pages using Lighthouse.
 All aspects turned out to be above 90%, except 82% mark for accessibility of "Detail Page."
