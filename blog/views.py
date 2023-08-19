@@ -22,7 +22,7 @@ class PostList(generic.ListView):
     """Gets queryset of featured posts and displays them on the home page."""
     model = Post
     queryset = Post.objects.filter(featured_flag=True).order_by(
-        "-created_on")[:3]
+            "-created_on")[:3]
     template_name = "index.html"
 
 
@@ -66,7 +66,7 @@ class PostDetail(View):
         :return: render()
         :rtype: method
         """
-        post = get_object_or_404(Post, slug=slug)
+        post = get_object_or_404(Post, slug=slug)      
         comments = post.comments.order_by('created_on')
         # If the user has liked the post, set 'liked' True
         liked = False
