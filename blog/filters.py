@@ -13,11 +13,11 @@ class PostFilter(django_filters.FilterSet):
     author__username = django_filters.CharFilter(lookup_expr='icontains',
                                                  label='author')
     published_after = django_filters.DateFilter(method='filter_start_date',
-                                                label='published_after',
+                                                label='from',
                                                 widget=Input(
                                                     attrs={'type': 'date'}))
     published_before = django_filters.DateFilter(method='filter_end_date',
-                                                 label='published_before',
+                                                 label='until',
                                                  widget=Input(
                                                     attrs={'type': 'date'}))
     num_of_likes = django_filters.NumberFilter(method='filter_likes',
