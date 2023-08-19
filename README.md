@@ -119,7 +119,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 - If the post has been published, comments are displayed on the bottom left.
 - The comments are listed in the order of oldest to newest so that users can follow the conversation.
 - If users are logged in, they will see a comment form on the right side of the comments so they can leave comments.
-- For users who haven’t logged in, a note will say ‘Want to leave comments?  Log in or Become a member,’ which includes links to log-in and sign-up pages.
+- For users who haven’t logged in, a note will say ‘Want to leave comments?  Sign in or Become a member,’ which includes links to log-in and sign-up pages.
 
 **Additional Functions on Detail Page**
 - By clicking on the heart icon below the featured image, users can 'like' the post, or undo that action.
@@ -285,7 +285,7 @@ No. | Goals | How they are achieved |
 #### Testing Features
 As preparatory steps,
 1. create a user with username "testuser" and a password "gR48NmYr1" (leave the email blank)
-2. Log in as "testuser"
+2. Sign in as "testuser"
 3. make 10 posts with the following field values:
 title: blog 1, blog 2, blog 3, blog 4, blog 5, blog 6, blog 7, blog 8, blog 9, blog 10
 content: (for all of them): test content
@@ -327,7 +327,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 #### The flash messages
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image|Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|1| Message disappears after 5 seconds. | log out | log in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|[image](./media/manual-tests/flash_messages/1.png)|2023/8/15|
+|1| Message disappears after 5 seconds. | sign out | sign in as testuser | Redirected to the home page.  The message "Successfully signed in as testuser" will show up and disappear after 5 seconds. |Redirected to the home page.  The message "Successfully signed in as testuser" shows up and disappears after 5 seconds.| pass|[image](./media/manual-tests/flash_messages/1.png)|2023/8/15|
 
 #### Home
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail |Image| Date |
@@ -344,11 +344,11 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
 |1|link to "Become a Member"|Log out|Click the link on the right side of the comments section|Redirected to "Become a Member" page|Redirected to "Become a Member" page|pass|[image](./media/manual-tests/detail_page/1.png)|2023/8/15|
 |2|link to "Sign in"|--|Click the link|Redirected to "Sign in" page|Redirected to "Sign in" page|pass|[image](./media/manual-tests/detail_page/2.png)|2023/8/15|
-|3|validation message for comment form| Log in as testuser and go to "Detail Page" page of "blog 1"| leave the comment field blank, and click 'Submit' | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|[image](./media/manual-tests/detail_page/3.png)|2023/8/15|
+|3|validation message for comment form| Sign in as testuser and go to "Detail Page" page of "blog 1"| leave the comment field blank, and click 'Submit' | A message says "Please fill out this field"| A message says "Please fill out this field"| pass|[image](./media/manual-tests/detail_page/3.png)|2023/8/15|
 
 #### Update/Delete Comments
 As preparation,<br>
-- Log in as testuser and go to "Detail Page" of "blog 1."
+- Sign in as testuser and go to "Detail Page" of "blog 1."
 - Enter "test comment" in the text box and click 'Submit.'
 - Conduct test no. 1-2 consecutively.
 
@@ -416,7 +416,7 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 
 #### Update Stories
 As preparation,<br>
-1. Log in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
+1. Sign in as testuser, go to "Write Stories," enter "test title 2" for title, "content" for the content, "test city" for city, select 'Afghanistan' for country.
 2. click "Save"
 3. go to "My page" and click on the link "Read the full story" of the blog "test title 2"
 4. click "Update" 
@@ -534,7 +534,7 @@ Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected resul
 ### Test summary
 
 - "Remember me" function in the test no. 122.
-For log-in systems in general, clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to log in the next time.  But in this app, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May, 2023, I will leave it as it is.  It needs to be fixed in the future.
+For log-in systems in general, clicking on the check box "Remember me" prepopulates the password for the user when the same user tries to sign in the next time.  But in this app, the password doesn't get filled out automatically. It doesn't cause a serious problem for the function of the site, so as of May, 2023, I will leave it as it is.  It needs to be fixed in the future.
 
 - Test no. 63, 64 on "Write Stories" and no. 83, 84 on "Update Stories"<br>
 When spaces are entered for the title, content and city, and the country is unselected, clicking 'Save' or 'Submit' will display the validation error message for the country before the form is submitted.
@@ -652,7 +652,7 @@ Other sources for code snippets taken in this project:
 
 - For the code for search system, I took basic ideas from this [youtube video](https://www.youtube.com/watch?v=vU0VeFN-abU&t=26s)
 
-- The code to log in a testuser (line 16-20 in test_views.py) was taken from [this site](https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests)
+- The code to sign in a testuser (line 16-20 in test_views.py) was taken from [this site](https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests)
 
 
 
