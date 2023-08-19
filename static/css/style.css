@@ -131,7 +131,17 @@ footer {
   border-radius: 0.3rem;
   background-color: rgb(141, 111, 56);
   border: none;
+  outline: none;
   color: #fff;
+}
+
+.btn-submit:hover {
+  background-color: rgb(84, 62, 21);
+  opacity: 0.8;
+  outline: none;
+  border: none;
+  color: #fff;
+  text-decoration: underline;
 }
 
 .btn-right {
