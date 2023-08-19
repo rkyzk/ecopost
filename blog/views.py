@@ -73,7 +73,6 @@ class PostDetail(View):
         :return: render()
         :rtype: method
         """
-        return HttpResponse(status=500)
         post = get_object_or_404(Post, slug=slug)      
         comments = post.comments.order_by('created_on')
         # If the user has liked the post, set 'liked' True
