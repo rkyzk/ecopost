@@ -460,8 +460,8 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
 |1|Make all fields empty| delete prepopulated title, content, city and unselect the country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/update_stories/1.png)|2023/08/16|
 |2|Make all fields empty| delete prepopulated title, content, city and unselect the country | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/update_stories/2.png)|2023/08/16|
-|3|Make title field empty | delete the title but keep the other fields populated | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|[image](./media/manual-tests/update_stories/3.png)|2023/08/16|
-|4|Make title field empty | delete the title but keep the other fields populated| click 'submit' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass|[image](./media/manual-tests/update_stories/4.png)|2023/08/16|
+|3|Make title field empty | delete the title but keep the other fields populated | click 'save' | A message says "Please fill out this field" for the title | The title filed is activated, but no message is displayed.| fail|[image](./media/manual-tests/update_stories/3.png)|2023/08/16|
+|4|Make title field empty | delete the title but keep the other fields populated| click 'submit' | A message says "Please fill out this field" for the title | The title filed is activated, but no message is displayed. | fail|[image](./media/manual-tests/update_stories/4.png)|2023/08/16|
 |5|Make content field empty | delete the content but keep the other fields populated | click 'save' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|[image](./media/manual-tests/update_stories/5.png)|2023/08/16|
 |6|Make content field empty | delete the content but keep the other fields populated | click 'submit' | A message says "Please fill out this field" for the content | A message says "Please fill out this field" for the content | pass|[image](./media/manual-tests/update_stories/6.png)|2023/08/16|
 |7|Make city field empty | delete the city but keep the other fields populated | click 'save' | A message says "Please fill out this field" for city | A message says "Please fill out this field" for city | pass|[image](./media/manual-tests/update_stories/7.png)|2023/08/16|
@@ -471,6 +471,8 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |11|enter spaces | enter spaces in the title, content and city fields.  | click 'save' | A message tells the fields must be filled. | Message "This field is required" is displayed for the title, content and city| pass|[image1 ](./media/manual-tests/update_stories/11.png)[image2](./media/manual-tests/update_stories/11-2.png)|2023/08/16|
 |12|enter spaces | enter spaces in the title, content and city fields.  | click 'submit' | A message tells the fields must be filled. | Message "This field is required" is displayed for the title, content and city| pass|[image1 ](./media/manual-tests/update_stories/12.png)[image2](./media/manual-tests/update_stories/12-2.png)|2023/08/16|
 |13|cancel functionality | change the title and content to 'test title 2 updated' & 'content updated'. Change the country to Aland Islands| click 'cancel' | Redirected to "detail page." And the fields remain unchanged. | Redirected to "detail page." And the fields remain unchanged. | pass|[image1 ](./media/manual-tests/update_stories/13.png)[image2](./media/manual-tests/update_stories/13-2.png)|2023/08/16|
+
+*test no. 3 & 4 failed, and these issues will be discussed later in [Test summary](#test-summary) section.*
 
 #### My Page
 To prepare<br>
@@ -560,8 +562,11 @@ Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected resul
 
 ### Test summary
 
+Most tests passed.  The following failed test needs to be discussed.
 
+**Manual tests ‘Update Stories’ section test no. 3 & 4**
 
+When the title field is made empty and ‘Update’ is clicked, a validation message should state the title should be filled out, but no message shows up.  I need to overwrite the customized validation, but I didn’t find the way to do that as of August 19th, 2023.  The form doesn’t get submitted without a title, so this will not cause a serious issue.  I will keep working on the issue.
 
 - - -
 ## Bugs
@@ -656,10 +661,11 @@ Other sources for code snippets taken in this project:
 
 - The code for turning the navbar to a hamburger menu (lines 9-19 in script.js & lines 21-45 in base.html) was taken from [this site.](https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design)
 
-- For the code for search system, I took basic ideas from this [youtube video](https://www.youtube.com/watch?v=vU0VeFN-abU&t=26s)
+- For the code for search system, I took basic ideas from this [youtube video]
 
 - The code to sign in a testuser (line 16-20 in test_views.py) was taken from [this site](https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests)
 
+- The code to handle 500 error was taken from [this site](https://pythoncircle.com/post/40/designing-custom-404-and-500-error-pages-in-django/).
 
 
 
