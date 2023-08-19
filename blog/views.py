@@ -18,11 +18,8 @@ from .models import Post, Comment, CATEGORY
 min_num_likes = 1
 
 
-def handler500(request, *args, **argv):
-    response = render_to_response('500.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
+def handler500(request):
+    return render(request,'500.html', {})
 
 
 class PostList(generic.ListView):
@@ -73,6 +70,7 @@ class PostDetail(View):
         :return: render()
         :rtype: method
         """
+        return HttpResponse(status_code=500)
         post = get_object_or_404(Post, slug=slug)      
         comments = post.comments.order_by('created_on')
         # If the user has liked the post, set 'liked' True
