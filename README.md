@@ -553,7 +553,7 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |3|Leave password empty| Enter “testuser” for username| click “Sign in”|A message says "Please fill out this field" for password| A message says "Please fill out this field" for password| pass|[image](./media/manual-tests/signin/3.png)|2023/8/19|
 |4|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in”|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|[image](./media/manual-tests/signin/4.png)|2023/8/19|
 |5|Enter wrong username| Enter “nouser” for username; "gR48NmYr1" for password | click “Sign in”|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|[image](./media/manual-tests/signin/5.png)|2023/8/19|
-|122|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Sign out and go back to the sign in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|[image](./media/manual-tests/signin/6.png)|2023/8/19|
+|6|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Sign out and go back to the sign in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|[image](./media/manual-tests/signin/6.png)|2023/8/19|
 
 #### Sign out
 Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
@@ -562,11 +562,15 @@ Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected resul
 
 ### Test summary
 
-Most tests passed.  The following failed test needs to be discussed.
+Most tests passed.  The following failed tests need to be discussed.
 
 **Manual tests ‘Update Stories’ section test no. 3 & 4**
 
 When the title field is made empty and ‘Update’ is clicked, a validation message should state the title should be filled out, but no message shows up.  I need to overwrite the customized validation, but I didn’t find the way to do that as of August 19th, 2023.  The form doesn’t get submitted without a title, so this will not cause a serious issue.  I will keep working on the issue.
+
+**Manual tests 'Sign in' section test no. 6**
+
+The check box ‘Remember me’ doesn’t function as expected.  If the checkbox is clicked, the password should be automatically filled out the next time the user enters the username, but when the function was tested, the password remained unfilled.  This doesn't cause a serious problem in the app, but I will try to fix the issue in the future.
 
 - - -
 ## Bugs
