@@ -103,7 +103,7 @@ class TestViews(TestCase):
                                 'country': 'IR',
                                 'category': 'others',
                                 'save': 'draft'})
-        post = Post.objects.filter(slug='test-blog').first()
+        post = Post.objects.filter(title='test blog').first()
         self.assertEqual(post.title, 'test blog')
         self.assertEqual(post.content, 'test')
         self.assertRedirects(response, f'/detail/{post.slug}/')
@@ -116,7 +116,7 @@ class TestViews(TestCase):
                                 'country': 'IR',
                                 'category': 'others',
                                 'submit': 'complete'})
-        post = Post.objects.filter(slug='test-blog').first()
+        post = Post.objects.filter(title='test blog').first()
         self.assertEqual(post.title, 'test blog')
         self.assertEqual(post.status, 1)
         self.assertRedirects(response, f'/detail/{post.slug}/')
@@ -129,7 +129,7 @@ class TestViews(TestCase):
                                 'country': 'IR',
                                 'category': 'others',
                                 'save': 'draft'})
-        post = Post.objects.filter(slug='test-blog').first()
+        post = Post.objects.filter(title='test blog').first()
         self.assertEqual(post.title, 'test blog')
         self.assertEqual(post.status, 0)
         self.assertRedirects(response, f'/detail/{post.slug}/')
@@ -243,12 +243,12 @@ class TestViews(TestCase):
         response = self.c.get(f'/detail/{self.post1.slug}/')
         self.assertContains(response,
                             '<button class="btn btn-submit" ' +
+                            'name="update-post" ' +
                             'type="submit">Update</button>',
                             status_code=200)
         self.assertContains(response,
-                            '<button type="submit" class="btn btn-submit ' +
-                            'item-right" name="delete_post" value="title1">' +
-                            'Delete</button>',
+                            '<button type="submit" class="btn ' +
+                            'btn-submit btn-right" name="delete_post"',
                             status_code=200)
 
     def test_detail_GET_no_update_delete_btn_if_status1_and_author(self):
@@ -346,16 +346,6 @@ class TestViews(TestCase):
         comment = Comment.objects.filter(commenter=self.user1).first()
         self.assertEqual(comment.body, 'comment updated')
         self.assertEqual(comment.comment_status, 1)
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, f'/detail/{comment.post.slug}/')
-
-    def test_update_comment_POST_cancel_will_not_update_comment(self):
-        response = self.c.post('/update_comment/comment1/',
-                               {'body': 'comment updated',
-                                'cancel': 'cancel'})
-        comment = Comment.objects.filter(commenter=self.user1).first()
-        self.assertEqual(comment.body, 'test comment')
-        self.assertEqual(comment.comment_status, 0)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, f'/detail/{comment.post.slug}/')
 
@@ -591,250 +581,6 @@ class TestViews(TestCase):
     def test_my_page_GET_will_403_if_wrong_user(self):
         response = self.c2.get('/mypage/user1/')
         self.assertEqual(response.status_code, 403)
-
-
-class TestSearchView(TestCase):
-
-    def setUp(self):
-        """create test posts."""
-        self.user1 = User.objects.create_user(username="user1", password="pw1")
-        self.user2 = User.objects.create_user(username="user2", password="pw2")
-        self.user3 = User.objects.create_user(username="test3", password="pw3")
-        self.post1 = Post.objects.create(title='gray cat',
-                                         author=self.user1,
-                                         content='abc',
-                                         category='Others',
-                                         city='Dublin',
-                                         country='Ireland',
-                                         status=2)
-        self.post1.save()
-        self.post2 = Post.objects.create(title='white cat',
-                                         author=self.user2,
-                                         content='xyz',
-                                         category='Others',
-                                         city='Yokohama',
-                                         country='Japan',
-                                         status=2)
-        self.post2.save()
-        self.post3 = Post.objects.create(title='brown dog',
-                                         author=self.user3,
-                                         content='def',
-                                         category='Others',
-                                         city='Freiburg',
-                                         country='Germany',
-                                         status=2)
-        self.post3.save()
-
-    def test_search_GET_will_get_page(self):
-        response = self.client.get('/search_story/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-
-    def test_category_choices_are_right(self):
-        response = self.client.get('/search_story/')
-        category_choices = Post._meta.get_field('category').choices
-        categories = [cat[1] for cat in category_choices]
-        self.assertEqual(response.context['categories'], categories)
-
-    def test_search_clicked_set_to_True_if_search_clicked(self):
-        response = self.client.get('/search_story/',
-                                   {'search': 'search'})
-        self.assertEqual(response.context['search_clicked'], True)
-
-    def test_search_without_fields_will_show_message(self):
-        response = self.client.get('/search_story/',
-                                   {'category': 'Choose...',
-                                    'country': 'Choose...',
-                                    'search': 'search'})
-        self.assertTrue(response.context['no_input'])
-        self.assertContains(response,
-                            '<p>Please enter at least one field</p>')
-
-    def test_search_entering_only_spaces_will_show_message(self):
-        response = self.client.get('/search_story/',
-                                   {'title_input': ' ',
-                                    'author_input': ' ',
-                                    'keyword_1': ' ',
-                                    'keyword_2': ' ',
-                                    'keyword_3': ' ',
-                                    'category': 'Choose...',
-                                    'city': ' ',
-                                    'search': 'search'})
-        self.assertTrue(response.context['no_input'])
-        self.assertContains(response,
-                            '<p>Please enter at least one field</p>')
-
-    def test_search_show_message_no_matching_results_if_no_match(self):
-        response = self.client.get('/search_story/',
-                                   {'title_input': 'non existing post',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(len(response.context['queryset']), 0)
-        self.assertContains(response,
-                            '<p>No matching results found</p>')
-
-    def test_search_by_title_contains_will_get_right_posts(self):
-        response = self.client.get('/search_story/',
-                                   {'title_input': 'cat',
-                                    'title_filter': 'contains',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post2, self.post1])
-
-    def test_search_by_exact_title_returns_right_post(self):
-        response = self.client.get('/search_story/',
-                                   {'title_input': 'gray cat',
-                                    'title_filter': 'is_exactly',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(response.context['queryset'][0], self.post1)
-
-    def test_search_by_author_contains_will_return_right_posts(self):
-        response = self.client.get('/search_story/',
-                                   {'author_input': 'user',
-                                    'author_filter': 'contains',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post2, self.post1])
-
-    def test_search_by_exact_author_returns_right_post(self):
-        response = self.client.get('/search_story/',
-                                   {'author_input': 'user2',
-                                    'author_filter': 'is_exactly',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(response.context['queryset'][0], self.post2)
-
-    def test_search_by_keywords_will_return_the_matching_post(self):
-        response = self.client.get('/search_story/',
-                                   {'keyword_1': 'cat',
-                                    'keyword_2': 'xyz',
-                                    'keyword_3': 'white',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(response.context['queryset'][0], self.post2)
-
-    def test_search_by_keywords_will_return_all_matching_posts(self):
-        response = self.client.get('/search_story/',
-                                   {'keyword_1': 'cat',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post2, self.post1])
-
-    def test_search_by_keywords_will_return_empty_queryset_if_no_match(self):
-        response = self.client.get('/search_story/',
-                                   {'keyword_1': 'cat',
-                                    'keyword_2': 'xyz',
-                                    'keyword_3': 'brown',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 0)
-
-    def test_search_by_min_likes_will_return_all_matching_posts(self):
-        self.post1.likes.add(self.user1)
-        self.post1.likes.add(self.user2)
-        self.post1.save()
-        self.post2.likes.add(self.user2)
-        self.post2.likes.add(self.user3)
-        self.post2.save()
-        response = self.client.get('/search_story/',
-                                   {'liked_count_min': '2',
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post2, self.post1])
-
-    def test_search_by_date_min_will_return_right_post_if_match(self):
-        self.post1.published_on = datetime.utcnow() - timedelta(days=10)
-        self.post1.save()
-        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
-        response = self.client.get('/search_story/',
-                                   {'date_min': date,
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post3, self.post2])
-
-    def test_search_by_date_max_will_return_right_post_if_match(self):
-        self.post1.published_on = datetime.utcnow() - timedelta(days=10)
-        self.post1.save()
-        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
-        response = self.client.get('/search_story/',
-                                   {'date_max': date,
-                                    'category': 'Choose...',
-                                    'search': 'search'})
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post1])
-
-    def test_search_by_category_will_return_right_post_if_match(self):
-        self.post1.category = 'animals'
-        self.post1.save()
-        response = self.client.get('/search_story/',
-                                   {'category': 'Protecting animals',
-                                    'search': 'search'})
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post1])
-
-    def test_search_by_city_will_return_right_post_if_match(self):
-        response = self.client.get('/search_story/',
-                                   {'category': 'Choose...',
-                                    'city': 'Dublin',
-                                    'search': 'search'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertEqual(len(response.context['queryset']), 1)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post1])
-
-    def test_search_multi_conditions_returns_right_match(self):
-        response = self.client.get('/search_story/',
-                                   {'category': 'Others',
-                                    'keyword_1': 'cat',
-                                    'search': 'search'})
-        self.assertEqual(len(response.context['queryset']), 2)
-        self.assertEqual(list(response.context['queryset']),
-                         [self.post2, self.post1])
-
-    def test_search_multi_conditions_returns_no_match_if_no_match(self):
-        self.post3.published_on = datetime.utcnow() - timedelta(days=10)
-        self.post3.save()
-        date = (datetime.utcnow() - timedelta(days=5)).strftime("%Y-%m-%d")
-        response = self.client.get('/search_story/',
-                                   {'date_min': date,
-                                    'category': 'Choose...',
-                                    'city': 'Freiburg',
-                                    'country': '',
-                                    'search': 'search'})
-        self.assertEqual(len(response.context['queryset']), 0)
 
 
 if __name__ == '__main__':

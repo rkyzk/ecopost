@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.AddField(
             model_name='post',
             name='city',
             field=models.CharField(max_length=25, default='N/A'),
