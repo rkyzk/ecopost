@@ -71,8 +71,8 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 - The logo of the website is located on the left side of the navigation bar.
 - A clover is chosen for the logo because it’s a widely liked symbol and is associated with good luck and hope, giving a friendly and positive impression.   
 - On the right side, links to other pages are provided.
-- Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Log out.’
-- Other users will find links to ‘Home,’ ‘Search,’ ‘Become a Member,’ and ‘Log in.’
+- Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Sign out.’
+- Other users will find links to ‘Home,’ ‘Search,’ ‘Become a Member,’ and ‘Sign in.’
 - These terms clearly indicate what these linked pages will present.
 - Only the content of 'My Page' may not be clear for first-time visitors, but if they navigate to the page, they will see lists of posts that are grouped by labeled categories, so that should become clear. 
 
@@ -163,7 +163,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 - If no match was found, a note will say, 'No matching results found'
 
 ### Notes on Other Pages
-- “Become a Member” (sign up page), “log in” and “sign out” pages were taken from django.allauth.
+- “Become a Member” (sign up page), “sign in” and “sign out” pages were taken from django.allauth.
 - The pages were styled with my own css to match other pages.
 - Line 42 in login.html was modified in order to display a note:
   'Email admin@ecopost.com if you've forgotten your password.' since setting a system to
@@ -412,8 +412,8 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 As preparatory steps, go to admin and change the poems as follows:
 Delete all other posts.
 
-title| author  | content | city | country | category | published date|
-|:---| :--- | :--- |:---| :--- | :--- |
+title| author | content | city | country | category | published date|
+|:---| :--- | :--- |:---| :--- | :--- |:--- |
 |blog 1| testuser | protecting animals odd numbers | Dublin | Ireland | protecting animals |2023/8/1|
 |blog 2| testuser | protecting aquatic system content  | Dublin | Ireland | protecting aquatic system |2023/8/1|
 |blog 3| testuser |protecting soil & trees odd numbers  | Dublin | Ireland | protecting soil & trees content |2023/8/6|
@@ -440,13 +440,14 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |14|search by likes count & published start date|—|enter ‘1’ for  ‘liked more than’ field, enter ‘2023/08/10’ for the published start date and click ‘search’|blog 5 & 6 will be displayed.|blog 5 & 6 are displayed.|Pass|[image](./media/manual-tests/search_stories/14.png)|2023/8/19|
 |15|search by author & keyword & category|—|enter ‘testuser’ for  the author, ‘odd numbers’ for keyword, enter ‘saving resources’ for the category and click ‘search’|A note ’no results’ will be displayed.|Note ‘no results’ is displayed.|Pass|[image](./media/manual-tests/search_stories/15.png)|2023/8/19|
 |16|enter spaces and search|—|enter spaces for title, author, keyword and city and click ‘search’|All blogs are displayed.|All blogs are displayed.|Pass|[image](./media/manual-tests/search_stories/16.png)|2023/8/19|
+|17|'liked more than' field accepts only a number|—|enter 'a' for 'liked more than' field.|'a' can't be entered. |'a' can't be entered.|Pass|[image](./media/manual-tests/search_stories/17.png)|2023/8/19|
 
 #### Image Transformation
 ("Write Stories" and "Update Stories")
 
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|1|image transformation (code in line 40-45 in blog.models.py|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|[image1 ](.media/manual-tests/img_transform/1.png)[image2 ](.media/manual-tests/img_transform/1-2.png)|2023/08/16|
+|1|image transformation (code in line 40-45 in blog.models.py)|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|[image1 ](.media/manual-tests/img_transform/1.png)[image2 ](.media/manual-tests/img_transform/1-2.png)|2023/05/02|
 
 #### Update Stories
 As preparation,<br>
