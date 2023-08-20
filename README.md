@@ -53,7 +53,7 @@ No.|As a… |I can…|so that …|Priority (1 is the highest)|Finish by (plan)|
 |22|user |see a confirmation dialog before deleting my drafts and comments | I will not delete them by mistake.| 1|Day 12|
 |23| user |bookmark posts | I can easily access certain posts later.| 2|Day 3|
 
-The user stories are placed on this [Kanbannboard](https://github.com/users/rkyzk/projects/8).
+The user stories are placed on this [kanbannboard](https://github.com/users/rkyzk/projects/8).
 
 ## Features in a Nutshell:
 Users can see lists of excerpts from
@@ -88,16 +88,19 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 
 **About the Fonts**
 - Montserrat Alternates was used for headings because it's stylish and visually pleasant when used sparingly.
-- For the content Lato is used since it's readable and familiar. 
+- For the content Lato is used since it's readable and familiar.
+
+**Logo, Favicon and other graphics**
+- I used a clover for the logo and favicon because it’s a widely liked symbol and is associated with good luck and hope, giving a friendly and positive impression. 
+- I used a graphic of blue and green earth next to the heading, because this graphic is beautiful and improves the appearance of the page
 
 ## Each Part and Function in Detail
 
 ### Navigation (common to all pages)
-![nav-bar](media/navbar.png)
-- The logo of the website is located on the left side of the navigation bar.
-- A clover is chosen for the logo because it’s a widely liked symbol and is associated with good luck and hope, giving a friendly and positive impression.   
+![nav-bar](./media/navbar.png)
+- The logo of the website is located on the left side of the navigation bar. 
 - On the right side, links to other pages are provided.
-- Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Sign out.’
+- Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Sign out.
 - Other users will find links to ‘Home,’ ‘Search,’ ‘Become a Member,’ and ‘Sign in.’
 - These terms clearly indicate what these linked pages will present.
 - Only the content of 'My Page' may not be clear for first-time visitors, but if they navigate to the page, they will see lists of posts that are grouped by labeled categories, so that should become clear. 
@@ -111,7 +114,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 ### Home Page
 
 **Heading**
-![heading](media/ecopost-heading.png)
+![heading](./media/heading.png)
 - The heading at the center states the title of this website ‘ecopost.’
 - A graphic of earth is placed on the right side.
 - This graphic serves as a reminder that we want to protect this beautiful planet.  
@@ -614,10 +617,13 @@ I replaced ul tag with div tag.
 After correction the html validation shows no errors.
 
 ## Checking Performance and Accessibility
-Performance scored 99 on Sign in page, but on other pages it scored between 59 and 72, and this needs to be improved in the future.
+Performance scored 99 on Sign in page, but on other pages it scored between 52 and 72, and this needs to be improved in the future.
 ‘Opportunity’ section stated the score can be improved if initial server response time is reduced.  I will try to optimize the code to prepare pages faster. 
 
-As for accessibility all pages scored 100%.
+Accessibility scored 91% on Update Comment page.
+On all other pages accessibility scored 100%.
+
+On Update Comment page, the report said that the score was lowered because the comment form doesn’t have a label.  I inserted a label tag with 'for' attribute in the update_comment.html, but that didn’t solve the problem.  I will try to find out how to solve the issue.
 
 Screenshots of the reports are available [here](./documents/LIGHTHOUSE.md)
 
