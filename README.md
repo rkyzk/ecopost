@@ -27,7 +27,33 @@ This application offers a platform where individuals around the world can share 
 
 ## User Stories
 
-User stories can be found [here.](https://github.com/users/rkyzk/projects/8)
+No.|As a… |I can…|so that …|Priority (1 is the highest)|Finish by (plan)|
+|:--|:-----|:--------------------------------|:----------------------------------------|:--|:--|
+|1|site visitor | understand what the site is for and how to use it| I can immediately start using the site.| 1|Day 2|
+|2|site visitor | sign up for an account| participate in the community by writing posts and comments|1|Day 2|
+|3| user | see featured posts on the home page |I can immediately read interesting posts.| 1|Day 2|
+|4| user | see the detailed page of a post |I can read the full content of the post as well as comments written on the post.| 1|Day 3|
+|5| user |see a list of recently published posts | I can browse through the newest posts.| 1|Day 3|
+|6| user | see a list of most ‘liked’ posts |I can browse through popular posts.| 1|Day 4|
+|7| member | write posts |I can share my stories with other users.| 1|Day 5|
+|8| member | edit my drafts |I can update or correct the content.| 1|Day 6|
+|9| member | delete my posts |writings that I no longer need will be removed from the database.| 1|Day 6|
+|10| member |write comments on posts |I can participate in discussions with other members.| 1|Day 7|
+|11| member | edit my comments |update or correct the content.| 1|Day 8|
+|12| member | delete my comments |take back my comments if I change my mind later.| 1|Day 8|
+|13| user | search posts by title, author, keywords, published dates and other factors | I can find the kind of posts I am looking for.| 1|Day 9|
+|14| member |‘like’ posts | I can show my appreciation for particular posts.| 1|Day 3|
+|15| member| see a page displaying 1) the posts and drafts I've written, 2) the posts I've commented on and 3) the posts I've bookmarked | I can easily access them.| 1|Day 10|
+|16| admin | review posts submitted by users | only appropriate posts will be published.| 1|Day 5|
+|17| admin|present posts that are particularly interesting on the home page | visitors are likely to read them first and get a good impression of the site. |1|Day 2|
+|18| admin | make sure that users can update or delete their posts only before they submit their drafts | published posts will not be suddenly changed or get deleted.| 1|Day 6|
+|19| admin| make sure that users can update or delete only the posts and comments written by themselves | the users can be assured that no one else will make changes to their writings.| 1|Day 8|
+|20|admin | make sure that users can access only their own ‘My Page’ | users cannot access pages that are irrelevant to them.| 1|Day 10|
+|21|user|see feedback messages | I can be sure the requests I made have been processed. |1|Day 12|
+|22|user |see a confirmation dialog before deleting my drafts and comments | I will not delete them by mistake.| 1|Day 12|
+|23| user |bookmark posts | I can easily access certain posts later.| 1|Day 3|
+
+The user stories above are placed on this [Kanbannboard](https://github.com/users/rkyzk/projects/8).
 
 ## Features in a Nutshell:
 Users can see lists of excerpts from
@@ -55,7 +81,7 @@ Please click on "Homepage" in the upper left corner to see wireframes of differe
 The overall appearance is kept simple and clean so as not to interfere with various colors that the featured images will bring in.
 
 **About the Colors**
-- I used beige (rgb(141, 111, 56)) for the navigation menu, headings and buttons.
+- I used beige (rgb(141, 111, 56)) for the navigation links, headings and buttons.
 - I used blue (color: rgb(46, 122, 145)) for links in the text.
 - I used light grey (#e8e8e8) for the footer.
 - Beige and blue were chosen because they are associated with nature.
@@ -77,7 +103,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 - Only the content of 'My Page' may not be clear for first-time visitors, but if they navigate to the page, they will see lists of posts that are grouped by labeled categories, so that should become clear. 
 
 ### Login status
-- At the top right corner, logged-in status says ‘Logged in as (username)’ or ‘You’re not logged in.’
+- At the top right corner, logged-in status says ‘Signed in as (username)’ or ‘You’re not signed in.’
 
 ### Footer (common to all pages)
 - Links to social networks are provided.
