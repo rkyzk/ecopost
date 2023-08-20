@@ -283,8 +283,10 @@ h1 {
 }
 
 @media screen and (max-width: 1200px) {
+
+  .content,
   .detail-content {
-    width: 95%;
+    width: 100%;
   }
 }
 
@@ -308,14 +310,21 @@ h1 {
 }
 
 @media screen and (max-width: 900px) {
-
-  .intro-box,
-  .content {
+  .intro-box {
     width: 90%;
   }
 }
 
 @media (max-width: 767px) {
+  .individual-post {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .featured-heading {
+    margin-left: 50px;
+  }
+
   .line {
     display: block;
     margin-bottom: 40px;
@@ -412,6 +421,14 @@ h1 {
 }
 
 @media screen and (max-width: 575px) {
+  .individual-post {
+    width: 100%;
+  }
+
+  .featured-heading {
+    margin-left: 20px;
+  }
+
   .item-right {
     margin-left: 0;
     margin-top: 10px;
@@ -459,7 +476,6 @@ h1 {
 @media screen and (max-width: 420px) {
 
   .intro-box,
-  .content,
   .search-contnet,
   section,
   .authentication {

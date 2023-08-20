@@ -27,10 +27,10 @@
 <!-- Featured stories -->
 <div class="d-flex justify-content-center mt-5">
   <div class="content">
-    <h2>Featured Stories</h2>
+    <h2 class="featured-heading">Featured Stories</h2>
     <div class="row posts">
       {% for post in post_list %}
-      <div class="col-md-4">
+      <div class="col-md-4 individual-post">
         <div class="image-wrapper d-flex justify-content-center">
           {% if "placeholder" in post.featured_image.url %}
           <img src="https://res.cloudinary.com/dacgkk0so/image/upload/v1691891851/default-img_ojmwhd.jpg"
