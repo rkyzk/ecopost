@@ -1,4 +1,12 @@
-The following items were conducted in automated tests, and they all passed.
+The following items were conducted in automated tests, and they all passed.<br>
+According to the coverage report<br> 
+- 89% of blog/forms.py was covered.
+- 97% of blog/models.py was covered.
+- 57% of views.py was covered.
+
+<img src="../media/automated-tests/" width="600px">
+
+Manual tests complement most of the aspects that weren't covered by automated tests.
 
 #### Test models (test_models.py)
 
