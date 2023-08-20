@@ -142,7 +142,7 @@ class TestViews(TestCase):
                                 'country': 'IR',
                                 'category': 'others',
                                 'save': 'draft'})
-        messages = list(get_messages(response.wsgi_request))  
+        messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), 'Your draft has been saved.')
 
     def test_message_says_draft_is_submitted_if_submitted(self):
@@ -291,296 +291,296 @@ class TestViews(TestCase):
                                'btn-submit btn-right" name="delete_post"',
                                status_code=200)
 
-#     # Testing "PostLikeView" -----------------------------------------
-#     def test_post_like_POST_will_add_user(self):
-#         response = self.c2.post(reverse('post_like',
-#                                         kwargs={'slug': self.post1.slug}))
-#         post = Post.objects.filter(slug=self.post1.slug).first()
-#         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-#         self.assertTrue(post.likes.filter(id=self.user2.id).exists())
+    # Testing "PostLikeView" -----------------------------------------
+    def test_post_like_POST_will_add_user(self):
+        response = self.c2.post(reverse('post_like',
+                                        kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertTrue(post.likes.filter(id=self.user2.id).exists())
 
-#     def test_post_like_POST_for_the_second_time_will_remove_user(self):
-#         response = self.c2.post(reverse('post_like',
-#                                 kwargs={'slug': self.post1.slug}))
-#         response = self.c2.post(reverse('post_like',
-#                                 kwargs={'slug': self.post1.slug}))
-#         post = Post.objects.filter(slug=self.post1.slug).first()
-#         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-#         self.assertFalse(post.likes.filter(id=self.user2.id).exists())
+    def test_post_like_POST_for_the_second_time_will_remove_user(self):
+        response = self.c2.post(reverse('post_like',
+                                kwargs={'slug': self.post1.slug}))
+        response = self.c2.post(reverse('post_like',
+                                kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertFalse(post.likes.filter(id=self.user2.id).exists())
 
-#     # Testing "BookmarkView" -----------------------------------------
-#     def test_bookmark_POST_will_add_user(self):
-#         response = self.c2.post(reverse('bookmark',
-#                                         kwargs={'slug': self.post1.slug}))
-#         post = Post.objects.filter(slug=self.post1.slug).first()
-#         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-#         self.assertTrue(post.bookmark.filter(id=self.user2.id).exists())
+    # Testing "BookmarkView" -----------------------------------------
+    def test_bookmark_POST_will_add_user(self):
+        response = self.c2.post(reverse('bookmark',
+                                        kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertTrue(post.bookmark.filter(id=self.user2.id).exists())
 
-#     def test_bookmark_POST_for_2nd_time_will_remove_user(self):
-#         response = self.c2.post(reverse('bookmark',
-#                                         kwargs={'slug': self.post1.slug}))
-#         response = self.c2.post(reverse('bookmark',
-#                                         kwargs={'slug': self.post1.slug}))
-#         post = Post.objects.filter(slug=self.post1.slug).first()
-#         self.assertRedirects(response, f'/detail/{self.post1.slug}/')
-#         self.assertFalse(post.bookmark.filter(id=self.user2.id).exists())
+    def test_bookmark_POST_for_2nd_time_will_remove_user(self):
+        response = self.c2.post(reverse('bookmark',
+                                        kwargs={'slug': self.post1.slug}))
+        response = self.c2.post(reverse('bookmark',
+                                        kwargs={'slug': self.post1.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertRedirects(response, f'/detail/{self.post1.slug}/')
+        self.assertFalse(post.bookmark.filter(id=self.user2.id).exists())
 
-#     # Testing "UpdateCommentView" -----------------------------------------
-#     def test_update_comment_GET_gets_the_page_if_right_user(self):
-#         response = self.c.get('/update_comment/comment1/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'update_comment.html', 'base.html')
+    # Testing "UpdateCommentView" -----------------------------------------
+    def test_update_comment_GET_gets_the_page_if_right_user(self):
+        response = self.c.get('/update_comment/comment1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'update_comment.html', 'base.html')
 
-#     def test_update_comment_GET_will_redirect_to_login_if_not_logged_in(self):
-#         response = self.client.get('/update_comment/comment1/')
-#         self.assertEqual(response.status_code, 302)
-#         self.assertTrue(response.url.startswith('/accounts/login/'))
+    def test_update_comment_GET_will_redirect_to_login_if_not_logged_in(self):
+        response = self.client.get('/update_comment/comment1/')
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login/'))
 
-#     def test_update_comment_GET_will_403_if_wrong_user(self):
-#         response = self.c2.get(reverse('update_comment', kwargs={'id': 1}))
-#         self.assertEqual(response.status_code, 403)
+    def test_update_comment_GET_will_403_if_wrong_user(self):
+        response = self.c2.get(reverse('update_comment', kwargs={'id': 1}))
+        self.assertEqual(response.status_code, 403)
 
-#     def test_update_comment_POST_will_update_comment(self):
-#         response = self.c.post('/update_comment/comment1/',
-#                                {'body': 'comment updated'})
-#         comment = Comment.objects.filter(commenter=self.user1).first()
-#         self.assertEqual(comment.body, 'comment updated')
-#         self.assertEqual(comment.comment_status, 1)
-#         self.assertEqual(response.status_code, 302)
-#         self.assertRedirects(response, f'/detail/{comment.post.slug}/')
+    def test_update_comment_POST_will_update_comment(self):
+        response = self.c.post('/update_comment/comment1/',
+                               {'body': 'comment updated'})
+        comment = Comment.objects.filter(commenter=self.user1).first()
+        self.assertEqual(comment.body, 'comment updated')
+        self.assertEqual(comment.comment_status, 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, f'/detail/{comment.post.slug}/')
 
-#     # Testing "DeleteCommentView" -----------------------------------------
-#     def test_delete_comment_POST_will_set_comment_status_to_2(self):
-#         response = self.c.post('/delete_comment/comment1/')
-#         comment = Comment.objects.filter(commenter=self.user1).first()
-#         self.assertEqual(comment.comment_status, 2)
-#         self.assertEqual(response.status_code, 302)
-#         self.assertRedirects(response, f'/detail/{comment.post.slug}/')
+    # Testing "DeleteCommentView" -----------------------------------------
+    def test_delete_comment_POST_will_set_comment_status_to_2(self):
+        response = self.c.post('/delete_comment/comment1/')
+        comment = Comment.objects.filter(commenter=self.user1).first()
+        self.assertEqual(comment.comment_status, 2)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, f'/detail/{comment.post.slug}/')
 
-#     # Testing "UpdatePostView" -----------------------------------------
-#     def test_update_post_GET_gets_the_page_if_right_user(self):
-#         response = self.c.get(f'/update/{self.post6.slug}/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'update_post.html', 'base.html')
+    # Testing "UpdatePostView" -----------------------------------------
+    def test_update_post_GET_gets_the_page_if_right_user(self):
+        response = self.c.get(f'/update/{self.post6.slug}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'update_post.html', 'base.html')
 
-#     def test_update_post_GET_will_redirect_to_login_if_not_logged_in(self):
-#         response = self.client.get(f'/update/{self.post1.slug}/')
-#         self.assertEqual(response.status_code, 302)
-#         self.assertTrue(response.url.startswith('/accounts/login/'))
+    def test_update_post_GET_will_redirect_to_login_if_not_logged_in(self):
+        response = self.client.get(f'/update/{self.post1.slug}/')
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login/'))
 
-#     def test_update_post_GET_will_403_if_wrong_user(self):
-#         response = self.c2.get(f'/update/{self.post1.slug}/')
-#         self.assertEqual(response.status_code, 403)
+    def test_update_post_GET_will_403_if_wrong_user(self):
+        response = self.c2.get(f'/update/{self.post1.slug}/')
+        self.assertEqual(response.status_code, 403)
 
-#     def test_update_post_GET_will_403_if_submitted(self):
-#         self.post1.status = 1
-#         self.post1.save()
-#         response = self.c.get(f'/update/{self.post1.slug}/')
-#         self.assertEqual(response.status_code, 403)
+    def test_update_post_GET_will_403_if_submitted(self):
+        self.post1.status = 1
+        self.post1.save()
+        response = self.c.get(f'/update/{self.post1.slug}/')
+        self.assertEqual(response.status_code, 403)
 
-#     def test_update_post_GET_will_403_if_published(self):
-#         self.post1.status = 2
-#         self.post1.save()
-#         response = self.c.get(f'/update/{self.post1.slug}/')
-#         self.assertEqual(response.status_code, 403)
+    def test_update_post_GET_will_403_if_published(self):
+        self.post1.status = 2
+        self.post1.save()
+        response = self.c.get(f'/update/{self.post1.slug}/')
+        self.assertEqual(response.status_code, 403)
 
-#     def test_update_post_POST_will_update_title(self):
-#         response = self.c.post(reverse('update_post',
-#                                kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title updated',
-#                                 'content': 'content',
-#                                 'city': 'test city',
-#                                 'country': 'IR',
-#                                 'category': 'others',
-#                                 'save': 'draft'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.title, 'title updated')
-#         self.assertEqual(post.content, 'content')
-#         self.assertEqual(post.city, 'test city')
-#         self.assertEqual(post.country, 'IR')
-#         self.assertEqual(post.category, 'others')
-#         self.assertRedirects(response, f'/detail/{post.slug}/')
+    def test_update_post_POST_will_update_title(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post6.slug}),
+                               {'title': 'title updated',
+                                'content': 'content',
+                                'city': 'test city',
+                                'country': 'IR',
+                                'category': 'others',
+                                'save': 'draft'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.title, 'title updated')
+        self.assertEqual(post.content, 'content')
+        self.assertEqual(post.city, 'test city')
+        self.assertEqual(post.country, 'IR')
+        self.assertEqual(post.category, 'others')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
-#     def test_update_post_POST_will_update_content(self):
-#         response = self.c.post(reverse('update_post',
-#                                kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content updated',
-#                                 'city': 'test city',
-#                                 'country': 'IR',
-#                                 'category': 'others',
-#                                 'save': 'draft'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.title, 'title6')
-#         self.assertEqual(post.content, 'content updated')
-#         self.assertEqual(post.city, 'test city')
-#         self.assertEqual(post.country, 'IR')
-#         self.assertEqual(post.category, 'others')
-#         self.assertRedirects(response, f'/detail/{post.slug}/')
+    def test_update_post_POST_will_update_content(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content updated',
+                                'city': 'test city',
+                                'country': 'IR',
+                                'category': 'others',
+                                'save': 'draft'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.title, 'title6')
+        self.assertEqual(post.content, 'content updated')
+        self.assertEqual(post.city, 'test city')
+        self.assertEqual(post.country, 'IR')
+        self.assertEqual(post.category, 'others')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
-#     def test_update_post_POST_will_update_city(self):
-#         response = self.c.post(reverse('update_post',
-#                                kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content',
-#                                 'city': 'test city 2',
-#                                 'country': 'IR',
-#                                 'category': 'others',
-#                                 'save': 'draft'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.title, 'title6')
-#         self.assertEqual(post.content, 'content')
-#         self.assertEqual(post.city, 'test city 2')
-#         self.assertEqual(post.country, 'IR')
-#         self.assertEqual(post.category, 'others')
-#         self.assertRedirects(response, f'/detail/{post.slug}/')
+    def test_update_post_POST_will_update_city(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content',
+                                'city': 'test city 2',
+                                'country': 'IR',
+                                'category': 'others',
+                                'save': 'draft'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.title, 'title6')
+        self.assertEqual(post.content, 'content')
+        self.assertEqual(post.city, 'test city 2')
+        self.assertEqual(post.country, 'IR')
+        self.assertEqual(post.category, 'others')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
-#     def test_update_post_POST_will_update_country(self):
-#         response = self.c.post(reverse('update_post',
-#                                kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content',
-#                                 'city': 'test city',
-#                                 'country': 'NZ',
-#                                 'category': 'others',
-#                                 'save': 'draft'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.title, 'title6')
-#         self.assertEqual(post.content, 'content')
-#         self.assertEqual(post.city, 'test city')
-#         self.assertEqual(post.country, 'NZ')
-#         self.assertEqual(post.category, 'others')
-#         self.assertRedirects(response, f'/detail/{post.slug}/')
+    def test_update_post_POST_will_update_country(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content',
+                                'city': 'test city',
+                                'country': 'NZ',
+                                'category': 'others',
+                                'save': 'draft'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.title, 'title6')
+        self.assertEqual(post.content, 'content')
+        self.assertEqual(post.city, 'test city')
+        self.assertEqual(post.country, 'NZ')
+        self.assertEqual(post.category, 'others')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
-#     def test_update_post_POST_will_update_category(self):
-#         response = self.c.post(reverse('update_post',
-#                                kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content',
-#                                 'city': 'test city',
-#                                 'country': 'IR',
-#                                 'category': 'aquatic system',
-#                                 'save': 'draft'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.title, 'title6')
-#         self.assertEqual(post.content, 'content')
-#         self.assertEqual(post.city, 'test city')
-#         self.assertEqual(post.country, 'IR')
-#         self.assertEqual(post.category, 'aquatic system')
-#         self.assertRedirects(response, f'/detail/{post.slug}/')
+    def test_update_post_POST_will_update_category(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content',
+                                'city': 'test city',
+                                'country': 'IR',
+                                'category': 'aquatic system',
+                                'save': 'draft'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.title, 'title6')
+        self.assertEqual(post.content, 'content')
+        self.assertEqual(post.city, 'test city')
+        self.assertEqual(post.country, 'IR')
+        self.assertEqual(post.category, 'aquatic system')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
-#     def test_update_post_POST_cancel_will_not_update_post(self):
-#         response = self.c.post(reverse('update_post',
-#                                        kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content updated',
-#                                 'city': 'test city',
-#                                 'country': 'IR',
-#                                 'category': 'others',
-#                                 'cancel': 'cancel'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.title, 'title6')
-#         self.assertEqual(post.content, 'content updated')
-#         self.assertEqual(post.city, 'test city')
-#         self.assertEqual(post.country, 'IR')
-#         self.assertEqual(post.category, 'others')
-#         self.assertRedirects(response, f'/detail/{post.slug}/')
+    def test_update_post_POST_cancel_will_not_update_post(self):
+        response = self.c.post(reverse('update_post',
+                                       kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content updated',
+                                'city': 'test city',
+                                'country': 'IR',
+                                'category': 'others',
+                                'cancel': 'cancel'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.title, 'title6')
+        self.assertEqual(post.content, 'content updated')
+        self.assertEqual(post.city, 'test city')
+        self.assertEqual(post.country, 'IR')
+        self.assertEqual(post.category, 'others')
+        self.assertRedirects(response, f'/detail/{post.slug}/')
 
-#     def test_update_post_POST_msg_says_change_saved_if_saved(self):
-#         response = self.c.post(reverse('update_post',
-#                                kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content updated',
-#                                 'city': 'test city',
-#                                 'country': 'IR',
-#                                 'category': 'others',
-#                                 'save': 'draft'},
-#                                follow=True)
-#         messages = list(response.context['messages'])
-#         self.assertEqual(str(messages[0]), "The change has been saved.")
+    def test_update_post_POST_msg_says_change_saved_if_saved(self):
+        response = self.c.post(reverse('update_post',
+                               kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content updated',
+                                'city': 'test city',
+                                'country': 'IR',
+                                'category': 'others',
+                                'save': 'draft'},
+                               follow=True)
+        messages = list(response.context['messages'])
+        self.assertEqual(str(messages[0]), "The change has been saved.")
 
-#     def test_update_post_POST_submit_will_set_status_to_1(self):
-#         response = self.c.post(reverse('update_post',
-#                                        kwargs={'slug': self.post6.slug}),
-#                                {'title': 'title6',
-#                                 'content': 'content updated',
-#                                 'city': 'test city',
-#                                 'country': 'IR',
-#                                 'category': 'others',
-#                                 'submit': 'complete'})
-#         post = Post.objects.filter(slug=self.post6.slug).first()
-#         self.assertEqual(post.status, 1)
+    def test_update_post_POST_submit_will_set_status_to_1(self):
+        response = self.c.post(reverse('update_post',
+                                       kwargs={'slug': self.post6.slug}),
+                               {'title': 'title6',
+                                'content': 'content updated',
+                                'city': 'test city',
+                                'country': 'IR',
+                                'category': 'others',
+                                'submit': 'complete'})
+        post = Post.objects.filter(slug=self.post6.slug).first()
+        self.assertEqual(post.status, 1)
 
-#     # Testing "DeletePostView" ----------------------------------
-#     def test_delete_post_POST_will_delete_post_if_right_user(self):
-#         response = self.c.post(reverse('delete_post',
-#                                        kwargs={'slug': self.post6.slug}))
-#         existing_posts = Post.objects.filter(slug=self.post6.slug)
-#         self.assertEqual(len(existing_posts), 0)
-#         self.assertRedirects(response, '/')
+    # Testing "DeletePostView" ----------------------------------
+    def test_delete_post_POST_will_delete_post_if_right_user(self):
+        response = self.c.post(reverse('delete_post',
+                                       kwargs={'slug': self.post6.slug}))
+        existing_posts = Post.objects.filter(slug=self.post6.slug)
+        self.assertEqual(len(existing_posts), 0)
+        self.assertRedirects(response, '/')
 
-#     def test_delete_post_POST_will_show_403_if_wrong_user(self):
-#         response = self.c2.post(reverse('delete_post',
-#                                         kwargs={'slug': self.post6.slug}))
-#         self.assertEqual(response.status_code, 403)
+    def test_delete_post_POST_will_show_403_if_wrong_user(self):
+        response = self.c2.post(reverse('delete_post',
+                                        kwargs={'slug': self.post6.slug}))
+        self.assertEqual(response.status_code, 403)
 
-#     def test_delete_post_POST_will_not_delete_post_if_wrong_user(self):
-#         response = self.c2.post(reverse('delete_post',
-#                                         kwargs={'slug': self.post6.slug}))
-#         post = Post.objects.filter(slug=self.post1.slug).first()
-#         self.assertEqual(post.title, 'title1')
+    def test_delete_post_POST_will_not_delete_post_if_wrong_user(self):
+        response = self.c2.post(reverse('delete_post',
+                                        kwargs={'slug': self.post6.slug}))
+        post = Post.objects.filter(slug=self.post1.slug).first()
+        self.assertEqual(post.title, 'title1')
 
-#     def test_delete_post_POST_will_show_403_if_status_1(self):
-#         self.post1.status = 1
-#         self.post1.save()
-#         response = self.c2.post(reverse('delete_post',
-#                                         kwargs={'slug': self.post1.slug}))
-#         self.assertEqual(response.status_code, 403)
+    def test_delete_post_POST_will_show_403_if_status_1(self):
+        self.post1.status = 1
+        self.post1.save()
+        response = self.c2.post(reverse('delete_post',
+                                        kwargs={'slug': self.post1.slug}))
+        self.assertEqual(response.status_code, 403)
 
-#     def test_delete_post_POST_will_show_403_if_status_2(self):
-#         self.post1.status = 2
-#         self.post1.save()
-#         response = self.c2.post(reverse('delete_post',
-#                                         kwargs={'slug': self.post1.slug}))
-#         self.assertEqual(response.status_code, 403)
+    def test_delete_post_POST_will_show_403_if_status_2(self):
+        self.post1.status = 2
+        self.post1.save()
+        response = self.c2.post(reverse('delete_post',
+                                        kwargs={'slug': self.post1.slug}))
+        self.assertEqual(response.status_code, 403)
 
-#     # Testing "MoreStoriesView" ----------------------------------
-#     def test_can_get_more_stories(self):
-#         response = self.client.get('/more_stories/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'more_stories.html')
+    # Testing "MoreStoriesView" ----------------------------------
+    def test_can_get_more_stories(self):
+        response = self.client.get('/more_stories/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'more_stories.html')
 
-#     def test_more_stories_display_posts_published_in_the_prev_7_days(self):
-#         self.post4.published_on = datetime.utcnow() - timedelta(days=10)
-#         self.post4.save()
-#         response = self.client.get('/more_stories/')
-#         self.assertEqual(len(response.context['object_list']), 1)
-#         self.assertEqual(list(response.context['object_list']),
-#                          [self.post5])
+    def test_more_stories_display_posts_published_in_the_prev_7_days(self):
+        self.post4.published_on = datetime.utcnow() - timedelta(days=10)
+        self.post4.save()
+        response = self.client.get('/more_stories/')
+        self.assertEqual(len(response.context['object_list']), 1)
+        self.assertEqual(list(response.context['object_list']),
+                         [self.post5])
 
-#     # Testing "PopularStoriesView" ----------------------------------
-#     def test_can_get_readers_favorite_stories(self):
-#         response = self.client.get('/popular_stories/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'popular_stories.html')
+    # Testing "PopularStoriesView" ----------------------------------
+    def test_can_get_readers_favorite_stories(self):
+        response = self.client.get('/popular_stories/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'popular_stories.html')
 
-#     def test_favorite_stories_display_right_posts(self):
-#         self.post4.likes.add(self.user1)
-#         self.post4.save()
-#         response = self.client.get('/popular_stories/')
-#         self.assertEqual(len(response.context['object_list']), 1)
-#         self.assertEqual(list(response.context['object_list']),
-#                          [self.post4])
+    def test_favorite_stories_display_right_posts(self):
+        self.post4.likes.add(self.user1)
+        self.post4.save()
+        response = self.client.get('/popular_stories/')
+        self.assertEqual(len(response.context['object_list']), 1)
+        self.assertEqual(list(response.context['object_list']),
+                         [self.post4])
 
-#     # Testing "MyPageView" ----------------------------------
-#     def test_my_page_GET_will_get_page_if_user(self):
-#         response = self.c.get('/mypage/user1/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'my_page.html', 'base.html')
+    # Testing "MyPageView" ----------------------------------
+    def test_my_page_GET_will_get_page_if_user(self):
+        response = self.c.get('/mypage/user1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'my_page.html', 'base.html')
 
-#     def test_my_page_GET_will_403_if_wrong_user(self):
-#         response = self.c2.get('/mypage/user1/')
-#         self.assertEqual(response.status_code, 403)
+    def test_my_page_GET_will_403_if_wrong_user(self):
+        response = self.c2.get('/mypage/user1/')
+        self.assertEqual(response.status_code, 403)
 
 
 if __name__ == '__main__':

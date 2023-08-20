@@ -71,7 +71,7 @@ class Post(models.Model):
                                  string.digits, k=16))
             self.slug = slugify(self.title + '-' + random_str)
         # if the post has been published but published_on is empty
-        # assign the current datetime 
+        # assign the current datetime
         if self.status == 2 and not self.published_on:
             self.published_on = datetime.utcnow()
         # remove p tags in case the content contains them

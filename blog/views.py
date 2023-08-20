@@ -19,6 +19,7 @@ min_num_likes = 1
 
 
 def handler500(request):
+    """renders 500.html in case of 500 error"""
     return render(
         request,
         '500.html',
@@ -54,7 +55,7 @@ class AddStory(LoginRequiredMixin, generic.CreateView):
         message = 'Your draft has been saved.'
         # If submitted, set the status to 1 ('Submitted.')
         if 'submit' in self.request.POST.keys():
-            form.instance.status = 1 
+            form.instance.status = 1
             message = "You submitted your post. " + \
                       "We'll contact you when decision has been made."
         form.save()
@@ -74,7 +75,7 @@ class PostDetail(View):
         :return: render()
         :rtype: method
         """
-        post = get_object_or_404(Post, slug=slug)      
+        post = get_object_or_404(Post, slug=slug)
         comments = post.comments.order_by('created_on')
         # If the user has liked the post, set 'liked' True
         liked = False
@@ -213,7 +214,7 @@ class UpdatePost(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         slug = self.kwargs.get('slug')
         post = get_object_or_404(Post, slug=slug)
         return post.status == 0 and post.author == self.request.user
-     
+
 
 class DeletePost(LoginRequiredMixin, View):
     """Deletes posts."""
@@ -332,7 +333,7 @@ class MyPage(LoginRequiredMixin, UserPassesTestMixin, View):
         arguments: self, request, pk: pk of the user, *args, **kwargs
         :returns: render()
         :rtype: method
-        """    
+        """
         my_posts = Post.objects.filter(author=pk)
         # Make a list of posts commented by the user
         comments = Comment.objects.filter(commenter__id=pk,

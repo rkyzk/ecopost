@@ -37,7 +37,7 @@ class PostFilter(django_filters.FilterSet):
         model = Post
         fields = ['title', 'author__username', 'content', 'published_on',
                   'num_of_likes', 'category', 'city', 'country']
-    
+
     def filter_keyword(self, queryset, name, value):
         return queryset.filter(Q(title__icontains=value) |
                                Q(content__icontains=value))
