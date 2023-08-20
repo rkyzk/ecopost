@@ -22,6 +22,8 @@
 ![ecopost-home](./media/readme/home.png)
 <img src="./media/readme/mobile.png" width="250" alt="ecopost displayed on mobile">
 
+The website is deployed [here](https://ecopost.herokuapp.com/).
+
 ## Overview
 This application offers a platform where individuals around the world can share their stories on what they are doing to protect the environment. Many people feel helpless, thinking that individuals cannot do so much. Here, visitors can read posts written by others, leave comments and write their own stories. Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope.
 
@@ -116,8 +118,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 **Heading**<br>
 <img src="./media/readme/heading.png" alt="heading" width="400px">
 - The heading at the center states the title of this website ‘ecopost.’
-- A graphic of earth is placed on the right side.
-- This graphic serves as a reminder that we want to protect this beautiful planet.  
+- A graphic of earth is placed on the right side. 
 
 **Introduction**
 - Below the heading an introductory paragraph explains what the site is for and how to use it.
@@ -388,16 +389,16 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 #### More Stories
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- |
-|1|pagination|--|Go to "More Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
-|2|link 'NEXT' if paginated|--|Click ‘NEXT’|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
-|3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](.media/manual-tests/more_stories/3.png)|2023/8/16|
+|1|pagination|--|Go to "More Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](./media/manual-tests/more_stories/1.png)[image2 ](./media/manual-tests/more_stories/1-2.png)[image3](./media/manual-tests/more_stories/1-3.png)|2023/8/16|
+|2|link 'NEXT' if paginated|--|Click ‘NEXT’|The second page is displayed.|The second page is displayed.|pass|[image ](./media/manual-tests/more_stories/2.png)|2023/8/16|
+|3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](./media/manual-tests/more_stories/3.png)|2023/8/16|
 
 #### Popular Stories
 Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|1|content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
-|2|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|[image ](.media/manual-tests/more_stories/2.png)|2023/8/16|
-|3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](.media/manual-tests/more_stories/3.png)|2023/8/16|
+|1|content of the page|--|Go to "Popular Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](./media/manual-tests/more_stories/1.png)[image2 ](./media/manual-tests/more_stories/1-2.png)[image3](./media/manual-tests/more_stories/1-3.png)|2023/8/16|
+|2|link 'NEXT' if paginated|--|Click on NEXT|The second page is displayed.|The second page is displayed.|pass|[image ](./media/manual-tests/more_stories/2.png)|2023/8/16|
+|3|link 'PREV' on the second page|--|Click on PREV|The first page is displayed.|The first page is displayed.|pass|[image ](./media/manual-tests/more_stories/3.png)|2023/8/16|
 
 #### Write Stories
 *Log in as testuser*
@@ -459,7 +460,7 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 
 Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|1|image transformation (code in line 40-45 in blog.models.py)|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|[image1 ](.media/manual-tests/img_transform/1.png)[image2 ](.media/manual-tests/img_transform/1-2.png)|2023/05/02|
+|1|image transformation (code in line 40-45 in blog.models.py)|Go to ‘Write Stories.’ Enter ‘test image transformation’ for title, ‘content’ for content, ‘test’ for city, ‘Afghanistan’ for country, upload ‘test_transformation.jpg,’ and click ‘Save’|Inspect the photo| The photo will be cropped to 510 x 340 px. The photo shows the face and the torso of the person (testing the function “gravity: ‘auto’”)  The file size is significantly reduced.|The photo was cropped to 510 x 340px. The photo shows the face and the torso of the person. The file size was reduced from 1.5MB to 33.0kB.|pass|[image1 ](./media/manual-tests/img_transform/1.png)[image2 ](./media/manual-tests/img_transform/1-2.png)|2023/05/02|
 
 #### Update Stories
 As preparation,<br>
@@ -497,41 +498,41 @@ To prepare<br>
 **"Written by me" section**<br>
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|1|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/1.png)|2023/08/17|
-|2|The layout|--| Click "Show more" | blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/2.png)|2023/08/17|
+|1|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/my_page/1.png)|2023/08/17|
+|2|The layout|--| Click "Show more" | blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/my_page/2.png)|2023/08/17|
 
 **"Commented by me" section**<br>
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|3|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/3.png)|2023/08/17|
-|4|The layout|--| Click "Show more" | blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/4.png)|2023/08/17|
+|3|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/my_page/3.png)|2023/08/17|
+|4|The layout|--| Click "Show more" | blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/my_page/4.png)|2023/08/17|
 
 **"Bookmarked by me" section**<br>
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|5|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/5.png)|2023/08/17|
-|6|The layout in "Bookmarked by me"|--| Click "Show more" |blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/6.png)|2023/08/17|
+|5|The layout|--| Go to "My Page" | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown. | blog 14, blog 13, blog 12 appear in the order, and "Show more" button is shown.|pass|[image](./media/manual-tests/my_page/5.png)|2023/08/17|
+|6|The layout in "Bookmarked by me"|--| Click "Show more" |blog 11 is displayed below blog 14-12. | blog 11 is displayed below blog 14-12.|pass|[image](./media/manual-tests/my_page/6.png)|2023/08/17|
 
 **Show more/less buttons in "Written by me" section**<br>
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|7|"Show more" button| -- |Click "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/7.png)|2023/08/17|
-|8|"Show less" button (upper) | -- |Click "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/8.png)|2023/08/17|
-|9|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/9.png)|2023/08/17|
+|7|"Show more" button| -- |Click "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/my_page/7.png)|2023/08/17|
+|8|"Show less" button (upper) | -- |Click "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/my_page/8.png)|2023/08/17|
+|9|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/my_page/9.png)|2023/08/17|
 
 **Show more/less buttons in "Commented by me" section**<br>
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|10|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/10.png)|2023/08/17|
-|11|"Show less" button (upper) | -- |Click "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/11.png)|2023/08/17|
-|12|"Show less" button (lower) | Click on "Show more" |Click "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/12.png)|2023/08/17|
+|10|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/my_page/10.png)|2023/08/17|
+|11|"Show less" button (upper) | -- |Click "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/my_page/11.png)|2023/08/17|
+|12|"Show less" button (lower) | Click on "Show more" |Click "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/my_page/12.png)|2023/08/17|
 
 **Show more/less buttons in "Bookmarked by me" section**<br>
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
-|13|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/13.png)|2023/08/17|
-|14|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/14.png)|2023/08/17|
-|15|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/15.png)|2023/08/17|
+|13|"Show more" button| -- |Click on "Show more"| blog 11 will be displayed, and the label of the clicked button will change to "Show less" | blog 11 is displayed, the clicked button says "Show less"|pass|[image](./media/manual-tests/my_page/13.png)|2023/08/17|
+|14|"Show less" button (upper) | -- |Click on "Show less" | "blog 11" will disappear. The clicked button will say "Show more" |"blog 11" disappears.  The clicked button says "Show more" | pass|[image](./media/manual-tests/my_page/14.png)|2023/08/17|
+|15|"Show less" button (lower) | Click on "Show more" |Click on "Show less" | "blog 11" will disappear. The button below 3 posts (blog 12-14) will say "Show more" |"blog 11" disappears.  The button below 3 posts (blog 12-14) says "Show more" |pass|[image](./media/manual-tests/my_page/15.png)|2023/08/17|
 
 **Test if clicking "Show more" and "Show less" buttons in different sections will function normally**<br>
 Preparation:
@@ -540,7 +541,7 @@ Preparation:
 
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |
-|16|Show more/less buttons in different sections | -- |Click "Show less" in "Commented by me"| "blog 11" in "Commented by me" will disappear. The button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The button in "Commented by me" section says "Show more" | pass|[image](./media/manual-tests/16.png)|2023/08/17|
+|16|Show more/less buttons in different sections | -- |Click "Show less" in "Commented by me"| "blog 11" in "Commented by me" will disappear. The button in "Commented by me" will say "Show more" | "blog 11" in "Commented by me" disappears. The button in "Commented by me" section says "Show more" | pass|[image](./media/manual-tests/my_page/16.png)|2023/08/17|
 
 #### Become a Member
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
@@ -566,6 +567,8 @@ Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected resu
 |4|Enter wrong password| Enter “testuser” for username; "wrongpw" for password | click “Sign in”|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|[image](./media/manual-tests/signin/4.png)|2023/8/19|
 |5|Enter wrong username| Enter “nouser” for username; "gR48NmYr1" for password | click “Sign in”|A message says "username and/or password you specified are not correct" | A message says "username and/or password you specified are not correct" | pass|[image](./media/manual-tests/signin/5.png)|2023/8/19|
 |6|Remember me function| Enter “testuser” for username; "gR48NmYr1" for password; put a check for "Remember me" and sign in. Sign out and go back to the sign in page| Enter "testuser" for username | The password will be automatically filled out. | The password is not automatically filled out. | fail|[image](./media/manual-tests/signin/6.png)|2023/8/19|
+
+*test no. 6 failed.  This issue will be discussed in [Test summary](#test-summary) section.*
 
 #### Sign out
 Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image |Date |
@@ -614,7 +617,7 @@ After the above correctiosn the html validation showed no errors.
 
 ## Checking Performance and Accessibility
 Performance scored 99% on Sign in page, but on other pages it scored between 52% and 72%, and this aspect needs to be improved in the future.
-‘Opportunity’ section stated the score can be improved if initial server response time is reduced.  I will try to optimize the code to prepare pages faster. 
+‘Opportunity’ section of the analysis report stated the score can be improved if initial server response time is reduced.  I will try to optimize the code to prepare pages faster. 
 
 Accessibility scored 91% on Update Comment page.
 On all other pages accessibility scored 100%.
@@ -626,7 +629,7 @@ Screenshots of the reports are available [here](./documents/LIGHTHOUSE.md)
 ## Media
 
 Logo image: clover
-https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural-elements_1069886.htm#query=earth%20plants%20free&position=24&from_view=search&track=ais
+https://www.freepik.com/free-photos-vectors/clover-logo
 
 Favicon: Clover
 https://icons8.com/icons/set/favicon-clover
@@ -637,9 +640,6 @@ https://www.freepik.com/free-vector/watercolor-background-earth-day-with-natural
 Default featured image
 https://www.pexels.com/photo/forest-345522/
 
-test_transformation
-https://www.pexels.com/photo/city-fashion-man-people-15839341/
-
 ## Credits
 Many thanks to my mentor Jubril Akolade and tutors at Code Institute for their guidance and dedicated support.<br>
 
@@ -648,7 +648,7 @@ For this application, I used the Code Institute's 'Code Star' project as a start
 Code snippets that were taken from 'Code Star' are as follows:
 
 - The code to display 3 excerpts of posts in a row 
-{% if forloop.counter|divisibleby:3 %}
+`{% if forloop.counter|divisibleby:3 %}`
 was used in “More Stories,” “Popular Stories” and “My Page.” 
 
 - The code to paginate post lists was used in “More Stories” (after ln 43) and “Popular Stories” (after ln 41).
@@ -667,7 +667,7 @@ Other sources for code snippets taken in this project:
 
 - The code for turning the navbar to a hamburger menu (lines 9-19 in script.js & lines 21-45 in base.html) was taken from [this site.](https://stackoverflow.com/questions/70370519/how-can-i-turn-my-navbar-into-hamburger-menu-for-mobile-using-responsive-design)
 
-- For the code for search system, I took basic ideas from this [youtube video]
+- For the code for search system, I took basic ideas from this [youtube video](https://www.youtube.com/watch?v=G-Rct7Na0UQ)
 
 - The code to sign in a testuser (line 16-20 in test_views.py) was taken from [this site](https://stackoverflow.com/questions/2619102/djangos-self-client-login-does-not-work-in-unit-tests)
 
