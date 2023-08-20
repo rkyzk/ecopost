@@ -20,7 +20,7 @@
 - - -
 
 ![ecopost-home](./media/readme/home.png)
-<img src="./media/readme/mobile.png" width="300" alt="ecopost displayed on mobile">
+<img src="./media/readme/mobile.png" width="250" alt="ecopost displayed on mobile">
 
 ## Overview
 This application offers a platform where individuals around the world can share their stories on what they are doing to protect the environment. Many people feel helpless, thinking that individuals cannot do so much. Here, visitors can read posts written by others, leave comments and write their own stories. Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope.
@@ -113,8 +113,8 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 
 ### Home Page
 
-**Heading**
-![heading](./media/readme/heading.png)
+**Heading**<br>
+<img src="./media/readme/heading.png" alt="heading" width="400px">
 - The heading at the center states the title of this website ‘ecopost.’
 - A graphic of earth is placed on the right side.
 - This graphic serves as a reminder that we want to protect this beautiful planet.  
@@ -386,7 +386,6 @@ Test No.| Feature | Preparation Steps if any | Test Steps | Expected results | A
 |3|Confirmation dialog - ok|--|Click on 'Ok'|Redirected to "home." A flash message, "Your draft has been deleted." appears.|Redirected to "home." A flash message, "Your draft has been deleted." appears.|pass|[image](./media/manual-tests/detail_page_delete_posts/3.png)|2023/8/15|
 
 #### More Stories
-Conduct test. no   consecutively.
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image | Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- | :--- |
 |1|pagination|--|Go to "More Stories"| Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|Blog 5-10 are displayed in descending order and blog 4 is displayed on the second page.|pass|[image1 ](.media/manual-tests/more_stories/1.png)[image2 ](.media/manual-tests/more_stories/1-2.png)[image3](.media/manual-tests/more_stories/1-3.png)|2023/8/16|
@@ -402,7 +401,6 @@ Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected resul
 
 #### Write Stories
 *Log in as testuser*
-
 Test No.| Feature tested | Preparation Steps if any | Test Steps | Expected results | Actual results | Pass/Fail | Image| Date |
 |:---| :--- | :--- |:---| :--- | :--- |:---| :--- |:--- |
 |1|Leave all fields empty| -- | click 'save' | A message says "Please fill out this field" for the title | A message says "Please fill out this field" for the title | pass |[image](./media/manual-tests/write_stories/1.png)|2023/8/16|
@@ -576,7 +574,7 @@ Test No.| Feature tested| Preparation Steps if any | Test Steps | Expected resul
 
 ### Test summary
 
-Most tests passed.  The following failed tests need to be discussed.
+The following failed tests need to be discussed.
 
 **Manual tests ‘Update Stories’ section test no. 3 & 4**
 
@@ -602,28 +600,26 @@ The check box ‘Remember me’ doesn’t function as expected.  If the checkbox
 
 ## Validating python, CSS, Html code with Tools
 
-- I checked the code in all python modules at CI Python Linter. line 160 in settings.py and line 3 & 6 in env.py get errors because the line is too long.  I tried to break the line,but it didn't work, so I left it as it is.
-All other errors (white spaces at the end of the lines) were corrected.
+- I checked the code in all python modules at CI Python Linter. Line 160 in settings.py and line 3 & 6 in env.py get errors because the lines are too long.  I tried to break the lines, but breaking lines also gave me errros, so I left the lines as they were.  All other errors (white spaces at the end of the lines) were corrected.
 - I validated style.css at jigsaw (https://jigsaw.w3.org/)<br>
 I got one error saying ‘Property rotate doesn’t exist.’  But clearly property ‘rotate’ is a widely used property of CSS, and it is functioning in the app, so I left the rule as it is.
 - I validated html at https://validator.w3.org<br>
-**Errors corrected:**
-- Error: Stray start tag footer.<br>
+- Errors corrected:
+1. Error: Stray start tag footer.<br>
 I was putting footer tags outside body tags on base.html.  I corrected it by inserting the footer inside the body tags.
-
-- span tags in ul tag in more_stories.html ln 45-55<br>
+2.  span tags in ul tag in more_stories.html ln 45-55<br>
 I replaced ul tag with div tag.
 
-After correction the html validation shows no errors.
+After the above correctiosn the html validation showed no errors.
 
 ## Checking Performance and Accessibility
-Performance scored 99 on Sign in page, but on other pages it scored between 52 and 72, and this needs to be improved in the future.
+Performance scored 99% on Sign in page, but on other pages it scored between 52% and 72%, and this aspect needs to be improved in the future.
 ‘Opportunity’ section stated the score can be improved if initial server response time is reduced.  I will try to optimize the code to prepare pages faster. 
 
 Accessibility scored 91% on Update Comment page.
 On all other pages accessibility scored 100%.
 
-On Update Comment page, the report said that the score was lowered because the comment form doesn’t have a label.  I inserted a label tag with 'for' attribute in the update_comment.html, but that didn’t solve the problem.  I will try to find out how to solve the issue.
+On Update Comment page, the report said that the score was lowered because the comment form doesn’t have a label.  I inserted a label tag with 'for' attribute in the update_comment.html, but I still got the same score and a warning that I need a label.  I will try to find out how to solve the issue.
 
 Screenshots of the reports are available [here](./documents/LIGHTHOUSE.md)
 
