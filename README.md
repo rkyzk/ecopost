@@ -33,7 +33,7 @@ No.|As a… |I can…|so that …|Priority (1 is the highest)|Finish by (plan)|
 |:--|:-----|:--------------------------------|:----------------------------------------|:--|:--|
 |1|site visitor | understand what the site is for and how to use it| I can immediately start using the site.| 1|Day 2|
 |2|site visitor | sign up for an account| I can participate in the community by writing posts and comments|1|Day 2|
-|3| user | see featured posts on the home page |I don't necessarily look for what to read but can immediately read interesting posts.| 1|Day 2|
+|3| user | see featured posts on the home page |I don't necessarily have to look for what to read but can immediately read interesting posts.| 1|Day 2|
 |4| user | see the detailed page of a post |I can read the full content of the post as well as comments written on the post.| 1|Day 3|
 |5| user |see a list of recently published posts | I can browse through the newest posts.| 1|Day 3|
 |6| user | see a list of most ‘liked’ posts |I can browse through popular posts.| 1|Day 4|
