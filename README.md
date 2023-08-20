@@ -271,33 +271,31 @@ The list of items tested can be found [here].
 I conducted manual testing for the aspects that weren't covered by automated testing.
 
 ### Testing User Stories
-**As Users**
 No. | Goals | How they are achieved | 
 |:---| :--- | :--- |  
 |1| What the site is for and how to use it are clear. | An introductory paragraph on the home page describes what the site is for and how to use it.  Also the links in the navigation bar indicate which page has which functionality so users can easily understand how to use the app. | 
-|2| Visitors can sign up. | An introductory paragraph on the home page invites users to become a member.  In addition, a link to sign up page is displayed in the navbar. | 
-|3| Featured posts are presented on the home page. | Three featured stories chosen by editors are displayed on the home page. |
-|4| Users can see the list of recently published posts. |By clicking the link on the home page 'More Stories from this week' users can see the list of recently published posts. | 
-|5| Users can see the list of popular posts. | By clicking the link on the home page 'Readers' favorite storeis of all time' users can see the list of the posts that have been liked the most. |
-|6| Users can write posts. | On ‘Write Stories’ page logged-in users can write their own posts and submit them.  The posts will be published if admin of the site approves of them. |
-|7| Users can edit posts. | By clicking 'update' on the post_detail page, users can edit their posts. |
-|8| Users can delete posts. | By clicking 'delete' on the post_detail page, users can delete their posts.|
-|9| Users can write comments. | Logged-in can leave comments on the post_detail page.|
-|10| Users can edit comments | By clicking the edit icon, users can delete their comments. |
-|11| Users can delete comments. | By clicking the trash bin icon, users can delete their comments. |
-|12| Users can search posts. | On "Search Stories" page, users can search posts by multiple factors. |
-|13| Users can like posts. |By clicking the heart icon, logged-in users can like posts.|
-|14| Users can bookmark posts. |By clicking the bookmark icon, logged-in users can bookmark posts.  The bookmarked posts will be displayed on 'My Page'.|
-|15| Users have easy access to 1. posts witten by the user 2. posts commented by the user and 3. posts bookmarked by the user |'My page' displays these three groups of posts.|
-
-**As admin**
-No. | Goals | How they are achieved | 
-|:---| :--- | :--- |  
-|16| Admin can select posts to be published. | Post’s status is set to ‘Submitted’ when users submit their drafts, and they will not be published yet.  Only when admin changes the status to ‘Published,’ the posts will be published. |
+|2| Visitors can sign up. | Users can go to the sign up page via the link in the navbar, present on all pages.  Also, at the end of the introductory paragraph on the home page, another link to the sing up page is provided. | 
+|3| Users can see the detail page of a post. | All post excerpts have a link ‘Read the full story,’ and by clicking the link, users can go to the detail page. The detail page displays the full content of the post and comments written on the post. |
+|4| Featured posts are presented on the home page. | Three featured posts chosen by editors are displayed on the home page. |
+|5| Users can see a list of recently published posts. |By clicking the link on the home page 'More Stories from this week' users can go to the page displaying a list of recently published posts. | 
+|6| Users can see a list of popular posts. | By clicking the link on the home page 'Readers' favorite stories of all time' users can go to the page displaying a list of the posts that have been liked the most. |
+|7| Users can write posts. | On ‘Write Stories’ page logged in users can write their own posts and submit them.  The posts will be published if admin of the site approves of them. |
+|8| Users can edit posts. | By clicking 'update' on the post_detail page, users can edit their posts. |
+|9| Users can delete posts. | By clicking 'delete' on the post_detail page, users can delete their posts.|
+|10| Users can write comments. | Logged in users can leave comments on the post_detail page.|
+|11| Users can edit comments | By clicking the edit icon, users can delete their comments. |
+|12| Users can delete comments. | By clicking the trash bin icon, users can delete their comments. |
+|13| Users can search posts. | On "Search Stories" page, users can search posts by multiple factors. |
+|14| Users can like posts. |By clicking the heart icon, logged in users can like posts.|
+|15| Users have easy access to the posts written, commented or bookmaked by them. |'My page' displays these three groups of posts.|
+|16| Admin can select posts to be published. | Post’s status is set to ‘Submitted’ when users submit their drafts, and they will not be published yet.  Only when admin changes the status to ‘Published’ on the admin panel, the posts will be published. |
 |17| The most interesting posts are presented on "Home" |Three featured stories chosen by admin will be displayed on the home page. |
-|18| Allow users to update or delete posts only before submission | ‘Update’ and ‘Delete’ buttons for posts appear only if posts are in ‘draft’ status.  In addition, the code is programmed to raise errors if attempts are made to update or delete submitted posts. (line 206, 220 in views.py) |
+|18| Allow users to update or delete posts only before submission | ‘Update’ and ‘Delete’ buttons for posts appear only if posts are in ‘draft’ status.  In addition, the code is programmed to raise errors if attempts are made to update or delete submitted posts. (line 226 & 232 in views.py) |
 |19| Allow only the authors to update/delete the posts & comments | LoginRequiredMixin and UserPassestestMixin allow only the users who are logged in as the authors of posts and comments to update or delete their writings. |
 |20|Allow users to access only their own “My page” | LoginRequiredMixin and UserPassestestMixin will allow users to access only their own “My Page.” |
+|21|Users get feedback messages|Feedback messages are displayed on the top of the page for 5 seconds after requests from the users have been processed. |
+|22|Users will see delete confirmation dialogs. |Before deleting their posts or comments, users will see delete confirmation dialogs. |
+|23| Users can bookmark posts. |By clicking the bookmark icon, logged-in users can bookmark posts.  The bookmarked posts will be displayed on 'My Page'. |
 
 #### Testing Features
 As preparatory steps,
