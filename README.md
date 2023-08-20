@@ -264,21 +264,8 @@ DATABASE_URL, SECRET_KEY and PORT = 8000
 
 _ _ _
 ## Automated Testing
-Automated tests can be found in test_models.py, test_forms.py and test_views.py
-
-Views were tested in test_views.py in the following order
-- PostListView
-- AddStoryView
-- PostLikeView
-- BookmarkView
-- UpdateCommentView
-- DeleteCommentView
-- UpdatePostView
-- DeletePostView
-- MoreStoriesView
-- PopularStoriesView
-- MyPageView
-- SearchView
+Automated tests were written in test_models.py, test_forms.py and test_views.py.
+The list of items tested can be found [here].
 
 ## Manual Testing
 I conducted manual testing for the aspects that weren't covered by automated testing.
