@@ -20,7 +20,7 @@
 - - -
 
 ![ecopost-home](./media/readme/home.png)
-![ecopost-mobile](./media/readme/mobile.png)
+<img src="./media/readme/mobile.png" width="300" alt="ecopost displayed on mobile">
 
 ## Overview
 This application offers a platform where individuals around the world can share their stories on what they are doing to protect the environment. Many people feel helpless, thinking that individuals cannot do so much. Here, visitors can read posts written by others, leave comments and write their own stories. Users can connect with others who are concerned about the environmental crisis, get motivated to take actions, or at least find some hope.
@@ -43,7 +43,7 @@ No.|As a… |I can…|so that …|Priority (1 is the highest)|Finish by (plan)|
 |12| member | delete my comments |take back my comments if I change my mind later.| 1|Day 8|
 |13| user | search posts by title, author, keywords, published dates and other factors | I can find the kind of posts I am looking for.| 1|Day 9|
 |14| member |‘like’ posts | I can show my appreciation for particular posts.| 1|Day 3|
-|15| member| see a page displaying 1) the posts and drafts I've written, 2) the posts I've commented on and 3) the posts I've bookmarked | I can easily access them.| 1|Day 10|
+|15| member| see a page displaying 1. the posts and drafts I've written, 2. the posts I've commented on and 3. the posts I've bookmarked | I can easily access them.| 1|Day 10|
 |16| admin | review posts submitted by users | only appropriate posts will be published.| 1|Day 5|
 |17| admin|present posts that are particularly interesting on the home page | visitors are likely to read them first and get a good impression of the site. |1|Day 2|
 |18| admin | make sure that users can update or delete their posts only before they submit their drafts | published posts will not be suddenly changed or get deleted.| 1|Day 6|
@@ -97,7 +97,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 ## Each Part and Function in Detail
 
 ### Navigation (common to all pages)
-![nav-bar](./media/navbar.png)
+![nav-bar](./media/readme/navbar.png)
 - The logo of the website is located on the left side of the navigation bar. 
 - On the right side, links to other pages are provided.
 - Logged-in users will find links to ‘Home,’ ‘Search,’ ‘Write Stories,’ ‘My Page’ and ‘Sign out.
@@ -114,7 +114,7 @@ The overall appearance is kept simple and clean so as not to interfere with vari
 ### Home Page
 
 **Heading**
-![heading](./media/heading.png)
+![heading](./media/readme/heading.png)
 - The heading at the center states the title of this website ‘ecopost.’
 - A graphic of earth is placed on the right side.
 - This graphic serves as a reminder that we want to protect this beautiful planet.  

@@ -4,7 +4,7 @@ According to the coverage report<br>
 - 97% of blog/models.py was covered.
 - 57% of views.py was covered.
 
-<img src="../media/automated-tests/coverage_report.png" width="600px">
+<img src="../media/automated-tests/coverage_report.png" width="600px" alt="coverage report">
 
 Manual tests complement most of the aspects that weren't covered by automated tests.
 
@@ -134,9 +134,9 @@ Comment Form
 **Screenshots**
 
 - test_models.py
-<img src="../media/automated-tests/test_models.png" width="600">
+<img src="../media/automated-tests/test_models.png" width="600" alt="results of testing test_models">
 - test_forms.py
-<img src="../media/automated-tests/test_forms.png" width="600">
+<img src="../media/automated-tests/test_forms.png" width="600" alt="results of testing test_models">
 - test_views.py
-<img src="../media/automated-tests/test_views.png" width="600">
-<img src="../media/automated-tests/test_views2.png" width="600">
+<img src="../media/automated-tests/test_views.png" width="600" alt="results of testing test_models">
+<img src="../media/automated-tests/test_views2.png" width="600" alt="results of testing test_models">
