@@ -268,7 +268,7 @@ DATABASE_URL, SECRET_KEY and PORT = 8000
 _ _ _
 ## Automated Testing
 Automated tests were written in test_models.py, test_forms.py and test_views.py.
-The list of items tested can be found [here](./documents/AUTOMATEDTEST.md).
+The list of items tested can be found [here](./documents/AUTOMATEDTESTS.md).
 
 ## Manual Testing
 I conducted manual testing for the aspects that weren't covered by automated testing.
