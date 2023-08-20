@@ -51,9 +51,9 @@ No.|As a… |I can…|so that …|Priority (1 is the highest)|Finish by (plan)|
 |20|admin | make sure that users can access only their own ‘My Page’ | users cannot access pages that are irrelevant to them.| 1|Day 10|
 |21|user|see feedback messages | I can be sure the requests I made have been processed. |1|Day 12|
 |22|user |see a confirmation dialog before deleting my drafts and comments | I will not delete them by mistake.| 1|Day 12|
-|23| user |bookmark posts | I can easily access certain posts later.| 1|Day 3|
+|23| user |bookmark posts | I can easily access certain posts later.| 2|Day 3|
 
-The user stories above are placed on this [Kanbannboard](https://github.com/users/rkyzk/projects/8).
+The user stories are placed on this [Kanbannboard](https://github.com/users/rkyzk/projects/8).
 
 ## Features in a Nutshell:
 Users can see lists of excerpts from
@@ -265,7 +265,7 @@ DATABASE_URL, SECRET_KEY and PORT = 8000
 _ _ _
 ## Automated Testing
 Automated tests were written in test_models.py, test_forms.py and test_views.py.
-The list of items tested can be found [here].
+The list of items tested can be found [here](./documents/AUTOMATEDTEST.md).
 
 ## Manual Testing
 I conducted manual testing for the aspects that weren't covered by automated testing.
@@ -594,43 +594,32 @@ The check box ‘Remember me’ doesn’t function as expected.  If the checkbox
 
 ## Aspects to be improved in the future
 - Remember me function on “Log in” page needs to be fixed.
-- Currently on "Search Stories" page, after users run a 'Search,' they will have to scroll down to see the results.  I need to design the page so they will find the results more easily.
 - I will make Contact page where users can write and submit messages to admin.
 - I also want to simplify the process of updating comments.  Instead of displaying a whole new page of 'Update Comments,' I want to display a small input box on "Detail Page" where the original comment is displayed.
 
 ## Validating python, CSS, Html code with Tools
 
-- I checked the code in all python modules at CI Python Linter and came out with no errors.
+- I checked the code in all python modules at CI Python Linter. line 160 in settings.py and line 3 & 6 in env.py get errors because the line is too long.  I tried to break the line,but it didn't work, so I left it as it is.
+All other errors (white spaces at the end of the lines) were corrected.
 - I validated style.css at jigsaw (https://jigsaw.w3.org/)<br>
-I got one error saying ‘Property rotate doesn’t exist.’  But clearly property ‘rotate’ is a widely used property of CSS, and so I left the rule as it is.
-- I validated html at https://validator.w3.org
-Errors corrected:
-- Error: Stray start tag footer.
+I got one error saying ‘Property rotate doesn’t exist.’  But clearly property ‘rotate’ is a widely used property of CSS, and it is functioning in the app, so I left the rule as it is.
+- I validated html at https://validator.w3.org<br>
+**Errors corrected:**
+- Error: Stray start tag footer.<br>
 I was putting footer tags outside body tags on base.html.  I corrected it by inserting the footer inside the body tags.
 
-- Other errors:
-'width="100%"' in some img tags
-span tags in ul tag in more_stories.html ln 45-55 --> I used div instead of ul
+- span tags in ul tag in more_stories.html ln 45-55<br>
+I replaced ul tag with div tag.
 
 After correction the html validation shows no errors.
 
 ## Checking Performance and Accessibility
+Performance scored 99 on Sign in page, but on other pages it scored between 59 and 72, and this needs to be improved in the future.
+‘Opportunity’ section stated the score can be improved if initial server response time is reduced.  I will try to optimize the code to prepare pages faster. 
 
-I checked the performance and accessibility of all pages using Lighthouse.
-All aspects turned out to be above 90%, except 82% mark for accessibility of "Detail Page."
-The report said that the causes of the lower accessibility are that the buttons don't have accessible names and that the textarea for the comment section doesn't have a label.  I provided proper names for all button tags, but the result didn't improve afterwards.  As for the label, I intentionally didn't provide any label, since I thought it'd be redundant to insert a label under the heading "Leave Comments."
+As for accessibility all pages scored 100%.
 
-Screenshots of the reports are available at following links.
-[Home](media/lighthouse-home.png)
-[Detail Page](media/lighthouse-detail.png)
-[More Stories](media/lh-more_stories.png)
-[Popular Stories](media/lh-popular-stories.png)
-[Search Stories](media/lighthouse-Search-Stories.png)
-[Write Stories](media/lighthouse-Write-Stories.png)
-[Update Stories](media/lighthouse-Update.png)
-[My Page](media/lighthouse-mypage.png)
-[Become a Member](media/lighthouse-become-a-member.png)
-[Sign in](media/lighthouse-signin.png)
+Screenshots of the reports are available [here](./documents/LIGHTHOUSE.md)
 
 ## Media
 
